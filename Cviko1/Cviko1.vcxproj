@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7901942B-BB56-4668-B06B-E9177D976550}</ProjectGuid>
+    <RootNamespace>Cviko1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\opencv\opencv\build\x86\vc12\lib;$(ProjectDir)\GL_LIB\soil\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;opencv_ts300.lib;SOIL.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\opencv\opencv\build\x86\vc12\lib;$(ProjectDir)\GL_LIB\soil\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;opencv_ts300.lib;SOIL.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Buffer\ebo.cpp" />
+    <ClCompile Include="Buffer\vao.cpp" />
+    <ClCompile Include="Buffer\vbo.cpp" />
+    <ClCompile Include="Context\context.cpp" />
+    <ClCompile Include="Helper\image.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model\cubemap.cpp" />
+    <ClCompile Include="Model\mesh.cpp" />
+    <ClCompile Include="Model\model.cpp" />
+    <ClCompile Include="Model\texture.cpp" />
+    <ClCompile Include="Model\vertex.cpp" />
+    <ClCompile Include="Render\camera.cpp" />
+    <ClCompile Include="Render\framebuffer.cpp" />
+    <ClCompile Include="Render\Light\attenuation.cpp" />
+    <ClCompile Include="Render\Light\directional_light.cpp" />
+    <ClCompile Include="Render\Light\phong.cpp" />
+    <ClCompile Include="Render\Light\point_light.cpp" />
+    <ClCompile Include="Render\Light\spotlight.cpp" />
+    <ClCompile Include="Render\program.cpp" />
+    <ClCompile Include="Render\renderbuffer.cpp" />
+    <ClCompile Include="Render\renderer.cpp" />
+    <ClCompile Include="Render\shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Buffer\ebo.h" />
+    <ClInclude Include="Buffer\vao.h" />
+    <ClInclude Include="Buffer\vbo.h" />
+    <ClInclude Include="Context\context.h" />
+    <ClInclude Include="Helper\fileio.h" />
+    <ClInclude Include="Helper\helper.h" />
+    <ClInclude Include="Helper\image.h" />
+    <ClInclude Include="Model\cubemap.h" />
+    <ClInclude Include="Model\mesh.h" />
+    <ClInclude Include="Model\model.h" />
+    <ClInclude Include="Model\texture.h" />
+    <ClInclude Include="Model\vertex.h" />
+    <ClInclude Include="Render\camera.h" />
+    <ClInclude Include="Render\framebuffer.h" />
+    <ClInclude Include="Render\Light\attenuation.h" />
+    <ClInclude Include="Render\Light\directional_light.h" />
+    <ClInclude Include="Render\Light\phong.h" />
+    <ClInclude Include="Render\Light\point_light.h" />
+    <ClInclude Include="Render\Light\spotlight.h" />
+    <ClInclude Include="Render\program.h" />
+    <ClInclude Include="Render\renderbuffer.h" />
+    <ClInclude Include="Render\renderer.h" />
+    <ClInclude Include="Render\shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assimp.dll" />
+    <None Include="Shaders\Fragment\test.frag" />
+    <None Include="Shaders\Vertex\test.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
