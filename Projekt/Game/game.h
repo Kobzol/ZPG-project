@@ -34,7 +34,9 @@ private:
 	Context* context;
 	Renderer renderer;
 
-	std::pair<GLdouble, GLdouble> mousePosition;
+	std::pair<GLdouble, GLdouble> oldMousePosition = std::make_pair(-1, -1);
+	std::pair<GLdouble, GLdouble> mousePosition = std::make_pair(-1, -1);
+	std::pair<GLdouble, GLdouble> oldMouseScroll;
 	std::pair<GLdouble, GLdouble> mouseScroll;
 	std::pair<bool, bool> mouseDown = std::make_pair(false, false);
 

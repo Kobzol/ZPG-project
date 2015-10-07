@@ -74,6 +74,8 @@ void Game::start()
 
 	float cameraSpeed = 1.0f;
 
+	float mouseX, mouseY;
+
 	context->loop([&](Context& context)
 	{
 		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -86,6 +88,30 @@ void Game::start()
 		program.setUniform3f("color", glm::vec3(1.0f, 0.0f, 0.0f));
 
 		this->renderer.drawTriangles(0, 3);
+
+		double diffX = this->mousePosition.first - this->oldMousePosition.first;
+		double diffY = this->oldMousePosition.second - this->mousePosition.second;
+
+		if (diffX != 0 || diffY != 0)
+		{
+			diffX *= mouseSensitivity;
+			diffY *= mouseSensitivity;
+
+			yaw += (GLfloat) diffX;
+			pitch += (GLfloat) diffY;
+
+			pitch = glm::clamp(pitch, -89.0f, 89.0f);
+
+			GLfloat cosPitch = cos(glm::radians(pitch));
+			GLfloat sinPitch = sin(glm::radians(pitch));
+			GLfloat cosYaw = cos(glm::radians(yaw));
+			GLfloat sinYaw = sin(glm::radians(yaw));
+			glm::vec3 cameraFront = glm::vec3(cosPitch * cosYaw, sinPitch, cosPitch * sinYaw);
+
+			camera.setTarget(cameraFront);
+
+			this->oldMousePosition = this->mousePosition;
+		}
 
 		if (this->isButtonPressed(GLFW_KEY_ESCAPE))
 		{
@@ -122,10 +148,19 @@ void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int 
 }
 void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
 {
-	this->mousePosition = std::make_pair(x, y);
+	if (this->oldMousePosition.first == -1)	// first mouse move
+	{
+		this->oldMousePosition = this->mousePosition = std::make_pair(x, y);
+	}
+	else
+	{
+		this->oldMousePosition = this->mousePosition;
+		this->mousePosition = std::make_pair(x, y);
+	}
 }
 void Game::onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {
+	this->oldMouseScroll = this->mouseScroll;
 	this->mouseScroll = std::make_pair(xOffset, yOffset);
 }
 void Game::onMouseButtonCallback(GLFWwindow* window, int button, int action, int modifier)
