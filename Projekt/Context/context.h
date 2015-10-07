@@ -45,6 +45,7 @@ public:
 	void setKeyCallback(void (*callback)(GLFWwindow* window, int key, int scancode, int action, int mode));
 	void setMousePositionCallback(void (*callback)(GLFWwindow* window, double xpos, double ypos));
 	void setMouseScrollCallback(void (*callback)(GLFWwindow* window, double xoffset, double yoffset));
+	void setMouseButtonCallback(void(*callback)(GLFWwindow* window, int button, int action, int modifier));
 	void setCursor(bool enabled);
 
 	void setDepthTest(bool enabled);

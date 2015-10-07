@@ -75,6 +75,7 @@
     <ClCompile Include="Buffer\vao.cpp" />
     <ClCompile Include="Buffer\vbo.cpp" />
     <ClCompile Include="Context\context.cpp" />
+    <ClCompile Include="Game\game.cpp" />
     <ClCompile Include="Helper\image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\cubemap.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="Buffer\vao.h" />
     <ClInclude Include="Buffer\vbo.h" />
     <ClInclude Include="Context\context.h" />
+    <ClInclude Include="Game\game.h" />
     <ClInclude Include="Helper\fileio.h" />
     <ClInclude Include="Helper\helper.h" />
     <ClInclude Include="Helper\image.h" />

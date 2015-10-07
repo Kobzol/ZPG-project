@@ -101,6 +101,10 @@ void Context::setMouseScrollCallback(void (*callback)(GLFWwindow* window, double
 {
 	glfwSetScrollCallback(this->window, callback);
 }
+void Context::setMouseButtonCallback(void(*callback)(GLFWwindow* window, int button, int action, int modifier))
+{
+	glfwSetMouseButtonCallback(this->window, callback);
+}
 void Context::setCursor(bool enabled)
 {
 	glfwSetInputMode(this->window, GLFW_CURSOR, enabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
