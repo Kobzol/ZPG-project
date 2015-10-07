@@ -1,5 +1,4 @@
 Thumbs.db
-*.obj
 *.exe
 *.pdb
 *.user
@@ -18,11 +17,14 @@ Thumbs.db
 *.ilk
 *.log
 [Bb]in
+[Bb]in/*.obj
 [Dd]ebug*/
+[Dd]ebug*/*.obj
 *.lib
 *.sbr
 obj/
 [Rr]elease*/
+[Rr]elease*/*.obj
 _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
