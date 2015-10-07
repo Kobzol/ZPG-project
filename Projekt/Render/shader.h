@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include "../Helper/helper.h"
+#include "../Helper/opengl_helper.h"
 
 class Shader
 {

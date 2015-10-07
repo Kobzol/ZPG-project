@@ -3,7 +3,7 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 
-#include "../Helper/helper.h"
+#include "../Helper/opengl_helper.h"
 
 class Renderbuffer
 {

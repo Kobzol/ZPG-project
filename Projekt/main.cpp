@@ -11,7 +11,7 @@
 #include "Buffer/ebo.h"
 #include "Buffer/vbo.h"
 #include "Buffer/vao.h"
-#include "Helper/fileio.h"
+#include "Helper/file_helper.h"
 #include "Model/model.h"
 
 Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
@@ -113,8 +113,8 @@ int main()
 	context.setKeyCallback(key_callback);
 	context.setMousePositionCallback(mouse_callback);
 
-	Shader vertShader(io_load_file("Shaders/Vertex/test.vert"), GL_VERTEX_SHADER);
-	Shader fragShader(io_load_file("Shaders/Fragment/test.frag"), GL_FRAGMENT_SHADER);
+	Shader vertShader(FileHelper::loadFile("Shaders/Vertex/test.vert"), GL_VERTEX_SHADER);
+	Shader fragShader(FileHelper::loadFile("Shaders/Fragment/test.frag"), GL_FRAGMENT_SHADER);
 
 	Program program;
 	program.attachShader(vertShader);

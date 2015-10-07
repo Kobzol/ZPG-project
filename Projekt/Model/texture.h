@@ -7,7 +7,7 @@
 
 #include <stack>
 
-#include "../Helper/helper.h"
+#include "../Helper/opengl_helper.h"
 #include "../Helper/image.h"
 
 enum TextureType

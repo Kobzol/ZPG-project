@@ -7,7 +7,7 @@
 #include <string>
 #include <functional>
 
-#include "../Helper/helper.h"
+#include "../Helper/opengl_helper.h"
 
 class Context
 {

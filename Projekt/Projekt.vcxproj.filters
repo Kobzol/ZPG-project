@@ -101,12 +101,6 @@
     <ClInclude Include="Context\context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Helper\fileio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Helper\helper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Helper\image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -168,6 +162,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\file_helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\opengl_helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

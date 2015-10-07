@@ -40,7 +40,7 @@ void Context::initialize()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-	gl_clear_error();
+	OpenGLHelper::glClearError();
 }
 void Context::terminate()
 {
@@ -81,7 +81,7 @@ void Context::createWindow(int width, int height, int samples, std::string title
 	glewExperimental = true;
 	glewInit();
 
-	gl_clear_error();
+	OpenGLHelper::glClearError();
 }
 
 void Context::setViewport(GLint x, GLint y, GLsizei width, GLsizei height)

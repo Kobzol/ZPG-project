@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include "../Helper/helper.h"
+#include "../Helper/opengl_helper.h"
 #include "../Helper/image.h"
 
 class Cubemap

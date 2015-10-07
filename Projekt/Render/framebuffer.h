@@ -8,7 +8,7 @@
 #include "../Model/cubemap.h"
 #include "../Model/texture.h"
 #include "renderbuffer.h"
-#include "../Helper/helper.h"
+#include "../Helper/opengl_helper.h"
 
 class Framebuffer
 {
