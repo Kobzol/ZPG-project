@@ -27,4 +27,7 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
+*.sdf
+*.opensdf
+
 GL_LIB
