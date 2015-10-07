@@ -13,12 +13,9 @@ private:
 	GLuint shader;
 	GLint type;
 
-	Shader(const Shader& other);
-	Shader& operator=(Shader& other);
-
 public:
 	Shader(std::string code, GLenum type);
-	~Shader();
 
 	GLuint getId();
+	void free();
 };

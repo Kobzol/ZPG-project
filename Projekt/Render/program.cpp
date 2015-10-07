@@ -8,16 +8,9 @@ void Program::setAttribute(GLint position, GLint count, GLenum type, GLboolean n
 	GL_CHECK_ERRORS();
 }
 
-Program::Program(std::string outputName)
+Program::Program()
 {
 	this->program = glCreateProgram();
-	glBindFragDataLocation(this->program, 0, outputName.c_str());
-	GL_CHECK_ERRORS();
-}
-
-Program::~Program()
-{
-	glDeleteProgram(this->program);
 	GL_CHECK_ERRORS();
 }
 
@@ -36,6 +29,11 @@ void Program::use()
 {
 	glUseProgram(this->program);
 
+	GL_CHECK_ERRORS();
+}
+void Program::free()
+{
+	glDeleteProgram(this->program);
 	GL_CHECK_ERRORS();
 }
 

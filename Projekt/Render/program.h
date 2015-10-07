@@ -21,18 +21,15 @@ class Program : public CameraChangedListener
 private:
 	GLuint program;
 
-	Program(const Program& other);
-	Program& operator=(Program& other);
-
 public:
 	static void setAttribute(GLint position, GLint count, GLenum type, GLboolean normalize, GLsizei stride, const void* offset);
 
-	Program(std::string outputName);
-	~Program();
+	Program();
 
 	void attachShader(Shader& shader);
 	void link();
 	void use();
+	void free();
 
 	GLint getAttributeLocation(std::string name);
 	void setAttribute(std::string name, GLint count, GLenum type, GLboolean normalize, GLsizei stride, const void* offset);

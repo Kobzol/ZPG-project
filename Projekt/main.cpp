@@ -106,7 +106,7 @@ namespace glm {
 }
 
 int main()
-{
+{{
 	Context context;
 	context.initialize();
 	context.createWindow(800, 600, 1, "ZPG", false, false);
@@ -115,8 +115,8 @@ int main()
 
 	Shader vertShader(io_load_file("Shaders/Vertex/test.vert"), GL_VERTEX_SHADER);
 	Shader fragShader(io_load_file("Shaders/Fragment/test.frag"), GL_FRAGMENT_SHADER);
-	
-	Program program("outColor");
+
+	Program program;
 	program.attachShader(vertShader);
 	program.attachShader(fragShader);
 	program.link();
@@ -141,15 +141,15 @@ int main()
 	camera.addListener(&program);
 	program.setCameraMatrices(camera);
 
-	context.loop([&] (Context& context)
+	context.loop([&](Context& context)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		program.use();
-		
+
 		vaoA.bind();
 		ebo.bind();
-		
+
 		program.setUniformMatrix4fv("Model", model);
 		program.setUniform3f("color", glm::vec3(1.0f, 0.0f, 0.0f));
 
@@ -157,6 +157,6 @@ int main()
 	});
 
 	context.terminate();
-
+}
 	return 0;
 }

@@ -13,7 +13,7 @@ Shader::Shader(std::string code, GLenum type)
 	GL_CHECK_ERRORS();
 }
 
-Shader::~Shader()
+void Shader::free()
 {
 	glDeleteShader(this->shader);
 	GL_CHECK_ERRORS();
