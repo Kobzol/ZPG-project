@@ -14,7 +14,7 @@
 #include "Helper/fileio.h"
 #include "Model/model.h"
 
-Camera camera(glm::vec3(0, 0, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0, 1.0, 0.0), 45.0f, 800.0 / 600, 0.1f, 10.0f);
+Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 
 double xpos_old = -1;
 double ypos_old = -1;
@@ -68,8 +68,8 @@ void mouse_callback(GLFWwindow* window, double x_pos, double y_pos)
 	diff_x *= mouseSensitivity;
 	diff_y *= mouseSensitivity;
 
-	yaw += diff_x;
-	pitch += diff_y;
+	yaw += (GLfloat) diff_x;
+	pitch += (GLfloat) diff_y;
 
 	pitch = glm::clamp(pitch, -89.0f, 89.0f);
 
@@ -139,6 +139,7 @@ int main()
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 	camera.addListener(&program);
+	program.setCameraMatrices(camera);
 
 	context.loop([&] (Context& context)
 	{

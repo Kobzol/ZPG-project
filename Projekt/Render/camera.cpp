@@ -12,7 +12,7 @@ Camera::Camera(
 	this->broadcaster.setCallback([this](EventListener* listener)
 	{
 		CameraChangedListener* list = (CameraChangedListener*) listener;
-		list->notifyCameraChanged(this);
+		list->notifyCameraChanged(*this);
 	});
 }
 

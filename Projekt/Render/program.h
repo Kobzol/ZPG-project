@@ -47,9 +47,6 @@ public:
 
 	VAO* getVAO();
 
-	void notifyCameraChanged(Camera* camera)
-	{
-		this->setUniformMatrix4fv("View", camera->getViewMatrix());
-		this->setUniformMatrix4fv("Projection", camera->getProjectionMatrix());
-	}
+	void notifyCameraChanged(Camera& camera);
+	void setCameraMatrices(Camera& camera);
 };

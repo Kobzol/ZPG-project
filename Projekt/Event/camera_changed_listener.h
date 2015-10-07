@@ -7,5 +7,5 @@ class Camera;
 class CameraChangedListener : public EventListener
 {
 public:
-	virtual void notifyCameraChanged(Camera* camera) = 0;
+	virtual void notifyCameraChanged(Camera& camera) = 0;
 };

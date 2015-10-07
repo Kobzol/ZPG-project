@@ -89,3 +89,13 @@ void Program::setUniformMatrix4fv(std::string name, const glm::mat4& matrix)
 	glUniformMatrix4fv(this->getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 	GL_CHECK_ERRORS();
 }
+
+void Program::notifyCameraChanged(Camera& camera)
+{
+	this->setCameraMatrices(camera);
+}
+void Program::setCameraMatrices(Camera& camera)
+{
+	this->setUniformMatrix4fv("View", camera.getViewMatrix());
+	this->setUniformMatrix4fv("Projection", camera.getProjectionMatrix());
+}
