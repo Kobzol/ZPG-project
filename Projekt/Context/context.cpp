@@ -11,10 +11,6 @@ Context::Context()
 {
 	this->window = nullptr;
 }
-Context::~Context()
-{
-	this->destroyWindow();
-}
 
 void Context::destroyWindow()
 {
@@ -49,12 +45,17 @@ void Context::initialize()
 }
 void Context::terminate()
 {
+	this->destroyWindow();
 	glfwTerminate();
 }
 
 GLFWwindow* Context::getWindow()
 {
 	return this->window;
+}
+void Context::closeWindow()
+{
+	glfwSetWindowShouldClose(this->window, 1);
 }
 int Context::getWindowWidth()
 {

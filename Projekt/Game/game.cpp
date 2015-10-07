@@ -80,7 +80,10 @@ void Game::start()
 
 void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier)
 {
-
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	{
+		this->context->closeWindow();
+	}
 }
 void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
 {

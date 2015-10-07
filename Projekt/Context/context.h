@@ -30,12 +30,12 @@ public:
 	static GLdouble getDeltaTime();
 
 	Context();
-	~Context();
 
 	void initialize();
 	void terminate();
 
 	GLFWwindow* getWindow();
+	void closeWindow();
 	int getWindowWidth();
 	int getWindowHeight();
 
