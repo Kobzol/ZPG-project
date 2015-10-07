@@ -110,7 +110,7 @@ void Context::setCursor(bool enabled)
 	glfwSetInputMode(this->window, GLFW_CURSOR, enabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
 }
 
-void Context::loop(std::function<void(Context&)> loop_callback)
+void Context::loop(std::function<void(Context&)> loopCallback)
 {
 	GLfloat lastFrame = glfwGetTime();
 	while (!glfwWindowShouldClose(this->window))
@@ -121,7 +121,7 @@ void Context::loop(std::function<void(Context&)> loop_callback)
 
 		glfwPollEvents();
 
-		loop_callback(*this);
+		loopCallback(*this);
 
 		glfwSwapBuffers(this->window);
 	}

@@ -37,7 +37,7 @@ public:
 	int getWindowWidth();
 	int getWindowHeight();
 
-	void loop(std::function<void(Context&)> loop_callback);
+	void loop(std::function<void(Context&)> loopCallback);
 
 	void createWindow(int width, int height, int samples, std::string title, bool resizable, bool fullscreen);
 
