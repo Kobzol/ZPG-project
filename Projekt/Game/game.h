@@ -10,6 +10,7 @@
 #include "../Helper/file_helper.h"
 #include "../Render/shader.h"
 #include "../Render/program.h"
+#include "../Render/renderer.h"
 
 class Game
 {
@@ -27,6 +28,7 @@ private:
 	static Game instance;
 
 	Context* context;
+	Renderer renderer;
 
 	Game();
 	~Game();

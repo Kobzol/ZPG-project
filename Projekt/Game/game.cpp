@@ -63,7 +63,7 @@ void Game::start()
 
 	context->loop([&](Context& context)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		program.use();
 
@@ -72,7 +72,7 @@ void Game::start()
 		program.setUniformMatrix4fv("Model", model);
 		program.setUniform3f("color", glm::vec3(1.0f, 0.0f, 0.0f));
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		this->renderer.drawTriangles(0, 3);
 	});
 
 	context->terminate();
