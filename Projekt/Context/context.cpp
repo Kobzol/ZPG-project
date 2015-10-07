@@ -1,6 +1,11 @@
 #include "context.h"
 
-GLfloat Context::deltaTime = 0.0f;
+GLdouble Context::deltaTime = 0.0;
+
+GLdouble Context::getDeltaTime()
+{
+	return Context::deltaTime;
+}
 
 Context::Context()
 {
@@ -112,10 +117,10 @@ void Context::setCursor(bool enabled)
 
 void Context::loop(std::function<void(Context&)> loopCallback)
 {
-	GLfloat lastFrame = glfwGetTime();
+	GLdouble lastFrame = glfwGetTime();
 	while (!glfwWindowShouldClose(this->window))
 	{
-		GLfloat currentFrame = glfwGetTime();
+		GLdouble currentFrame = glfwGetTime();
 		Context::deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 

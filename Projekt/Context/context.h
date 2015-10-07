@@ -12,6 +12,8 @@
 class Context
 {
 private:
+	static GLdouble deltaTime;
+
 	GLFWwindow* window;
 	int width;
 	int height;
@@ -25,7 +27,7 @@ private:
 	GLboolean getGLBoolean(bool value);
 
 public:
-	static GLfloat deltaTime;
+	static GLdouble getDeltaTime();
 
 	Context();
 	~Context();
