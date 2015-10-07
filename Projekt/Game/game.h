@@ -19,6 +19,7 @@ public:
 	static Game& getInstance();
 
 	void start();
+	bool isButtonPressed(int key);
 
 	void onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier);
 	void onMouseMoveCallback(GLFWwindow* window, double x, double y);
@@ -27,6 +28,8 @@ public:
 
 private:
 	static Game instance;
+
+	char buttons[512];
 
 	Context* context;
 	Renderer renderer;

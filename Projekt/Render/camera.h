@@ -40,6 +40,7 @@ public:
 	);
 
 	void setPosition(glm::vec3 position);
+	void move(glm::vec3 vector);
 	void setTarget(glm::vec3 target);
 	void setUpVector(glm::vec3 up);
 

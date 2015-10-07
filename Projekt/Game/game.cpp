@@ -10,6 +10,7 @@ Game& Game::getInstance()
 Game::Game()
 {
 	this->context = nullptr;
+	memset(this->buttons, 0, sizeof(this->buttons));
 }
 Game::~Game()
 {
@@ -52,6 +53,16 @@ void Game::start()
 	vbo.bind();
 	vbo.setData(points, sizeof(points), GL_STATIC_DRAW);
 
+	double xpos_old = -1;
+	double ypos_old = -1;
+
+	GLfloat pitch = 0.0f;
+	GLfloat yaw = -90.0f;
+	GLfloat mouseSensitivity = 0.05f;
+
+	float angleHorizontal = 270.0f;
+	float angleVertical = 0.0f;
+
 	float angle = 90.0f;
 	glm::mat4 model;
 
@@ -60,6 +71,8 @@ void Game::start()
 	Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	camera.addListener(&program);
 	program.setCameraMatrices(camera);
+
+	float cameraSpeed = 1.0f;
 
 	context->loop([&](Context& context)
 	{
@@ -73,17 +86,39 @@ void Game::start()
 		program.setUniform3f("color", glm::vec3(1.0f, 0.0f, 0.0f));
 
 		this->renderer.drawTriangles(0, 3);
+
+		if (this->isButtonPressed(GLFW_KEY_ESCAPE))
+		{
+			context.closeWindow();
+		}
+		if (this->isButtonPressed(GLFW_KEY_D))
+		{
+			camera.move(-camera.getLeft() * cameraSpeed * context.getDeltaTime());
+		}
+		if (this->isButtonPressed(GLFW_KEY_A))
+		{
+			camera.move(camera.getLeft() * cameraSpeed * context.getDeltaTime());
+		}
+		if (this->isButtonPressed(GLFW_KEY_W))
+		{
+			camera.move(camera.getFront() * cameraSpeed * context.getDeltaTime());
+		}
+		if (this->isButtonPressed(GLFW_KEY_S))
+		{
+			camera.move(-camera.getFront() * cameraSpeed * context.getDeltaTime());
+		}
 	});
 
 	context->terminate();
 }
+bool Game::isButtonPressed(int key)
+{
+	return this->buttons[key] != GLFW_RELEASE;
+}
 
 void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier)
 {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	{
-		this->context->closeWindow();
-	}
+	this->buttons[key] = action;
 }
 void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
 {

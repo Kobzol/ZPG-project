@@ -33,19 +33,19 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
-	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE)
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 	{
 		camera.setPosition(camera.getPosition() + -camera.getLeft() * 0.1f);
 	}
-	if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE)
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 	{
 		camera.setPosition(camera.getPosition() + camera.getLeft() * 0.1f);
 	}
-	if (glfwGetKey(window, GLFW_KEY_UP) == GL_TRUE)
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
 		camera.setPosition(camera.getPosition() + camera.getFront() * 0.1f);
 	}
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GL_TRUE)
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
 		camera.setPosition(camera.getPosition() + -camera.getFront() * 0.1f);
 	}

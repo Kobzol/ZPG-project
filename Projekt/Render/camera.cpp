@@ -41,6 +41,10 @@ void Camera::setPosition(glm::vec3 position)
 	this->position = position;
 	this->recalculateViewMatrix();
 }
+void Camera::move(glm::vec3 vector)
+{
+	this->setPosition(this->getPosition() + vector);
+}
 void Camera::setTarget(glm::vec3 target)
 {
 	this->target = glm::normalize(target);
