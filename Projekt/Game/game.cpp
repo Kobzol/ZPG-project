@@ -87,13 +87,20 @@ void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int 
 }
 void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
 {
-
+	this->mousePosition = std::make_pair(x, y);
 }
 void Game::onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {
-
+	this->mouseScroll = std::make_pair(xOffset, yOffset);
 }
 void Game::onMouseButtonCallback(GLFWwindow* window, int button, int action, int modifier)
 {
-
+	if (button == GLFW_MOUSE_BUTTON_1)
+	{
+		this->mouseDown.first = action == GLFW_PRESS;
+	}
+	else if (button == GLFW_MOUSE_BUTTON_2)
+	{
+		this->mouseDown.second = action == GLFW_PRESS;
+	}
 }

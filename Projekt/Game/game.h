@@ -31,6 +31,10 @@ private:
 	Context* context;
 	Renderer renderer;
 
+	std::pair<GLdouble, GLdouble> mousePosition;
+	std::pair<GLdouble, GLdouble> mouseScroll;
+	std::pair<bool, bool> mouseDown = std::make_pair(false, false);
+
 	Game();
 	~Game();
 	Game(const Game& other);
