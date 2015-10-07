@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7901942B-BB56-4668-B06B-E9177D976550}</ProjectGuid>
     <RootNamespace>Cviko1</RootNamespace>
+    <ProjectName>Projekt</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -82,6 +83,7 @@
     <ClCompile Include="Model\texture.cpp" />
     <ClCompile Include="Model\vertex.cpp" />
     <ClCompile Include="Render\camera.cpp" />
+    <ClCompile Include="Event\event_broadcaster.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />
     <ClCompile Include="Render\Light\attenuation.cpp" />
     <ClCompile Include="Render\Light\directional_light.cpp" />
@@ -107,6 +109,9 @@
     <ClInclude Include="Model\texture.h" />
     <ClInclude Include="Model\vertex.h" />
     <ClInclude Include="Render\camera.h" />
+    <ClInclude Include="Event\camera_changed_listener.h" />
+    <ClInclude Include="Event\event_listener.h" />
+    <ClInclude Include="Event\event_broadcaster.h" />
     <ClInclude Include="Render\framebuffer.h" />
     <ClInclude Include="Render\Light\attenuation.h" />
     <ClInclude Include="Render\Light\directional_light.h" />

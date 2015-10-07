@@ -11,10 +11,12 @@
 #include <memory>
 
 #include "shader.h"
-#include "../buffer/vao.h"
+#include "../Buffer/vao.h"
 #include "../Helper/helper.h"
+#include "../Event/camera_changed_listener.h"
+#include "camera.h"
 
-class Program
+class Program : public CameraChangedListener
 {
 private:
 	GLuint program;
@@ -44,4 +46,10 @@ public:
 	void setUniformMatrix4fv(std::string name, const glm::mat4& matrix);
 
 	VAO* getVAO();
+
+	void notifyCameraChanged(Camera* camera)
+	{
+		this->setUniformMatrix4fv("View", camera->getViewMatrix());
+		this->setUniformMatrix4fv("Projection", camera->getProjectionMatrix());
+	}
 };
