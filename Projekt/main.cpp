@@ -4,15 +4,16 @@
 
 #include <iostream>
 
-#include "Context/context.h"
-#include "Render/shader.h"
-#include "Render/program.h"
-#include "Render/camera.h"
-#include "Buffer/ebo.h"
-#include "Buffer/vbo.h"
 #include "Buffer/vao.h"
+#include "Buffer/vbo.h"
+#include "Buffer/ebo.h"
+#include "Context/context.h"
+#include "Game/game.h"
 #include "Helper/file_helper.h"
 #include "Model/model.h"
+#include "Render/camera.h"
+#include "Render/program.h"
+#include "Render/shader.h"
 
 Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 
@@ -88,26 +89,12 @@ float pointsA[] = {
 	-0.5f, -0.5f, 0.0f,	// lower left
 };
 
-glm::vec4 pointUp = glm::vec4(0.0f, 0.5f, 0.0f, 0.0f);
-glm::vec4 pointLeft = glm::vec4(-0.5f, -0.5f, 0.0f, 0.0f);
-glm::vec4 pointRight = glm::vec4(0.5f, -0.5f, 0.0f, 0.0f);
-
-int indices[] = { 0, 1, 2, 2, 3, 0 };
-
-namespace glm { 
-	glm::mat4 rotate_around(const glm::mat4 &origin, float angle, const glm::vec3 axis, const glm::vec3 &point)
-	{
-		glm::mat4 move_to_point = glm::translate(origin, point);
-		glm::mat4 rotate = glm::rotate(move_to_point, angle, axis);
-		glm::mat4 move_back = glm::translate(rotate, -point);
-
-		return move_back;
-	}
-}
-
 int main()
-{{
-	Context context;
+{
+	{
+		Game::getInstance().start();
+	}
+	/*Context context;
 	context.initialize();
 	context.createWindow(800, 600, 1, "ZPG", false, false);
 	context.setKeyCallback(key_callback);
@@ -156,7 +143,7 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 	});
 
-	context.terminate();
-}
+	context.terminate();*/
+
 	return 0;
 }

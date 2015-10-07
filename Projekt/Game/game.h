@@ -4,7 +4,12 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "../Buffer/vao.h"
+#include "../Buffer/vbo.h"
 #include "../Context/context.h"
+#include "../Helper/file_helper.h"
+#include "../Render/shader.h"
+#include "../Render/program.h"
 
 class Game
 {
@@ -21,7 +26,10 @@ public:
 private:
 	static Game instance;
 
-	Game() { };
+	Context* context;
+
+	Game();
+	~Game();
 	Game(const Game& other);
 	Game& operator=(const Game& other);
 };
