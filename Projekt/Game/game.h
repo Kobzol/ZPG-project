@@ -8,6 +8,7 @@
 #include "../Buffer/vbo.h"
 #include "../Context/context.h"
 #include "../Helper/file_helper.h"
+#include "../Model/vertex.h"
 #include "../Render/shader.h"
 #include "../Render/program.h"
 #include "../Render/renderer.h"

@@ -55,7 +55,7 @@ void Game::start()
 	float angle = 90.0f;
 	glm::mat4 model;
 
-	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, 0, 0);
+	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 
 	Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	camera.addListener(&program);
