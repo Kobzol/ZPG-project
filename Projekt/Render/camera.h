@@ -56,8 +56,6 @@ public:
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjectionMatrix();
 
-	void addListener(CameraChangedListener* listener)
-	{
-		this->broadcaster.attachListener(listener);
-	}
+	void attachListener(CameraChangedListener* listener);
+	void detachListener(CameraChangedListener* listener);
 };

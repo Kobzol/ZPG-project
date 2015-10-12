@@ -69,7 +69,7 @@ void Game::start()
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 
 	Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
-	camera.addListener(&program);
+	camera.attachListener(&program);
 	program.setCameraMatrices(camera);
 
 	float cameraSpeed = 1.0f;
@@ -134,6 +134,8 @@ void Game::start()
 			camera.move(-camera.getFront() * cameraSpeed * context.getDeltaTime());
 		}
 	});
+
+	camera.detachListener(&program);
 
 	context->terminate();
 }

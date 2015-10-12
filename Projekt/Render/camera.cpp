@@ -98,3 +98,12 @@ glm::mat4 Camera::getProjectionMatrix()
 {
 	return this->projectionMatrix;
 }
+
+void Camera::attachListener(CameraChangedListener* listener)
+{
+	this->broadcaster.attachListener(listener);
+}
+void Camera::detachListener(CameraChangedListener* listener)
+{
+	this->broadcaster.detachListener(listener);
+}
