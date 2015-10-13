@@ -30,6 +30,7 @@ void Game::start()
 	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { Game::getInstance().onMouseMoveCallback(window, x, y); });
 	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { Game::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
 	this->context->setMouseButtonCallback([](GLFWwindow* window, int button, int action, int modifier) { Game::getInstance().onMouseButtonCallback(window, button, action, modifier); });
+	this->context->setWindowSizeCallback([](GLFWwindow* window, int width, int height) { Game::getInstance().onWindowSizeCallback(window, width, height); });
 	this->context->setDepthTest(true);
 	this->context->setShowMouseCursor(false);
 
@@ -55,11 +56,11 @@ void Game::start()
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
 
-	Camera camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
-	camera.attachListener(&program);
-	program.setCameraMatrices(camera);
+	this->camera = new Camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	camera->attachListener(&program);
+	program.setCameraMatrices(*camera);
 
-	this->freelookController.setLookVector(camera.getFront());
+	this->freelookController.setLookVector(camera->getFront());
 
 	float cameraSpeed = 1.0f;
 
@@ -77,8 +78,8 @@ void Game::start()
 
 		this->renderer.drawTriangles(0, pocetPrvku);
 
-		this->freelookController.updateCamera(context.getDeltaTime(), camera);
-		this->flyController.updateCamera(context.getDeltaTime(), camera);
+		this->freelookController.updateCamera(context.getDeltaTime(), *camera);
+		this->flyController.updateCamera(context.getDeltaTime(), *camera);
 
 		if (this->flyController.isButtonPressed(GLFW_KEY_ESCAPE))
 		{
@@ -86,7 +87,8 @@ void Game::start()
 		}
 	});
 
-	camera.detachListener(&program);
+	camera->detachListener(&program);
+	delete this->camera;
 
 	context->terminate();
 }
@@ -114,4 +116,10 @@ void Game::onMouseButtonCallback(GLFWwindow* window, int button, int action, int
 	{
 		this->mouseDown.second = action == GLFW_PRESS;
 	}
+}
+void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+
+	this->camera->setAspect(width / (float) height);
 }

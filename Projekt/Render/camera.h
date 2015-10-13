@@ -28,6 +28,9 @@ private:
 	void recalculateViewMatrix();
 	void recalculateProjectionMatrix();
 
+	Camera(const Camera& other);
+	Camera& operator=(const Camera& other);
+
 public:
 	Camera(
 		glm::vec3 position = glm::vec3(0.0f),

@@ -111,6 +111,10 @@ void Context::setMouseButtonCallback(void(*callback)(GLFWwindow* window, int but
 {
 	glfwSetMouseButtonCallback(this->window, callback);
 }
+void Context::setWindowSizeCallback(void(*callback)(GLFWwindow* window, int width, int height))
+{
+	glfwSetWindowSizeCallback(this->window, callback);
+}
 void Context::setCursor(bool enabled)
 {
 	glfwSetInputMode(this->window, GLFW_CURSOR, enabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);

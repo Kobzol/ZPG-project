@@ -26,12 +26,16 @@ public:
 	void onMouseMoveCallback(GLFWwindow* window, double x, double y);
 	void onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 	void onMouseButtonCallback(GLFWwindow* window, int button, int action, int modifier);
+	void onWindowSizeCallback(GLFWwindow* window, int width, int height);
 
 private:
 	static Game instance;
 
 	Context* context;
 	Renderer renderer;
+
+	Camera* camera;
+
 	FreelookController freelookController;
 	FlyController flyController;
 

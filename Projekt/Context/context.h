@@ -48,6 +48,7 @@ public:
 	void setMousePositionCallback(void (*callback)(GLFWwindow* window, double xpos, double ypos));
 	void setMouseScrollCallback(void (*callback)(GLFWwindow* window, double xoffset, double yoffset));
 	void setMouseButtonCallback(void(*callback)(GLFWwindow* window, int button, int action, int modifier));
+	void setWindowSizeCallback(void(*callback)(GLFWwindow* window, int width, int height));
 	void setCursor(bool enabled);
 
 	void setDepthTest(bool enabled);
