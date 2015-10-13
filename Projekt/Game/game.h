@@ -36,7 +36,6 @@ private:
 	Renderer renderer;
 	FreelookController freelookController;
 
-	glm::vec2 mousePos;
 	std::pair<GLdouble, GLdouble> oldMouseScroll;
 	std::pair<GLdouble, GLdouble> mouseScroll;
 	std::pair<bool, bool> mouseDown = std::make_pair(false, false);

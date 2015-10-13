@@ -6,21 +6,10 @@ FreelookController::FreelookController(float mouseSensitivity) : mouseSensitivit
 	this->yaw = -90.0f;
 }
 
-void FreelookController::update(double xPos, double yPos, float delta, Camera& camera)
+void FreelookController::updateCamera(float delta, Camera& camera)
 {
-	if (this->mousePosOld.x == -1.0f)
-	{
-		this->mousePosOld.x = (float) xPos;
-		this->mousePosOld.y = (float) yPos;
-
-		return;
-	}
-
-	float diffX = (float) (xPos - this->mousePosOld.x);
-	float diffY = (float) (this->mousePosOld.y - yPos);
-
-	this->mousePosOld.x = (float) xPos;
-	this->mousePosOld.y = (float) yPos;
+	float diffX = (float) (this->mousePos.x - this->mousePosOld.x);
+	float diffY = (float) (this->mousePosOld.y - this->mousePos.y);
 
 	if (diffX != 0 || diffY != 0)
 	{
@@ -39,5 +28,21 @@ void FreelookController::update(double xPos, double yPos, float delta, Camera& c
 		glm::vec3 cameraFront = glm::vec3(cosPitch * cosYaw, sinPitch, cosPitch * sinYaw);
 
 		camera.setTarget(cameraFront);
+
+		this->mousePosOld = this->mousePos;
 	}
+}
+
+void FreelookController::setMousePos(double xPos, double yPos)
+{
+	if (this->mousePosOld.x == -1.0f)
+	{
+		this->mousePosOld.x = (float) xPos;
+		this->mousePosOld.y = (float) yPos;
+
+		return;
+	}
+
+	this->mousePosOld = this->mousePos;
+	this->mousePos = glm::vec2(xPos, yPos);
 }

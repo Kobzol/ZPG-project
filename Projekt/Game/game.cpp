@@ -76,7 +76,7 @@ void Game::start()
 
 		this->renderer.drawTriangles(0, pocetPrvku);
 
-		this->freelookController.update(this->mousePos.x, this->mousePos.y, context.getDeltaTime(), camera);
+		this->freelookController.updateCamera(context.getDeltaTime(), camera);
 
 		if (this->isButtonPressed(GLFW_KEY_ESCAPE))
 		{
@@ -115,8 +115,7 @@ void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int 
 }
 void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
 {
-	this->mousePos.x = x;
-	this->mousePos.y = y;
+	this->freelookController.setMousePos(x, y);
 }
 void Game::onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {

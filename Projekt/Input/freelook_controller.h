@@ -25,5 +25,7 @@ private:
 public:
 	FreelookController(float mouseSensitivity = 0.05f);
 
-	void update(double xPos, double yPos, float delta, Camera& camera);
+	void updateCamera(float delta, Camera& camera);
+
+	void setMousePos(double xPos, double yPos);
 };
