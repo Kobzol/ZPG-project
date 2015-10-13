@@ -56,9 +56,11 @@ void Game::start()
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
 
-	Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	Camera camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.3f, 0.2f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	camera.attachListener(&program);
 	program.setCameraMatrices(camera);
+
+	this->freelookController.setLookVector(camera.getFront());
 
 	float cameraSpeed = 1.0f;
 

@@ -6,7 +6,17 @@
 
 class FreelookController
 {
+public:
+	FreelookController(float mouseSensitivity = 0.05f);
+
+	void updateCamera(float delta, Camera& camera);
+
+	void setLookVector(glm::vec3 lookVector);
+	void setMousePos(double xPos, double yPos);
+
 private:
+	bool firstMouseEvent;
+
 	glm::vec2 mousePosOld;
 	glm::vec2 mousePos;
 
@@ -14,11 +24,4 @@ private:
 
 	float pitch;
 	float yaw;
-
-public:
-	FreelookController(float mouseSensitivity = 0.05f);
-
-	void updateCamera(float delta, Camera& camera);
-
-	void setMousePos(double xPos, double yPos);
 };
