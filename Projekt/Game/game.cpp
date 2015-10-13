@@ -50,16 +50,6 @@ void Game::start()
 	vbo.bind();
 	vbo.setData(VERTICES, sizeof(VERTICES), GL_STATIC_DRAW);
 
-	double xpos_old = -1;
-	double ypos_old = -1;
-
-	GLfloat pitch = 0.0f;
-	GLfloat yaw = -90.0f;
-	GLfloat mouseSensitivity = 0.05f;
-
-	float angleHorizontal = 270.0f;
-	float angleVertical = 0.0f;
-
 	float angle = 90.0f;
 	glm::mat4 model;
 
@@ -71,8 +61,6 @@ void Game::start()
 	program.setCameraMatrices(camera);
 
 	float cameraSpeed = 1.0f;
-
-	float mouseX, mouseY;
 
 	context->loop([&](Context& context)
 	{
@@ -88,29 +76,7 @@ void Game::start()
 
 		this->renderer.drawTriangles(0, pocetPrvku);
 
-		double diffX = this->mousePosition.first - this->oldMousePosition.first;
-		double diffY = this->oldMousePosition.second - this->mousePosition.second;
-
-		if (diffX != 0 || diffY != 0)
-		{
-			diffX *= mouseSensitivity;
-			diffY *= mouseSensitivity;
-
-			yaw += (GLfloat) diffX;
-			pitch += (GLfloat) diffY;
-
-			pitch = glm::clamp(pitch, -89.0f, 89.0f);
-
-			GLfloat cosPitch = cos(glm::radians(pitch));
-			GLfloat sinPitch = sin(glm::radians(pitch));
-			GLfloat cosYaw = cos(glm::radians(yaw));
-			GLfloat sinYaw = sin(glm::radians(yaw));
-			glm::vec3 cameraFront = glm::vec3(cosPitch * cosYaw, sinPitch, cosPitch * sinYaw);
-
-			camera.setTarget(cameraFront);
-
-			this->oldMousePosition = this->mousePosition;
-		}
+		this->freelookController.update(this->mousePos.x, this->mousePos.y, context.getDeltaTime(), camera);
 
 		if (this->isButtonPressed(GLFW_KEY_ESCAPE))
 		{
@@ -149,15 +115,8 @@ void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int 
 }
 void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
 {
-	if (this->oldMousePosition.first == -1)	// first mouse move
-	{
-		this->oldMousePosition = this->mousePosition = std::make_pair(x, y);
-	}
-	else
-	{
-		this->oldMousePosition = this->mousePosition;
-		this->mousePosition = std::make_pair(x, y);
-	}
+	this->mousePos.x = x;
+	this->mousePos.y = y;
 }
 void Game::onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {

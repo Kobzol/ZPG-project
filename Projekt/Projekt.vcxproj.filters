@@ -87,6 +87,9 @@
     <ClCompile Include="Game\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Input\freelook_controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h">
@@ -186,6 +189,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="models\worker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\freelook_controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

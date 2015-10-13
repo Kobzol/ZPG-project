@@ -7,6 +7,7 @@
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "../Context/context.h"
+#include "../Input/freelook_controller.h"
 #include "../Helper/file_helper.h"
 #include "../Model/vertex.h"
 #include "../Render/shader.h"
@@ -33,9 +34,9 @@ private:
 
 	Context* context;
 	Renderer renderer;
+	FreelookController freelookController;
 
-	std::pair<GLdouble, GLdouble> oldMousePosition = std::make_pair(-1, -1);
-	std::pair<GLdouble, GLdouble> mousePosition = std::make_pair(-1, -1);
+	glm::vec2 mousePos;
 	std::pair<GLdouble, GLdouble> oldMouseScroll;
 	std::pair<GLdouble, GLdouble> mouseScroll;
 	std::pair<bool, bool> mouseDown = std::make_pair(false, false);
