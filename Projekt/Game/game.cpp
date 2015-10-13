@@ -1,5 +1,4 @@
 #include "game.h"
-#include "models/suzi_flat.h"
 
 Game Game::instance = Game();
 
@@ -34,21 +33,14 @@ void Game::start()
 	this->context->setDepthTest(true);
 	this->context->setShowMouseCursor(false);
 
-	Shader vertShader(FileHelper::loadFile("Shaders/Vertex/lambert.vert"), GL_VERTEX_SHADER);
-	Shader fragShader(FileHelper::loadFile("Shaders/Fragment/lambert.frag"), GL_FRAGMENT_SHADER);
+	Shader vertShader(FileHelper::loadFile("Shaders/Vertex/model.vert"), GL_VERTEX_SHADER);
+	Shader fragShader(FileHelper::loadFile("Shaders/Fragment/model.frag"), GL_FRAGMENT_SHADER);
 
 	Program program;
 	program.attachShader(vertShader);
 	program.attachShader(fragShader);
 	program.link();
 	program.use();
-
-	VAO vao;
-	vao.bind();
-
-	VBO vbo;
-	vbo.bind();
-	vbo.setData(VERTICES, sizeof(VERTICES), GL_STATIC_DRAW);
 
 	double xpos_old = -1;
 	double ypos_old = -1;
@@ -63,16 +55,14 @@ void Game::start()
 	float angle = 90.0f;
 	glm::mat4 model;
 
-	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
-	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
-
 	Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	camera.attachListener(&program);
 	program.setCameraMatrices(camera);
 
 	float cameraSpeed = 1.0f;
-
 	float mouseX, mouseY;
+
+	Model modelObject("nanosuit/nanosuit.obj");
 
 	context->loop([&](Context& context)
 	{
@@ -80,13 +70,10 @@ void Game::start()
 
 		program.use();
 
-		vao.bind();
-
 		model = glm::rotate(model, glm::radians(10.0f * context.getDeltaTime()), glm::vec3(0.0f, 0.0f, 1.0f));
 		program.setUniformMatrix4fv("Model", model);
-		program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
-		this->renderer.drawTriangles(0, pocetPrvku);
+		modelObject.draw(program, this->renderer);
 
 		double diffX = this->mousePosition.first - this->oldMousePosition.first;
 		double diffY = this->oldMousePosition.second - this->mousePosition.second;

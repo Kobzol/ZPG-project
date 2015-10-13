@@ -106,11 +106,6 @@
     <ClInclude Include="Helper\glm_helper.h" />
     <ClInclude Include="Helper\opengl_helper.h" />
     <ClInclude Include="Helper\image.h" />
-    <ClInclude Include="models\bedna.h" />
-    <ClInclude Include="models\sphere.h" />
-    <ClInclude Include="models\suzi_flat.h" />
-    <ClInclude Include="models\suzi_smooth.h" />
-    <ClInclude Include="models\worker.h" />
     <ClInclude Include="Model\cubemap.h" />
     <ClInclude Include="Model\mesh.h" />
     <ClInclude Include="Model\model.h" />
