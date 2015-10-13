@@ -35,6 +35,7 @@ public:
 	void setAttribute(std::string name, GLint count, GLenum type, GLboolean normalize, GLsizei stride, const void* offset);
 
 	GLint getUniformLocation(std::string name);
+	void setUniform4f(std::string name, const glm::vec4& value);
 	void setUniform3f(std::string name, GLfloat x, GLfloat y, GLfloat z);
 	void setUniform3f(std::string name, glm::vec3 value);
 	void setUniform2f(std::string name, glm::vec2 value);

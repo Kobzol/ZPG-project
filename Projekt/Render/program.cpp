@@ -58,6 +58,11 @@ GLint Program::getUniformLocation(std::string name)
 
 	return location;
 }
+void Program::setUniform4f(std::string name, const glm::vec4& value)
+{
+	glUniform4f(this->getUniformLocation(name), value.x, value.y, value.z, value.a);
+	GL_CHECK_ERRORS();
+}
 void Program::setUniform3f(std::string name, GLfloat x, GLfloat y, GLfloat z)
 {
 	glUniform3f(this->getUniformLocation(name), x, y, z);
