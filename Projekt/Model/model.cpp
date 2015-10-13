@@ -23,6 +23,7 @@ void Model::free()
 void Model::loadModel(std::string path)
 {
 	Assimp::Importer importer;
+
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -49,9 +50,10 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 
 void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 {
-	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices;
-	std::vector<Texture> textures;
+	this->meshes.push_back(Mesh(std::vector<Vertex>(), std::vector<GLuint>(), std::vector<Texture>()));
+	Mesh& createdMesh = this->meshes[this->meshes.size() - 1];
+
+	createdMesh.vertices.reserve(mesh->mNumVertices);
 
 	for (GLuint i = 0; i < mesh->mNumVertices; i++)
 	{
@@ -65,7 +67,7 @@ void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 		}
 		else vertex.texCoords = glm::vec2(0.0f);
 
-		vertices.push_back(vertex);
+		createdMesh.vertices.push_back(vertex);
 	}
 
 	for (GLuint i = 0; i < mesh->mNumFaces; i++)
@@ -74,7 +76,7 @@ void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 
 		for (GLuint j = 0; j < face.mNumIndices; j++)
 		{
-			indices.push_back(face.mIndices[j]);
+			createdMesh.indices.push_back(face.mIndices[j]);
 		}
 	}
 
@@ -82,22 +84,18 @@ void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 		
-		std::vector<Texture> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::Diffuse);
-		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-		
-		std::vector<Texture> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, TextureType::Specular);
-		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		this->loadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::Diffuse, createdMesh.textures);
+		this->loadMaterialTextures(material, aiTextureType_SPECULAR, TextureType::Specular, createdMesh.textures);
 	}
 
-	this->meshes.push_back(Mesh(vertices, indices, textures));
 	this->meshes[this->meshes.size() - 1].setup();
 }
 
-std::vector<Texture> Model::loadMaterialTextures(aiMaterial* material, aiTextureType assimpType, TextureType textureType)
+void Model::loadMaterialTextures(aiMaterial* material, aiTextureType assimpType, TextureType textureType, std::vector<Texture>& textures)
 {
-	std::vector<Texture> textures;
+	int textureCount = material->GetTextureCount(assimpType);
 
-	for (GLuint i = 0; i < material->GetTextureCount(assimpType); i++)
+	for (GLuint i = 0; i < textureCount; i++)
 	{
 		aiString str;
 		material->GetTexture(assimpType, i, &str);
@@ -111,7 +109,6 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial* material, aiTexture
 			Texture texture(textureType);
 			texture.allocate();
 			texture.bind();
-			texture.path = str;
 			texture.set2DImage(Image(path, ImageType::Alpha));
 			texture.generateMipmap();
 
@@ -120,6 +117,4 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial* material, aiTexture
 		
 		textures.push_back(this->loadedTextures[convStr]);
 	}
-
-	return textures;
 }

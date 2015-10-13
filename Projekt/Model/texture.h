@@ -30,8 +30,6 @@ public:
 	TextureType type;
 	GLenum glType;
 
-	aiString path;
-
 	Texture(TextureType type = TextureType::Diffuse);
 
 	GLuint getId();

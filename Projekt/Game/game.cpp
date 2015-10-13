@@ -55,7 +55,7 @@ void Game::start()
 	float angle = 90.0f;
 	glm::mat4 model;
 
-	Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 	camera.attachListener(&program);
 	program.setCameraMatrices(camera);
 

@@ -8,6 +8,8 @@
 #include <vector>
 #include <unordered_map>
 
+#include <time.h>
+
 #include "../Render/program.h"
 #include "../Render/renderer.h"
 #include "mesh.h"
@@ -28,5 +30,5 @@ private:
 	void loadModel(std::string path);
 	void processNode(aiNode* node, const aiScene* scene);
 	void addMesh(aiMesh* mesh, const aiScene* scene);
-	std::vector<Texture> loadMaterialTextures(aiMaterial* material, aiTextureType assimpType, TextureType textureType);
+	void loadMaterialTextures(aiMaterial* material, aiTextureType assimpType, TextureType textureType, std::vector<Texture>& textures);
 };
