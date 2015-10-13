@@ -190,9 +190,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\Fragment\test.frag" />
-    <None Include="Shaders\Vertex\test.vert" />
     <None Include="assimp.dll" />
     <None Include="ClassDiagram.cd" />
+    <None Include="Shaders\Fragment\lambert.frag" />
+    <None Include="Shaders\Vertex\lambert.vert" />
   </ItemGroup>
 </Project>

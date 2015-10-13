@@ -134,8 +134,8 @@
   <ItemGroup>
     <None Include="assimp.dll" />
     <None Include="ClassDiagram.cd" />
-    <None Include="Shaders\Fragment\test.frag" />
-    <None Include="Shaders\Vertex\test.vert" />
+    <None Include="Shaders\Fragment\lambert.frag" />
+    <None Include="Shaders\Vertex\lambert.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
