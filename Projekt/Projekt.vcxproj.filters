@@ -173,10 +173,26 @@
     <ClInclude Include="Helper\glm_helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="models\bedna.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\suzi_flat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\suzi_smooth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\worker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Fragment\test.frag" />
     <None Include="Shaders\Vertex\test.vert" />
     <None Include="assimp.dll" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
