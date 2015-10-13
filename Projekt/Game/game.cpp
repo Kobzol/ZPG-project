@@ -11,7 +11,6 @@ Game& Game::getInstance()
 Game::Game()
 {
 	this->context = nullptr;
-	memset(this->buttons, 0, sizeof(this->buttons));
 }
 Game::~Game()
 {
@@ -56,7 +55,7 @@ void Game::start()
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
 
-	Camera camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.3f, 0.2f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	Camera camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	camera.attachListener(&program);
 	program.setCameraMatrices(camera);
 
@@ -79,26 +78,11 @@ void Game::start()
 		this->renderer.drawTriangles(0, pocetPrvku);
 
 		this->freelookController.updateCamera(context.getDeltaTime(), camera);
+		this->flyController.updateCamera(context.getDeltaTime(), camera);
 
-		if (this->isButtonPressed(GLFW_KEY_ESCAPE))
+		if (this->flyController.isButtonPressed(GLFW_KEY_ESCAPE))
 		{
-			context.closeWindow();
-		}
-		if (this->isButtonPressed(GLFW_KEY_D))
-		{
-			camera.move(-camera.getLeft() * cameraSpeed * context.getDeltaTime());
-		}
-		if (this->isButtonPressed(GLFW_KEY_A))
-		{
-			camera.move(camera.getLeft() * cameraSpeed * context.getDeltaTime());
-		}
-		if (this->isButtonPressed(GLFW_KEY_W))
-		{
-			camera.move(camera.getFront() * cameraSpeed * context.getDeltaTime());
-		}
-		if (this->isButtonPressed(GLFW_KEY_S))
-		{
-			camera.move(-camera.getFront() * cameraSpeed * context.getDeltaTime());
+			glfwSetWindowShouldClose(this->context->getWindow(), 1);
 		}
 	});
 
@@ -106,14 +90,10 @@ void Game::start()
 
 	context->terminate();
 }
-bool Game::isButtonPressed(int key)
-{
-	return this->buttons[key] != GLFW_RELEASE;
-}
 
 void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier)
 {
-	this->buttons[key] = action;
+	this->flyController.changeButtonState(key, action);
 }
 void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
 {

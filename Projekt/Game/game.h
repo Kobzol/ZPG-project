@@ -7,6 +7,7 @@
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "../Context/context.h"
+#include "../Input/fly_controller.h"
 #include "../Input/freelook_controller.h"
 #include "../Helper/file_helper.h"
 #include "../Model/vertex.h"
@@ -20,7 +21,6 @@ public:
 	static Game& getInstance();
 
 	void start();
-	bool isButtonPressed(int key);
 
 	void onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier);
 	void onMouseMoveCallback(GLFWwindow* window, double x, double y);
@@ -30,11 +30,10 @@ public:
 private:
 	static Game instance;
 
-	char buttons[512];
-
 	Context* context;
 	Renderer renderer;
 	FreelookController freelookController;
+	FlyController flyController;
 
 	std::pair<GLdouble, GLdouble> oldMouseScroll;
 	std::pair<GLdouble, GLdouble> mouseScroll;

@@ -77,6 +77,7 @@
     <ClCompile Include="Context\context.cpp" />
     <ClCompile Include="Game\game.cpp" />
     <ClCompile Include="Helper\image.cpp" />
+    <ClCompile Include="Input\fly_controller.cpp" />
     <ClCompile Include="Input\freelook_controller.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\cubemap.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="Helper\glm_helper.h" />
     <ClInclude Include="Helper\opengl_helper.h" />
     <ClInclude Include="Helper\image.h" />
+    <ClInclude Include="Input\fly_controller.h" />
     <ClInclude Include="Input\freelook_controller.h" />
     <ClInclude Include="models\bedna.h" />
     <ClInclude Include="models\sphere.h" />
