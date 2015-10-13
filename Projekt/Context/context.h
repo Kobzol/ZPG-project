@@ -75,4 +75,6 @@ public:
 	void setMultisampling(bool enabled);
 	
 	void setGammaCorrection(bool enabled);
+
+	void setShowMouseCursor(bool enabled);
 };

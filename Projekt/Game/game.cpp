@@ -32,6 +32,7 @@ void Game::start()
 	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { Game::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
 	this->context->setMouseButtonCallback([](GLFWwindow* window, int button, int action, int modifier) { Game::getInstance().onMouseButtonCallback(window, button, action, modifier); });
 	this->context->setDepthTest(true);
+	this->context->setShowMouseCursor(false);
 
 	Shader vertShader(FileHelper::loadFile("Shaders/Vertex/lambert.vert"), GL_VERTEX_SHADER);
 	Shader fragShader(FileHelper::loadFile("Shaders/Fragment/lambert.frag"), GL_FRAGMENT_SHADER);

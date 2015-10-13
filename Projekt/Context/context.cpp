@@ -220,3 +220,8 @@ void Context::setGammaCorrection(bool enabled)
 {
 	this->setProperty(GL_FRAMEBUFFER_SRGB, enabled);
 }
+
+void Context::setShowMouseCursor(bool enabled)
+{
+	glfwSetInputMode(window, GLFW_CURSOR, enabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+}

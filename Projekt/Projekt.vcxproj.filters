@@ -194,5 +194,7 @@
     <None Include="ClassDiagram.cd" />
     <None Include="Shaders\Fragment\lambert.frag" />
     <None Include="Shaders\Vertex\lambert.vert" />
+    <None Include="Shaders\Vertex\model.vert" />
+    <None Include="Shaders\Fragment\model.frag" />
   </ItemGroup>
 </Project>
