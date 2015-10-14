@@ -33,7 +33,7 @@ Program& ProgramManager::get(std::string identifier)
 	{
 		return this->programs[identifier];
 	}
-	else throw std::runtime_error("No program with identifier " + identifier + " found");
+	else throw std::runtime_error("No program with identifier " + identifier + " has been found.");
 }
 
 void ProgramManager::dispose()
