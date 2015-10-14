@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 #include "../Helper/file_helper.h"
+#include "../Model/vertex.h"
 #include "../Render/program.h"
 #include "../Render/shader.h"
 

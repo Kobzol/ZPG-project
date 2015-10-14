@@ -20,6 +20,7 @@ void ProgramManager::preloadPrograms()
 	program.attachShader(vertexShader);
 	program.attachShader(fragmentShader);
 	program.link();
+
 	this->load(ProgramManager::PROGRAM_DEFAULT, program);
 }
 void ProgramManager::load(std::string identifier, const Program &program)

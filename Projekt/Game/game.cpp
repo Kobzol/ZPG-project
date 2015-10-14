@@ -34,6 +34,8 @@ void Game::start()
 	this->context->setDepthTest(true);
 	this->context->setShowMouseCursor(false);
 
+	this->camera = new Camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_DEFAULT);
 	program.use();
@@ -45,36 +47,33 @@ void Game::start()
 	vbo.bind();
 	vbo.setData(VERTICES, sizeof(VERTICES), GL_STATIC_DRAW);
 
-	float angle = 90.0f;
 	glm::mat4 model;
 
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
+	
+	program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
-	this->camera = new Camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	camera->attachListener(&program);
 	program.setCameraMatrices(*camera);
 
 	this->freelookController.setLookVector(camera->getFront());
 
-	float cameraSpeed = 1.0f;
-
 	context->loop([&](Context& context)
 	{
-		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		float delta = context.getDeltaTime();
 
-		program.use();
+		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		vao.bind();
 
-		model = glm::rotate(model, glm::radians(10.0f * context.getDeltaTime()), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(10.0f * delta), glm::vec3(0.0f, 0.0f, 1.0f));
 		program.setUniformMatrix4fv("Model", model);
-		program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
 		this->renderer.drawTriangles(0, pocetPrvku);
 
-		this->freelookController.updateCamera(context.getDeltaTime(), *camera);
-		this->flyController.updateCamera(context.getDeltaTime(), *camera);
+		this->freelookController.updateCamera(delta, *camera);
+		this->flyController.updateCamera(delta, *camera);
 
 		if (this->flyController.isButtonPressed(GLFW_KEY_ESCAPE))
 		{
