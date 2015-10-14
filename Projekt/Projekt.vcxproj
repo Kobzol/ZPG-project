@@ -89,6 +89,7 @@
     <ClCompile Include="Model\vertex.cpp" />
     <ClCompile Include="Render\camera.cpp" />
     <ClCompile Include="Event\event_broadcaster.cpp" />
+    <ClCompile Include="Render\effect_manager.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />
     <ClCompile Include="Render\Light\attenuation.cpp" />
     <ClCompile Include="Render\Light\directional_light.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="Event\camera_changed_listener.h" />
     <ClInclude Include="Event\event_listener.h" />
     <ClInclude Include="Event\event_broadcaster.h" />
+    <ClInclude Include="Render\effect_manager.h" />
     <ClInclude Include="Render\framebuffer.h" />
     <ClInclude Include="Render\Light\attenuation.h" />
     <ClInclude Include="Render\Light\directional_light.h" />

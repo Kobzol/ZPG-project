@@ -31,8 +31,9 @@ void Game::start()
 	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { Game::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
 	this->context->setMouseButtonCallback([](GLFWwindow* window, int button, int action, int modifier) { Game::getInstance().onMouseButtonCallback(window, button, action, modifier); });
 	this->context->setWindowSizeCallback([](GLFWwindow* window, int width, int height) { Game::getInstance().onWindowSizeCallback(window, width, height); });
-	this->context->setDepthTest(true);
 	this->context->setShowMouseCursor(false);
+	this->context->setDepthTest(true);
+	this->context->setStencilTest(true);
 
 	this->camera = new Camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 
@@ -50,8 +51,6 @@ void Game::start()
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
 
-	program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-
 	camera->attachListener(&program);
 	program.setCameraMatrices(*camera);
 
@@ -59,17 +58,33 @@ void Game::start()
 
 	Transform transform;
 
+	this->context->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
 	context->loop([&](Context& context)
 	{
 		float delta = context.getDeltaTime();
 
-		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		vao.bind();
 
+		transform.setScale(glm::vec3(1.0f));
 		program.setUniformMatrix4fv("Model", transform.getModel());
 
+		EffectManager::getInstance().beforeRender(context);
+
+		program.setUniform4f("color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 		this->renderer.drawTriangles(0, pocetPrvku);
+
+		EffectManager::getInstance().beforeOutline(context);
+
+		transform.setScale(glm::vec3(1.1f, 1.1f, 1.1f));
+		program.setUniformMatrix4fv("Model", transform.getModel());
+
+		program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+		this->renderer.drawTriangles(0, pocetPrvku);
+
+		EffectManager::getInstance().afterOutline(context);
 
 		this->freelookController.updateCamera(delta, *camera);
 		this->flyController.updateCamera(delta, *camera);

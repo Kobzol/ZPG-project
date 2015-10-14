@@ -13,9 +13,10 @@
 #include "../Input/freelook_controller.h"
 #include "../Helper/file_helper.h"
 #include "../Model/vertex.h"
-#include "../Render/shader.h"
+#include "../Render/effect_manager.h"
 #include "../Render/program.h"
 #include "../Render/renderer.h"
+#include "../Render/shader.h"
 
 class Game
 {
