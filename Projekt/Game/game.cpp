@@ -47,17 +47,17 @@ void Game::start()
 	vbo.bind();
 	vbo.setData(VERTICES, sizeof(VERTICES), GL_STATIC_DRAW);
 
-	glm::mat4 model;
-
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
-	
+
 	program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
 	camera->attachListener(&program);
 	program.setCameraMatrices(*camera);
 
 	this->freelookController.setLookVector(camera->getFront());
+
+	Transform transform;
 
 	context->loop([&](Context& context)
 	{
@@ -67,8 +67,7 @@ void Game::start()
 
 		vao.bind();
 
-		model = glm::rotate(model, glm::radians(10.0f * delta), glm::vec3(0.0f, 0.0f, 1.0f));
-		program.setUniformMatrix4fv("Model", model);
+		program.setUniformMatrix4fv("Model", transform.getModel());
 
 		this->renderer.drawTriangles(0, pocetPrvku);
 
@@ -78,6 +77,14 @@ void Game::start()
 		if (this->flyController.isButtonPressed(GLFW_KEY_ESCAPE))
 		{
 			glfwSetWindowShouldClose(this->context->getWindow(), 1);
+		}
+		if (this->flyController.isButtonPressed(GLFW_KEY_RIGHT))
+		{
+			transform.rotateBy(1.0f * delta, glm::vec3(0.0f, 0.0f, 1.0f));
+		}
+		if (this->flyController.isButtonPressed(GLFW_KEY_LEFT))
+		{
+			transform.rotateBy(-1.0f * delta, glm::vec3(0.0f, 0.0f, 1.0f));
 		}
 	});
 

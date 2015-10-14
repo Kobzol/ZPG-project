@@ -76,6 +76,7 @@
     <ClCompile Include="Buffer\vbo.cpp" />
     <ClCompile Include="Context\context.cpp" />
     <ClCompile Include="Game\game.cpp" />
+    <ClCompile Include="Game\Physics\transform.cpp" />
     <ClCompile Include="Game\program_manager.cpp" />
     <ClCompile Include="Helper\image.cpp" />
     <ClCompile Include="Input\fly_controller.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="Buffer\vbo.h" />
     <ClInclude Include="Context\context.h" />
     <ClInclude Include="Game\game.h" />
+    <ClInclude Include="Game\Physics\transform.h" />
     <ClInclude Include="Game\program_manager.h" />
     <ClInclude Include="Helper\file_helper.h" />
     <ClInclude Include="Helper\glm_helper.h" />
