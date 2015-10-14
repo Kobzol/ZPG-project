@@ -34,13 +34,8 @@ void Game::start()
 	this->context->setDepthTest(true);
 	this->context->setShowMouseCursor(false);
 
-	Shader vertShader(FileHelper::loadFile("Shaders/Vertex/lambert.vert"), GL_VERTEX_SHADER);
-	Shader fragShader(FileHelper::loadFile("Shaders/Fragment/lambert.frag"), GL_FRAGMENT_SHADER);
-
-	Program program;
-	program.attachShader(vertShader);
-	program.attachShader(fragShader);
-	program.link();
+	ProgramManager::getInstance().preloadPrograms();
+	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_DEFAULT);
 	program.use();
 
 	VAO vao;
@@ -89,6 +84,8 @@ void Game::start()
 
 	camera->detachListener(&program);
 	delete this->camera;
+
+	ProgramManager::getInstance().dispose();
 
 	context->terminate();
 }

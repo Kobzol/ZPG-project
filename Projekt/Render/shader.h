@@ -11,7 +11,6 @@ class Shader
 {
 private:
 	GLuint shader;
-	GLint type;
 
 public:
 	Shader(std::string code, GLenum type);

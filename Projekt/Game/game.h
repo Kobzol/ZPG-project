@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "program_manager.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "../Context/context.h"
