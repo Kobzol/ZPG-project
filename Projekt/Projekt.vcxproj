@@ -78,6 +78,7 @@
     <ClCompile Include="Game\game.cpp" />
     <ClCompile Include="Game\Physics\transform.cpp" />
     <ClCompile Include="Game\program_manager.cpp" />
+    <ClCompile Include="Game\timer.cpp" />
     <ClCompile Include="Helper\image.cpp" />
     <ClCompile Include="Input\fly_controller.cpp" />
     <ClCompile Include="Input\freelook_controller.cpp" />
@@ -106,6 +107,7 @@
     <ClInclude Include="Buffer\vao.h" />
     <ClInclude Include="Buffer\vbo.h" />
     <ClInclude Include="Context\context.h" />
+    <ClInclude Include="Game\timer.h" />
     <ClInclude Include="Game\game.h" />
     <ClInclude Include="Game\Physics\transform.h" />
     <ClInclude Include="Game\program_manager.h" />

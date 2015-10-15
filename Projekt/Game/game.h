@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "program_manager.h"
+#include "timer.h"
 #include "Physics/transform.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"

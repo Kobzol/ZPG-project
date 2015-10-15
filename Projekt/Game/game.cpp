@@ -34,6 +34,7 @@ void Game::start()
 	this->context->setShowMouseCursor(false);
 	this->context->setDepthTest(true);
 	this->context->setStencilTest(true);
+	this->context->setCulling(true);
 
 	this->camera = new Camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 
@@ -60,9 +61,17 @@ void Game::start()
 
 	this->context->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
+	Timer timer(0.25f);
+
 	context->loop([&](Context& context)
 	{
 		float delta = context.getDeltaTime();
+		timer.update(delta);
+
+		if (timer.resetIfReady())
+		{
+			std::cout << "FPS: " << 1.0f / delta << std::endl;
+		}
 
 		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
