@@ -5,10 +5,13 @@
 class MouseState
 {
 public:
+	MouseState();
+
 	glm::vec2 getState();
 	glm::vec2 getOldState();
 
 	void update(float x, float y);
+	void resetOldState();
 
 private:
 	bool firstEvent;

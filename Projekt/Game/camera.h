@@ -5,10 +5,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "game_object.h"
 #include "../Event/camera_changed_listener.h"
 #include "../Event/event_broadcaster.h"
 
-class Camera
+class Camera : public GameObject
 {
 private:
 	glm::vec3 position;
@@ -33,6 +34,7 @@ private:
 
 public:
 	Camera(
+		IScriptComponent* component,
 		glm::vec3 position = glm::vec3(0.0f),
 		glm::vec3 target = glm::vec3(0.0f),
 		glm::vec3 up = glm::vec3(0.0f, 0.0f, 1.0f),

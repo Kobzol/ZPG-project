@@ -6,12 +6,12 @@
 
 #include "program_manager.h"
 #include "timer.h"
+#include "Input/input_controller.h"
+#include "Component/camera_controller.h"
 #include "Physics/transform.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "../Context/context.h"
-#include "../Input/fly_controller.h"
-#include "../Input/freelook_controller.h"
 #include "../Helper/file_helper.h"
 #include "../Model/vertex.h"
 #include "../Render/effect_manager.h"
@@ -25,23 +25,17 @@ public:
 	static Game& getInstance();
 
 	void start();
-
-	void onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier);
-	void onMouseMoveCallback(GLFWwindow* window, double x, double y);
-	void onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
-	void onMouseButtonCallback(GLFWwindow* window, int button, int action, int modifier);
-	void onWindowSizeCallback(GLFWwindow* window, int width, int height);
+	float getDeltaTime();
 
 private:
 	static Game instance;
+
+	void onWindowSizeCallback(GLFWwindow* window, int width, int height);
 
 	Context* context;
 	Renderer renderer;
 
 	Camera* camera;
-
-	FreelookController freelookController;
-	FlyController flyController;
 
 	std::pair<GLdouble, GLdouble> oldMouseScroll;
 	std::pair<GLdouble, GLdouble> mouseScroll;

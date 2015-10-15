@@ -27,3 +27,7 @@ void MouseState::update(float x, float y)
 	this->oldState = this->state;
 	this->state = glm::vec2(x, y);
 }
+void MouseState::resetOldState()
+{
+	this->oldState = this->state;
+}

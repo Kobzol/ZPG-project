@@ -1,10 +1,11 @@
 #include "camera.h"
 
 Camera::Camera(
+	IScriptComponent* component,
 	glm::vec3 position, glm::vec3 target, glm::vec3 up,
 	float fov, float aspect, float nearPlane, float farPlane
 	) : position(position), target(target), up(up),
-	fov(fov), aspect(aspect), nearPlane(nearPlane), farPlane(farPlane)
+	fov(fov), aspect(aspect), nearPlane(nearPlane), farPlane(farPlane), GameObject(component)
 {
 	this->recalculateViewMatrix();
 	this->recalculateProjectionMatrix();

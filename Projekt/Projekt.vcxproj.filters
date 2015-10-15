@@ -48,9 +48,6 @@
     <ClCompile Include="Render\Light\spotlight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Render\camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Render\program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -87,12 +84,6 @@
     <ClCompile Include="Game\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Input\freelook_controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Input\fly_controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\program_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -103,6 +94,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Input\input_controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Input\mouse_state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\camera_controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\game_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,9 +141,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Render\Light\spotlight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Render\program.h">
@@ -206,12 +209,6 @@
     <ClInclude Include="models\worker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Input\freelook_controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Input\fly_controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game\program_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -225,6 +222,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\content_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Input\input_controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Input\mouse_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\iscript_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\game_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\camera_controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

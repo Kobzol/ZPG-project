@@ -21,22 +21,27 @@ Game::~Game()
 	}
 }
 
+float Game::getDeltaTime()
+{
+	return this->context->getDeltaTime();
+}
+
 void Game::start()
 {
 	this->context = new Context();
 	this->context->initialize();
 	this->context->createWindow(800, 600, 1, "ZPG", false, false);
-	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { Game::getInstance().onKeyCallback(window, key, scan, action, modifier); });
-	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { Game::getInstance().onMouseMoveCallback(window, x, y); });
-	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { Game::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
-	this->context->setMouseButtonCallback([](GLFWwindow* window, int button, int action, int modifier) { Game::getInstance().onMouseButtonCallback(window, button, action, modifier); });
+	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { InputController::getInstance().onKeyCallback(window, key, scan, action, modifier); });
+	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { InputController::getInstance().onMouseMoveCallback(window, x, y); });
+	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { InputController::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
+	this->context->setMouseButtonCallback([](GLFWwindow* window, int button, int action, int modifier) { InputController::getInstance().onMouseButtonCallback(window, button, action, modifier); });
 	this->context->setWindowSizeCallback([](GLFWwindow* window, int width, int height) { Game::getInstance().onWindowSizeCallback(window, width, height); });
 	this->context->setShowMouseCursor(false);
 	this->context->setDepthTest(true);
 	this->context->setStencilTest(true);
 	this->context->setCulling(true);
 
-	this->camera = new Camera(glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	this->camera = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_DEFAULT);
@@ -55,8 +60,6 @@ void Game::start()
 	camera->attachListener(&program);
 	program.setCameraMatrices(*camera);
 
-	this->freelookController.setLookVector(camera->getFront());
-
 	Transform transform;
 
 	this->context->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
@@ -67,6 +70,8 @@ void Game::start()
 	{
 		float delta = context.getDeltaTime();
 		timer.update(delta);
+
+		this->camera->update();
 
 		if (timer.resetIfReady())
 		{
@@ -95,24 +100,16 @@ void Game::start()
 
 		EffectManager::getInstance().afterOutline(context);
 
-		this->freelookController.updateCamera(delta, *camera);
-		this->flyController.updateCamera(delta, *camera);
-
-		if (this->flyController.isButtonPressed(GLFW_KEY_ESCAPE))
+		if (InputController::getInstance().isButtonPressed(GLFW_KEY_ESCAPE))
 		{
 			glfwSetWindowShouldClose(this->context->getWindow(), 1);
 		}
-		if (this->flyController.isButtonPressed(GLFW_KEY_RIGHT))
-		{
-			transform.rotateBy(1.0f * delta, glm::vec3(0.0f, 0.0f, 1.0f));
-		}
-		if (this->flyController.isButtonPressed(GLFW_KEY_LEFT))
-		{
-			transform.rotateBy(-1.0f * delta, glm::vec3(0.0f, 0.0f, 1.0f));
-		}
+
+		InputController::getInstance().afterUpdate();
 	});
 
 	camera->detachListener(&program);
+	camera->dispose();
 	delete this->camera;
 
 	ProgramManager::getInstance().dispose();
@@ -120,30 +117,6 @@ void Game::start()
 	context->terminate();
 }
 
-void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier)
-{
-	this->flyController.changeButtonState(key, action);
-}
-void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
-{
-	this->freelookController.setMousePos(x, y);
-}
-void Game::onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
-{
-	this->oldMouseScroll = this->mouseScroll;
-	this->mouseScroll = std::make_pair(xOffset, yOffset);
-}
-void Game::onMouseButtonCallback(GLFWwindow* window, int button, int action, int modifier)
-{
-	if (button == GLFW_MOUSE_BUTTON_1)
-	{
-		this->mouseDown.first = action == GLFW_PRESS;
-	}
-	else if (button == GLFW_MOUSE_BUTTON_2)
-	{
-		this->mouseDown.second = action == GLFW_PRESS;
-	}
-}
 void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);

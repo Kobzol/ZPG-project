@@ -14,7 +14,7 @@
 #include "../Buffer/vao.h"
 #include "../Helper/opengl_helper.h"
 #include "../Event/camera_changed_listener.h"
-#include "camera.h"
+#include "../Game/camera.h"
 
 class Program : public CameraChangedListener
 {
