@@ -105,10 +105,13 @@
     <ClCompile Include="Game\Component\camera_controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\game_object.cpp">
+    <ClCompile Include="Game\Content\program_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Content\program_manager.cpp">
+    <ClCompile Include="Game\Object\game_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\object_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -230,9 +233,6 @@
     <ClInclude Include="Game\Component\iscript_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\game_object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Component\camera_controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -249,6 +249,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Content\content_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\game_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\object_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

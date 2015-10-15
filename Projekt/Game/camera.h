@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "game_object.h"
+#include "Object/game_object.h"
 #include "../Event/camera_changed_listener.h"
 #include "../Event/event_broadcaster.h"
 

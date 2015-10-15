@@ -9,6 +9,7 @@
 #include "Input/input_controller.h"
 #include "Component/camera_controller.h"
 #include "Content/program_manager.h"
+#include "Object/object_manager.h"
 #include "Physics/transform.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
@@ -28,14 +29,16 @@ public:
 	void start();
 	float getDeltaTime();
 
+	ObjectManager& getObjectManager();
+
 private:
 	static Game instance;
 
 	void onWindowSizeCallback(GLFWwindow* window, int width, int height);
 
+	ObjectManager objectManager;
 	Context* context;
 	Renderer renderer;
-
 	Camera* camera;
 
 	Game();

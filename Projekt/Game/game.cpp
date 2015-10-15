@@ -26,6 +26,11 @@ float Game::getDeltaTime()
 	return this->context->getDeltaTime();
 }
 
+ObjectManager& Game::getObjectManager()
+{
+	return this->objectManager;
+}
+
 void Game::start()
 {
 	this->context = new Context();
@@ -90,7 +95,7 @@ void Game::start()
 		EffectManager::getInstance().beforeRender(context);
 
 		program.setUniform4f("color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-		this->renderer.drawTriangles(0, pocetPrvku);
+		this->renderer.drawTriangles(0, (GLsizei) pocetPrvku);
 
 		EffectManager::getInstance().beforeOutline(context);
 
@@ -98,7 +103,7 @@ void Game::start()
 		program.setUniformMatrix4fv("Model", transform.getModel());
 
 		program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-		this->renderer.drawTriangles(0, pocetPrvku);
+		this->renderer.drawTriangles(0, (GLsizei) pocetPrvku);
 
 		EffectManager::getInstance().afterOutline(context);
 

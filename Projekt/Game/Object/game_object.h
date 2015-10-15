@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Component/iscript_component.h"
-#include "Physics/itransformable.h"
-#include "Physics/transform.h"
-#include "tag.h"
-#include "../Helper/flags.h"
+#include "../Component/iscript_component.h"
+#include "../Physics/itransformable.h"
+#include "../Physics/transform.h"
+#include "../tag.h"
+#include "../../Helper/flags.h"
 
 class GameObject : public ITransformable
 {
@@ -14,8 +14,11 @@ public:
 	Transform& getTransform();
 	Flags<Tag>& getTags();
 
-	void update();
-	void dispose();
+	int getId();
+	void setId(int id);
+
+	virtual void update();
+	virtual void dispose();
 
 	virtual glm::mat4 getModel() const;
 
@@ -37,6 +40,8 @@ public:
 private:
 	GameObject(const GameObject& other);
 	GameObject& operator=(const GameObject& other);
+
+	int id;
 
 	Flags<Tag> tags;
 	Transform transform;

@@ -77,9 +77,10 @@
     <ClCompile Include="Context\context.cpp" />
     <ClCompile Include="Game\Component\camera_controller.cpp" />
     <ClCompile Include="Game\game.cpp" />
-    <ClCompile Include="Game\game_object.cpp" />
+    <ClCompile Include="Game\Object\game_object.cpp" />
     <ClCompile Include="Game\Input\input_controller.cpp" />
     <ClCompile Include="Game\Input\mouse_state.cpp" />
+    <ClCompile Include="Game\Object\object_manager.cpp" />
     <ClCompile Include="Game\Physics\transform.cpp" />
     <ClCompile Include="Game\Content\program_manager.cpp" />
     <ClCompile Include="Game\timer.cpp" />
@@ -112,9 +113,10 @@
     <ClInclude Include="Game\Component\camera_controller.h" />
     <ClInclude Include="Game\Component\iscript_component.h" />
     <ClInclude Include="Game\Content\content_manager.h" />
-    <ClInclude Include="Game\game_object.h" />
+    <ClInclude Include="Game\Object\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />
+    <ClInclude Include="Game\Object\object_manager.h" />
     <ClInclude Include="Game\Physics\itransformable.h" />
     <ClInclude Include="Game\tag.h" />
     <ClInclude Include="Game\timer.h" />

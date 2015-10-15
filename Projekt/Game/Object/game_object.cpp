@@ -1,6 +1,6 @@
 #include "game_object.h"
 
-GameObject::GameObject(IScriptComponent* scriptComponent) : scriptComponent(scriptComponent)
+GameObject::GameObject(IScriptComponent* scriptComponent) : scriptComponent(scriptComponent), id(-1)
 {
 
 }
@@ -12,6 +12,15 @@ Transform& GameObject::getTransform()
 Flags<Tag>& GameObject::getTags()
 {
 	return this->tags;
+}
+
+int GameObject::getId()
+{
+	return this->id;
+}
+void GameObject::setId(int id)
+{
+	this->id = id;
 }
 
 void GameObject::update()
