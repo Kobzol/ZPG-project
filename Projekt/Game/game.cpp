@@ -121,7 +121,6 @@ void Game::start()
 
 void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
-	glViewport(0, 0, width, height);
-
+	this->context->setViewport(0, 0, width, height);
 	this->camera->setAspect(width / (float) height);
 }
