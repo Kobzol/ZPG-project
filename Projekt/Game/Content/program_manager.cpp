@@ -38,10 +38,21 @@ void ProgramManager::use(std::string identifier)
 	}
 	else std::runtime_error("Program with identifier " + identifier + " doesn't exist");
 }
-
 Program& ProgramManager::getCurrentProgram()
 {
 	return this->get(this->currentProgram);
+}
+
+void ProgramManager::save()
+{
+	this->saveStack.push(this->currentProgram);
+}
+void ProgramManager::restore()
+{
+	std::string lastSavedProgram = this->saveStack.top();
+	this->saveStack.pop();
+
+	this->use(lastSavedProgram);
 }
 
 void ProgramManager::dispose()

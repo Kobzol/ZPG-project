@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stack>
 #include <unordered_map>
 
 #include "content_manager.h"
@@ -18,8 +19,10 @@ public:
 	void preloadPrograms();
 
 	void use(std::string identifier);
-
 	Program& getCurrentProgram();
+
+	void save();
+	void restore();
 
 	void dispose();
 
@@ -32,4 +35,5 @@ private:
 	ProgramManager();
 
 	std::string currentProgram;
+	std::stack<std::string> saveStack;
 };
