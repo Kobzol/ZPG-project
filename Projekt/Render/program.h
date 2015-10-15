@@ -16,9 +16,15 @@
 #include "../Event/camera_changed_listener.h"
 #include "../Game/camera.h"
 
+class ProgramManager;
+
 class Program : public CameraChangedListener
 {
+	friend class ProgramManager;
+
 private:
+	void use();
+
 	GLuint program;
 
 public:
@@ -28,7 +34,6 @@ public:
 
 	void attachShader(Shader& shader);
 	void link();
-	void use();
 	void free();
 
 	GLint getAttributeLocation(std::string name);

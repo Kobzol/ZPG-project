@@ -17,6 +17,10 @@ public:
 
 	void preloadPrograms();
 
+	void use(std::string identifier);
+
+	Program& getCurrentProgram();
+
 	void dispose();
 
 private:
@@ -26,4 +30,6 @@ private:
 	static ProgramManager instance;
 
 	ProgramManager();
+
+	std::string currentProgram;
 };

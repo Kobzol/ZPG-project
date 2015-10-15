@@ -13,7 +13,7 @@ ProgramManager& ProgramManager::getInstance()
 
 ProgramManager::ProgramManager()
 {
-
+	
 }
 
 void ProgramManager::preloadPrograms()
@@ -27,6 +27,21 @@ void ProgramManager::preloadPrograms()
 	program.link();
 
 	this->load(ProgramManager::PROGRAM_DEFAULT, program);
+}
+
+void ProgramManager::use(std::string identifier)
+{
+	if (this->items.count(identifier))
+	{
+		this->currentProgram = identifier;
+		this->items[identifier].use();
+	}
+	else std::runtime_error("Program with identifier " + identifier + " doesn't exist");
+}
+
+Program& ProgramManager::getCurrentProgram()
+{
+	return this->get(this->currentProgram);
 }
 
 void ProgramManager::dispose()

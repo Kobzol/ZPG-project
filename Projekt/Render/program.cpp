@@ -25,15 +25,14 @@ void Program::link()
 	GL_CHECK_LINKAGE(this->program);
 	GL_CHECK_ERRORS();
 }
-void Program::use()
-{
-	glUseProgram(this->program);
-
-	GL_CHECK_ERRORS();
-}
 void Program::free()
 {
 	glDeleteProgram(this->program);
+	GL_CHECK_ERRORS();
+}
+void Program::use()
+{
+	glUseProgram(this->program);
 	GL_CHECK_ERRORS();
 }
 

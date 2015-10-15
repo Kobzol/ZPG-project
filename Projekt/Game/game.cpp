@@ -52,7 +52,7 @@ void Game::start()
 
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_DEFAULT);
-	program.use();
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_DEFAULT);
 
 	VAO vao;
 	vao.bind();
