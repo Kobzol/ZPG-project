@@ -3,10 +3,10 @@
 #include <unordered_map>
 
 #include "content_manager.h"
-#include "../Helper/file_helper.h"
-#include "../Model/vertex.h"
-#include "../Render/program.h"
-#include "../Render/shader.h"
+#include "../../Helper/file_helper.h"
+#include "../../Model/vertex.h"
+#include "../../Render/program.h"
+#include "../../Render/shader.h"
 
 class ProgramManager : public ContentManager<Program>
 {

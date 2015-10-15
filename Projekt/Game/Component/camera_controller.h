@@ -3,7 +3,10 @@
 #include <glm/glm.hpp>
 
 #include "iscript_component.h"
+#include "../camera.h"
 #include "../game.h"
+#include "../game_object.h"
+#include "../Input/input_controller.h"
 
 class CameraController : public IScriptComponent
 {

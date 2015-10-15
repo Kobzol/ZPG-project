@@ -42,6 +42,7 @@ void Game::start()
 	this->context->setCulling(true);
 
 	this->camera = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	this->camera->getTags().set(Tag::Camera);
 
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_DEFAULT);

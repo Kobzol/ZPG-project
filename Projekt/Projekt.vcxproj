@@ -81,7 +81,7 @@
     <ClCompile Include="Game\Input\input_controller.cpp" />
     <ClCompile Include="Game\Input\mouse_state.cpp" />
     <ClCompile Include="Game\Physics\transform.cpp" />
-    <ClCompile Include="Game\program_manager.cpp" />
+    <ClCompile Include="Game\Content\program_manager.cpp" />
     <ClCompile Include="Game\timer.cpp" />
     <ClCompile Include="Helper\image.cpp" />
     <ClCompile Include="main.cpp" />
@@ -111,7 +111,7 @@
     <ClInclude Include="Context\context.h" />
     <ClInclude Include="Game\Component\camera_controller.h" />
     <ClInclude Include="Game\Component\iscript_component.h" />
-    <ClInclude Include="Game\content_manager.h" />
+    <ClInclude Include="Game\Content\content_manager.h" />
     <ClInclude Include="Game\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />
@@ -120,7 +120,7 @@
     <ClInclude Include="Game\timer.h" />
     <ClInclude Include="Game\game.h" />
     <ClInclude Include="Game\Physics\transform.h" />
-    <ClInclude Include="Game\program_manager.h" />
+    <ClInclude Include="Game\Content\program_manager.h" />
     <ClInclude Include="Helper\file_helper.h" />
     <ClInclude Include="Helper\flags.h" />
     <ClInclude Include="Helper\glm_helper.h" />
