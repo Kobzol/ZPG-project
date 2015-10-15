@@ -2,12 +2,13 @@
 
 #include <unordered_map>
 
+#include "content_manager.h"
 #include "../Helper/file_helper.h"
 #include "../Model/vertex.h"
 #include "../Render/program.h"
 #include "../Render/shader.h"
 
-class ProgramManager
+class ProgramManager : public ContentManager<Program>
 {
 public:
 	static const std::string PROGRAM_DEFAULT;
@@ -15,11 +16,8 @@ public:
 	static ProgramManager& getInstance();
 
 	void preloadPrograms();
-	void load(std::string identifier, const Program &program);
 
 	void dispose();
-
-	Program& get(std::string identifier);
 
 private:
 	static const std::string SHADER_VERTEX_PATH;
@@ -28,9 +26,4 @@ private:
 	static ProgramManager instance;
 
 	ProgramManager();
-	~ProgramManager();
-	ProgramManager(const ProgramManager& other);
-	ProgramManager& operator=(const ProgramManager& other);
-
-	std::unordered_map<std::string, Program> programs;
 };

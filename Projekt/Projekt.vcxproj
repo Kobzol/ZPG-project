@@ -107,6 +107,7 @@
     <ClInclude Include="Buffer\vao.h" />
     <ClInclude Include="Buffer\vbo.h" />
     <ClInclude Include="Context\context.h" />
+    <ClInclude Include="Game\content_manager.h" />
     <ClInclude Include="Game\timer.h" />
     <ClInclude Include="Game\game.h" />
     <ClInclude Include="Game\Physics\transform.h" />

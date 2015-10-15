@@ -224,6 +224,9 @@
     <ClInclude Include="Game\timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\content_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

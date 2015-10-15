@@ -11,6 +11,11 @@ ProgramManager& ProgramManager::getInstance()
 	return ProgramManager::instance;
 }
 
+ProgramManager::ProgramManager()
+{
+
+}
+
 void ProgramManager::preloadPrograms()
 {
 	Shader vertexShader(FileHelper::loadFile(ProgramManager::SHADER_VERTEX_PATH + "lambert.vert"), GL_VERTEX_SHADER);
@@ -23,26 +28,13 @@ void ProgramManager::preloadPrograms()
 
 	this->load(ProgramManager::PROGRAM_DEFAULT, program);
 }
-void ProgramManager::load(std::string identifier, const Program &program)
-{
-	this->programs.emplace(identifier, program);
-}
-
-Program& ProgramManager::get(std::string identifier)
-{
-	if (this->programs.count(identifier))
-	{
-		return this->programs[identifier];
-	}
-	else throw std::runtime_error("No program with identifier " + identifier + " has been found.");
-}
 
 void ProgramManager::dispose()
 {
-	for (auto program : this->programs)
+	for (auto program : this->items)
 	{
 		program.second.free();
 	}
 
-	this->programs.clear();
+	this->items.clear();
 }
