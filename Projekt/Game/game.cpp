@@ -86,7 +86,7 @@ void Game::start()
 			this->camera->rotateBy(1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		}
 
-		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		vao.bind();
 
@@ -96,7 +96,7 @@ void Game::start()
 		EffectManager::getInstance().beforeRender(context);
 
 		program.setUniform4f("color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-		this->renderer.drawTriangles(0, (GLsizei) pocetPrvku);
+		RenderUtils::drawTriangles(0, (GLsizei)pocetPrvku);
 
 		EffectManager::getInstance().beforeOutline(context);
 
@@ -104,7 +104,7 @@ void Game::start()
 		program.setUniformMatrix4fv("Model", transform.getModel());
 
 		program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-		this->renderer.drawTriangles(0, (GLsizei) pocetPrvku);
+		RenderUtils::drawTriangles(0, (GLsizei)pocetPrvku);
 
 		EffectManager::getInstance().afterOutline(context);
 

@@ -53,8 +53,6 @@ private:
 	void recalculateProjectionMatrix();
 
 	glm::vec3 target;
-	
-	short _padding;	// to align the object to 32 bits
 
 	float fov;
 	float aspect;

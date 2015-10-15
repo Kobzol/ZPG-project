@@ -18,7 +18,7 @@
 #include "../Model/vertex.h"
 #include "../Render/effect_manager.h"
 #include "../Render/program.h"
-#include "../Render/renderer.h"
+#include "../Render/render_utils.h"
 #include "../Render/shader.h"
 
 class Game
@@ -38,7 +38,6 @@ private:
 
 	ObjectManager objectManager;
 	Context* context;
-	Renderer renderer;
 	Camera* camera;
 
 	Game();

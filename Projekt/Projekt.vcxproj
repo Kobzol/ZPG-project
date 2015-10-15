@@ -102,7 +102,7 @@
     <ClCompile Include="Render\Light\spotlight.cpp" />
     <ClCompile Include="Render\program.cpp" />
     <ClCompile Include="Render\renderbuffer.cpp" />
-    <ClCompile Include="Render\renderer.cpp" />
+    <ClCompile Include="Render\render_utils.cpp" />
     <ClCompile Include="Render\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +151,7 @@
     <ClInclude Include="Render\Light\spotlight.h" />
     <ClInclude Include="Render\program.h" />
     <ClInclude Include="Render\renderbuffer.h" />
-    <ClInclude Include="Render\renderer.h" />
+    <ClInclude Include="Render\render_utils.h" />
     <ClInclude Include="Render\shader.h" />
   </ItemGroup>
   <ItemGroup>
