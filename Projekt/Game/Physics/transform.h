@@ -4,7 +4,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-class Transform
+#include "itransformable.h"
+
+class Transform : public ITransformable
 {
 public:
 	Transform(const glm::vec3 &position = glm::vec3(0.0f),

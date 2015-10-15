@@ -71,18 +71,18 @@ void CameraController::handleMouseMove(Camera* camera)
 
 	if (InputController::getInstance().isButtonPressed(GLFW_KEY_D))
 	{
-		camera->move(-camera->getLeft() * actualSpeed);
+		camera->moveBy(-camera->getLeft() * actualSpeed);
 	}
 	if (InputController::getInstance().isButtonPressed(GLFW_KEY_A))
 	{
-		camera->move(camera->getLeft() * actualSpeed);
+		camera->moveBy(camera->getLeft() * actualSpeed);
 	}
 	if (InputController::getInstance().isButtonPressed(GLFW_KEY_W))
 	{
-		camera->move(camera->getFront() * actualSpeed);
+		camera->moveBy(camera->getFront() * actualSpeed);
 	}
 	if (InputController::getInstance().isButtonPressed(GLFW_KEY_S))
 	{
-		camera->move(-camera->getFront() * actualSpeed);
+		camera->moveBy(-camera->getFront() * actualSpeed);
 	}
 }
