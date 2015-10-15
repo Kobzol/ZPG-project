@@ -107,6 +107,13 @@ glm::mat4 Camera::getProjectionMatrix()
 	return this->projectionMatrix;
 }
 
+void Camera::dispose()
+{
+	GameObject::dispose();
+
+	this->broadcaster.dispose();
+}
+
 void Camera::attachListener(CameraChangedListener* listener)
 {
 	this->broadcaster.attachListener(listener);

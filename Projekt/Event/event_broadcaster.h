@@ -18,4 +18,6 @@ public:
 	void attachListener(EventListener* listener);
 	void detachListener(EventListener* listener);
 	void notify();
+
+	void dispose();
 };

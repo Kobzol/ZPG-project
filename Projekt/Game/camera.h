@@ -40,6 +40,8 @@ public:
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjectionMatrix();
 
+	void dispose() override;
+
 	void attachListener(CameraChangedListener* listener);
 	void detachListener(CameraChangedListener* listener);
 
@@ -51,6 +53,8 @@ private:
 	void recalculateProjectionMatrix();
 
 	glm::vec3 target;
+	
+	short _padding;	// to align the object to 32 bits
 
 	float fov;
 	float aspect;

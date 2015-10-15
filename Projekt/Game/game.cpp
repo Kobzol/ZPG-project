@@ -48,6 +48,7 @@ void Game::start()
 
 	this->camera = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	this->camera->getTags().set(Tag::Camera);
+	this->objectManager.add(this->camera);
 
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_DEFAULT);
@@ -113,12 +114,10 @@ void Game::start()
 		}
 
 		InputController::getInstance().afterUpdate();
+		this->objectManager.removeMarkedObjects();
 	});
 
-	camera->detachListener(&program);
-	camera->dispose();
-	delete this->camera;
-
+	this->objectManager.dispose();
 	ProgramManager::getInstance().dispose();
 
 	context->terminate();
