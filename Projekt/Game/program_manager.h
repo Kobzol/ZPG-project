@@ -27,5 +27,10 @@ private:
 
 	static ProgramManager instance;
 
+	ProgramManager();
+	~ProgramManager();
+	ProgramManager(const ProgramManager& other);
+	ProgramManager& operator=(const ProgramManager& other);
+
 	std::unordered_map<std::string, Program> programs;
 };
