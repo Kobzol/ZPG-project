@@ -39,11 +39,11 @@ void Transform::moveBy(const glm::vec3 &offset)
 
 void Transform::setRotation(float angle, const glm::vec3 &axis)
 {
-	this->quat = glm::rotate(glm::quat(), angle, axis);
+	this->quat = glm::rotate(glm::quat(), glm::radians(angle), axis);
 }
 void Transform::rotateBy(float angle, const glm::vec3 &axis)
 {
-	this->quat = glm::rotate(quat, angle, axis);
+	this->quat = glm::rotate(quat, glm::radians(angle), axis);
 }
 
 void Transform::setScale(const glm::vec3 &scale)

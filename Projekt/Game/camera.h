@@ -11,32 +11,11 @@
 
 class Camera : public GameObject
 {
-private:
-	glm::vec3 target;
-	glm::vec3 up;
-
-	float fov;
-	float aspect;
-	float nearPlane;
-	float farPlane;
-
-	glm::mat4 viewMatrix;
-	glm::mat4 projectionMatrix;
-
-	EventBroadcaster broadcaster;
-
-	void recalculateViewMatrix();
-	void recalculateProjectionMatrix();
-
-	Camera(const Camera& other);
-	Camera& operator=(const Camera& other);
-
 public:
 	Camera(
 		IScriptComponent* component,
 		glm::vec3 position = glm::vec3(0.0f),
 		glm::vec3 target = glm::vec3(0.0f),
-		glm::vec3 up = glm::vec3(0.0f, 0.0f, 1.0f),
 		float fov = 45.0f,
 		float aspect = 4.0f / 3.0f,
 		float nearPlane = 1.0f,
@@ -45,10 +24,12 @@ public:
 
 	void setPosition(const glm::vec3& position) override;
 	void moveBy(const glm::vec3& offset) override;
+	void setRotation(float angle, const glm::vec3& axis) override;
+	void rotateBy(float angle, const glm::vec3& axis) override;
 	void setTarget(glm::vec3 target);
-	void setUpVector(glm::vec3 up);
 
 	glm::vec3 getLeft();
+	glm::vec3 getUp();
 	glm::vec3 getFront();
 
 	void setFov(float fov);
@@ -61,4 +42,23 @@ public:
 
 	void attachListener(CameraChangedListener* listener);
 	void detachListener(CameraChangedListener* listener);
+
+private:
+	Camera(const Camera& other);
+	Camera& operator=(const Camera& other);
+
+	void recalculateViewMatrix();
+	void recalculateProjectionMatrix();
+
+	glm::vec3 target;
+
+	float fov;
+	float aspect;
+	float nearPlane;
+	float farPlane;
+
+	glm::mat4 viewMatrix;
+	glm::mat4 projectionMatrix;
+
+	EventBroadcaster broadcaster;
 };

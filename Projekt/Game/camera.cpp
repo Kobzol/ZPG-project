@@ -2,10 +2,9 @@
 
 Camera::Camera(
 	IScriptComponent* component,
-	glm::vec3 position, glm::vec3 target, glm::vec3 up,
+	glm::vec3 position, glm::vec3 target,
 	float fov, float aspect, float nearPlane, float farPlane
-	) : target(target), up(up),
-	fov(fov), aspect(aspect), nearPlane(nearPlane), farPlane(farPlane), GameObject(component)
+	) : target(target), fov(fov), aspect(aspect), nearPlane(nearPlane), farPlane(farPlane), GameObject(component)
 {
 	this->setPosition(position);
 
@@ -24,7 +23,7 @@ void Camera::recalculateViewMatrix()
 	this->viewMatrix = glm::lookAt(
 		this->getPosition(),
 		this->getPosition() + this->target,
-		this->up
+		this->getUp()
 	);
 	this->broadcaster.notify();
 }
@@ -49,20 +48,29 @@ void Camera::moveBy(const glm::vec3& offset)
 	GameObject::moveBy(offset);
 	this->recalculateViewMatrix();
 }
+void Camera::setRotation(float angle, const glm::vec3& axis)
+{
+	GameObject::setRotation(angle, axis);
+	this->recalculateViewMatrix();
+}
+void Camera::rotateBy(float angle, const glm::vec3& axis)
+{
+	GameObject::rotateBy(angle, axis);
+	this->recalculateViewMatrix();
+}
 void Camera::setTarget(glm::vec3 target)
 {
 	this->target = glm::normalize(target);
 	this->recalculateViewMatrix();
 }
-void Camera::setUpVector(glm::vec3 up)
-{
-	this->up = up;
-	this->recalculateViewMatrix();
-}
 
 glm::vec3 Camera::getLeft()
 {
-	return glm::normalize(glm::cross(this->up, this->target));
+	return glm::normalize(glm::cross(this->getUp(), this->target));
+}
+glm::vec3 Camera::getUp()
+{
+	return glm::vec3(0.0f, 1.0f, 0.0f) * this->getRotation();
 }
 glm::vec3 Camera::getFront()
 {
