@@ -9,6 +9,10 @@ Transform& GameObject::getTransform()
 {
 	return this->transform;
 }
+Flags<Tag>& GameObject::getTags()
+{
+	return this->tags;
+}
 
 void GameObject::update()
 {

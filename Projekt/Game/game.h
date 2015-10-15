@@ -37,10 +37,6 @@ private:
 
 	Camera* camera;
 
-	std::pair<GLdouble, GLdouble> oldMouseScroll;
-	std::pair<GLdouble, GLdouble> mouseScroll;
-	std::pair<bool, bool> mouseDown = std::make_pair(false, false);
-
 	Game();
 	~Game();
 	Game(const Game& other);

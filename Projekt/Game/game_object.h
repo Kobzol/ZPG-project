@@ -3,6 +3,8 @@
 #include "Component/iscript_component.h"
 #include "Physics/itransformable.h"
 #include "Physics/transform.h"
+#include "tag.h"
+#include "../Helper/flags.h"
 
 class GameObject : public ITransformable
 {
@@ -10,6 +12,7 @@ public:
 	GameObject(IScriptComponent* component);
 
 	Transform& getTransform();
+	Flags<Tag>& getTags();
 
 	void update();
 	void dispose();
@@ -35,6 +38,7 @@ private:
 	GameObject(const GameObject& other);
 	GameObject& operator=(const GameObject& other);
 
+	Flags<Tag> tags;
 	Transform transform;
 	IScriptComponent* scriptComponent;
 };

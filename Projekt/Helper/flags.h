@@ -6,8 +6,12 @@ template <class T>
 class Flags
 {
 public:
-	std::bitset<32> value;
+	std::bitset<sizeof(int)> value;
 
+	Flags()
+	{
+		
+	}
 	Flags(T enumValue)
 	{
 		this->set(enumValue);

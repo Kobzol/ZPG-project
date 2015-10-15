@@ -116,6 +116,7 @@
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />
     <ClInclude Include="Game\Physics\itransformable.h" />
+    <ClInclude Include="Game\tag.h" />
     <ClInclude Include="Game\timer.h" />
     <ClInclude Include="Game\game.h" />
     <ClInclude Include="Game\Physics\transform.h" />
