@@ -18,7 +18,7 @@ void VBO::unbind()
 }
 void VBO::dispose()
 {
-	glDeleteBuffers(GL_ARRAY_BUFFER, &this->vbo); // crashes
+	//glDeleteBuffers(GL_ARRAY_BUFFER, &this->vbo); // crashes
 	GL_CHECK_ERRORS();
 	this->vbo = 0;
 }

@@ -31,7 +31,7 @@ public:
 
 	Context();
 
-	void initialize();
+	void initialize(int majorVersion, int minorVersion);
 	void terminate();
 
 	GLFWwindow* getWindow();

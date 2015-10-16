@@ -37,7 +37,7 @@ Context& Game::getContext()
 void Game::start()
 {
 	this->context = new Context();
-	this->context->initialize();
+	this->context->initialize(4, 3);
 	this->context->createWindow(800, 600, 1, "ZPG", false, false);
 	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { InputController::getInstance().onKeyCallback(window, key, scan, action, modifier); });
 	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { InputController::getInstance().onMouseMoveCallback(window, x, y); });
