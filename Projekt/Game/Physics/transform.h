@@ -5,6 +5,14 @@
 #include <glm/gtc/quaternion.hpp>
 
 #include "itransformable.h"
+#include "../../Helper/flags.h"
+
+enum class TransformDirtyBit
+{
+	Position = 1,
+	Rotation = 2,
+	Scale = 3
+};
 
 class Transform : public ITransformable
 {
@@ -28,10 +36,17 @@ public:
 	void setScale(const glm::vec3 &scale);
 	void scaleBy(const glm::vec3 &scale);
 
+	bool isDirty(std::initializer_list<TransformDirtyBit> bits);
+	void clearDirty(std::initializer_list<TransformDirtyBit> bits);
+
 	void reset();
 
 private:
+	void setDirty(std::initializer_list<TransformDirtyBit> bits);
+
 	glm::vec3 position;
 	glm::vec3 scale;
 	glm::quat quat;
+
+	Flags<TransformDirtyBit> dirty;
 };

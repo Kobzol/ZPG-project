@@ -14,7 +14,6 @@
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "../Context/context.h"
-#include "../Helper/file_helper.h"
 #include "../Model/vertex.h"
 #include "../Render/effect_manager.h"
 #include "../Render/program.h"

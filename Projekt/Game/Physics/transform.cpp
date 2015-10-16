@@ -31,28 +31,43 @@ glm::vec3 Transform::getScale() const
 void Transform::setPosition(const glm::vec3 &position)
 {
 	this->position = position;
+	this->setDirty({ TransformDirtyBit::Position });
 }
 void Transform::moveBy(const glm::vec3 &offset)
 {
 	this->position += offset;
+	this->setDirty({ TransformDirtyBit::Position });
 }
 
 void Transform::setRotation(float angle, const glm::vec3 &axis)
 {
 	this->quat = glm::rotate(glm::quat(), glm::radians(angle), axis);
+	this->setDirty({ TransformDirtyBit::Rotation });
 }
 void Transform::rotateBy(float angle, const glm::vec3 &axis)
 {
 	this->quat = glm::rotate(quat, glm::radians(angle), axis);
+	this->setDirty({ TransformDirtyBit::Rotation });
 }
 
 void Transform::setScale(const glm::vec3 &scale)
 {
 	this->scale = scale;
+	this->setDirty({ TransformDirtyBit::Scale });
 }
 void Transform::scaleBy(const glm::vec3 &scale)
 {
 	this->scale *= scale;
+	this->setDirty({ TransformDirtyBit::Scale });
+}
+
+bool Transform::isDirty(std::initializer_list<TransformDirtyBit> bits)
+{
+	return this->dirty.isSet(bits);
+}
+void Transform::clearDirty(std::initializer_list<TransformDirtyBit> bits)
+{
+	this->dirty.unset(bits);
 }
 
 void Transform::reset()
@@ -60,4 +75,11 @@ void Transform::reset()
 	this->position = glm::vec3(0.0f);
 	this->scale = glm::vec3(1.0f);
 	this->quat = glm::quat();
+
+	this->setDirty({ TransformDirtyBit::Position, TransformDirtyBit::Rotation, TransformDirtyBit::Scale });
+}
+
+void Transform::setDirty(std::initializer_list<TransformDirtyBit> bits)
+{
+	this->dirty.set(bits);
 }
