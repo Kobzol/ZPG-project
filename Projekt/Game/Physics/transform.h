@@ -35,6 +35,7 @@ public:
 	void setScale(const glm::vec3 &scale);
 	void scaleBy(const glm::vec3 &scale);
 
+	bool isDirty();
 	bool isDirty(std::initializer_list<TransformDirtyBit> bits);
 	void clearDirty(std::initializer_list<TransformDirtyBit> bits);
 

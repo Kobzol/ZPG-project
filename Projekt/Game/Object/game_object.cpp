@@ -1,6 +1,6 @@
 #include "game_object.h"
 
-GameObject::GameObject(IComponent* scriptComponent, IComponent* renderComponent) : scriptComponent(scriptComponent), renderComponent(renderComponent) id(-1)
+GameObject::GameObject(IComponent* scriptComponent, IComponent* renderComponent) : scriptComponent(scriptComponent), renderComponent(renderComponent), id(-1)
 {
 	if (scriptComponent != nullptr)
 	{
@@ -56,6 +56,15 @@ void GameObject::draw()
 
 void GameObject::dispose()
 {
-	this->scriptComponent->dispose();
-	delete this->scriptComponent;
+	if (this->scriptComponent != nullptr)
+	{
+		this->scriptComponent->dispose();
+		delete this->scriptComponent;
+	}
+	
+	if (this->renderComponent != nullptr)
+	{
+		this->renderComponent->dispose();
+		delete this->renderComponent;
+	}
 }

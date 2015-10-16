@@ -100,3 +100,7 @@ void Program::setProjectionMatrix(const glm::mat4& matrix)
 {
 	this->setUniformMatrix4fv("Projection", matrix);
 }
+void Program::setModelMatrix(const glm::mat4& matrix)
+{
+	this->setUniformMatrix4fv("Model", matrix);
+}

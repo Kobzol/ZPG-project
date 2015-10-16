@@ -9,12 +9,15 @@
 class ObjectManager
 {
 public:
-	ObjectManager(int maxSize = 100);
+	ObjectManager(size_t maxSize = 100);
 
 	GameObject* get(int id);
 	void add(GameObject* object);
 	void markForRemoval(GameObject* object);
 	void removeMarkedObjects();
+
+	size_t getObjectCount();
+	std::vector<GameObject*>& getObjects();
 
 	void dispose();
 
@@ -24,12 +27,12 @@ private:
 	ObjectManager(const ObjectManager& other);
 	ObjectManager& operator=(const ObjectManager& other);
 
-	void remove(int index);
+	void remove(size_t index);
 
 	std::vector<GameObject*> objects;
-	std::unordered_map<int, int> indexMap;
+	std::unordered_map<int, size_t> indexMap;
 	std::set<int> removalList;
 
-	int maxSize;
-	int nextIndex;
+	size_t maxSize;
+	size_t nextIndex;
 };

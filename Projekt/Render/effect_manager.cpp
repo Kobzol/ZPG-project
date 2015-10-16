@@ -9,6 +9,7 @@ EffectManager& EffectManager::getInstance()
 
 void EffectManager::beforeRender(Context& context)
 {
+	context.setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	context.setStencilFunc(GL_ALWAYS, 1, 0xFF);	// passes stencil test always
 	context.setStencilMask(0xFF);	// enable writing to stencil buffer
 }

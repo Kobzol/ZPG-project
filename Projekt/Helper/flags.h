@@ -55,6 +55,10 @@ public:
 
 		return true;
 	}
+	bool isZero()
+	{
+		return this->value.none();
+	}
 	void reset()
 	{
 		this->value.reset();

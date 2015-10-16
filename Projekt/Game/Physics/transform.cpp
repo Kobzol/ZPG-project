@@ -61,6 +61,10 @@ void Transform::scaleBy(const glm::vec3 &scale)
 	this->setDirty({ TransformDirtyBit::Scale });
 }
 
+bool Transform::isDirty()
+{
+	return !this->dirty.isZero();
+}
 bool Transform::isDirty(std::initializer_list<TransformDirtyBit> bits)
 {
 	return this->dirty.isSet(bits);

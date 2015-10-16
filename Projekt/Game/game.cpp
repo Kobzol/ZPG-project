@@ -30,6 +30,10 @@ ObjectManager& Game::getObjectManager()
 {
 	return this->objectManager;
 }
+Context& Game::getContext()
+{
+	return *this->context;
+}
 
 void Game::start()
 {
@@ -46,6 +50,10 @@ void Game::start()
 	this->context->setStencilTest(true);
 	this->context->setCulling(true);
 
+	ProgramManager::getInstance().preloadPrograms();
+	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_DEFAULT);
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_DEFAULT);
+
 	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	this->camera = new GameObject(cameraScript);
 	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 3.5f));
@@ -53,23 +61,8 @@ void Game::start()
 	this->camera->getTags().set(Tag::Camera);
 	this->objectManager.add(this->camera);
 
-	ProgramManager::getInstance().preloadPrograms();
-	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_DEFAULT);
-	ProgramManager::getInstance().use(ProgramManager::PROGRAM_DEFAULT);
-
-	VAO vao;
-	vao.bind();
-
-	VBO vbo;
-	vbo.bind();
-	vbo.setData(VERTICES, sizeof(VERTICES), GL_STATIC_DRAW);
-
-	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
-	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
-
-	Transform transform;
-
-	this->context->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	GameObject* suzi = new GameObject(nullptr, new VertexRenderComponent(VERTICES, (size_t) pocetPrvku));
+	this->objectManager.add(suzi);
 
 	Timer timer(0.25f);
 
@@ -84,27 +77,20 @@ void Game::start()
 			this->camera->getTransform().rotateBy(1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		}
 
+		std::vector<GameObject*> objects = this->objectManager.getObjects();
+		size_t objectCount = this->objectManager.getObjectCount();
+
+		for (size_t i = 0; i < objectCount; i++)
+		{
+			objects[i]->update();
+		}
+
 		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		vao.bind();
-
-		transform.setScale(glm::vec3(1.0f));
-		program.setUniformMatrix4fv("Model", transform.getModel());
-
-		EffectManager::getInstance().beforeRender(context);
-
-		program.setUniform4f("color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-		RenderUtils::drawTriangles(0, (GLsizei)pocetPrvku);
-
-		EffectManager::getInstance().beforeOutline(context);
-
-		transform.setScale(glm::vec3(1.1f, 1.1f, 1.1f));
-		program.setUniformMatrix4fv("Model", transform.getModel());
-
-		program.setUniform4f("color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-		RenderUtils::drawTriangles(0, (GLsizei)pocetPrvku);
-
-		EffectManager::getInstance().afterOutline(context);
+		for (size_t i = 0; i < objectCount; i++)
+		{
+			objects[i]->draw();
+		}
 
 		if (InputController::getInstance().isButtonPressed(GLFW_KEY_ESCAPE))
 		{
