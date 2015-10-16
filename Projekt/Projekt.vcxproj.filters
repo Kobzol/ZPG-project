@@ -212,9 +212,6 @@
     <ClInclude Include="Game\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Component\iscript_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Component\camera_controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -237,6 +234,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Render\render_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\icomponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

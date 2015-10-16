@@ -1,7 +1,7 @@
 #include "camera.h"
 
 Camera::Camera(
-	IScriptComponent* controller,
+	IComponent* controller,
 	glm::vec3 target,
 	float fov, float aspect, float nearPlane, float farPlane
 	) : controller(controller), target(target), fov(fov), aspect(aspect), nearPlane(nearPlane), farPlane(farPlane)
@@ -45,7 +45,7 @@ void Camera::update()
 }
 void Camera::setGameObject(GameObject* object)
 {
-	IScriptComponent::setGameObject(object);
+	IComponent::setGameObject(object);
 
 	if (this->controller != nullptr)
 	{

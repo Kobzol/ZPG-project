@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Component/iscript_component.h"
+#include "Component/icomponent.h"
 #include "Content/program_manager.h"
 #include "Object/game_object.h"
 #include "Physics/transform.h"
@@ -17,11 +17,11 @@ enum class CameraDirtyBit
 	Perspective
 };
 
-class Camera : public IScriptComponent
+class Camera : public IComponent
 {
 public:
 	Camera(
-		IScriptComponent* controller,
+		IComponent* controller,
 		glm::vec3 target = glm::vec3(0.0f),
 		float fov = 45.0f,
 		float aspect = 4.0f / 3.0f,
@@ -63,7 +63,7 @@ private:
 	float nearPlane;
 	float farPlane;
 
-	IScriptComponent* controller;
+	IComponent* controller;
 
 	Flags<CameraDirtyBit> dirty;
 

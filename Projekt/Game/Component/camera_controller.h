@@ -2,13 +2,13 @@
 
 #include <glm/glm.hpp>
 
-#include "iscript_component.h"
+#include "icomponent.h"
 #include "../camera.h"
 #include "../game.h"
 #include "../Object/game_object.h"
 #include "../Input/input_controller.h"
 
-class CameraController : public IScriptComponent
+class CameraController : public IComponent
 {
 public:
 	CameraController(float cameraSpeed = 1.0f, float mouseSensitivity = 0.05f);

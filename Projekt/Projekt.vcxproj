@@ -116,7 +116,7 @@
     <ClInclude Include="Buffer\vbo.h" />
     <ClInclude Include="Context\context.h" />
     <ClInclude Include="Game\Component\camera_controller.h" />
-    <ClInclude Include="Game\Component\iscript_component.h" />
+    <ClInclude Include="Game\Component\icomponent.h" />
     <ClInclude Include="Game\Content\content_manager.h" />
     <ClInclude Include="Game\Object\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />

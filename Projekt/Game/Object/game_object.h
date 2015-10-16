@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Component/iscript_component.h"
+#include "../Component/icomponent.h"
 #include "../Physics/transform.h"
 #include "../tag.h"
 #include "../../Helper/flags.h"
@@ -8,10 +8,10 @@
 class GameObject
 {
 public:
-	GameObject(IScriptComponent* component);
+	GameObject(IComponent* component);
 
 	Transform& getTransform();
-	IScriptComponent* getScriptComponent();
+	IComponent* getScriptComponent();
 	Flags<Tag>& getTags();
 
 	int getId();
@@ -27,6 +27,6 @@ private:
 	int id;
 
 	Transform transform;
-	IScriptComponent* scriptComponent;
+	IComponent* scriptComponent;
 	Flags<Tag> tags;
 };

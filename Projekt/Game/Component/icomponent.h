@@ -2,7 +2,7 @@
 
 class GameObject;
 
-class IScriptComponent
+class IComponent
 {
 public:
 	virtual void update() = 0;

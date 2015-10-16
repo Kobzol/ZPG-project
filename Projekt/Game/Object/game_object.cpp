@@ -1,6 +1,6 @@
 #include "game_object.h"
 
-GameObject::GameObject(IScriptComponent* scriptComponent) : scriptComponent(scriptComponent), id(-1)
+GameObject::GameObject(IComponent* scriptComponent) : scriptComponent(scriptComponent), id(-1)
 {
 	scriptComponent->setGameObject(this);
 }
@@ -9,7 +9,7 @@ Transform& GameObject::getTransform()
 {
 	return this->transform;
 }
-IScriptComponent* GameObject::getScriptComponent()
+IComponent* GameObject::getScriptComponent()
 {
 	return this->scriptComponent;
 }
