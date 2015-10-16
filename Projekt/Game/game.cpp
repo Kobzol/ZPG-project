@@ -1,5 +1,4 @@
 #include "game.h"
-#include "models/suzi_flat.h"
 
 Game Game::instance = Game();
 
@@ -94,7 +93,7 @@ void Game::start()
 
 		if (InputController::getInstance().isButtonPressed(GLFW_KEY_ESCAPE))
 		{
-			glfwSetWindowShouldClose(this->context->getWindow(), 1);
+			context.closeWindow();
 		}
 
 		InputController::getInstance().afterUpdate();

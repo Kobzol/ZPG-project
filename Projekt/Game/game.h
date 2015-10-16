@@ -20,6 +20,7 @@
 #include "../Render/program.h"
 #include "../Render/render_utils.h"
 #include "../Render/shader.h"
+#include "models/suzi_flat.h"
 
 class Game
 {
