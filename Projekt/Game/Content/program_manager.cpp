@@ -42,6 +42,10 @@ Program& ProgramManager::getCurrentProgram()
 {
 	return this->get(this->currentProgram);
 }
+std::string ProgramManager::getCurrentProgramName()
+{
+	return this->currentProgram;
+}
 
 void ProgramManager::save()
 {

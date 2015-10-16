@@ -66,4 +66,6 @@ private:
 	IScriptComponent* controller;
 
 	Flags<CameraDirtyBit> dirty;
+
+	std::string lastUsedProgram;
 };

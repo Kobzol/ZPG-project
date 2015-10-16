@@ -20,6 +20,7 @@ public:
 
 	void use(std::string identifier);
 	Program& getCurrentProgram();
+	std::string getCurrentProgramName();
 
 	void save();
 	void restore();
