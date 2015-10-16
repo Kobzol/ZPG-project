@@ -78,8 +78,6 @@ void Game::start()
 		float delta = context.getDeltaTime();
 		timer.update(delta);
 
-		this->camera->update();
-
 		if (timer.resetIfReady())
 		{
 			std::cout << "FPS: " << 1.0f / delta << std::endl;

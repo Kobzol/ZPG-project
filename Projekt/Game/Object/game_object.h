@@ -8,16 +8,18 @@
 class GameObject
 {
 public:
-	GameObject(IComponent* component);
+	GameObject(IComponent* component=nullptr, IComponent* renderComponent=nullptr);
 
 	Transform& getTransform();
 	IComponent* getScriptComponent();
+	IComponent* getRenderComponent();
 	Flags<Tag>& getTags();
 
 	int getId();
 	void setId(int id);
 
 	void update();
+	void draw();
 	void dispose();
 
 private:
@@ -28,5 +30,6 @@ private:
 
 	Transform transform;
 	IComponent* scriptComponent;
+	IComponent* renderComponent;
 	Flags<Tag> tags;
 };

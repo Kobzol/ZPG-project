@@ -1,8 +1,16 @@
 #include "game_object.h"
 
-GameObject::GameObject(IComponent* scriptComponent) : scriptComponent(scriptComponent), id(-1)
+GameObject::GameObject(IComponent* scriptComponent, IComponent* renderComponent) : scriptComponent(scriptComponent), renderComponent(renderComponent) id(-1)
 {
-	scriptComponent->setGameObject(this);
+	if (scriptComponent != nullptr)
+	{
+		scriptComponent->setGameObject(this);
+	}
+	
+	if (renderComponent != nullptr)
+	{
+		renderComponent->setGameObject(this);
+	}
 }
 
 Transform& GameObject::getTransform()
@@ -12,6 +20,10 @@ Transform& GameObject::getTransform()
 IComponent* GameObject::getScriptComponent()
 {
 	return this->scriptComponent;
+}
+IComponent* GameObject::getRenderComponent()
+{
+	return this->renderComponent;
 }
 Flags<Tag>& GameObject::getTags()
 {
@@ -32,6 +44,13 @@ void GameObject::update()
 	if (this->scriptComponent != nullptr)
 	{
 		this->scriptComponent->update();
+	}
+}
+void GameObject::draw()
+{
+	if (this->renderComponent != nullptr)
+	{
+		this->renderComponent->update();
 	}
 }
 
