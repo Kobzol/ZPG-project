@@ -5,13 +5,13 @@ CameraController::CameraController(float cameraSpeed, float mouseSensitivity) : 
 
 }
 
-void CameraController::update(GameObject* object)
+void CameraController::update()
 {
-	Camera* camera = (Camera*) object;
+	Camera* camera = (Camera*) this->gameObject->getScriptComponent();
 
 	this->handleMouseMove(camera);
 
-	if (!this->lookVectorSet)
+	if (!this->lookVectorSet)	// TODO: set front vector according to up vector
 	{
 		this->setLookVector(camera->getFront());
 		this->lookVectorSet = true;
@@ -71,18 +71,18 @@ void CameraController::handleMouseMove(Camera* camera)
 
 	if (InputController::getInstance().isButtonPressed(GLFW_KEY_D))
 	{
-		camera->moveBy(-camera->getLeft() * actualSpeed);
+		camera->getGameObject()->getTransform().moveBy(-camera->getLeft() * actualSpeed);
 	}
 	if (InputController::getInstance().isButtonPressed(GLFW_KEY_A))
 	{
-		camera->moveBy(camera->getLeft() * actualSpeed);
+		camera->getGameObject()->getTransform().moveBy(camera->getLeft() * actualSpeed);
 	}
 	if (InputController::getInstance().isButtonPressed(GLFW_KEY_W))
 	{
-		camera->moveBy(camera->getFront() * actualSpeed);
+		camera->getGameObject()->getTransform().moveBy(camera->getFront() * actualSpeed);
 	}
 	if (InputController::getInstance().isButtonPressed(GLFW_KEY_S))
 	{
-		camera->moveBy(-camera->getFront() * actualSpeed);
+		camera->getGameObject()->getTransform().moveBy(-camera->getFront() * actualSpeed);
 	}
 }

@@ -5,16 +5,18 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Component/iscript_component.h"
+#include "Content/program_manager.h"
 #include "Object/game_object.h"
+#include "Physics/transform.h"
 #include "../Event/camera_changed_listener.h"
 #include "../Event/event_broadcaster.h"
 
-class Camera : public GameObject
+class Camera : public IScriptComponent
 {
 public:
 	Camera(
-		IScriptComponent* component,
-		glm::vec3 position = glm::vec3(0.0f),
+		IScriptComponent* controller,
 		glm::vec3 target = glm::vec3(0.0f),
 		float fov = 45.0f,
 		float aspect = 4.0f / 3.0f,
@@ -22,10 +24,9 @@ public:
 		float farPlane = 10.0f
 	);
 
-	void setPosition(const glm::vec3& position) override;
-	void moveBy(const glm::vec3& offset) override;
-	void setRotation(float angle, const glm::vec3& axis) override;
-	void rotateBy(float angle, const glm::vec3& axis) override;
+	void update() override;
+	void setGameObject(GameObject* object) override;
+
 	void setTarget(glm::vec3 target);
 
 	glm::vec3 getLeft();
@@ -37,20 +38,14 @@ public:
 	void setNearPlane(float nearPlane);
 	void setFarPlane(float farPlane);
 
-	glm::mat4 getViewMatrix();
-	glm::mat4 getProjectionMatrix();
+	glm::mat4 calculateViewMatrix();
+	glm::mat4 calculateProjectionMatrix();
 
 	void dispose() override;
-
-	void attachListener(CameraChangedListener* listener);
-	void detachListener(CameraChangedListener* listener);
 
 private:
 	Camera(const Camera& other);
 	Camera& operator=(const Camera& other);
-
-	void recalculateViewMatrix();
-	void recalculateProjectionMatrix();
 
 	glm::vec3 target;
 
@@ -59,8 +54,6 @@ private:
 	float nearPlane;
 	float farPlane;
 
-	glm::mat4 viewMatrix;
-	glm::mat4 projectionMatrix;
-
-	EventBroadcaster broadcaster;
+	IScriptComponent* controller;
+	bool perspectiveDirty;
 };

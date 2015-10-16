@@ -4,7 +4,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-#include "itransformable.h"
 #include "../../Helper/flags.h"
 
 enum class TransformDirtyBit
@@ -14,7 +13,7 @@ enum class TransformDirtyBit
 	Scale = 3
 };
 
-class Transform : public ITransformable
+class Transform
 {
 public:
 	Transform(const glm::vec3 &position = glm::vec3(0.0f),

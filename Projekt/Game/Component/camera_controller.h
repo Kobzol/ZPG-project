@@ -13,7 +13,7 @@ class CameraController : public IScriptComponent
 public:
 	CameraController(float cameraSpeed = 1.0f, float mouseSensitivity = 0.05f);
 
-	void update(GameObject* object) override;
+	void update() override;
 
 private:
 	void setLookVector(glm::vec3 vector);

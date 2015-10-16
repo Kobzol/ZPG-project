@@ -2,7 +2,7 @@
 
 Transform::Transform(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &scale) : position(position), quat(rotation), scale(scale)
 {
-
+	this->setDirty({ TransformDirtyBit::Position, TransformDirtyBit::Rotation, TransformDirtyBit::Scale });
 }
 
 glm::mat4 Transform::getModel() const

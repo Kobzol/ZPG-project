@@ -37,7 +37,7 @@ private:
 
 	ObjectManager objectManager;
 	Context* context;
-	Camera* camera;
+	GameObject* camera;
 
 	Game();
 	~Game();

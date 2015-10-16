@@ -46,6 +46,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -56,11 +58,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -68,6 +72,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\opencv\opencv\build\x86\vc12\lib;$(ProjectDir)\GL_LIB\soil\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;opencv_ts300.lib;SOIL.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -117,7 +122,6 @@
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />
     <ClInclude Include="Game\Object\object_manager.h" />
-    <ClInclude Include="Game\Physics\itransformable.h" />
     <ClInclude Include="Game\tag.h" />
     <ClInclude Include="Game\timer.h" />
     <ClInclude Include="Game\game.h" />
@@ -128,11 +132,6 @@
     <ClInclude Include="Helper\glm_helper.h" />
     <ClInclude Include="Helper\opengl_helper.h" />
     <ClInclude Include="Helper\image.h" />
-    <ClInclude Include="models\bedna.h" />
-    <ClInclude Include="models\sphere.h" />
-    <ClInclude Include="models\suzi_flat.h" />
-    <ClInclude Include="models\suzi_smooth.h" />
-    <ClInclude Include="models\worker.h" />
     <ClInclude Include="Model\cubemap.h" />
     <ClInclude Include="Model\mesh.h" />
     <ClInclude Include="Model\model.h" />

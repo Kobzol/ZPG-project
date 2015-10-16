@@ -51,11 +51,11 @@ void InputController::onKeyCallback(GLFWwindow* window, int key, int scan, int a
 }
 void InputController::onMouseMoveCallback(GLFWwindow* window, double x, double y)
 {
-	this->mousePosition.update(x, y);
+	this->mousePosition.update((float) x, (float) y);
 }
 void InputController::onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {
-	this->mouseScroll.update(xOffset, yOffset);
+	this->mouseScroll.update((float) xOffset, (float) yOffset);
 }
 void InputController::onMouseButtonCallback(GLFWwindow* window, int button, int action, int modifier)
 {

@@ -92,12 +92,11 @@ void Program::setUniformMatrix4fv(std::string name, const glm::mat4& matrix)
 	GL_CHECK_ERRORS();
 }
 
-void Program::notifyCameraChanged(Camera& camera)
+void Program::setViewMatrix(const glm::mat4& matrix)
 {
-	this->setCameraMatrices(camera);
+	this->setUniformMatrix4fv("View", matrix);
 }
-void Program::setCameraMatrices(Camera& camera)
+void Program::setProjectionMatrix(const glm::mat4& matrix)
 {
-	this->setUniformMatrix4fv("View", camera.getViewMatrix());
-	this->setUniformMatrix4fv("Projection", camera.getProjectionMatrix());
+	this->setUniformMatrix4fv("Projection", matrix);
 }

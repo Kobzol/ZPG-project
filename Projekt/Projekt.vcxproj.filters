@@ -194,21 +194,6 @@
     <ClInclude Include="Helper\glm_helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="models\bedna.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="models\sphere.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="models\suzi_flat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="models\suzi_smooth.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="models\worker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Physics\transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -231,9 +216,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Component\camera_controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Physics\itransformable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Helper\flags.h">

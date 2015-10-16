@@ -46,7 +46,10 @@ void Game::start()
 	this->context->setStencilTest(true);
 	this->context->setCulling(true);
 
-	this->camera = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, 3.5f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	this->camera = new GameObject(cameraScript);
+	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 3.5f));
+
 	this->camera->getTags().set(Tag::Camera);
 	this->objectManager.add(this->camera);
 
@@ -64,9 +67,6 @@ void Game::start()
 	program.setAttribute("position", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 	program.setAttribute("normal", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
 
-	camera->attachListener(&program);
-	program.setCameraMatrices(*camera);
-
 	Transform transform;
 
 	this->context->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
@@ -83,7 +83,7 @@ void Game::start()
 		if (timer.resetIfReady())
 		{
 			std::cout << "FPS: " << 1.0f / delta << std::endl;
-			this->camera->rotateBy(1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+			this->camera->getTransform().rotateBy(1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		}
 
 		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -126,5 +126,6 @@ void Game::start()
 void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
 	this->context->setViewport(0, 0, width, height);
-	this->camera->setAspect(width / (float) height);
+	Camera* camera = (Camera*) this->camera->getScriptComponent();
+	camera->setAspect(width / (float) height);
 }

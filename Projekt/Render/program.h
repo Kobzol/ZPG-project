@@ -13,12 +13,10 @@
 #include "shader.h"
 #include "../Buffer/vao.h"
 #include "../Helper/opengl_helper.h"
-#include "../Event/camera_changed_listener.h"
-#include "../Game/camera.h"
 
 class ProgramManager;
 
-class Program : public CameraChangedListener
+class Program
 {
 	friend class ProgramManager;
 
@@ -48,8 +46,8 @@ public:
 	void setUniform1i(std::string name, GLint value);
 	void setUniformMatrix4fv(std::string name, const glm::mat4& matrix);
 
-	VAO* getVAO();
+	void setViewMatrix(const glm::mat4& matrix);
+	void setProjectionMatrix(const glm::mat4& matrix);
 
-	void notifyCameraChanged(Camera& camera);
-	void setCameraMatrices(Camera& camera);
+	VAO* getVAO();
 };
