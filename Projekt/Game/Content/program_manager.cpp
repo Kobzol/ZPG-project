@@ -63,7 +63,7 @@ void ProgramManager::dispose()
 {
 	for (auto program : this->items)
 	{
-		program.second.free();
+		program.second.dispose();
 	}
 
 	this->items.clear();

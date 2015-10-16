@@ -21,7 +21,7 @@ unsigned char* Image::getImageData()
 {
 	return this->data;
 }
-void Image::free()
+void Image::dispose()
 {
 	if (this->data != nullptr)
 	{

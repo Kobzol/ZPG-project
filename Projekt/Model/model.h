@@ -18,7 +18,7 @@
 //	Model(std::string path);
 //
 //	void draw(Program& program, Renderer& renderer);
-//	void free();
+//	void dispose();
 //
 //private:
 //	std::vector<Mesh> meshes;

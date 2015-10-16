@@ -32,7 +32,7 @@ public:
 
 	void attachShader(Shader& shader);
 	void link();
-	void free();
+	void dispose();
 
 	GLint getAttributeLocation(std::string name);
 	void setAttribute(std::string name, GLint count, GLenum type, GLboolean normalize, GLsizei stride, const void* offset);

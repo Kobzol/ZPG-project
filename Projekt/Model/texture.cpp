@@ -46,7 +46,7 @@ void Texture::bind(int unit)
 	glBindTexture(this->glType, this->texture);
 	GL_CHECK_ERRORS();
 }
-void Texture::free()
+void Texture::dispose()
 {
 	if (this->texture != 0)
 	{

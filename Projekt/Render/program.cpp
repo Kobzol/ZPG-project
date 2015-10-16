@@ -25,7 +25,7 @@ void Program::link()
 	GL_CHECK_LINKAGE(this->program);
 	GL_CHECK_ERRORS();
 }
-void Program::free()
+void Program::dispose()
 {
 	glDeleteProgram(this->program);
 	GL_CHECK_ERRORS();

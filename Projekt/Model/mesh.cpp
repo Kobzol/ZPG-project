@@ -53,9 +53,9 @@
 //	renderer.drawElements(this->indices.size(), GL_UNSIGNED_INT, 0);
 //	this->vao.unbind();
 //}
-//void Mesh::free()
+//void Mesh::dispose()
 //{
-//	this->vao.free();
-//	this->vbo.free();
-//	this->ebo.free();
+//	this->vao.dispose();
+//	this->vbo.dispose();
+//	this->ebo.dispose();
 //}

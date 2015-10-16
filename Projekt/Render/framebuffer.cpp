@@ -18,7 +18,7 @@ Framebuffer::~Framebuffer()
 
 	if (this->primaryAttachment.get() != nullptr)
 	{
-		this->primaryAttachment.get()->free();
+		this->primaryAttachment.get()->dispose();
 	}
 }
 

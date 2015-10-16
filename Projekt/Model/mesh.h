@@ -26,7 +26,7 @@
 //	void setup();
 //
 //	void draw(Program& program, Renderer& renderer);
-//	void free();
+//	void dispose();
 //
 //private:
 //	VAO vao;

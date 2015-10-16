@@ -12,11 +12,11 @@
 //		this->meshes[i].draw(program, renderer);
 //	}
 //}
-//void Model::free()
+//void Model::dispose()
 //{
 //	for (GLuint i = 0; i < this->meshes.size(); i++)
 //	{
-//		this->meshes[i].free();
+//		this->meshes[i].dispose();
 //	}
 //}
 //
