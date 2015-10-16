@@ -2,15 +2,10 @@
 
 int ObjectManager::objectId = 0;
 
-ObjectManager::ObjectManager(int maxSize) : maxSize(maxSize)
+ObjectManager::ObjectManager(int maxSize) : maxSize(maxSize), nextIndex(0)
 {
 	this->objects.resize(maxSize);
 	std::fill(this->objects.begin(), this->objects.end(), nullptr);
-
-	for (int i = maxSize - 1; i >= 0; i--)
-	{
-		this->freeSpots.push(i);
-	}
 }
 
 GameObject* ObjectManager::get(int id)
@@ -23,10 +18,9 @@ GameObject* ObjectManager::get(int id)
 }
 void ObjectManager::add(GameObject* object)
 {
-	if (!this->freeSpots.empty())
+	if (this->nextIndex < this->maxSize)
 	{
-		int nextSpot = this->freeSpots.top();
-		this->freeSpots.pop();
+		int nextSpot = this->nextIndex++;
 
 		int id = ObjectManager::objectId++;
 
@@ -77,9 +71,20 @@ void ObjectManager::remove(int index)
 	GameObject* object = this->objects[index];
 	int objectId = object->getId();
 
+	int maxIndex = this->nextIndex - 1;
+	GameObject* movedObject = this->objects[maxIndex];
+
 	this->indexMap.erase(objectId);
-	this->objects[index] = nullptr;
-	this->freeSpots.push(index);
+
+	if (object != movedObject)
+	{
+		this->objects[index] = movedObject;
+		this->indexMap[movedObject->getId()] = index;
+		this->objects[maxIndex] = nullptr;
+	}
+	else this->objects[index] = nullptr;	// the removed object is the last one
+	
+	this->nextIndex--;
 
 	object->dispose();
 	delete object;

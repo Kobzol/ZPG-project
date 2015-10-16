@@ -1,7 +1,6 @@
 #pragma once
 
 #include <set>
-#include <stack>
 #include <unordered_map>
 #include <vector>
 
@@ -29,8 +28,8 @@ private:
 
 	std::vector<GameObject*> objects;
 	std::unordered_map<int, int> indexMap;
-	std::stack<int> freeSpots;
 	std::set<int> removalList;
 
 	int maxSize;
+	int nextIndex;
 };
