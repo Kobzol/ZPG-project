@@ -9,8 +9,13 @@
 #include "Content/program_manager.h"
 #include "Object/game_object.h"
 #include "Physics/transform.h"
-#include "../Event/camera_changed_listener.h"
-#include "../Event/event_broadcaster.h"
+#include "../Helper/flags.h"
+
+enum class CameraDirtyBit
+{
+	Target,
+	Perspective
+};
 
 class Camera : public IScriptComponent
 {
@@ -47,6 +52,10 @@ private:
 	Camera(const Camera& other);
 	Camera& operator=(const Camera& other);
 
+	bool isDirty(std::initializer_list<CameraDirtyBit> bits);
+	void clearDirty(std::initializer_list<CameraDirtyBit> bits);
+	void setDirty(std::initializer_list<CameraDirtyBit> bits);
+
 	glm::vec3 target;
 
 	float fov;
@@ -55,5 +64,6 @@ private:
 	float farPlane;
 
 	IScriptComponent* controller;
-	bool perspectiveDirty;
+
+	Flags<CameraDirtyBit> dirty;
 };
