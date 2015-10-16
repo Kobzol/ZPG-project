@@ -11,7 +11,7 @@ void EBO::bind()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
 	GL_CHECK_ERRORS();
 }
-void EBO::free()
+void EBO::dispose()
 {
 	glDeleteBuffers(GL_ELEMENT_ARRAY_BUFFER, &this->ebo);
 	GL_CHECK_ERRORS();

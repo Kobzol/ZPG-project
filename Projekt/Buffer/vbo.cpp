@@ -11,7 +11,12 @@ void VBO::bind()
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
 	GL_CHECK_ERRORS();
 }
-void VBO::free()
+void VBO::unbind()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	GL_CHECK_ERRORS();
+}
+void VBO::dispose()
 {
 	glDeleteBuffers(GL_ARRAY_BUFFER, &this->vbo);
 	GL_CHECK_ERRORS();

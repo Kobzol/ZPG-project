@@ -9,6 +9,8 @@ VertexRenderComponent::VertexRenderComponent(const Vertex* data, size_t vertices
 
 	Program::setAttribute(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, position));
 	Program::setAttribute(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, normal));
+
+	this->vao.unbind();
 }
 
 void VertexRenderComponent::update()
@@ -21,10 +23,12 @@ void VertexRenderComponent::update()
 		transform.clearDirty({ TransformDirtyBit::Position, TransformDirtyBit::Rotation, TransformDirtyBit::Scale });
 	}
 
+	this->vao.bind();
 	RenderUtils::drawTriangles(0, this->verticesCount);
+	this->vao.unbind();
 }
 void VertexRenderComponent::dispose()
 {
-	this->vao.free();
-	this->vbo.free();
+	this->vbo.dispose();
+	this->vao.dispose();
 }
