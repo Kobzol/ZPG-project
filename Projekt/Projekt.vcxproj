@@ -46,7 +46,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
