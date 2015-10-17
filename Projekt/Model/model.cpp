@@ -102,7 +102,7 @@ void Model::loadMaterialTextures(aiMaterial* material, aiTextureType assimpType,
 		
 		std::string convStr = std::string(str.C_Str());
 
-		if (!this->loadedTextures.count(convStr))
+		if (!TextureManager::getInstance().hasKey(convStr))
 		{
 			std::string path = this->directory + "/" + convStr;
 
@@ -112,9 +112,9 @@ void Model::loadMaterialTextures(aiMaterial* material, aiTextureType assimpType,
 			texture.set2DImage(Image(path, ImageType::Alpha));
 			texture.generateMipmap();
 
-			loadedTextures[convStr] = texture;
+			TextureManager::getInstance().load(convStr, texture);
 		}
 		
-		textures.push_back(this->loadedTextures[convStr]);
+		textures.push_back(TextureManager::getInstance().get(convStr));
 	}
 }

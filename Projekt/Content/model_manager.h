@@ -7,6 +7,7 @@ class ModelManager : public ContentManager<Model*>
 {
 public:
 	static const std::string MODEL_CUBE;
+	static const std::string MODEL_NANOSUIT;
 
 	static ModelManager& getInstance();
 

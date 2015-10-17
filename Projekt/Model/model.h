@@ -7,11 +7,11 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-
 #include <time.h>
 
-#include "../Render/render_utils.h"
 #include "mesh.h"
+#include "../Content/texture_manager.h"
+#include "../Render/render_utils.h"
 
 class Model
 {
@@ -27,7 +27,6 @@ private:
 
 	std::vector<Mesh> meshes;
 	std::string directory;
-	std::unordered_map<std::string, Texture> loadedTextures;
 
 	void loadModel(std::string path);
 	void processNode(aiNode* node, const aiScene* scene);

@@ -11,6 +11,11 @@ public:
 		this->items.emplace(identifier, item);
 	}
 
+	bool hasKey(std::string identifier)
+	{
+		return this->items.count(identifier) > 0;
+	}
+
 	T& get(std::string identifier)
 	{
 		if (this->items.count(identifier))

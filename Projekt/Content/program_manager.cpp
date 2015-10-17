@@ -1,11 +1,12 @@
 #include "program_manager.h"
 
 ProgramManager ProgramManager::instance = ProgramManager();
-const std::string ProgramManager::SHADER_VERTEX_PATH = "Shaders/Vertex/";
-const std::string ProgramManager::SHADER_FRAGMENT_PATH = "Shaders/Fragment/";
 
 const std::string ProgramManager::PROGRAM_VERTEX = "vertex";
 const std::string ProgramManager::PROGRAM_MODEL = "model";
+
+const std::string ProgramManager::SHADER_VERTEX_PATH = "Shaders/Vertex/";
+const std::string ProgramManager::SHADER_FRAGMENT_PATH = "Shaders/Fragment/";
 
 ProgramManager& ProgramManager::getInstance()
 {

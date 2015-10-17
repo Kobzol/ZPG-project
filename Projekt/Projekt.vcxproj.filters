@@ -37,6 +37,7 @@
     <ClCompile Include="Game\Render\model_render_component.cpp" />
     <ClCompile Include="Content\model_manager.cpp" />
     <ClCompile Include="Content\program_manager.cpp" />
+    <ClCompile Include="Content\texture_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -83,6 +84,7 @@
     <ClInclude Include="Content\content_manager.h" />
     <ClInclude Include="Content\model_manager.h" />
     <ClInclude Include="Content\program_manager.h" />
+    <ClInclude Include="Content\texture_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
