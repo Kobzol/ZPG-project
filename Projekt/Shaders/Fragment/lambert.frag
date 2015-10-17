@@ -9,8 +9,6 @@ in VertexData outVertex;
 
 out vec4 outColor;
 
-uniform vec4 color;
-
 void main()
 {
 	vec4 lightPosition = vec4(-10.0f, 10.0f, 10.0f, 1.0f);

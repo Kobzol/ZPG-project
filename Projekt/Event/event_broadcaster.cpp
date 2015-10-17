@@ -29,3 +29,8 @@ void EventBroadcaster::notify()
 		this->notifyCallback(listener);
 	}
 }
+
+void EventBroadcaster::dispose()
+{
+	this->listeners.clear();
+}

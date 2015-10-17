@@ -19,5 +19,5 @@ public:
 
 	void bind();
 	void unbind();
-	void free();
+	void dispose();
 };

@@ -4,17 +4,23 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <time.h>
-
+#include "tag.h"
+#include "timer.h"
+#include "Input/input_controller.h"
+#include "Component/camera_controller.h"
+#include "Content/program_manager.h"
+#include "Object/object_manager.h"
+#include "Physics/transform.h"
+#include "Render/vertex_render_component.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "../Context/context.h"
-#include "../Helper/file_helper.h"
-#include "../Model/model.h"
+#include "../Model/Model.h"
 #include "../Model/vertex.h"
-#include "../Render/shader.h"
+#include "../Render/effect_manager.h"
 #include "../Render/program.h"
-#include "../Render/renderer.h"
+#include "../Render/render_utils.h"
+#include "../Render/shader.h"
 
 class Game
 {
@@ -22,26 +28,19 @@ public:
 	static Game& getInstance();
 
 	void start();
-	bool isButtonPressed(int key);
+	float getDeltaTime();
 
-	void onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier);
-	void onMouseMoveCallback(GLFWwindow* window, double x, double y);
-	void onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
-	void onMouseButtonCallback(GLFWwindow* window, int button, int action, int modifier);
+	ObjectManager& getObjectManager();
+	Context& getContext();
 
 private:
 	static Game instance;
 
-	char buttons[512];
+	void onWindowSizeCallback(GLFWwindow* window, int width, int height);
 
+	ObjectManager objectManager;
 	Context* context;
-	Renderer renderer;
-
-	std::pair<GLdouble, GLdouble> oldMousePosition = std::make_pair(-1, -1);
-	std::pair<GLdouble, GLdouble> mousePosition = std::make_pair(-1, -1);
-	std::pair<GLdouble, GLdouble> oldMouseScroll;
-	std::pair<GLdouble, GLdouble> mouseScroll;
-	std::pair<bool, bool> mouseDown = std::make_pair(false, false);
+	GameObject* camera;
 
 	Game();
 	~Game();

@@ -17,5 +17,5 @@ public:
 	void setData(void* data, GLint size, GLenum mode = GL_STATIC_DRAW);
 
 	void bind();
-	void free();
+	void dispose();
 };

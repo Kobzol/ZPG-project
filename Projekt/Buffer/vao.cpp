@@ -27,7 +27,7 @@ void VAO::unbind()
 	glBindVertexArray(0);
 	GL_CHECK_ERRORS();
 }
-void VAO::free()
+void VAO::dispose()
 {
 	glDeleteVertexArrays(1, &this->vao);
 	GL_CHECK_ERRORS();

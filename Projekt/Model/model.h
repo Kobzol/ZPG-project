@@ -10,8 +10,7 @@
 
 #include <time.h>
 
-#include "../Render/program.h"
-#include "../Render/renderer.h"
+#include "../Render/render_utils.h"
 #include "mesh.h"
 
 class Model
@@ -19,7 +18,7 @@ class Model
 public:
 	Model(std::string path);
 
-	void draw(Program& program, Renderer& renderer);
+	void draw();
 	void free();
 
 private:

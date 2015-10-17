@@ -24,7 +24,7 @@ void Mesh::setup()
 	this->vao.unbind();
 }
 
-void Mesh::draw(Program& program, Renderer& renderer)
+void Mesh::draw()
 {
 	GLuint diffuseNo = 1;
 	GLuint specularNo = 1;
@@ -45,17 +45,17 @@ void Mesh::draw(Program& program, Renderer& renderer)
 
 		name += std::to_string(index);
 
-		program.setUniform1i(name, i);
+		ProgramManager::getInstance().getCurrentProgram().setUniform1i(name, i);
 		this->textures[i].bind(i);
 	}
 
 	this->vao.bind();
-	renderer.drawElements(this->indices.size(), GL_UNSIGNED_INT, 0);
+	RenderUtils::drawElements(this->indices.size(), GL_UNSIGNED_INT, 0);
 	this->vao.unbind();
 }
 void Mesh::free()
 {
-	this->vao.free();
-	this->vbo.free();
-	this->ebo.free();
+	this->vao.dispose();
+	this->vbo.dispose();
+	this->ebo.dispose();
 }

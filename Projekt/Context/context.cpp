@@ -33,11 +33,11 @@ GLboolean Context::getGLBoolean(bool value)
 	return value ? GL_TRUE : GL_FALSE;
 }
 
-void Context::initialize()
+void Context::initialize(int majorVersion, int minorVersion)
 {
 	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, majorVersion);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorVersion);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
@@ -110,6 +110,10 @@ void Context::setMouseScrollCallback(void (*callback)(GLFWwindow* window, double
 void Context::setMouseButtonCallback(void(*callback)(GLFWwindow* window, int button, int action, int modifier))
 {
 	glfwSetMouseButtonCallback(this->window, callback);
+}
+void Context::setWindowSizeCallback(void(*callback)(GLFWwindow* window, int width, int height))
+{
+	glfwSetWindowSizeCallback(this->window, callback);
 }
 void Context::setCursor(bool enabled)
 {

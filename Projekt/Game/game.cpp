@@ -10,7 +10,6 @@ Game& Game::getInstance()
 Game::Game()
 {
 	this->context = nullptr;
-	memset(this->buttons, 0, sizeof(this->buttons));
 }
 Game::~Game()
 {
@@ -21,144 +20,98 @@ Game::~Game()
 	}
 }
 
+float Game::getDeltaTime()
+{
+	return this->context->getDeltaTime();
+}
+
+ObjectManager& Game::getObjectManager()
+{
+	return this->objectManager;
+}
+Context& Game::getContext()
+{
+	return *this->context;
+}
+
 void Game::start()
 {
 	this->context = new Context();
-	this->context->initialize();
+	this->context->initialize(4, 3);
 	this->context->createWindow(800, 600, 1, "ZPG", false, false);
-	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { Game::getInstance().onKeyCallback(window, key, scan, action, modifier); });
-	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { Game::getInstance().onMouseMoveCallback(window, x, y); });
-	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { Game::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
-	this->context->setMouseButtonCallback([](GLFWwindow* window, int button, int action, int modifier) { Game::getInstance().onMouseButtonCallback(window, button, action, modifier); });
-	this->context->setDepthTest(true);
+	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { InputController::getInstance().onKeyCallback(window, key, scan, action, modifier); });
+	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { InputController::getInstance().onMouseMoveCallback(window, x, y); });
+	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { InputController::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
+	this->context->setMouseButtonCallback([](GLFWwindow* window, int button, int action, int modifier) { InputController::getInstance().onMouseButtonCallback(window, button, action, modifier); });
+	this->context->setWindowSizeCallback([](GLFWwindow* window, int width, int height) { Game::getInstance().onWindowSizeCallback(window, width, height); });
 	this->context->setShowMouseCursor(false);
+	this->context->setDepthTest(true);
+	this->context->setStencilTest(true);
+	this->context->setCulling(true);
 
-	Shader vertShader(FileHelper::loadFile("Shaders/Vertex/model.vert"), GL_VERTEX_SHADER);
-	Shader fragShader(FileHelper::loadFile("Shaders/Fragment/model.frag"), GL_FRAGMENT_SHADER);
+	ProgramManager::getInstance().preloadPrograms();
+	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
 
-	Program program;
-	program.attachShader(vertShader);
-	program.attachShader(fragShader);
-	program.link();
-	program.use();
+	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	this->camera = new GameObject(cameraScript);
+	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 3.5f));
 
-	double xpos_old = -1;
-	double ypos_old = -1;
+	this->camera->getTags().set(Tag::Camera);
+	this->objectManager.add(this->camera);
 
-	GLfloat pitch = 0.0f;
-	GLfloat yaw = -90.0f;
-	GLfloat mouseSensitivity = 0.05f;
+	Model model("models/cube/cube.obj");
+	glm::mat4 modelMatrix;
 
-	float angleHorizontal = 270.0f;
-	float angleVertical = 0.0f;
-
-	float angle = 90.0f;
-	glm::mat4 model;
-
-	Camera camera(glm::vec3(0.0f, 0.0f, 0.5f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-	camera.attachListener(&program);
-	program.setCameraMatrices(camera);
-
-	float cameraSpeed = 1.0f;
-	float mouseX, mouseY;
-
-	Model modelObject("nanosuit/nanosuit.obj");
+	Timer timer(0.25f);
 
 	context->loop([&](Context& context)
 	{
-		this->renderer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		float delta = context.getDeltaTime();
+		timer.update(delta);
 
-		program.use();
-
-		model = glm::rotate(model, glm::radians(10.0f * context.getDeltaTime()), glm::vec3(0.0f, 0.0f, 1.0f));
-		program.setUniformMatrix4fv("Model", model);
-
-		modelObject.draw(program, this->renderer);
-
-		double diffX = this->mousePosition.first - this->oldMousePosition.first;
-		double diffY = this->oldMousePosition.second - this->mousePosition.second;
-
-		if (diffX != 0 || diffY != 0)
+		if (timer.resetIfReady())
 		{
-			diffX *= mouseSensitivity;
-			diffY *= mouseSensitivity;
-
-			yaw += (GLfloat) diffX;
-			pitch += (GLfloat) diffY;
-
-			pitch = glm::clamp(pitch, -89.0f, 89.0f);
-
-			GLfloat cosPitch = cos(glm::radians(pitch));
-			GLfloat sinPitch = sin(glm::radians(pitch));
-			GLfloat cosYaw = cos(glm::radians(yaw));
-			GLfloat sinYaw = sin(glm::radians(yaw));
-			glm::vec3 cameraFront = glm::vec3(cosPitch * cosYaw, sinPitch, cosPitch * sinYaw);
-
-			camera.setTarget(cameraFront);
-
-			this->oldMousePosition = this->mousePosition;
+			std::cout << "FPS: " << 1.0f / delta << std::endl;
+			this->camera->getTransform().rotateBy(1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		}
 
-		if (this->isButtonPressed(GLFW_KEY_ESCAPE))
+		std::vector<GameObject*> objects = this->objectManager.getObjects();
+		size_t objectCount = this->objectManager.getObjectCount();
+
+		for (size_t i = 0; i < objectCount; i++)
+		{
+			objects[i]->update();
+		}
+
+		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		for (size_t i = 0; i < objectCount; i++)
+		{
+			objects[i]->draw();
+		}
+
+		program.setModelMatrix(modelMatrix);
+		model.draw();
+
+		if (InputController::getInstance().isButtonPressed(GLFW_KEY_ESCAPE))
 		{
 			context.closeWindow();
 		}
-		if (this->isButtonPressed(GLFW_KEY_D))
-		{
-			camera.move(-camera.getLeft() * cameraSpeed * context.getDeltaTime());
-		}
-		if (this->isButtonPressed(GLFW_KEY_A))
-		{
-			camera.move(camera.getLeft() * cameraSpeed * context.getDeltaTime());
-		}
-		if (this->isButtonPressed(GLFW_KEY_W))
-		{
-			camera.move(camera.getFront() * cameraSpeed * context.getDeltaTime());
-		}
-		if (this->isButtonPressed(GLFW_KEY_S))
-		{
-			camera.move(-camera.getFront() * cameraSpeed * context.getDeltaTime());
-		}
+
+		InputController::getInstance().afterUpdate();
+		this->objectManager.removeMarkedObjects();
 	});
 
-	camera.detachListener(&program);
+	this->objectManager.dispose();
+	ProgramManager::getInstance().dispose();
 
 	context->terminate();
 }
-bool Game::isButtonPressed(int key)
-{
-	return this->buttons[key] != GLFW_RELEASE;
-}
 
-void Game::onKeyCallback(GLFWwindow* window, int key, int scan, int action, int modifier)
+void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
-	this->buttons[key] = action;
-}
-void Game::onMouseMoveCallback(GLFWwindow* window, double x, double y)
-{
-	if (this->oldMousePosition.first == -1)	// first mouse move
-	{
-		this->oldMousePosition = this->mousePosition = std::make_pair(x, y);
-	}
-	else
-	{
-		this->oldMousePosition = this->mousePosition;
-		this->mousePosition = std::make_pair(x, y);
-	}
-}
-void Game::onMouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
-{
-	this->oldMouseScroll = this->mouseScroll;
-	this->mouseScroll = std::make_pair(xOffset, yOffset);
-}
-void Game::onMouseButtonCallback(GLFWwindow* window, int button, int action, int modifier)
-{
-	if (button == GLFW_MOUSE_BUTTON_1)
-	{
-		this->mouseDown.first = action == GLFW_PRESS;
-	}
-	else if (button == GLFW_MOUSE_BUTTON_2)
-	{
-		this->mouseDown.second = action == GLFW_PRESS;
-	}
+	this->context->setViewport(0, 0, width, height);
+	Camera* camera = (Camera*) this->camera->getScriptComponent();
+	camera->setAspect(width / (float) height);
 }

@@ -20,7 +20,7 @@ public:
 	void allocate();
 
 	void bind(int unit = 0);
-	void free();
+	void dispose();
 
 	void set2DImages(std::vector<Image>& images);
 

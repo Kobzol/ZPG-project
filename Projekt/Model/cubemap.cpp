@@ -10,7 +10,7 @@ void Cubemap::allocate()
 	glGenTextures(1, &this->cubemap);
 	GL_CHECK_ERRORS();
 }
-void Cubemap::free()
+void Cubemap::dispose()
 {
 	glDeleteTextures(1, &this->cubemap);
 	GL_CHECK_ERRORS();

@@ -27,5 +27,5 @@ public:
 	int getHeight();
 
 	unsigned char* getImageData();
-	void free();
+	void dispose();
 };

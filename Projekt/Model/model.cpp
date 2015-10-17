@@ -5,11 +5,11 @@ Model::Model(std::string path)
 	this->loadModel(path);
 }
 
-void Model::draw(Program& program, Renderer& renderer)
+void Model::draw()
 {
 	for (GLuint i = 0; i < this->meshes.size(); i++)
 	{
-		this->meshes[i].draw(program, renderer);
+		this->meshes[i].draw();
 	}
 }
 void Model::free()
@@ -93,7 +93,7 @@ void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 
 void Model::loadMaterialTextures(aiMaterial* material, aiTextureType assimpType, TextureType textureType, std::vector<Texture>& textures)
 {
-	int textureCount = material->GetTextureCount(assimpType);
+	size_t textureCount = material->GetTextureCount(assimpType);
 
 	for (GLuint i = 0; i < textureCount; i++)
 	{

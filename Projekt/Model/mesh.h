@@ -7,8 +7,8 @@
 #include <vector>
 
 #include "../Buffer/ebo.h"
-#include "../Render/program.h"
-#include "../Render/renderer.h"
+#include "../Game/Content/program_Manager.h"
+#include "../Render/render_utils.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "texture.h"
@@ -25,7 +25,7 @@ public:
 
 	void setup();
 
-	void draw(Program& program, Renderer& renderer);
+	void draw();
 	void free();
 
 private:

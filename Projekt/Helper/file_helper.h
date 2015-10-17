@@ -19,7 +19,7 @@ public:
 
 			return buffer.str();
 		}
-		else throw 1;
+		else throw std::runtime_error("File at " + path + " coult not be opened.");
 	}
 
 private:
