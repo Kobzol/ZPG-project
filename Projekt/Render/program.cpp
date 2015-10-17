@@ -18,12 +18,23 @@ void Program::attachShader(Shader& shader)
 {
 	glAttachShader(this->program, shader.getId());
 	GL_CHECK_ERRORS();
+
+	this->shaders.push_back(shader);
 }
 void Program::link()
 {
 	glLinkProgram(this->program);
 	GL_CHECK_LINKAGE(this->program);
 	GL_CHECK_ERRORS();
+
+	for (Shader& shader : this->shaders)
+	{
+		glDetachShader(this->program, shader.getId());
+		GL_CHECK_ERRORS();
+		shader.dispose();
+	}
+
+	this->shaders.clear();
 }
 void Program::dispose()
 {

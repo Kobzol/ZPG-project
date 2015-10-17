@@ -7,8 +7,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <string>
 #include <memory>
+#include <string>
+#include <vector>
 
 #include "shader.h"
 #include "../Buffer/vao.h"
@@ -23,6 +24,7 @@ class Program
 private:
 	void use();
 
+	std::vector<Shader> shaders;
 	GLuint program;
 
 public:
