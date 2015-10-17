@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Component/icomponent.h"
-#include "../Content/program_manager.h"
+#include "../../Content/program_manager.h"
 #include "../Object/game_object.h"
 #include "../../Buffer/vao.h"
 #include "../../Buffer/vbo.h"

@@ -19,16 +19,11 @@ enum TextureType
 class Texture
 {
 private:
-	static std::stack<GLuint> bindings;
-
 	GLuint texture;
+	GLenum glType;
 
 public:
-	static void saveState();
-	static void restoreState();
-
 	TextureType type;
-	GLenum glType;
 
 	Texture(TextureType type = TextureType::Diffuse);
 

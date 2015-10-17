@@ -12,7 +12,6 @@
     <ClCompile Include="Game\Input\mouse_state.cpp" />
     <ClCompile Include="Game\Object\object_manager.cpp" />
     <ClCompile Include="Game\Physics\transform.cpp" />
-    <ClCompile Include="Game\Content\program_manager.cpp" />
     <ClCompile Include="Game\Render\vertex_render_component.cpp" />
     <ClCompile Include="Game\timer.cpp" />
     <ClCompile Include="Helper\image.cpp" />
@@ -35,8 +34,9 @@
     <ClCompile Include="Render\renderbuffer.cpp" />
     <ClCompile Include="Render\render_utils.cpp" />
     <ClCompile Include="Render\shader.cpp" />
-    <ClCompile Include="Game\Content\model_manager.cpp" />
     <ClCompile Include="Game\Render\model_render_component.cpp" />
+    <ClCompile Include="Content\model_manager.cpp" />
+    <ClCompile Include="Content\program_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -45,7 +45,6 @@
     <ClInclude Include="Context\context.h" />
     <ClInclude Include="Game\Component\camera_controller.h" />
     <ClInclude Include="Game\Component\icomponent.h" />
-    <ClInclude Include="Game\Content\content_manager.h" />
     <ClInclude Include="Game\Object\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />
@@ -55,7 +54,6 @@
     <ClInclude Include="Game\timer.h" />
     <ClInclude Include="Game\game.h" />
     <ClInclude Include="Game\Physics\transform.h" />
-    <ClInclude Include="Game\Content\program_manager.h" />
     <ClInclude Include="Helper\file_helper.h" />
     <ClInclude Include="Helper\flags.h" />
     <ClInclude Include="Helper\glm_helper.h" />
@@ -81,8 +79,10 @@
     <ClInclude Include="Render\renderbuffer.h" />
     <ClInclude Include="Render\render_utils.h" />
     <ClInclude Include="Render\shader.h" />
-    <ClInclude Include="Game\Content\model_manager.h" />
     <ClInclude Include="Game\Render\model_render_component.h" />
+    <ClInclude Include="Content\content_manager.h" />
+    <ClInclude Include="Content\model_manager.h" />
+    <ClInclude Include="Content\program_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

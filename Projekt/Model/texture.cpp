@@ -1,29 +1,5 @@
 #include "texture.h"
 
-std::stack<GLuint> Texture::bindings = std::stack<GLuint>();
-
-void Texture::saveState()
-{
-	GLuint boundTexture = 0;
-	glGetIntegerv(GL_TEXTURE_BINDING_2D, (GLint*) &boundTexture);
-	GL_CHECK_ERRORS();
-
-	if (boundTexture != 0)
-	{
-		Texture::bindings.push(boundTexture);
-	}
-}
-void Texture::restoreState()
-{
-	if (Texture::bindings.size() > 0)
-	{
-		GLuint boundTexture = bindings.top();
-		bindings.pop();
-		glBindTexture(GL_TEXTURE_2D, boundTexture);
-		GL_CHECK_ERRORS();
-	}
-}
-
 Texture::Texture(TextureType type) : type(type), texture(0)
 {
 	this->glType = GL_TEXTURE_2D;

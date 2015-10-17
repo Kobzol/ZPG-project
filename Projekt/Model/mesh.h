@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "../Buffer/ebo.h"
-#include "../Game/Content/program_Manager.h"
+#include "../Content/program_Manager.h"
 #include "../Render/render_utils.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
@@ -21,7 +21,7 @@ public:
 	std::vector<GLuint> indices;
 	std::vector<Texture> textures;
 
-	Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures);
+	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices, const std::vector<Texture>& textures);
 
 	void setup();
 
