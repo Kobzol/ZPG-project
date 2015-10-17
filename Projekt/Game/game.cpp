@@ -105,6 +105,7 @@ void Game::start()
 
 	this->objectManager.dispose();
 	ProgramManager::getInstance().dispose();
+	ModelManager::getInstance().dispose();
 
 	context->terminate();
 }

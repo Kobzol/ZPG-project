@@ -1,257 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Buffer\ebo.cpp" />
+    <ClCompile Include="Buffer\vao.cpp" />
+    <ClCompile Include="Buffer\vbo.cpp" />
+    <ClCompile Include="Context\context.cpp" />
+    <ClCompile Include="Game\Component\camera_controller.cpp" />
+    <ClCompile Include="Game\game.cpp" />
+    <ClCompile Include="Game\Object\game_object.cpp" />
+    <ClCompile Include="Game\Input\input_controller.cpp" />
+    <ClCompile Include="Game\Input\mouse_state.cpp" />
+    <ClCompile Include="Game\Object\object_manager.cpp" />
+    <ClCompile Include="Game\Physics\transform.cpp" />
+    <ClCompile Include="Game\Content\program_manager.cpp" />
+    <ClCompile Include="Game\Render\vertex_render_component.cpp" />
+    <ClCompile Include="Game\timer.cpp" />
+    <ClCompile Include="Helper\image.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model\cubemap.cpp" />
+    <ClCompile Include="Model\mesh.cpp" />
+    <ClCompile Include="Model\model.cpp" />
+    <ClCompile Include="Model\texture.cpp" />
+    <ClCompile Include="Model\vertex.cpp" />
+    <ClCompile Include="Game\camera.cpp" />
+    <ClCompile Include="Event\event_broadcaster.cpp" />
+    <ClCompile Include="Render\effect_manager.cpp" />
+    <ClCompile Include="Render\framebuffer.cpp" />
+    <ClCompile Include="Render\Light\attenuation.cpp" />
+    <ClCompile Include="Render\Light\directional_light.cpp" />
+    <ClCompile Include="Render\Light\phong.cpp" />
+    <ClCompile Include="Render\Light\point_light.cpp" />
+    <ClCompile Include="Render\Light\spotlight.cpp" />
+    <ClCompile Include="Render\program.cpp" />
+    <ClCompile Include="Render\renderbuffer.cpp" />
+    <ClCompile Include="Render\render_utils.cpp" />
+    <ClCompile Include="Render\shader.cpp" />
+    <ClCompile Include="Game\Content\model_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer\ebo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer\vao.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer\vbo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Context\context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Helper\image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Light\attenuation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Light\directional_light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Light\phong.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Light\point_light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Light\spotlight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\program.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\renderbuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\framebuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\cubemap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\vertex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Event\event_broadcaster.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Physics\transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\effect_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\timer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Input\input_controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Input\mouse_state.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Component\camera_controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Content\program_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\game_object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\object_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\render_utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Render\vertex_render_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Buffer\ebo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Buffer\vao.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Buffer\vbo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Context\context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Helper\image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Light\attenuation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Light\directional_light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Light\phong.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Light\point_light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Light\spotlight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\program.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\renderbuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\framebuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\cubemap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Event\event_broadcaster.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Event\event_listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Event\camera_changed_listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Helper\file_helper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Helper\opengl_helper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Helper\glm_helper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Physics\transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\effect_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Input\input_controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Input\mouse_state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Component\camera_controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Helper\flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\tag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Content\program_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Content\content_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\game_object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\object_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\render_utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Component\icomponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Render\vertex_render_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="Buffer\ebo.h" />
+    <ClInclude Include="Buffer\vao.h" />
+    <ClInclude Include="Buffer\vbo.h" />
+    <ClInclude Include="Context\context.h" />
+    <ClInclude Include="Game\Component\camera_controller.h" />
+    <ClInclude Include="Game\Component\icomponent.h" />
+    <ClInclude Include="Game\Content\content_manager.h" />
+    <ClInclude Include="Game\Object\game_object.h" />
+    <ClInclude Include="Game\Input\input_controller.h" />
+    <ClInclude Include="Game\Input\mouse_state.h" />
+    <ClInclude Include="Game\Object\object_manager.h" />
+    <ClInclude Include="Game\Render\vertex_render_component.h" />
+    <ClInclude Include="Game\tag.h" />
+    <ClInclude Include="Game\timer.h" />
+    <ClInclude Include="Game\game.h" />
+    <ClInclude Include="Game\Physics\transform.h" />
+    <ClInclude Include="Game\Content\program_manager.h" />
+    <ClInclude Include="Helper\file_helper.h" />
+    <ClInclude Include="Helper\flags.h" />
+    <ClInclude Include="Helper\glm_helper.h" />
+    <ClInclude Include="Helper\opengl_helper.h" />
+    <ClInclude Include="Helper\image.h" />
+    <ClInclude Include="Model\cubemap.h" />
+    <ClInclude Include="Model\mesh.h" />
+    <ClInclude Include="Model\model.h" />
+    <ClInclude Include="Model\texture.h" />
+    <ClInclude Include="Model\vertex.h" />
+    <ClInclude Include="Game\camera.h" />
+    <ClInclude Include="Event\camera_changed_listener.h" />
+    <ClInclude Include="Event\event_listener.h" />
+    <ClInclude Include="Event\event_broadcaster.h" />
+    <ClInclude Include="Render\effect_manager.h" />
+    <ClInclude Include="Render\framebuffer.h" />
+    <ClInclude Include="Render\Light\attenuation.h" />
+    <ClInclude Include="Render\Light\directional_light.h" />
+    <ClInclude Include="Render\Light\phong.h" />
+    <ClInclude Include="Render\Light\point_light.h" />
+    <ClInclude Include="Render\Light\spotlight.h" />
+    <ClInclude Include="Render\program.h" />
+    <ClInclude Include="Render\renderbuffer.h" />
+    <ClInclude Include="Render\render_utils.h" />
+    <ClInclude Include="Render\shader.h" />
+    <ClInclude Include="Game\Content\model_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
     <None Include="ClassDiagram.cd" />
     <None Include="Shaders\Fragment\lambert.frag" />
-    <None Include="Shaders\Vertex\lambert.vert" />
-    <None Include="Shaders\Vertex\model.vert" />
     <None Include="Shaders\Fragment\model.frag" />
+    <None Include="Shaders\Vertex\model.vert" />
+    <None Include="Shaders\Vertex\lambert.vert" />
   </ItemGroup>
 </Project>

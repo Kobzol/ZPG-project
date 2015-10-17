@@ -19,9 +19,12 @@ public:
 	Model(std::string path);
 
 	void draw();
-	void free();
+	void dispose();
 
 private:
+	Model(const Model& other);
+	Model& operator=(const Model& other);
+
 	std::vector<Mesh> meshes;
 	std::string directory;
 	std::unordered_map<std::string, Texture> loadedTextures;

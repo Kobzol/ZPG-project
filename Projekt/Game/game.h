@@ -8,6 +8,7 @@
 #include "timer.h"
 #include "Input/input_controller.h"
 #include "Component/camera_controller.h"
+#include "Content/model_manager.h"
 #include "Content/program_manager.h"
 #include "Object/object_manager.h"
 #include "Physics/transform.h"

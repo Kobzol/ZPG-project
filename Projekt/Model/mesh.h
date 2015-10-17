@@ -26,9 +26,11 @@ public:
 	void setup();
 
 	void draw();
-	void free();
+	void dispose();
 
 private:
+	Mesh& operator=(const Mesh& other);
+
 	VAO vao;
 	VBO vbo;
 	EBO ebo;

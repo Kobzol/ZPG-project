@@ -81,6 +81,7 @@
     <ClCompile Include="Buffer\vbo.cpp" />
     <ClCompile Include="Context\context.cpp" />
     <ClCompile Include="Game\Component\camera_controller.cpp" />
+    <ClCompile Include="Game\Content\model_manager.cpp" />
     <ClCompile Include="Game\game.cpp" />
     <ClCompile Include="Game\Object\game_object.cpp" />
     <ClCompile Include="Game\Input\input_controller.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Game\Component\camera_controller.h" />
     <ClInclude Include="Game\Component\icomponent.h" />
     <ClInclude Include="Game\Content\content_manager.h" />
+    <ClInclude Include="Game\Content\model_manager.h" />
     <ClInclude Include="Game\Object\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />

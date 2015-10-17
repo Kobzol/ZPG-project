@@ -53,7 +53,7 @@ void Mesh::draw()
 	RenderUtils::drawElements(this->indices.size(), GL_UNSIGNED_INT, 0);
 	this->vao.unbind();
 }
-void Mesh::free()
+void Mesh::dispose()
 {
 	this->vao.dispose();
 	this->vbo.dispose();

@@ -12,11 +12,11 @@ void Model::draw()
 		this->meshes[i].draw();
 	}
 }
-void Model::free()
+void Model::dispose()
 {
 	for (GLuint i = 0; i < this->meshes.size(); i++)
 	{
-		this->meshes[i].free();
+		this->meshes[i].dispose();
 	}
 }
 
@@ -50,7 +50,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 
 void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 {
-	this->meshes.push_back(Mesh(std::vector<Vertex>(), std::vector<GLuint>(), std::vector<Texture>()));
+	this->meshes.emplace_back(std::vector<Vertex>(), std::vector<GLuint>(), std::vector<Texture>());
 	Mesh& createdMesh = this->meshes[this->meshes.size() - 1];
 
 	createdMesh.vertices.reserve(mesh->mNumVertices);
