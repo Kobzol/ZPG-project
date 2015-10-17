@@ -49,6 +49,8 @@ void Game::start()
 	this->context->setStencilTest(true);
 	this->context->setCulling(true);
 
+	ModelManager::getInstance().preloadModels();
+
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
@@ -60,8 +62,8 @@ void Game::start()
 	this->camera->getTags().set(Tag::Camera);
 	this->objectManager.add(this->camera);
 
-	Model model("models/cube/cube.obj");
-	glm::mat4 modelMatrix;
+	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	this->objectManager.add(cube);
 
 	Timer timer(0.25f);
 
@@ -90,9 +92,6 @@ void Game::start()
 		{
 			objects[i]->draw();
 		}
-
-		program.setModelMatrix(modelMatrix);
-		model.draw();
 
 		if (InputController::getInstance().isButtonPressed(GLFW_KEY_ESCAPE))
 		{

@@ -12,7 +12,7 @@
 #include "Content/program_manager.h"
 #include "Object/object_manager.h"
 #include "Physics/transform.h"
-#include "Render/vertex_render_component.h"
+#include "Render/model_render_component.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "../Context/context.h"

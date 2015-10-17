@@ -36,6 +36,7 @@
     <ClCompile Include="Render\render_utils.cpp" />
     <ClCompile Include="Render\shader.cpp" />
     <ClCompile Include="Game\Content\model_manager.cpp" />
+    <ClCompile Include="Game\Render\model_render_component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -81,6 +82,7 @@
     <ClInclude Include="Render\render_utils.h" />
     <ClInclude Include="Render\shader.h" />
     <ClInclude Include="Game\Content\model_manager.h" />
+    <ClInclude Include="Game\Render\model_render_component.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
