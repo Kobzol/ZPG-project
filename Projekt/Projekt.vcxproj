@@ -101,7 +101,7 @@
     <ClCompile Include="Model\model.cpp" />
     <ClCompile Include="Model\texture.cpp" />
     <ClCompile Include="Model\vertex.cpp" />
-    <ClCompile Include="Game\camera.cpp" />
+    <ClCompile Include="Game\Component\camera.cpp" />
     <ClCompile Include="Event\event_broadcaster.cpp" />
     <ClCompile Include="Render\effect_manager.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />
@@ -127,6 +127,7 @@
     <ClInclude Include="Game\Component\icomponent.h" />
     <ClInclude Include="Content\content_manager.h" />
     <ClInclude Include="Content\model_manager.h" />
+    <ClInclude Include="Game\Component\light.h" />
     <ClInclude Include="Game\Object\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />
@@ -148,7 +149,7 @@
     <ClInclude Include="Model\model.h" />
     <ClInclude Include="Model\texture.h" />
     <ClInclude Include="Model\vertex.h" />
-    <ClInclude Include="Game\camera.h" />
+    <ClInclude Include="Game\Component\camera.h" />
     <ClInclude Include="Event\camera_changed_listener.h" />
     <ClInclude Include="Event\event_listener.h" />
     <ClInclude Include="Event\event_broadcaster.h" />

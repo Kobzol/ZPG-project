@@ -21,7 +21,6 @@
     <ClCompile Include="Model\model.cpp" />
     <ClCompile Include="Model\texture.cpp" />
     <ClCompile Include="Model\vertex.cpp" />
-    <ClCompile Include="Game\camera.cpp" />
     <ClCompile Include="Event\event_broadcaster.cpp" />
     <ClCompile Include="Render\effect_manager.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />
@@ -40,6 +39,7 @@
     <ClCompile Include="Content\texture_manager.cpp" />
     <ClCompile Include="Content\framebuffer_manager.cpp" />
     <ClCompile Include="Game\screen_quad.cpp" />
+    <ClCompile Include="Game\Component\camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -67,7 +67,6 @@
     <ClInclude Include="Model\model.h" />
     <ClInclude Include="Model\texture.h" />
     <ClInclude Include="Model\vertex.h" />
-    <ClInclude Include="Game\camera.h" />
     <ClInclude Include="Event\camera_changed_listener.h" />
     <ClInclude Include="Event\event_listener.h" />
     <ClInclude Include="Event\event_broadcaster.h" />
@@ -89,6 +88,8 @@
     <ClInclude Include="Content\texture_manager.h" />
     <ClInclude Include="Content\framebuffer_manager.h" />
     <ClInclude Include="Game\screen_quad.h" />
+    <ClInclude Include="Game\Component\camera.h" />
+    <ClInclude Include="Game\Component\light.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

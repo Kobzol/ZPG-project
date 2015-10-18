@@ -2,8 +2,8 @@
 
 #include <glm/glm.hpp>
 
+#include "camera.h"
 #include "icomponent.h"
-#include "../camera.h"
 #include "../game.h"
 #include "../Object/game_object.h"
 #include "../Input/input_controller.h"

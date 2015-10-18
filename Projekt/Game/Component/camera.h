@@ -5,11 +5,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Component/icomponent.h"
+#include "icomponent.h"
 #include "Content/program_manager.h"
-#include "Object/game_object.h"
-#include "Physics/transform.h"
-#include "../Helper/flags.h"
+#include "../Object/game_object.h"
+#include "../Physics/transform.h"
+#include "../../Helper/flags.h"
 
 enum class CameraDirtyBit
 {

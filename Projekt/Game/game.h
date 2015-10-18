@@ -9,6 +9,7 @@
 #include "timer.h"
 #include "Input/input_controller.h"
 #include "Component/camera_controller.h"
+#include "Component/light.h"
 #include "Content/framebuffer_manager.h"
 #include "Content/model_manager.h"
 #include "Content/program_manager.h"

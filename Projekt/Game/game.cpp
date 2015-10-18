@@ -74,19 +74,22 @@ void Game::start()
 
 	Timer timer(0.25f);
 
-	DirectionalLight light;
-	light.direction = glm::vec3(50.0f, 50.0f, -100.0f);
-	light.phong.diffuse = glm::vec3(1.0f);
-	light.phong.ambient = glm::vec3(0.1f);
-	light.phong.specular = glm::vec3(1.0f);
-	light.setUniforms(program, "directionalLight");
+	DirectionalLight dirLight;
+	dirLight.direction = glm::vec3(50.0f, 50.0f, -100.0f);
+	dirLight.phong.diffuse = glm::vec3(1.0f);
+	dirLight.phong.ambient = glm::vec3(0.1f);
+	dirLight.phong.specular = glm::vec3(1.0f);
 
 	PointLight pointLight;
 	pointLight.position = glm::vec3(0.0f, 0.0f, 1.0f);
-	pointLight.phong = light.phong;
+	pointLight.phong = dirLight.phong;
 	pointLight.phong.diffuse = glm::vec3(1.0f, 1.0f, 0.0f);
 	pointLight.attenuation = Attenuation(1.0f, 0.09f, 0.032f);
-	pointLight.setUniforms(program, "pointLight");
+
+	GameObject* light = new GameObject(new Light<DirectionalLight>(dirLight, "directionalLight"));
+	this->objectManager.add(light);
+	light = new GameObject(new Light<PointLight>(pointLight, "pointLight"));
+	this->objectManager.add(light);
 
 	// render loop
 	context->loop([&](Context& context)
