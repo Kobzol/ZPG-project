@@ -32,8 +32,8 @@ void Mesh::draw()
 	for (GLuint i = 0; i < this->textures.size(); i++)
 	{
 		bool diffuse = this->textures[i].type == TextureType::Diffuse;
-		std::string name = "texture_";
-		name += (diffuse ? "diffuse" : "specular");
+		std::string name = "texture";
+		name += (diffuse ? "Diffuse" : "Specular");
 
 		GLuint index = specularNo;
 		if (diffuse)

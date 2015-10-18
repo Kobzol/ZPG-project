@@ -69,14 +69,16 @@ void Game::start()
 	this->camera->getTags().set(Tag::Camera);
 	this->objectManager.add(this->camera);
 
-	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)));
 	this->objectManager.add(cube);
 
 	Timer timer(0.25f);
 
 	DirectionalLight light;
-	light.direction = glm::vec3(0.0f, 0.0f, 10.0f);
-	light.phong.diffuse = glm::vec3(0.3f);
+	light.direction = glm::vec3(50.0f, 50.0f, -100.0f);
+	light.phong.diffuse = glm::vec3(1.0f);
+	light.phong.ambient = glm::vec3(0.1f);
+	light.phong.specular = glm::vec3(1.0f);
 	light.setUniforms(program, "directionalLight");
 
 	// render loop

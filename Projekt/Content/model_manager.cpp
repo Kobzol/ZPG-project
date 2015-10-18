@@ -20,7 +20,7 @@ ModelManager::ModelManager()
 void ModelManager::preloadModels()
 {
 	this->load(ModelManager::MODEL_CUBE, new Model(MODEL_PATH + "cube/cube.obj"));
-	//this->load(ModelManager::MODEL_CUBE, new Model(MODEL_PATH + "nanosuit/nanosuit.obj"));
+	this->load(ModelManager::MODEL_NANOSUIT, new Model(MODEL_PATH + "nanosuit/nanosuit.obj"));
 }
 
 void ModelManager::dispose()
