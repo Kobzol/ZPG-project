@@ -5,16 +5,25 @@ struct VertexData {
 	vec3 normal;
 	vec2 texCoords;
 };
-
+struct Attenuation {
+	float constant;
+	float linear;
+	float quadratic;
+};
 struct Phong {
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
 };
-
 struct DirLight {
 	vec3 direction;
 	Phong phong;
+};
+struct PointLight {
+    vec3 position;
+
+	Attenuation attenuation;
+    Phong phong;
 };
 
 in VertexData vertexData;
@@ -25,11 +34,14 @@ uniform sampler2D textureDiffuse1;
 uniform sampler2D textureSpecular1;
 
 uniform DirLight directionalLight;
+uniform PointLight pointLight;
 
 uniform vec3 viewPosition;
 
+void calcAttenuation(float dist, Attenuation attenuationIn, out float attenuationOut);
 void calcDiffSpec(vec3 lightDir, vec3 normal, vec3 viewDir, out float diff, out float spec);
 vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec3 diffuseMap, vec3 specularMap);
+vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec3 diffuseMap, vec3 specularMap);
 
 void main()
 {
@@ -38,9 +50,15 @@ void main()
 	vec3 diffuseMap = vec3(texture(textureDiffuse1, vertexData.texCoords));
 	vec3 specularMap = vec3(texture(textureSpecular1, vertexData.texCoords));
 
-	vec3 dirLight = calcDirLight(directionalLight, normal, viewDir, diffuseMap, specularMap);
+	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
 
-	outColor = vec4(dirLight, 1.0f);
+	vec3 dirLight = calcDirLight(directionalLight, normal, viewDir, diffuseMap, specularMap);
+	resultColor += dirLight;
+
+	vec3 pointLight = calcPointLight(pointLight, normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap);
+	resultColor += pointLight;
+
+	outColor = vec4(resultColor, 1.0f);
 
 
 	/*vec4 lightPosition = vec4(-10.0f, 10.0f, 10.0f, 1.0f);
@@ -57,6 +75,11 @@ void main()
 	outColor = vec4(diffColor + ambientColor, 1.0f);*/
 }
 
+void calcAttenuation(float dist, Attenuation attenuationIn, out float attenuationOut)
+{
+	attenuationOut = 1.0f / (attenuationIn.constant + attenuationIn.linear * dist + 
+  			     attenuationIn.quadratic * (dist * dist));
+}
 void calcDiffSpec(vec3 lightDir, vec3 normal, vec3 viewDir, out float diff, out float spec)
 {
 	diff = max(dot(normal, lightDir), 0.0f);
@@ -65,7 +88,6 @@ void calcDiffSpec(vec3 lightDir, vec3 normal, vec3 viewDir, out float diff, out 
 	vec3 reflectDir = reflect(-lightDir, normal);
 	spec = pow(max(dot(viewDir, reflectDir), 0.0f), 32.0f);	// TODO set material shininess
 }
-
 vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec3 diffuseMap, vec3 specularMap)
 {
 	vec3 lightDir = normalize(-light.direction);
@@ -78,4 +100,27 @@ vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec3 diffuseMap, ve
 	vec3 specular = light.phong.specular * spec * specularMap;
 
 	return (ambient + diffuse + specular);
+}
+vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec3 diffuseMap, vec3 specularMap)
+{
+    vec3 lightDir = normalize(light.position - fragPos);
+
+	float diff, spec;
+	calcDiffSpec(lightDir, normal, viewDir, diff, spec);
+
+    // attenuation
+    float dist    = length(light.position - fragPos);
+    float attenuation;
+	calcAttenuation(dist, light.attenuation, attenuation);
+
+    // combine results
+    vec3 ambient  = light.phong.ambient  * diffuseMap;
+    vec3 diffuse  = light.phong.diffuse  * diff * diffuseMap;
+    vec3 specular = light.phong.specular * spec * specularMap;
+
+    ambient  *= attenuation;
+    diffuse  *= attenuation;
+    specular *= attenuation;
+
+    return (ambient + diffuse + specular);
 }

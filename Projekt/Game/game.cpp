@@ -81,6 +81,13 @@ void Game::start()
 	light.phong.specular = glm::vec3(1.0f);
 	light.setUniforms(program, "directionalLight");
 
+	PointLight pointLight;
+	pointLight.position = glm::vec3(0.0f, 0.0f, 1.0f);
+	pointLight.phong = light.phong;
+	pointLight.phong.diffuse = glm::vec3(1.0f, 1.0f, 0.0f);
+	pointLight.attenuation = Attenuation(1.0f, 0.09f, 0.032f);
+	pointLight.setUniforms(program, "pointLight");
+
 	// render loop
 	context->loop([&](Context& context)
 	{
