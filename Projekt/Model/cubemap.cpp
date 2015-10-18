@@ -12,8 +12,11 @@ void Cubemap::allocate()
 }
 void Cubemap::dispose()
 {
-	glDeleteTextures(1, &this->cubemap);
-	GL_CHECK_ERRORS();
+	if (this->cubemap != 0)
+	{
+		glDeleteTextures(1, &this->cubemap);
+		GL_CHECK_ERRORS();
+	}
 }
 
 void Cubemap::bind(int unit)

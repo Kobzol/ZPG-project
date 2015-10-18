@@ -10,16 +10,13 @@ class Renderbuffer
 private:
 	GLuint renderbuffer;
 
-	Renderbuffer(const Renderbuffer& other);
-	Renderbuffer& operator=(Renderbuffer& other);
-
 public:
 	Renderbuffer();
-	~Renderbuffer();
 
 	GLuint getId();
 
 	void bind();
+	void dispose();
 
 	void setStorage(GLenum type, GLsizei width, GLsizei height);
 };

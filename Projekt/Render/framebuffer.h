@@ -16,14 +16,11 @@ private:
 	GLuint framebuffer;
 
 public:
-	static void bindDefault();
-
-	std::unique_ptr<Texture> primaryAttachment;
-	std::unique_ptr<Renderbuffer> secondaryAttachment;
-	std::unique_ptr<Cubemap> cubemapAttachment;
+	Texture primaryAttachment;
+	Renderbuffer secondaryAttachment;
+	Cubemap cubemapAttachment;
 
 	Framebuffer();
-	~Framebuffer();
 
 	GLuint getId();
 
@@ -33,4 +30,6 @@ public:
 	void createOmniShadowMap(int width, int height);
 
 	bool isComplete();
+
+	void dispose();
 };

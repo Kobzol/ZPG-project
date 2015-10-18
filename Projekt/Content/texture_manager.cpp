@@ -6,3 +6,8 @@ TextureManager& TextureManager::getInstance()
 {
 	return TextureManager::instance;
 }
+
+TextureManager::TextureManager()
+{
+
+}

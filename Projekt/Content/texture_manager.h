@@ -10,4 +10,6 @@ public:
 
 private:
 	static TextureManager instance;
+
+	TextureManager();
 };

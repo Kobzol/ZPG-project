@@ -79,6 +79,7 @@
     <ClCompile Include="Buffer\ebo.cpp" />
     <ClCompile Include="Buffer\vao.cpp" />
     <ClCompile Include="Buffer\vbo.cpp" />
+    <ClCompile Include="Content\framebuffer_manager.cpp" />
     <ClCompile Include="Content\texture_manager.cpp" />
     <ClCompile Include="Context\context.cpp" />
     <ClCompile Include="Game\Component\camera_controller.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="Buffer\ebo.h" />
     <ClInclude Include="Buffer\vao.h" />
     <ClInclude Include="Buffer\vbo.h" />
+    <ClInclude Include="Content\framebuffer_manager.h" />
     <ClInclude Include="Content\texture_manager.h" />
     <ClInclude Include="Context\context.h" />
     <ClInclude Include="Game\Component\camera_controller.h" />

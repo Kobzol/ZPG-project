@@ -38,6 +38,7 @@
     <ClCompile Include="Content\model_manager.cpp" />
     <ClCompile Include="Content\program_manager.cpp" />
     <ClCompile Include="Content\texture_manager.cpp" />
+    <ClCompile Include="Content\framebuffer_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -85,6 +86,7 @@
     <ClInclude Include="Content\model_manager.h" />
     <ClInclude Include="Content\program_manager.h" />
     <ClInclude Include="Content\texture_manager.h" />
+    <ClInclude Include="Content\framebuffer_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

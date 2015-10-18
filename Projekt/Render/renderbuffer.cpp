@@ -5,11 +5,6 @@ Renderbuffer::Renderbuffer()
 	glGenRenderbuffers(1, &this->renderbuffer);
 	GL_CHECK_ERRORS();
 }
-Renderbuffer::~Renderbuffer()
-{
-	glDeleteRenderbuffers(1, &this->renderbuffer);
-	GL_CHECK_ERRORS();
-}
 
 void Renderbuffer::bind()
 {
@@ -26,4 +21,9 @@ void Renderbuffer::setStorage(GLenum type, GLsizei width, GLsizei height)
 GLuint Renderbuffer::getId()
 {
 	return this->renderbuffer;
+}
+void Renderbuffer::dispose()
+{
+	glDeleteRenderbuffers(1, &this->renderbuffer);
+	GL_CHECK_ERRORS();
 }
