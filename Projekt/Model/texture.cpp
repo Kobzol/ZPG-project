@@ -62,6 +62,8 @@ void Texture::set2DImage(Image& image)
 
 	glTexImage2D(this->glType, 0, format, image.getWidth(), image.getHeight(), 0, format, GL_UNSIGNED_BYTE, image.getImageData());
 	GL_CHECK_ERRORS();
+
+	image.dispose();
 }
 void Texture::setDepthComponent(GLsizei width, GLsizei height)
 {

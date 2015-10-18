@@ -36,6 +36,7 @@ Context& Game::getContext()
 
 void Game::start()
 {
+	// context creation
 	this->context = new Context();
 	this->context->initialize(4, 3);
 	this->context->createWindow(800, 600, 1, "ZPG", false, false, true);
@@ -49,12 +50,14 @@ void Game::start()
 	this->context->setStencilTest(true);
 	this->context->setCulling(true);
 
+	// manager preload
 	ModelManager::getInstance().preloadModels();
 
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
 
+	// initial object spawn
 	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
 	this->camera = new GameObject(cameraScript);
 	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 3.5f));
@@ -67,6 +70,7 @@ void Game::start()
 
 	Timer timer(0.25f);
 
+	// render loop
 	context->loop([&](Context& context)
 	{
 		float delta = context.getDeltaTime();
@@ -102,9 +106,12 @@ void Game::start()
 		this->objectManager.removeMarkedObjects();
 	});
 
+	// resource disposal
 	this->objectManager.dispose();
 	ProgramManager::getInstance().dispose();
 	ModelManager::getInstance().dispose();
+	TextureManager::getInstance().dispose();
+	FramebufferManager::getInstance().dispose();
 
 	context->terminate();
 }

@@ -8,6 +8,8 @@ class TextureManager : public ContentManager<Texture>
 public:
 	static TextureManager& getInstance();
 
+	void dispose();
+
 private:
 	static TextureManager instance;
 

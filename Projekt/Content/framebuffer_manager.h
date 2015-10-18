@@ -10,6 +10,8 @@ public:
 
 	void bindDefault();
 
+	void dispose();
+
 private:
 	static FramebufferManager instance;
 

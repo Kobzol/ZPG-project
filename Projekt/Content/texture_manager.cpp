@@ -11,3 +11,11 @@ TextureManager::TextureManager()
 {
 
 }
+
+void TextureManager::dispose()
+{
+	for (auto& texture : this->items)
+	{
+		texture.second.dispose();
+	}
+}
