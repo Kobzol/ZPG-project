@@ -4,6 +4,7 @@ ProgramManager ProgramManager::instance = ProgramManager();
 
 const std::string ProgramManager::PROGRAM_VERTEX = "vertex";
 const std::string ProgramManager::PROGRAM_MODEL = "model";
+const std::string ProgramManager::PROGRAM_POSTPROCESS = "postprocess";
 
 const std::string ProgramManager::SHADER_VERTEX_PATH = "Shaders/Vertex/";
 const std::string ProgramManager::SHADER_FRAGMENT_PATH = "Shaders/Fragment/";
@@ -20,15 +21,8 @@ ProgramManager::ProgramManager()
 
 void ProgramManager::preloadPrograms()
 {
-	Shader vertexShader(FileHelper::loadFile(ProgramManager::SHADER_VERTEX_PATH + "model.vert"), GL_VERTEX_SHADER);
-	Shader fragmentShader(FileHelper::loadFile(ProgramManager::SHADER_FRAGMENT_PATH + "model.frag"), GL_FRAGMENT_SHADER);
-
-	Program program;
-	program.attachShader(vertexShader);
-	program.attachShader(fragmentShader);
-	program.link();
-
-	this->load(ProgramManager::PROGRAM_MODEL, program);
+	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag");
+	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag");
 }
 
 void ProgramManager::use(std::string identifier)
@@ -69,4 +63,17 @@ void ProgramManager::dispose()
 	}
 
 	this->items.clear();
+}
+
+void ProgramManager::preloadProgram(std::string identifier, std::string vertexPath, std::string fragmentPath)
+{
+	Shader vertexShader(FileHelper::loadFile(ProgramManager::SHADER_VERTEX_PATH + vertexPath), GL_VERTEX_SHADER);
+	Shader fragmentShader(FileHelper::loadFile(ProgramManager::SHADER_FRAGMENT_PATH + fragmentPath), GL_FRAGMENT_SHADER);
+
+	Program program;
+	program.attachShader(vertexShader);
+	program.attachShader(fragmentShader);
+	program.link();
+
+	this->load(identifier, program);
 }

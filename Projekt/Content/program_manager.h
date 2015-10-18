@@ -14,6 +14,7 @@ class ProgramManager : public ContentManager<Program>
 public:
 	static const std::string PROGRAM_VERTEX;
 	static const std::string PROGRAM_MODEL;
+	static const std::string PROGRAM_POSTPROCESS;
 
 	static ProgramManager& getInstance();
 
@@ -35,6 +36,8 @@ private:
 	static ProgramManager instance;
 
 	ProgramManager();
+
+	void preloadProgram(std::string identifier, std::string vertexPath, std::string fragmentPath);
 
 	std::string currentProgram;
 	std::stack<std::string> saveStack;
