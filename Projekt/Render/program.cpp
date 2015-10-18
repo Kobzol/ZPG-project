@@ -97,6 +97,11 @@ void Program::setUniform1i(std::string name, GLint value)
 	glUniform1i(this->getUniformLocation(name), value);
 	GL_CHECK_ERRORS();
 }
+void Program::setUniformMatrix3fv(std::string name, const glm::mat3& matrix)
+{
+	glUniformMatrix3fv(this->getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
+	GL_CHECK_ERRORS();
+}
 void Program::setUniformMatrix4fv(std::string name, const glm::mat4& matrix)
 {
 	glUniformMatrix4fv(this->getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
@@ -114,4 +119,5 @@ void Program::setProjectionMatrix(const glm::mat4& matrix)
 void Program::setModelMatrix(const glm::mat4& matrix)
 {
 	this->setUniformMatrix4fv("Model", matrix);
+	this->setUniformMatrix3fv("NormalMatrix", glm::transpose(glm::inverse(glm::mat3(matrix))));
 }

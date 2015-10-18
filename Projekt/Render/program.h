@@ -46,6 +46,7 @@ public:
 	void setUniform2f(std::string name, glm::vec2 value);
 	void setUniform1f(std::string name, GLfloat value);
 	void setUniform1i(std::string name, GLint value);
+	void setUniformMatrix3fv(std::string name, const glm::mat3& matrix);
 	void setUniformMatrix4fv(std::string name, const glm::mat4& matrix);
 
 	void setViewMatrix(const glm::mat4& matrix);

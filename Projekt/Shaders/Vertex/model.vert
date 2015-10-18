@@ -15,10 +15,11 @@ out VertexData outVertex;
 uniform mat4 Model;
 uniform mat4 View;
 uniform mat4 Projection;
+uniform mat3 NormalMatrix;
 
 void main()
 {
-	outVertex.outNormal = transpose(inverse(mat3(Model))) * normal;
+	outVertex.outNormal = NormalMatrix * normal;
 	outVertex.worldPosition = Model * vec4(position, 1.0f);
 	outVertex.texCoords = texCoords;
 
