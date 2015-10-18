@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "screen_quad.h"
 #include "tag.h"
 #include "timer.h"
 #include "Input/input_controller.h"
@@ -44,6 +45,7 @@ private:
 	ObjectManager objectManager;
 	Context* context;
 	GameObject* camera;
+	ScreenQuad* screenQuad;
 
 	Game();
 	~Game();

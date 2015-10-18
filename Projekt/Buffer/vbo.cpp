@@ -28,7 +28,7 @@ GLuint VBO::getId()
 	return this->vbo;
 }
 
-void VBO::setData(const Vertex* data, GLint size, GLenum mode)
+void VBO::setData(const void* data, GLint size, GLenum mode)
 {
 	glBufferData(GL_ARRAY_BUFFER, size, data, mode);
 	GL_CHECK_ERRORS();

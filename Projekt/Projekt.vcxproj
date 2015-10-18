@@ -113,6 +113,7 @@
     <ClCompile Include="Render\program.cpp" />
     <ClCompile Include="Render\renderbuffer.cpp" />
     <ClCompile Include="Render\render_utils.cpp" />
+    <ClCompile Include="Game\screen_quad.cpp" />
     <ClCompile Include="Render\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="Render\program.h" />
     <ClInclude Include="Render\renderbuffer.h" />
     <ClInclude Include="Render\render_utils.h" />
+    <ClInclude Include="Game\screen_quad.h" />
     <ClInclude Include="Render\shader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +170,8 @@
     <None Include="ClassDiagram.cd" />
     <None Include="Shaders\Fragment\lambert.frag" />
     <None Include="Shaders\Fragment\model.frag" />
+    <None Include="Shaders\Fragment\postprocess.frag" />
+    <None Include="Shaders\Vertex\postprocess.vert" />
     <None Include="Shaders\Vertex\model.vert" />
     <None Include="Shaders\Vertex\lambert.vert" />
   </ItemGroup>

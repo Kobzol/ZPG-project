@@ -1,11 +1,11 @@
 #include "model_manager.h"
 
-ModelManager ModelManager::instance = ModelManager();
-
 const std::string ModelManager::MODEL_CUBE = "cube";
 const std::string ModelManager::MODEL_NANOSUIT = "nanosuit";
 
 const std::string ModelManager::MODEL_PATH = "models/";
+
+ModelManager ModelManager::instance = ModelManager();
 
 ModelManager& ModelManager::getInstance()
 {

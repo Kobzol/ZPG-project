@@ -6,7 +6,11 @@
 class FramebufferManager : public ContentManager<Framebuffer>
 {
 public:
+	static const std::string FRAMEBUFFER_POSTPROCESS;
+
 	static FramebufferManager& getInstance();
+
+	void preloadFramebuffers();
 
 	void bindDefault();
 

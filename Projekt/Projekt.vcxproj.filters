@@ -39,6 +39,7 @@
     <ClCompile Include="Content\program_manager.cpp" />
     <ClCompile Include="Content\texture_manager.cpp" />
     <ClCompile Include="Content\framebuffer_manager.cpp" />
+    <ClCompile Include="Game\screen_quad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Content\program_manager.h" />
     <ClInclude Include="Content\texture_manager.h" />
     <ClInclude Include="Content\framebuffer_manager.h" />
+    <ClInclude Include="Game\screen_quad.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
@@ -95,5 +97,7 @@
     <None Include="Shaders\Fragment\model.frag" />
     <None Include="Shaders\Vertex\model.vert" />
     <None Include="Shaders\Vertex\lambert.vert" />
+    <None Include="Shaders\Vertex\postprocess.vert" />
+    <None Include="Shaders\Fragment\postprocess.frag" />
   </ItemGroup>
 </Project>

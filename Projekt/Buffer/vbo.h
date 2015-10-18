@@ -16,7 +16,7 @@ public:
 	VBO();
 
 	GLuint getId();
-	void setData(const Vertex* data, GLint size, GLenum mode = GL_STATIC_DRAW);
+	void setData(const void* data, GLint size, GLenum mode = GL_STATIC_DRAW);
 
 	void bind();
 	void unbind();

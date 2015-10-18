@@ -50,12 +50,16 @@ void Game::start()
 	this->context->setStencilTest(true);
 	this->context->setCulling(true);
 
+	this->screenQuad = new ScreenQuad();
+
 	// manager preload
 	ModelManager::getInstance().preloadModels();
 
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
+
+	FramebufferManager::getInstance().preloadFramebuffers();
 
 	// initial object spawn
 	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
@@ -82,6 +86,14 @@ void Game::start()
 			this->camera->getTransform().rotateBy(1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		}
 
+		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
+
+		RenderUtils::clearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
+		context.setDepthTest(true);
+
 		std::vector<GameObject*> objects = this->objectManager.getObjects();
 		size_t objectCount = this->objectManager.getObjectCount();
 
@@ -90,12 +102,12 @@ void Game::start()
 			objects[i]->update();
 		}
 
-		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
 		for (size_t i = 0; i < objectCount; i++)
 		{
 			objects[i]->draw();
 		}
+
+		this->screenQuad->drawScreen(context);
 
 		if (InputController::getInstance().isButtonPressed(GLFW_KEY_ESCAPE))
 		{
@@ -107,6 +119,9 @@ void Game::start()
 	});
 
 	// resource disposal
+	this->screenQuad->dispose();
+	delete this->screenQuad;
+
 	this->objectManager.dispose();
 	ProgramManager::getInstance().dispose();
 	ModelManager::getInstance().dispose();
