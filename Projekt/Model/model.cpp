@@ -28,7 +28,7 @@ void Model::loadModel(std::string path)
 
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
-		GL_PRINT_ERROR("failed loading scene from model " + path + ": " + std::string(importer.GetErrorString()));
+		throw std::runtime_error("Failed loading scene from model " + path + ": " + std::string(importer.GetErrorString()));
 	}
 	this->directory = path.substr(0, path.find_last_of("/"));
 
@@ -59,9 +59,14 @@ void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 	{
 		Vertex vertex;
 		vertex.position = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
-		vertex.normal = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
-		
-		if (mesh->mTextureCoords[0])
+
+		if (mesh->HasNormals())
+		{
+			vertex.normal = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
+		}
+		else vertex.normal = glm::vec3(0.0f);
+
+		if (mesh->HasTextureCoords(0))
 		{
 			vertex.texCoords = glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y);
 		}
