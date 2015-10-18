@@ -33,6 +33,7 @@ void Camera::update()
 			this->isDirty({ CameraDirtyBit::Target }))
 		{
 			program.setViewMatrix(this->calculateViewMatrix());
+			program.setViewPosition(this->gameObject->getTransform().getPosition());
 			this->gameObject->getTransform().clearDirty({ TransformDirtyBit::Position, TransformDirtyBit::Rotation });
 			this->clearDirty({ CameraDirtyBit::Target });
 		}

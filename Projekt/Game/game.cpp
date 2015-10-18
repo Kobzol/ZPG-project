@@ -74,6 +74,11 @@ void Game::start()
 
 	Timer timer(0.25f);
 
+	DirectionalLight light;
+	light.direction = glm::vec3(0.0f, 0.0f, 10.0f);
+	light.phong.diffuse = glm::vec3(0.3f);
+	light.setUniforms(program, "directionalLight");
+
 	// render loop
 	context->loop([&](Context& context)
 	{

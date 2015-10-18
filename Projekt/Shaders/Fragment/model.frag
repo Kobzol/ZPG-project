@@ -6,24 +6,39 @@ struct VertexData {
 	vec2 texCoords;
 };
 
+struct Phong {
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+};
+
+struct DirectionalLight {
+	vec3 direction;
+	Phong phong;
+};
+
 in VertexData outVertex;
 
 out vec4 outColor;
 
 uniform sampler2D texture_diffuse;
 
+uniform DirectionalLight directionalLight;
+
+uniform vec3 viewPosition;
+
 void main()
 {
 	vec4 lightPosition = vec4(-10.0f, 10.0f, 10.0f, 1.0f);
-	vec4 ambient = vec4(0.1f, 0.1f, 0.1f, 1.0f);
+	vec3 ambient = vec3(0.1f, 0.1f, 0.1f);
 
-	vec3 lightDir = vec3(normalize(lightPosition));
+	vec3 lightDir = normalize(-directionalLight.direction);
 	float dotLight = max(dot(lightDir, normalize(outVertex.outNormal)), 0.0f);
 	
-	vec4 color = texture(texture_diffuse, outVertex.texCoords);
+	vec3 color = vec3(texture(texture_diffuse, outVertex.texCoords));
 
-	vec4 diffColor = dotLight * color;
-	vec4 ambientColor = ambient;
+	vec3 diffColor = dotLight * color;
+	vec3 ambientColor = ambient;
 
-	outColor = diffColor + ambientColor;
+	outColor = vec4(diffColor + ambientColor, 1.0f);
 }

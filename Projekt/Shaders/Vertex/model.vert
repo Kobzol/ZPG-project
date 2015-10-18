@@ -12,16 +12,16 @@ struct VertexData {
 
 out VertexData outVertex;
 
-uniform mat4 Model;
-uniform mat4 View;
-uniform mat4 Projection;
-uniform mat3 NormalMatrix;
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat3 normalMatrix;
 
 void main()
 {
-	outVertex.outNormal = NormalMatrix * normal;
-	outVertex.worldPosition = Model * vec4(position, 1.0f);
+	outVertex.outNormal = normalMatrix * normal;
+	outVertex.worldPosition = modelMatrix * vec4(position, 1.0f);
 	outVertex.texCoords = texCoords;
 
-	gl_Position = Projection * View * Model * vec4(position, 1.0f);
+	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0f);
 }

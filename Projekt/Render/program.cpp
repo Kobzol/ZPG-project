@@ -110,14 +110,18 @@ void Program::setUniformMatrix4fv(std::string name, const glm::mat4& matrix)
 
 void Program::setViewMatrix(const glm::mat4& matrix)
 {
-	this->setUniformMatrix4fv("View", matrix);
+	this->setUniformMatrix4fv("viewMatrix", matrix);
 }
 void Program::setProjectionMatrix(const glm::mat4& matrix)
 {
-	this->setUniformMatrix4fv("Projection", matrix);
+	this->setUniformMatrix4fv("projectionMatrix", matrix);
 }
 void Program::setModelMatrix(const glm::mat4& matrix)
 {
-	this->setUniformMatrix4fv("Model", matrix);
-	this->setUniformMatrix3fv("NormalMatrix", glm::transpose(glm::inverse(glm::mat3(matrix))));
+	this->setUniformMatrix4fv("modelMatrix", matrix);
+	this->setUniformMatrix3fv("normalMatrix", glm::transpose(glm::inverse(glm::mat3(matrix))));
+}
+void Program::setViewPosition(const glm::vec3& position)
+{
+	this->setUniform3f("viewPosition", position);
 }

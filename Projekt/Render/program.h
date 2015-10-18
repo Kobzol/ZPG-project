@@ -52,6 +52,7 @@ public:
 	void setViewMatrix(const glm::mat4& matrix);
 	void setProjectionMatrix(const glm::mat4& matrix);
 	void setModelMatrix(const glm::mat4& matrix);
+	void setViewPosition(const glm::vec3& position);
 
 	VAO* getVAO();
 };

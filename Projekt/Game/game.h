@@ -25,6 +25,7 @@
 #include "../Render/program.h"
 #include "../Render/render_utils.h"
 #include "../Render/shader.h"
+#include "../Render/Light/directional_light.h"
 
 class Game
 {
