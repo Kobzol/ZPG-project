@@ -38,7 +38,7 @@ void Game::start()
 {
 	this->context = new Context();
 	this->context->initialize(4, 3);
-	this->context->createWindow(800, 600, 1, "ZPG", false, false);
+	this->context->createWindow(800, 600, 1, "ZPG", false, false, true);
 	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { InputController::getInstance().onKeyCallback(window, key, scan, action, modifier); });
 	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { InputController::getInstance().onMouseMoveCallback(window, x, y); });
 	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { InputController::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
@@ -74,7 +74,7 @@ void Game::start()
 
 		if (timer.resetIfReady())
 		{
-			std::cout << "FPS: " << 1.0f / delta << std::endl;
+			//std::cout << "FPS: " << 1.0f / delta << std::endl;
 			this->camera->getTransform().rotateBy(1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		}
 

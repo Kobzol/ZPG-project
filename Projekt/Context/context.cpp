@@ -1,5 +1,10 @@
 #include "context.h"
 
+void __stdcall Context::glDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+{
+	std::cout << message << std::endl;
+}
+
 GLfloat Context::deltaTime = 0.0;
 
 GLfloat Context::getDeltaTime()
@@ -66,7 +71,7 @@ int Context::getWindowHeight()
 	return this->height;
 }
 
-void Context::createWindow(int width, int height, int samples, std::string title, bool resizable, bool fullscreen)
+void Context::createWindow(int width, int height, int samples, std::string title, bool resizable, bool fullscreen, bool showDebugOutput)
 {
 	if (this->window != nullptr)
 	{
@@ -86,6 +91,12 @@ void Context::createWindow(int width, int height, int samples, std::string title
 
 	glewExperimental = true;
 	glewInit();
+
+	if (showDebugOutput)
+	{
+		glEnable(GL_DEBUG_OUTPUT);
+		glDebugMessageCallback(Context::glDebugCallback, NULL);
+	}
 
 	OpenGLHelper::glClearError();
 }
