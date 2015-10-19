@@ -95,6 +95,7 @@
     <ClInclude Include="Audio\audio_manager.h" />
     <ClInclude Include="Render\Font\font_manager.h" />
     <ClInclude Include="Render\Font\character.h" />
+    <ClInclude Include="Content\refcounter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
