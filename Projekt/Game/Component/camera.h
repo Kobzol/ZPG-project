@@ -6,9 +6,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "icomponent.h"
-#include "Content/program_manager.h"
 #include "../Object/game_object.h"
 #include "../Physics/transform.h"
+#include "../../Content/program_manager.h"
 #include "../../Helper/flags.h"
 
 enum class CameraDirtyBit
