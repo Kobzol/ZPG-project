@@ -47,14 +47,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\include;$(ProjectDir)\GL_LIB\freetype\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\opencv\opencv\build\x86\vc12\lib;$(ProjectDir)\GL_LIB\soil\lib;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\lib\Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;opencv_ts300.lib;SOIL.lib;assimp.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\opencv\opencv\build\x86\vc12\lib;$(ProjectDir)\GL_LIB\soil\lib;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\lib\Win32-visualStudio;$(ProjectDir)\GL_LIB\freetype\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;opencv_ts300.lib;SOIL.lib;assimp.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,6 +107,7 @@
     <ClCompile Include="Game\Component\camera.cpp" />
     <ClCompile Include="Event\event_broadcaster.cpp" />
     <ClCompile Include="Render\effect_manager.cpp" />
+    <ClCompile Include="Render\Font\font_manager.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />
     <ClCompile Include="Render\Light\attenuation.cpp" />
     <ClCompile Include="Render\Light\directional_light.cpp" />
@@ -158,6 +159,8 @@
     <ClInclude Include="Event\event_listener.h" />
     <ClInclude Include="Event\event_broadcaster.h" />
     <ClInclude Include="Render\effect_manager.h" />
+    <ClInclude Include="Render\Font\character.h" />
+    <ClInclude Include="Render\Font\font_manager.h" />
     <ClInclude Include="Render\framebuffer.h" />
     <ClInclude Include="Render\Light\attenuation.h" />
     <ClInclude Include="Render\Light\directional_light.h" />
@@ -173,12 +176,20 @@
   <ItemGroup>
     <None Include="assimp.dll" />
     <None Include="ClassDiagram.cd" />
+    <None Include="freetype6.dll" />
+    <None Include="ikpMP3.dll" />
+    <None Include="irrKlang.dll" />
+    <None Include="Shaders\Fragment\font.frag" />
     <None Include="Shaders\Fragment\lambert.frag" />
     <None Include="Shaders\Fragment\model.frag" />
     <None Include="Shaders\Fragment\postprocess.frag" />
+    <None Include="Shaders\Vertex\font.vert" />
     <None Include="Shaders\Vertex\postprocess.vert" />
     <None Include="Shaders\Vertex\model.vert" />
     <None Include="Shaders\Vertex\lambert.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\Font\arial.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

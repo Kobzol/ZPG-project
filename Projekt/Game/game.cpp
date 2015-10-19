@@ -36,10 +36,13 @@ Context& Game::getContext()
 
 void Game::start()
 {
+	int width = 800;
+	int height = 600;
+
 	// context creation
 	this->context = new Context();
 	this->context->initialize(4, 3);
-	this->context->createWindow(800, 600, 1, "ZPG", false, false, true);
+	this->context->createWindow(width, height, 1, "ZPG", false, false, true);
 	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { InputController::getInstance().onKeyCallback(window, key, scan, action, modifier); });
 	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { InputController::getInstance().onMouseMoveCallback(window, x, y); });
 	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { InputController::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
@@ -49,12 +52,15 @@ void Game::start()
 	this->context->setDepthTest(true);
 	this->context->setStencilTest(true);
 	this->context->setCulling(true);
+	this->context->setBlending(true);
+	this->context->setBlendingFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	this->screenQuad = new ScreenQuad();
 
 	// manager preload
 	AudioManager::getInstance().initialize();
 	ModelManager::getInstance().preloadModels();
+	FontManager::getInstance().initialize(width, height);
 
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
@@ -73,8 +79,6 @@ void Game::start()
 	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)));
 	this->objectManager.add(cube);
 
-	Timer timer(0.25f);
-
 	DirectionalLight dirLight;
 	dirLight.direction = glm::vec3(50.0f, 50.0f, -100.0f);
 	dirLight.phong.diffuse = glm::vec3(1.0f);
@@ -92,21 +96,16 @@ void Game::start()
 	light = new GameObject(new Light<PointLight>(pointLight, "pointLight"));
 	this->objectManager.add(light);
 
+	Timer timer(0.01f);
+
 	// render loop
 	context->loop([&](Context& context)
 	{
 		float delta = context.getDeltaTime();
 		timer.update(delta);
 
-		if (timer.resetIfReady())
-		{
-			//std::cout << "FPS: " << 1.0f / delta << std::endl;
-			this->camera->getTransform().rotateBy(1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-		}
-
 		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
 
-		RenderUtils::clearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
@@ -123,6 +122,11 @@ void Game::start()
 		for (size_t i = 0; i < objectCount; i++)
 		{
 			objects[i]->draw();
+		}
+
+		if (timer.resetIfReady())
+		{
+			FontManager::getInstance().renderText("FPS: " + std::to_string(round(1.0f / delta)), 10.0f, height - 20.0f, 0.5f, glm::vec3(1.0f, 1.0f, 0.0f));
 		}
 
 		this->screenQuad->drawScreen(context);
@@ -146,6 +150,7 @@ void Game::start()
 	TextureManager::getInstance().dispose();
 	FramebufferManager::getInstance().dispose();
 	AudioManager::getInstance().dispose();
+	FontManager::getInstance().dispose();
 
 	context->terminate();
 }
@@ -153,6 +158,9 @@ void Game::start()
 void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
 	this->context->setViewport(0, 0, width, height);
+
 	Camera* camera = (Camera*) this->camera->getScriptComponent();
 	camera->setAspect(width / (float) height);
+
+	FontManager::getInstance().setPerspective(width, height);
 }

@@ -15,6 +15,7 @@ public:
 	static const std::string PROGRAM_VERTEX;
 	static const std::string PROGRAM_MODEL;
 	static const std::string PROGRAM_POSTPROCESS;
+	static const std::string PROGRAM_FONT;
 
 	static ProgramManager& getInstance();
 

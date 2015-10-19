@@ -4,6 +4,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <time.h>
+
 #include "screen_quad.h"
 #include "tag.h"
 #include "timer.h"
@@ -29,6 +31,7 @@
 #include "../Render/shader.h"
 #include "../Render/Light/directional_light.h"
 #include "../Render/Light/point_light.h"
+#include "../Render/Font/font_manager.h"
 
 class Game
 {

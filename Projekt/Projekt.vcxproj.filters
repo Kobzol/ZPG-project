@@ -41,6 +41,7 @@
     <ClCompile Include="Game\screen_quad.cpp" />
     <ClCompile Include="Game\Component\camera.cpp" />
     <ClCompile Include="Audio\audio_manager.cpp" />
+    <ClCompile Include="Render\Font\font_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -92,6 +93,8 @@
     <ClInclude Include="Game\Component\camera.h" />
     <ClInclude Include="Game\Component\light.h" />
     <ClInclude Include="Audio\audio_manager.h" />
+    <ClInclude Include="Render\Font\font_manager.h" />
+    <ClInclude Include="Render\Font\character.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
@@ -102,5 +105,13 @@
     <None Include="Shaders\Vertex\lambert.vert" />
     <None Include="Shaders\Vertex\postprocess.vert" />
     <None Include="Shaders\Fragment\postprocess.frag" />
+    <None Include="Shaders\Vertex\font.vert" />
+    <None Include="Shaders\Fragment\font.frag" />
+    <None Include="freetype6.dll" />
+    <None Include="ikpMP3.dll" />
+    <None Include="irrKlang.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\Font\arial.ttf" />
   </ItemGroup>
 </Project>
