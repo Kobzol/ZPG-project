@@ -97,16 +97,23 @@ void Game::start()
 	this->objectManager.add(light);
 
 	Timer timer(0.01f);
+	Timer gunshotTimer(0.5f);
 
 	// render loop
 	context->loop([&](Context& context)
 	{
 		float delta = context.getDeltaTime();
 		timer.update(delta);
+		gunshotTimer.update(delta);
 
 		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
 
 		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		if (InputController::getInstance().isLeftMouseDown() && gunshotTimer.resetIfReady())
+		{
+			AudioManager::getInstance().play2DForget("gunshot.wav");
+		}
 
 		ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
 		context.setDepthTest(true);

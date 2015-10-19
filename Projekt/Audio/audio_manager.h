@@ -2,13 +2,14 @@
 
 #include <cassert>
 #include <string>
+#include <unordered_map>
 
 #include <irrKlang.h>
 
 class AudioManager
 {
 public:
-	static const std::string AUDIO_TEST;
+	static const std::string AUDIO_GUNSHOT;
 
 	static AudioManager& getInstance();
 
@@ -26,5 +27,9 @@ private:
 
 	AudioManager();
 
+	void preloadSounds();
+	void preloadSound(std::string path);
+
 	irrklang::ISoundEngine* engine;
+	std::unordered_map<std::string, irrklang::ISoundSource*> sounds;
 };
