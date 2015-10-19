@@ -3,7 +3,7 @@
 const std::string ModelManager::MODEL_CUBE = "cube";
 const std::string ModelManager::MODEL_NANOSUIT = "nanosuit";
 
-const std::string ModelManager::MODEL_PATH = "Resources/models/";
+const std::string ModelManager::MODEL_PATH = "Resources/Models/";
 
 ModelManager ModelManager::instance = ModelManager();
 

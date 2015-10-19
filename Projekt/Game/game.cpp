@@ -53,6 +53,7 @@ void Game::start()
 	this->screenQuad = new ScreenQuad();
 
 	// manager preload
+	AudioManager::getInstance().initialize();
 	ModelManager::getInstance().preloadModels();
 
 	ProgramManager::getInstance().preloadPrograms();
@@ -144,6 +145,7 @@ void Game::start()
 	ModelManager::getInstance().dispose();
 	TextureManager::getInstance().dispose();
 	FramebufferManager::getInstance().dispose();
+	AudioManager::getInstance().dispose();
 
 	context->terminate();
 }
