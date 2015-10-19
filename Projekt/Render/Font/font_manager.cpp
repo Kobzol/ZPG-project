@@ -62,6 +62,8 @@ void FontManager::initialize(int width, int height)
 		this->characters.insert(std::pair<GLchar, Character>(c, character));
 	}
 
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
 	FT_Done_Face(face);
 	FT_Done_FreeType(ft);
 
