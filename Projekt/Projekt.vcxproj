@@ -39,20 +39,22 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\GL_LIB\glm;$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\include;$(ProjectDir)\GL_LIB\glew-1.13.0\include;$(ProjectDir)\GL_LIB\assimp-3.1.1\include;$(ProjectDir)\GL_LIB\opencv\opencv\build\include;$(ProjectDir)\GL_LIB\soil\src;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\opencv\opencv\build\x86\vc12\lib;$(ProjectDir)\GL_LIB\soil\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;opencv_ts300.lib;SOIL.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\opencv\opencv\build\x86\vc12\lib;$(ProjectDir)\GL_LIB\soil\lib;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\lib\Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;opencv_ts300.lib;SOIL.lib;assimp.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Audio\audio_manager.cpp" />
     <ClCompile Include="Buffer\ebo.cpp" />
     <ClCompile Include="Buffer\vao.cpp" />
     <ClCompile Include="Buffer\vbo.cpp" />
@@ -117,6 +120,7 @@
     <ClCompile Include="Render\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Audio\audio_manager.h" />
     <ClInclude Include="Buffer\ebo.h" />
     <ClInclude Include="Buffer\vao.h" />
     <ClInclude Include="Buffer\vbo.h" />

@@ -40,6 +40,7 @@
     <ClCompile Include="Content\framebuffer_manager.cpp" />
     <ClCompile Include="Game\screen_quad.cpp" />
     <ClCompile Include="Game\Component\camera.cpp" />
+    <ClCompile Include="Audio\audio_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -90,6 +91,7 @@
     <ClInclude Include="Game\screen_quad.h" />
     <ClInclude Include="Game\Component\camera.h" />
     <ClInclude Include="Game\Component\light.h" />
+    <ClInclude Include="Audio\audio_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

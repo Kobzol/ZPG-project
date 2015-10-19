@@ -13,6 +13,7 @@
 #include "Object/object_manager.h"
 #include "Physics/transform.h"
 #include "Render/model_render_component.h"
+#include "../Audio/audio_manager.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
 #include "../Content/framebuffer_manager.h"
