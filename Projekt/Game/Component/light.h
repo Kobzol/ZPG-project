@@ -9,17 +9,17 @@ template <typename T>
 class Light : public IComponent
 {
 public:
-	Light(T& t, std::string name) : t(t), name(name)
+	Light(T& light, std::string name) : light(light), name(name)
 	{
 		
 	}
 
 	void update()
 	{
-		this->t.setUniforms(ProgramManager::getInstance().getCurrentProgram(), this->name);
+		this->light.setUniforms(ProgramManager::getInstance().getCurrentProgram(), this->name);
 	}
 
 private:
-	T t;
+	T light;
 	std::string name;
 };
