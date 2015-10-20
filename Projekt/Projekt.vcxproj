@@ -106,7 +106,6 @@
     <ClCompile Include="Model\texture.cpp" />
     <ClCompile Include="Model\vertex.cpp" />
     <ClCompile Include="Game\Component\camera.cpp" />
-    <ClCompile Include="Event\event_broadcaster.cpp" />
     <ClCompile Include="Render\effect_manager.cpp" />
     <ClCompile Include="Render\Font\font_manager.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />

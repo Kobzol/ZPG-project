@@ -21,7 +21,6 @@
     <ClCompile Include="Model\model.cpp" />
     <ClCompile Include="Model\texture.cpp" />
     <ClCompile Include="Model\vertex.cpp" />
-    <ClCompile Include="Event\event_broadcaster.cpp" />
     <ClCompile Include="Render\effect_manager.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />
     <ClCompile Include="Render\Light\attenuation.cpp" />
@@ -99,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
-    <None Include="ClassDiagram.cd" />
     <None Include="Shaders\Fragment\lambert.frag" />
     <None Include="Shaders\Fragment\model.frag" />
     <None Include="Shaders\Vertex\model.vert" />
@@ -111,6 +109,7 @@
     <None Include="freetype6.dll" />
     <None Include="ikpMP3.dll" />
     <None Include="irrKlang.dll" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />

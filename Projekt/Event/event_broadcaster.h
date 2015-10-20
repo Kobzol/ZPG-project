@@ -1,23 +1,36 @@
 #pragma once
 
 #include <algorithm>
-#include <functional>
 #include <vector>
 
-#include "event_listener.h"
-#include "camera_changed_listener.h"
-
+template <typename T, typename R>
 class EventBroadcaster
 {
 private:
-	std::vector<EventListener*> listeners;
-	std::function<void(EventListener*)> notifyCallback;
+	std::vector<T*> listeners;
+	void (T::*callback)(R* param);
 
 public:
-	void setCallback(std::function<void(EventListener*)> notifyCallback);
-	void attachListener(EventListener* listener);
-	void detachListener(EventListener* listener);
-	void notify();
-
-	void dispose();
+	void attachListener(T* listener)
+	{
+		if (std::find(this->listeners.begin(), this->listeners.end(), listener) == this->listeners.end())
+		{
+			this->listeners.push_back(listener);
+		}
+	}
+	void detachListener(T* listener)
+	{
+		auto found = std::find(this->listeners.begin(), this->listeners.end(), listener);
+		if (found != this->listeners.end())
+		{
+			this->listeners.erase(found);
+		}
+	}
+	void notify(R* param)
+	{
+		for (T& t : this->listeners)
+		{
+			(t->*callback)(param);
+		}
+	}
 };
