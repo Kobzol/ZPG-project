@@ -6,10 +6,15 @@ void __stdcall Context::glDebugCallback(GLenum source, GLenum type, GLuint id, G
 }
 
 GLfloat Context::deltaTime = 0.0;
+GLfloat Context::fixedDeltaTime = 0.0;
 
 GLfloat Context::getDeltaTime()
 {
 	return Context::deltaTime;
+}
+GLfloat Context::getFixedDeltaTime()
+{
+	return Context::fixedDeltaTime;
 }
 
 Context::Context()
@@ -131,9 +136,13 @@ void Context::setCursor(bool enabled)
 	glfwSetInputMode(this->window, GLFW_CURSOR, enabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
 }
 
-void Context::loop(std::function<void(Context&)> loopCallback)
+void Context::loop(std::function<void(Context&)> fixedCallback, std::function<void(Context&)> renderCallback)
 {
 	GLfloat lastFrame = (GLfloat) glfwGetTime();
+	double accumulator = 0.0;
+	double fixedDelta = 1 / 60.0f;
+	Context::fixedDeltaTime = fixedDelta;
+
 	while (!glfwWindowShouldClose(this->window))
 	{
 		GLfloat currentFrame = (GLfloat) glfwGetTime();
@@ -142,7 +151,15 @@ void Context::loop(std::function<void(Context&)> loopCallback)
 
 		glfwPollEvents();
 
-		loopCallback(*this);
+		accumulator += lastFrame;
+
+		while (accumulator > fixedDelta)
+		{
+			fixedCallback(*this);
+			accumulator -= fixedDelta;
+		}
+
+		renderCallback(*this);
 
 		glfwSwapBuffers(this->window);
 	}

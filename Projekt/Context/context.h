@@ -15,6 +15,7 @@ private:
 	static void __stdcall glDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 	static GLfloat deltaTime;
+	static GLfloat fixedDeltaTime;
 
 	GLFWwindow* window;
 	int width;
@@ -30,6 +31,7 @@ private:
 
 public:
 	static GLfloat getDeltaTime();
+	static GLfloat getFixedDeltaTime();
 
 	Context();
 
@@ -41,7 +43,7 @@ public:
 	int getWindowWidth();
 	int getWindowHeight();
 
-	void loop(std::function<void(Context&)> loopCallback);
+	void loop(std::function<void(Context&)> fixedCallback, std::function<void(Context&)> renderCallback);
 
 	void createWindow(int width, int height, int samples, std::string title, bool resizable, bool fullscreen, bool showDebugOutput = false);
 

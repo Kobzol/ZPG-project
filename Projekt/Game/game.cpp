@@ -99,8 +99,11 @@ void Game::start()
 	Timer timer(0.01f);
 	Timer gunshotTimer(0.5f);
 
-	// render loop
-	context->loop([&](Context& context)
+	context->loop([&](Context& context)	// physics
+	{
+		
+	},	
+	[&](Context& context)	// render
 	{
 		float delta = context.getDeltaTime();
 		timer.update(delta);
