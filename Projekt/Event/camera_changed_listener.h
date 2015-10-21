@@ -1,11 +1,13 @@
 #pragma once
 
-#include "event_listener.h"
-
 class Camera;
 
-class CameraChangedListener : public EventListener
+class CameraChangedListener
 {
 public:
+	void notifyCameraChangedStatic(Camera& camera)
+	{
+		this->notifyCameraChanged(camera);
+	}
 	virtual void notifyCameraChanged(Camera& camera) = 0;
 };

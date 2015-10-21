@@ -8,9 +8,14 @@ class EventBroadcaster
 {
 private:
 	std::vector<T*> listeners;
-	void (T::*callback)(R* param);
+	void (T::*callback)(R param);
 
 public:
+	EventBroadcaster(void (T::*callback)(R param)) : callback(callback)
+	{
+		
+	}
+
 	void attachListener(T* listener)
 	{
 		if (std::find(this->listeners.begin(), this->listeners.end(), listener) == this->listeners.end())
@@ -26,9 +31,9 @@ public:
 			this->listeners.erase(found);
 		}
 	}
-	void notify(R* param)
+	void notify(R param)
 	{
-		for (T& t : this->listeners)
+		for (T* t : this->listeners)
 		{
 			(t->*callback)(param);
 		}
