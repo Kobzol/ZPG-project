@@ -51,10 +51,15 @@ void AudioManager::preloadSounds()
 }
 void AudioManager::preloadSound(std::string path)
 {
-	path = AudioManager::AUDIO_PATH + path;
+	std::string resourcePath = AudioManager::AUDIO_PATH + path;
 
-	if (!this->sounds.count(path))
+	if (!this->sounds.count(resourcePath))
 	{
-		this->sounds.emplace(path, this->engine->addSoundSourceFromFile(path.c_str(), irrklang::E_STREAM_MODE::ESM_NO_STREAMING, true));
+		irrklang::ISoundSource* source = this->engine->addSoundSourceFromFile(resourcePath.c_str(), irrklang::E_STREAM_MODE::ESM_AUTO_DETECT, true);
+		this->sounds.emplace(resourcePath, source);
+
+		source->setDefaultVolume(0.001f);	// set the volume so that the sound cannot be heard
+		this->play2DForget(path); // trick irrklang into actually preloading the file
+		source->setDefaultVolume(1.0f);	// reset the volume
 	}
 }
