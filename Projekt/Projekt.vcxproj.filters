@@ -41,6 +41,7 @@
     <ClCompile Include="Game\Component\camera.cpp" />
     <ClCompile Include="Audio\audio_manager.cpp" />
     <ClCompile Include="Render\Font\font_manager.cpp" />
+    <ClCompile Include="Game\Physics\force.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -69,7 +70,6 @@
     <ClInclude Include="Model\texture.h" />
     <ClInclude Include="Model\vertex.h" />
     <ClInclude Include="Event\camera_changed_listener.h" />
-    <ClInclude Include="Event\event_listener.h" />
     <ClInclude Include="Event\event_broadcaster.h" />
     <ClInclude Include="Render\effect_manager.h" />
     <ClInclude Include="Render\framebuffer.h" />
@@ -95,6 +95,8 @@
     <ClInclude Include="Render\Font\font_manager.h" />
     <ClInclude Include="Render\Font\character.h" />
     <ClInclude Include="Content\refcounter.h" />
+    <ClInclude Include="Game\Physics\iphysics_component.h" />
+    <ClInclude Include="Game\Physics\force.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

@@ -93,6 +93,7 @@
     <ClCompile Include="Game\Input\input_controller.cpp" />
     <ClCompile Include="Game\Input\mouse_state.cpp" />
     <ClCompile Include="Game\Object\object_manager.cpp" />
+    <ClCompile Include="Game\Physics\force.cpp" />
     <ClCompile Include="Game\Physics\transform.cpp" />
     <ClCompile Include="Content\program_manager.cpp" />
     <ClCompile Include="Game\Render\model_render_component.cpp" />
@@ -133,6 +134,8 @@
     <ClInclude Include="Game\Component\icomponent.h" />
     <ClInclude Include="Content\content_manager.h" />
     <ClInclude Include="Content\model_manager.h" />
+    <ClInclude Include="Game\Physics\force.h" />
+    <ClInclude Include="Game\Physics\iphysics_component.h" />
     <ClInclude Include="Game\Component\light.h" />
     <ClInclude Include="Game\Object\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />
@@ -157,7 +160,6 @@
     <ClInclude Include="Model\vertex.h" />
     <ClInclude Include="Game\Component\camera.h" />
     <ClInclude Include="Event\camera_changed_listener.h" />
-    <ClInclude Include="Event\event_listener.h" />
     <ClInclude Include="Event\event_broadcaster.h" />
     <ClInclude Include="Render\effect_manager.h" />
     <ClInclude Include="Render\Font\character.h" />

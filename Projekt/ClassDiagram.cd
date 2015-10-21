@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
   <Class Name="AudioManager" Collapsed="true">
     <Position X="4.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
@@ -29,7 +29,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="FramebufferManager" Collapsed="true">
-    <Position X="4.25" Y="5.5" Width="1.5" />
+    <Position X="4.25" Y="5.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAkAAAAAAAACABAAAQAAAAAAgAAAAA=</HashCode>
       <FileName>Content\framebuffer_manager.h</FileName>
@@ -50,7 +50,10 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Context" Collapsed="true">
-    <Position X="14.25" Y="4.75" Width="1.5" />
+    <Position X="9" Y="4.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AIARAAABDgEICCRAwAEAAAAAAIACKAgJrAAghBAJxDA=</HashCode>
       <FileName>Context\context.h</FileName>
@@ -91,8 +94,8 @@
       <FileName>Game\Component\light.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GameObject" Collapsed="true">
-    <Position X="0.5" Y="8.25" Width="1.5" />
+  <Class Name="GameObject">
+    <Position X="15.25" Y="4.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AgFAAAAAAAAAAEAgACIAgBAAAAAGAAAAAABgAAIEAgA=</HashCode>
       <FileName>Game\Object\game_object.h</FileName>
@@ -112,22 +115,25 @@
       <FileName>Game\Input\mouse_state.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ObjectManager" Collapsed="true">
-    <Position X="14.25" Y="5.5" Width="1.5" />
+  <Class Name="ObjectManager">
+    <Position X="12" Y="4.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAgECCAAAAAAkAAAAQAAAAQBCAAAAMAAgBAACAAA=</HashCode>
       <FileName>Game\Object\object_manager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ModelRenderComponent" Collapsed="true">
-    <Position X="3" Y="1.75" Width="1.5" />
+    <Position X="3" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAA=</HashCode>
       <FileName>Game\Render\model_render_component.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VertexRenderComponent" Collapsed="true">
-    <Position X="5.25" Y="1.75" Width="1.5" />
+    <Position X="5.25" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAEAgEAAAAAAAAAAAAAAAAAAAQAAEAAA=</HashCode>
       <FileName>Game\Render\vertex_render_component.h</FileName>
@@ -140,19 +146,15 @@
       <FileName>Game\timer.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Game" Collapsed="true">
-    <Position X="11.75" Y="5.25" Width="1.5" />
+  <Class Name="Game">
+    <Position X="8.75" Y="5.75" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
     <AssociationLine Name="objectManager" Type="ObjectManager" ManuallyRouted="true">
       <Path>
-        <Point X="13.25" Y="5.656" />
-        <Point X="14.25" Y="5.656" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="context" Type="Context" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="13" Y="5.25" />
-        <Point X="13" Y="5" />
-        <Point X="14.25" Y="5" />
+        <Point X="11.5" Y="6.479" />
+        <Point X="12" Y="6.479" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -242,14 +244,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CameraChangedListener" Collapsed="true">
-    <Position X="2.25" Y="9" Width="2" />
+    <Position X="2.75" Y="9" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Event\camera_changed_listener.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EventBroadcaster&lt;T, R&gt;" Collapsed="true">
-    <Position X="0.5" Y="9" Width="1.5" />
+    <Position X="0.5" Y="9" Width="2" />
     <TypeIdentifier>
       <HashCode>AABQAAAAAAAAAAAAAAAEAAAAAIAAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>Event\event_broadcaster.h</FileName>
@@ -319,21 +321,21 @@
     </TypeIdentifier>
   </Struct>
   <Struct Name="Character" Collapsed="true">
-    <Position X="8" Y="4.25" Width="1.5" />
+    <Position X="6.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAACAAAAAIAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>Render\Font\character.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="Attenuation" Collapsed="true">
-    <Position X="15.5" Y="7" Width="1.5" />
+    <Position X="11.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAIASAAAAA=</HashCode>
       <FileName>Render\Light\attenuation.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="DirectionalLight" Collapsed="true">
-    <Position X="12" Y="8.5" Width="1.5" />
+    <Position X="8" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQQAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Render\Light\directional_light.h</FileName>
@@ -343,14 +345,14 @@
     </ShowAsAssociation>
   </Struct>
   <Struct Name="Phong" Collapsed="true">
-    <Position X="13.5" Y="7" Width="1.5" />
+    <Position X="9.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAIQAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>Render\Light\phong.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="PointLight" Collapsed="true">
-    <Position X="16.5" Y="8.5" Width="1.5" />
+    <Position X="12.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAAAAIAAAAAAAAAABAAAAIAAACAA=</HashCode>
       <FileName>Render\Light\point_light.h</FileName>
@@ -361,7 +363,7 @@
     </ShowAsAssociation>
   </Struct>
   <Struct Name="SpotLight" Collapsed="true">
-    <Position X="14.5" Y="8.5" Width="1.5" />
+    <Position X="10.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAABAIAAAAAAAIAAAgAAAAAABAAAAAAAAGAA=</HashCode>
       <FileName>Render\Light\spotlight.h</FileName>

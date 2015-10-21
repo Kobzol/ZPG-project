@@ -1,6 +1,7 @@
 #include "game_object.h"
 
-GameObject::GameObject(IComponent* scriptComponent, IComponent* renderComponent) : scriptComponent(scriptComponent), renderComponent(renderComponent), id(-1)
+GameObject::GameObject(IComponent* scriptComponent, IComponent* renderComponent, IPhysicsComponent* physicsComponent)
+	: scriptComponent(scriptComponent), renderComponent(renderComponent), physicsComponent(physicsComponent), id(-1)
 {
 	if (scriptComponent != nullptr)
 	{
@@ -10,6 +11,11 @@ GameObject::GameObject(IComponent* scriptComponent, IComponent* renderComponent)
 	if (renderComponent != nullptr)
 	{
 		renderComponent->setGameObject(this);
+	}
+
+	if (physicsComponent != nullptr)
+	{
+		physicsComponent->setGameObject(this);
 	}
 }
 
