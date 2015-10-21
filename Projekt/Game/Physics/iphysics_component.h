@@ -8,10 +8,10 @@ class GameObject;
 class IPhysicsComponent : public IComponent
 {
 public:
-	virtual bool isMovable() { return false; }
-	virtual bool isCollidable() { return false; }
-	virtual bool onCollision(GameObject* object) { }
-	virtual Force& getForce() { return this->force; }
+	virtual bool isMovable() const  = 0;
+	virtual bool isCollidable() const = 0;
+	virtual void onCollision(GameObject* object) = 0;
+	Force& getForce() { return this->force; }
 
 protected:
 	Force force;

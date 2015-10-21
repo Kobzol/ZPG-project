@@ -42,6 +42,8 @@
     <ClCompile Include="Audio\audio_manager.cpp" />
     <ClCompile Include="Render\Font\font_manager.cpp" />
     <ClCompile Include="Game\Physics\force.cpp" />
+    <ClCompile Include="Game\Physics\physics_handler.cpp" />
+    <ClCompile Include="Game\Physics\basic_physics_component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -97,6 +99,8 @@
     <ClInclude Include="Content\refcounter.h" />
     <ClInclude Include="Game\Physics\iphysics_component.h" />
     <ClInclude Include="Game\Physics\force.h" />
+    <ClInclude Include="Game\Physics\physics_handler.h" />
+    <ClInclude Include="Game\Physics\basic_physics_component.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

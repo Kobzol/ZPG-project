@@ -76,7 +76,9 @@ void Game::start()
 	this->camera->getTags().set(Tag::Camera);
 	this->objectManager.add(this->camera);
 
-	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)));
+	IPhysicsComponent* physics = new BasicPhysicsComponent(true, false);
+	physics->getForce() = Force(glm::vec3(0.0f, 0.0f, 1.0f), 0.001f);
+	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)), physics);
 	this->objectManager.add(cube);
 
 	DirectionalLight dirLight;
@@ -101,7 +103,7 @@ void Game::start()
 
 	context->loop([&](Context& context)	// physics
 	{
-		
+		this->physicsHandler.simulate(this->objectManager.getObjects(), this->objectManager.getObjectCount(), Context::getFixedDeltaTime());
 	},	
 	[&](Context& context)	// render
 	{

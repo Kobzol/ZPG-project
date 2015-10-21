@@ -13,6 +13,8 @@
 #include "Component/camera_controller.h"
 #include "Component/light.h"
 #include "Object/object_manager.h"
+#include "Physics/basic_physics_component.h"
+#include "Physics/physics_handler.h"
 #include "Physics/transform.h"
 #include "Render/model_render_component.h"
 #include "../Audio/audio_manager.h"
@@ -49,6 +51,7 @@ private:
 
 	void onWindowSizeCallback(GLFWwindow* window, int width, int height);
 
+	PhysicsHandler physicsHandler;
 	ObjectManager objectManager;
 	Context* context;
 	GameObject* camera;

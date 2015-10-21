@@ -14,16 +14,17 @@
 class OpenGLHelper
 {
 public:
-	static void glPrintError(std::string message, const char* filename, int line)
+	inline static void glPrintError(std::string message, const char* filename, int line)
 	{
 		std::cerr << "OpenGL Error: " << message << " in " << filename << ":" << line << std::endl;
 	}
-	static void glClearError()
+	inline static void glClearError()
 	{
 		glGetError();
 	}
 	static bool glCheckError(const char* filename, int line)
 	{
+#ifdef _DEBUG
 		GLenum error = glGetError();
 
 		if (error != GL_NO_ERROR)
@@ -58,7 +59,8 @@ public:
 
 			return false;
 		}
-		else return true;
+#endif
+		return true;
 	}
 	static bool glCheckCompilation(GLuint shader, const char* filename, int line)
 	{

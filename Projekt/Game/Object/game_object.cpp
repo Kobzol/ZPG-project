@@ -31,6 +31,10 @@ IComponent* GameObject::getRenderComponent()
 {
 	return this->renderComponent;
 }
+IPhysicsComponent* GameObject::getPhysicsComponent()
+{
+	return this->physicsComponent;
+}
 Flags<Tag>& GameObject::getTags()
 {
 	return this->tags;
