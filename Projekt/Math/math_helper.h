@@ -24,7 +24,15 @@ public:
 		float sinPitch = sin(pitchRad);
 		float cosYaw = cos(yawRad);
 		float sinYaw = sin(yawRad);
-		
+
 		return glm::vec3(cosPitch * cosYaw, sinPitch, cosPitch * sinYaw);
+
+		/*glm::vec3 direction;
+
+		direction.y = sin(glm::radians(pitch));
+		direction.x = cos(glm::radians(yaw));
+		direction.z = sin(glm::radians(yaw));
+
+		return direction;*/
 	}
 };

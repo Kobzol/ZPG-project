@@ -69,7 +69,7 @@ void Game::start()
 	FramebufferManager::getInstance().preloadFramebuffers();
 
 	// initial object spawn
-	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 10.0f);
+	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
 	this->camera = new GameObject(cameraScript);
 	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 3.5f));
 
@@ -78,7 +78,7 @@ void Game::start()
 
 	IPhysicsComponent* physics = new BasicPhysicsComponent(true, false);
 	physics->getForce() = Force(glm::vec3(0.0f, 0.0f, 1.0f), 0.001f);
-	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)), physics);
+	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_M4)), physics);
 	this->objectManager.add(cube);
 
 	DirectionalLight dirLight;
@@ -103,7 +103,7 @@ void Game::start()
 
 	context->loop([&](Context& context)	// physics
 	{
-		this->physicsHandler.simulate(this->objectManager.getObjects(), this->objectManager.getObjectCount(), Context::getFixedDeltaTime());
+		//this->physicsHandler.simulate(this->objectManager.getObjects(), this->objectManager.getObjectCount(), Context::getFixedDeltaTime());
 	},	
 	[&](Context& context)	// render
 	{
@@ -113,6 +113,7 @@ void Game::start()
 
 		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
 
+		RenderUtils::clearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		if (InputController::getInstance().isLeftMouseDown() && gunshotTimer.resetIfReady())

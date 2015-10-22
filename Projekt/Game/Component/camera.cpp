@@ -54,6 +54,11 @@ void Camera::setGameObject(GameObject* object)
 	}
 }
 
+IComponent* Camera::getController()
+{
+	return this->controller;
+}
+
 glm::mat4 Camera::calculateViewMatrix()
 {
 	return glm::lookAt(

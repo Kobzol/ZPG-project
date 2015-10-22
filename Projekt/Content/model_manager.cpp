@@ -2,6 +2,7 @@
 
 const std::string ModelManager::MODEL_CUBE = "cube";
 const std::string ModelManager::MODEL_NANOSUIT = "nanosuit";
+const std::string ModelManager::MODEL_M4 = "m4";
 
 const std::string ModelManager::MODEL_PATH = "Resources/Models/";
 
@@ -20,7 +21,7 @@ ModelManager::ModelManager()
 void ModelManager::preloadModels()
 {
 	this->load(ModelManager::MODEL_CUBE, new Model(MODEL_PATH + "cube/cube.obj"));
-	this->load(ModelManager::MODEL_NANOSUIT, new Model(MODEL_PATH + "nanosuit/nanosuit.obj"));
+	this->load(ModelManager::MODEL_M4, new Model(MODEL_PATH + "M4/m4a1_s.fbx"));
 }
 
 void ModelManager::dispose()

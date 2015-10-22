@@ -30,6 +30,7 @@ public:
 	void moveBy(const glm::vec3 &offset);
 
 	void setRotation(float angle, const glm::vec3 &axis);
+	void setRotation(glm::quat quaternion);
 	void rotateBy(float angle, const glm::vec3 &axis);
 
 	void setScale(const glm::vec3 &scale);

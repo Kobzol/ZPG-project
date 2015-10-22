@@ -44,6 +44,11 @@ void Transform::setRotation(float angle, const glm::vec3 &axis)
 	this->quat = glm::rotate(glm::quat(), glm::radians(angle), axis);
 	this->setDirty({ TransformDirtyBit::Rotation });
 }
+void Transform::setRotation(glm::quat quaternion)
+{
+	this->quat = quaternion;
+	this->setDirty({ TransformDirtyBit::Rotation });
+}
 void Transform::rotateBy(float angle, const glm::vec3 &axis)
 {
 	this->quat = glm::rotate(quat, glm::radians(angle), axis);

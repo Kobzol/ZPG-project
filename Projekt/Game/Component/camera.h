@@ -32,6 +32,8 @@ public:
 	void update() override;
 	void setGameObject(GameObject* object) override;
 
+	IComponent* getController();
+
 	void setTarget(glm::vec3 target);
 
 	glm::vec3 getLeft();

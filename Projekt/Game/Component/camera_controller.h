@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
 #include "camera.h"
 #include "icomponent.h"
@@ -12,12 +13,15 @@
 class CameraController : public IComponent
 {
 public:
-	CameraController(float cameraSpeed = 1.0f, float mouseSensitivity = 0.05f);
+	CameraController(float cameraSpeed = 1.0f, float mouseSensitivity = 1.0f);
 
 	void update() override;
 
+	float getPitch();
+	float getYaw();
+
 private:
-	void setLookVector(glm::vec3 vector);
+	void setLookVector(Camera* camera, glm::vec3 vector);
 	void handleMouseLook(Camera* camera);
 	void handleMouseMove(Camera* camera);
 

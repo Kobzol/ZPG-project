@@ -13,7 +13,7 @@ void CameraController::update()
 
 	if (!this->lookVectorSet)	// TODO: set front vector according to up vector
 	{
-		this->setLookVector(camera->getFront());
+		this->setLookVector(camera, camera->getFront());
 		this->lookVectorSet = true;
 	}
 	else
@@ -22,26 +22,34 @@ void CameraController::update()
 	}
 }
 
-void CameraController::setLookVector(glm::vec3 vector)
+float CameraController::getPitch()
+{
+	return this->pitch;
+}
+float CameraController::getYaw()
+{
+	return this->yaw;
+}
+
+void CameraController::setLookVector(Camera* camera, glm::vec3 vector)
 {
 	vector = glm::normalize(vector);
 
 	glm::vec3 zeroHorizontalVector = glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::vec3 zeroVerticalVector = glm::normalize(glm::vec3(0.0f, 0.0f, -1.0f));
 
-	float cos = glm::dot(vector, zeroHorizontalVector);
-	this->yaw = -glm::degrees(acos(cos));
-
-	cos = glm::dot(vector, zeroVerticalVector);
-	this->pitch = glm::degrees(acos(cos));
+	this->yaw = glm::degrees(glm::orientedAngle(vector, zeroHorizontalVector, glm::vec3(0.0f, 1.0f, 0.0f)));
+	this->pitch = glm::degrees(glm::orientedAngle(vector, zeroVerticalVector, zeroHorizontalVector));
+	
+	camera->setTarget(MathHelper::vectorFromPitchYaw(this->pitch, this->yaw));
 }
 void CameraController::handleMouseLook(Camera* camera)
 {
 	glm::vec2 mousePos = InputController::getInstance().getMousePosition().getState();
 	glm::vec2 mousePosOld = InputController::getInstance().getMousePosition().getOldState();
 
-	float diffX = (float)(mousePos.x - mousePosOld.x);
-	float diffY = (float)(mousePosOld.y - mousePos.y);
+	float diffX = (float) (mousePos.x - mousePosOld.x);
+	float diffY = (float) (mousePosOld.y - mousePos.y);
 
 	if (diffX != 0 || diffY != 0)
 	{
@@ -51,7 +59,8 @@ void CameraController::handleMouseLook(Camera* camera)
 		this->yaw += diffX;
 		this->pitch += diffY;
 
-		this->pitch = glm::clamp(this->pitch, -90.0f, 90.0f);
+		this->pitch = glm::clamp(this->pitch, -89.0f, 89.0f);
+		this->yaw = fmodf(this->yaw, 360.0f);
 
 		camera->setTarget(MathHelper::vectorFromPitchYaw(this->pitch, this->yaw));
 	}
