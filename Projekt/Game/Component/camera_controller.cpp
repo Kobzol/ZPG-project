@@ -53,16 +53,7 @@ void CameraController::handleMouseLook(Camera* camera)
 
 		this->pitch = glm::clamp(this->pitch, -90.0f, 90.0f);
 
-		float pitchRad = glm::radians(this->pitch);
-		float yawRad = glm::radians(this->yaw);
-
-		float cosPitch = cos(pitchRad);
-		float sinPitch = sin(pitchRad);
-		float cosYaw = cos(yawRad);
-		float sinYaw = sin(yawRad);
-		glm::vec3 cameraFront = glm::vec3(cosPitch * cosYaw, sinPitch, cosPitch * sinYaw);
-
-		camera->setTarget(cameraFront);
+		camera->setTarget(MathHelper::vectorFromPitchYaw(this->pitch, this->yaw));
 	}
 }
 void CameraController::handleMouseMove(Camera* camera)

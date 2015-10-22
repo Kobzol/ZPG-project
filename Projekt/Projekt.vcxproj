@@ -154,7 +154,7 @@
     <ClInclude Include="Content\program_manager.h" />
     <ClInclude Include="Helper\file_helper.h" />
     <ClInclude Include="Helper\flags.h" />
-    <ClInclude Include="Helper\glm_helper.h" />
+    <ClInclude Include="Math\math_helper.h" />
     <ClInclude Include="Helper\opengl_helper.h" />
     <ClInclude Include="Helper\image.h" />
     <ClInclude Include="Model\cubemap.h" />

@@ -7,6 +7,7 @@
 #include "../game.h"
 #include "../Object/game_object.h"
 #include "../Input/input_controller.h"
+#include "../../Math/math_helper.h"
 
 class CameraController : public IComponent
 {
