@@ -3,15 +3,15 @@
 #include <algorithm>
 #include <vector>
 
-template <typename T, typename R>
+template <typename T, typename... Args>
 class EventBroadcaster
 {
 private:
 	std::vector<T*> listeners;
-	void (T::*callback)(R param);
+	void (T::*callback)(Args... args);
 
 public:
-	EventBroadcaster(void (T::*callback)(R param)) : callback(callback)
+	EventBroadcaster(void (T::*callback)(Args... args)) : callback(callback)
 	{
 		
 	}
@@ -31,11 +31,11 @@ public:
 			this->listeners.erase(found);
 		}
 	}
-	void notify(R param)
+	void notify(Args... args)
 	{
 		for (T* t : this->listeners)
 		{
-			(t->*callback)(param);
+			(t->*callback)(args...);
 		}
 	}
 };
