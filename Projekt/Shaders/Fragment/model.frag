@@ -53,26 +53,12 @@ void main()
 	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
 
 	vec3 dirLight = calcDirLight(directionalLight, normal, viewDir, diffuseMap, specularMap);
-	resultColor += dirLight;
+	//resultColor += dirLight;
 
 	vec3 pointLight = calcPointLight(pointLight, normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap);
 	resultColor += pointLight;
 
 	outColor = vec4(resultColor, 1.0f);
-
-
-	/*vec4 lightPosition = vec4(-10.0f, 10.0f, 10.0f, 1.0f);
-	vec3 ambient = vec3(0.1f, 0.1f, 0.1f);
-
-	vec3 lightDir = normalize(-directionalLight.direction);
-	float dotLight = max(dot(lightDir, normalize(outVertex.outNormal)), 0.0f);
-	
-	vec3 color = vec3(texture(texture_diffuse, outVertex.texCoords));
-
-	vec3 diffColor = dotLight * color;
-	vec3 ambientColor = ambient;
-
-	outColor = vec4(diffColor + ambientColor, 1.0f);*/
 }
 
 void calcAttenuation(float dist, Attenuation attenuationIn, out float attenuationOut)

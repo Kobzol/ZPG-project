@@ -7,6 +7,8 @@ ModelRenderComponent::ModelRenderComponent(Model* model) : model(model)
 
 void ModelRenderComponent::update()
 {
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
+
 	Transform& transform = this->gameObject->getTransform();
 
 	if (transform.isDirty())

@@ -12,7 +12,6 @@
     <ClCompile Include="Game\Input\mouse_state.cpp" />
     <ClCompile Include="Game\Object\object_manager.cpp" />
     <ClCompile Include="Game\Physics\transform.cpp" />
-    <ClCompile Include="Game\Render\vertex_render_component.cpp" />
     <ClCompile Include="Game\timer.cpp" />
     <ClCompile Include="Helper\image.cpp" />
     <ClCompile Include="main.cpp" />
@@ -44,6 +43,7 @@
     <ClCompile Include="Game\Physics\force.cpp" />
     <ClCompile Include="Game\Physics\physics_handler.cpp" />
     <ClCompile Include="Game\Physics\basic_physics_component.cpp" />
+    <ClCompile Include="Game\Render\simple_constant_renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -56,7 +56,6 @@
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />
     <ClInclude Include="Game\Object\object_manager.h" />
-    <ClInclude Include="Game\Render\vertex_render_component.h" />
     <ClInclude Include="Game\tag.h" />
     <ClInclude Include="Game\timer.h" />
     <ClInclude Include="Game\game.h" />
@@ -101,6 +100,7 @@
     <ClInclude Include="Game\Physics\physics_handler.h" />
     <ClInclude Include="Game\Physics\basic_physics_component.h" />
     <ClInclude Include="Math\math_helper.h" />
+    <ClInclude Include="Game\Render\simple_constant_renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
@@ -116,6 +116,8 @@
     <None Include="ikpMP3.dll" />
     <None Include="irrKlang.dll" />
     <None Include="ClassDiagram.cd" />
+    <None Include="Shaders\Fragment\constant.frag" />
+    <None Include="Shaders\Vertex\constant.vert" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />

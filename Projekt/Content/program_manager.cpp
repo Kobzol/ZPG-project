@@ -1,6 +1,6 @@
 #include "program_manager.h"
 
-const std::string ProgramManager::PROGRAM_VERTEX = "vertex";
+const std::string ProgramManager::PROGRAM_SIMPLE_CONSTANT = "constant";
 const std::string ProgramManager::PROGRAM_MODEL = "model";
 const std::string ProgramManager::PROGRAM_POSTPROCESS = "postprocess";
 const std::string ProgramManager::PROGRAM_FONT = "font";
@@ -22,6 +22,7 @@ ProgramManager::ProgramManager()
 
 void ProgramManager::preloadPrograms()
 {
+	this->preloadProgram(ProgramManager::PROGRAM_SIMPLE_CONSTANT, "constant.vert", "constant.frag");
 	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag");
 	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag");
 	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag");

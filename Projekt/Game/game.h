@@ -17,6 +17,7 @@
 #include "Physics/physics_handler.h"
 #include "Physics/transform.h"
 #include "Render/model_render_component.h"
+#include "Render/simple_constant_renderer.h"
 #include "../Audio/audio_manager.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"
@@ -34,6 +35,7 @@
 #include "../Render/Light/directional_light.h"
 #include "../Render/Light/point_light.h"
 #include "../Render/Font/font_manager.h"
+#include "../Resources/Models/bedna.h"
 
 class Game
 {

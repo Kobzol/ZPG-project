@@ -71,14 +71,14 @@ void Game::start()
 	// initial object spawn
 	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
 	this->camera = new GameObject(cameraScript);
-	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 3.5f));
+	this->camera->getTransform().setPosition(glm::vec3(0.0f, 8.0f, 10.5f));
 
 	this->camera->getTags().set(Tag::Camera);
 	this->objectManager.add(this->camera);
 
 	IPhysicsComponent* physics = new BasicPhysicsComponent(true, false);
 	physics->getForce() = Force(glm::vec3(0.0f, 0.0f, 1.0f), 0.001f);
-	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_M4)), physics);
+	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)), physics);
 	this->objectManager.add(cube);
 
 	DirectionalLight dirLight;
@@ -90,16 +90,17 @@ void Game::start()
 	PointLight pointLight;
 	pointLight.position = glm::vec3(0.0f, 0.0f, 1.0f);
 	pointLight.phong = dirLight.phong;
-	pointLight.phong.diffuse = glm::vec3(1.0f, 1.0f, 0.0f);
-	pointLight.attenuation = Attenuation(1.0f, 0.09f, 0.032f);
+	pointLight.phong.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+	pointLight.attenuation = Attenuation::ATT_DISTANCE_LONG;
 
-	GameObject* light = new GameObject(new Light<DirectionalLight>(dirLight, "directionalLight"));
-	this->objectManager.add(light);
-	light = new GameObject(new Light<PointLight>(pointLight, "pointLight"));
+	//GameObject* light = new GameObject(new Light<DirectionalLight>(dirLight, "directionalLight"));
+	//this->objectManager.add(light);
+	GameObject* light = new GameObject(new Light<PointLight>(pointLight, "pointLight"), new SimpleConstantRenderer((const Vertex*) VERTICES, pocetPrvku, glm::vec3(1.0f)));
 	this->objectManager.add(light);
 
 	Timer timer(0.01f);
-	Timer gunshotTimer(0.5f);
+
+	GLfloat radius = 5.0f;
 
 	context->loop([&](Context& context)	// physics
 	{
@@ -109,17 +110,16 @@ void Game::start()
 	{
 		float delta = context.getDeltaTime();
 		timer.update(delta);
-		gunshotTimer.update(delta);
+
+		GLfloat camX = sin(glfwGetTime()) * radius;
+		GLfloat camZ = cos(glfwGetTime()) * radius;
 
 		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
 
-		RenderUtils::clearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		RenderUtils::clearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		if (InputController::getInstance().isLeftMouseDown() && gunshotTimer.resetIfReady())
-		{
-			AudioManager::getInstance().play2DForget("gunshot.wav");
-		}
+		light->getTransform().setPosition(glm::vec3(camX, 0.0f, camZ));
 
 		ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
 		context.setDepthTest(true);

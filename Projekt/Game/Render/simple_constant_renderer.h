@@ -9,10 +9,10 @@
 #include "../../Render/render_utils.h"
 #include "../game.h"
 
-class VertexRenderComponent : public IComponent
+class SimpleConstantRenderer : public IComponent
 {
 public:
-	VertexRenderComponent(const Vertex* data, size_t verticesCount);
+	SimpleConstantRenderer(const Vertex* data, size_t verticesCount, glm::vec3 color);
 
 	void update() override;
 	void dispose() override;
@@ -22,4 +22,6 @@ private:
 	VBO vbo;
 
 	size_t verticesCount;
+
+	glm::vec3 color;
 };

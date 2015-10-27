@@ -16,6 +16,7 @@ public:
 
 	void update()
 	{
+		this->light.position = this->gameObject->getTransform().getPosition();
 		this->light.setUniforms(ProgramManager::getInstance().getCurrentProgram(), this->name);
 	}
 

@@ -7,7 +7,6 @@
 #include "Buffer/vbo.h"
 #include "Context/context.h"
 #include "Game/game.h"
-#include "Game/Render/vertex_render_component.h"
 #include "Model/vertex.h"
 
 int main()
