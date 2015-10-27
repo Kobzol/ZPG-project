@@ -1,5 +1,5 @@
 #include "program_manager.h"
-#include "../../Game/Component/camera.h"
+#include "../../Game/Camera/camera.h"
 
 const std::string ProgramManager::PROGRAM_SIMPLE_CONSTANT = "constant";
 const std::string ProgramManager::PROGRAM_MODEL = "model";
@@ -23,8 +23,8 @@ ProgramManager::ProgramManager() : observedCamera(nullptr)
 
 void ProgramManager::preloadPrograms()
 {
-	this->preloadProgram(ProgramManager::PROGRAM_SIMPLE_CONSTANT, "constant.vert", "constant.frag", Flags<ProgramEvent>(ProgramEvent::MVP));
-	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag", Flags<ProgramEvent>({ ProgramEvent::MVP, ProgramEvent::ViewPosition }));
+	this->preloadProgram(ProgramManager::PROGRAM_SIMPLE_CONSTANT, "constant.vert", "constant.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
+	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag", Flags<ProgramEvent>({ ProgramEvent::ViewProjection, ProgramEvent::ViewPosition }));
 	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag", Flags<ProgramEvent>());
 	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag", Flags<ProgramEvent>());
 }
@@ -33,11 +33,15 @@ Program& ProgramManager::use(std::string identifier)
 {
 	if (this->items.count(identifier))
 	{
-		this->currentProgram = identifier;
 		Program& program = this->items[identifier];
-		program.use();
 
-		if (this->observedCamera != nullptr && program.getEvents().isSet(ProgramEvent::MVP))
+		if (this->currentProgram != identifier)
+		{
+			this->currentProgram = identifier;
+			program.use();
+		}
+
+		if (this->observedCamera != nullptr && program.getEvents().isSet(ProgramEvent::ViewProjection))
 		{
 			program.setViewMatrix(this->observedCamera->calculateViewMatrix());
 			program.setProjectionMatrix(this->observedCamera->calculateProjectionMatrix());

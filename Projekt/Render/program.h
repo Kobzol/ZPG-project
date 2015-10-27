@@ -20,7 +20,7 @@ class ProgramManager;
 
 enum class ProgramEvent
 {
-	MVP,
+	ViewProjection,
 	ViewPosition
 };
 

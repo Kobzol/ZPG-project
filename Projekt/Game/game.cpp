@@ -83,20 +83,14 @@ void Game::start()
 	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)), physics);
 	this->objectManager.add(cube);
 
-	DirectionalLight dirLight;
-	dirLight.direction = glm::vec3(50.0f, 50.0f, -100.0f);
-	dirLight.phong.diffuse = glm::vec3(1.0f);
-	dirLight.phong.ambient = glm::vec3(0.1f);
-	dirLight.phong.specular = glm::vec3(1.0f);
+	DirectionalLight dirLight(glm::vec3(50.0f, 50.0f, -100.0f), Phong(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f)));
 
-	PointLight pointLight;
-	pointLight.phong = dirLight.phong;
-	pointLight.phong.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
-	pointLight.attenuation = Attenuation::ATT_DISTANCE_LONG;
-
-	GameObject* light = new GameObject(new LightComponent<PointLight>(pointLight, "pointLight"), new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f)));
-	this->objectManager.add(light);
+	GameObject* light = new GameObject(
+		new LightComponent(new PointLight(Attenuation::ATT_DISTANCE_LONG, dirLight.phong), "pointLight"),
+		new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f))
+	);
 	light->getTransform().setPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+	this->objectManager.add(light);
 
 	Timer timer(0.01f);
 

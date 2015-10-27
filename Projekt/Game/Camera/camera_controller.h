@@ -4,8 +4,8 @@
 #include <glm/gtx/vector_angle.hpp>
 
 #include "camera.h"
-#include "icomponent.h"
 #include "../game.h"
+#include "../Component/icomponent.h"
 #include "../Object/game_object.h"
 #include "../Input/input_controller.h"
 #include "../../Math/math_helper.h"

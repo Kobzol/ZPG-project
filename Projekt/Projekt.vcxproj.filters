@@ -5,7 +5,6 @@
     <ClCompile Include="Buffer\vao.cpp" />
     <ClCompile Include="Buffer\vbo.cpp" />
     <ClCompile Include="Context\context.cpp" />
-    <ClCompile Include="Game\Component\camera_controller.cpp" />
     <ClCompile Include="Game\game.cpp" />
     <ClCompile Include="Game\Object\game_object.cpp" />
     <ClCompile Include="Game\Input\input_controller.cpp" />
@@ -23,10 +22,7 @@
     <ClCompile Include="Render\effect_manager.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />
     <ClCompile Include="Render\Light\attenuation.cpp" />
-    <ClCompile Include="Render\Light\directional_light.cpp" />
     <ClCompile Include="Render\Light\phong.cpp" />
-    <ClCompile Include="Render\Light\point_light.cpp" />
-    <ClCompile Include="Render\Light\spotlight.cpp" />
     <ClCompile Include="Render\program.cpp" />
     <ClCompile Include="Render\renderbuffer.cpp" />
     <ClCompile Include="Render\render_utils.cpp" />
@@ -37,20 +33,24 @@
     <ClCompile Include="Content\texture_manager.cpp" />
     <ClCompile Include="Content\framebuffer_manager.cpp" />
     <ClCompile Include="Game\screen_quad.cpp" />
-    <ClCompile Include="Game\Component\camera.cpp" />
     <ClCompile Include="Audio\audio_manager.cpp" />
     <ClCompile Include="Render\Font\font_manager.cpp" />
     <ClCompile Include="Game\Physics\force.cpp" />
     <ClCompile Include="Game\Physics\physics_handler.cpp" />
     <ClCompile Include="Game\Physics\basic_physics_component.cpp" />
     <ClCompile Include="Game\Render\simple_constant_renderer.cpp" />
+    <ClCompile Include="Game\Camera\camera.cpp" />
+    <ClCompile Include="Game\Camera\camera_controller.cpp" />
+    <ClCompile Include="Game\Light\directional_light.cpp" />
+    <ClCompile Include="Game\Light\point_light.cpp" />
+    <ClCompile Include="Game\Light\spotlight.cpp" />
+    <ClCompile Include="Game\Light\light_component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
     <ClInclude Include="Buffer\vao.h" />
     <ClInclude Include="Buffer\vbo.h" />
     <ClInclude Include="Context\context.h" />
-    <ClInclude Include="Game\Component\camera_controller.h" />
     <ClInclude Include="Game\Component\icomponent.h" />
     <ClInclude Include="Game\Object\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />
@@ -73,10 +73,7 @@
     <ClInclude Include="Render\effect_manager.h" />
     <ClInclude Include="Render\framebuffer.h" />
     <ClInclude Include="Render\Light\attenuation.h" />
-    <ClInclude Include="Render\Light\directional_light.h" />
     <ClInclude Include="Render\Light\phong.h" />
-    <ClInclude Include="Render\Light\point_light.h" />
-    <ClInclude Include="Render\Light\spotlight.h" />
     <ClInclude Include="Render\program.h" />
     <ClInclude Include="Render\renderbuffer.h" />
     <ClInclude Include="Render\render_utils.h" />
@@ -88,7 +85,6 @@
     <ClInclude Include="Content\texture_manager.h" />
     <ClInclude Include="Content\framebuffer_manager.h" />
     <ClInclude Include="Game\screen_quad.h" />
-    <ClInclude Include="Game\Component\camera.h" />
     <ClInclude Include="Audio\audio_manager.h" />
     <ClInclude Include="Render\Font\font_manager.h" />
     <ClInclude Include="Render\Font\character.h" />
@@ -100,7 +96,13 @@
     <ClInclude Include="Math\math_helper.h" />
     <ClInclude Include="Game\Render\simple_constant_renderer.h" />
     <ClInclude Include="Event\listeners.h" />
-    <ClInclude Include="Game\Component\light_component.h" />
+    <ClInclude Include="Game\Camera\camera.h" />
+    <ClInclude Include="Game\Camera\camera_controller.h" />
+    <ClInclude Include="Game\Light\light_component.h" />
+    <ClInclude Include="Game\Light\directional_light.h" />
+    <ClInclude Include="Game\Light\point_light.h" />
+    <ClInclude Include="Game\Light\spotlight.h" />
+    <ClInclude Include="Game\Light\light.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

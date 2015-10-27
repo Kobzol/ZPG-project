@@ -6,17 +6,17 @@
 
 #include <string>
 
-#include "../program.h"
-#include "phong.h"
+#include "light.h"
+#include "../../Render/program.h"
+#include "../../Render/Light/phong.h"
 
-struct DirectionalLight
+struct DirectionalLight : Light
 {
 public:
 	glm::vec3 direction;
 	Phong phong;
 
-	DirectionalLight();
 	DirectionalLight(const glm::vec3& direction, const Phong& phong);
 
-	void setUniforms(Program& program, std::string name);
+	void setUniforms(Program& program, std::string name, glm::vec3 position) override;
 };

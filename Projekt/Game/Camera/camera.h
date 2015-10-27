@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "icomponent.h"
+#include "../Component/icomponent.h"
 #include "../Object/game_object.h"
 #include "../Physics/transform.h"
 #include "../../Content/program_manager.h"
