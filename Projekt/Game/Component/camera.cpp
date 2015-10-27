@@ -12,32 +12,8 @@ Camera::Camera(
 void Camera::update()
 {
 	Program& program = ProgramManager::getInstance().getCurrentProgram();
-	std::string programName = ProgramManager::getInstance().getCurrentProgramName();
 
-	if (programName != this->lastUsedProgram)
-	{
-		program.setProjectionMatrix(this->calculateProjectionMatrix());
-		program.setViewMatrix(this->calculateViewMatrix());
-
-		this->lastUsedProgram = programName;
-	}
-	else
-	{
-		if (this->isDirty({ CameraDirtyBit::Perspective }))
-		{
-			program.setProjectionMatrix(this->calculateProjectionMatrix());
-			this->clearDirty({ CameraDirtyBit::Perspective });
-		}
-		if (this->gameObject->getTransform().isDirty({ TransformDirtyBit::Position }) ||
-			this->gameObject->getTransform().isDirty({ TransformDirtyBit::Rotation }) ||
-			this->isDirty({ CameraDirtyBit::Target }))
-		{
-			program.setViewMatrix(this->calculateViewMatrix());
-			program.setViewPosition(this->gameObject->getTransform().getPosition());
-			this->gameObject->getTransform().clearDirty({ TransformDirtyBit::Position, TransformDirtyBit::Rotation });
-			this->clearDirty({ CameraDirtyBit::Target });
-		}
-	}
+	program.setViewPosition(this->gameObject->getTransform().getPosition());
 
 	if (this->controller != nullptr)
 	{

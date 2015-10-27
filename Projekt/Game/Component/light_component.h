@@ -6,10 +6,10 @@
 #include "../../Content/program_manager.h"
 
 template <typename T>
-class Light : public IComponent
+class LightComponent : public IComponent
 {
 public:
-	Light(T& light, std::string name) : light(light), name(name)
+	LightComponent(T& light, std::string name) : light(light), name(name)
 	{
 		
 	}

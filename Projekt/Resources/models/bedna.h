@@ -1,14 +1,8 @@
 #pragma once
 
-struct Vertex2D
-{
-	float position[3];
-	float normal[3];
-};
-
 static float pocetPrvku=522;
 //glDrawArrays(GL_TRIANGLES, 0, pocetPrvku);;
-static const Vertex2D VERTICES[522] = {
+static const VertexSimple VERTICES[522] = {
 {{-1.000000 , -1.000000 , 1.000000 },{ -1.000000 , 0.000000 , 0.000000}}, 
 {{-1.000000 , -0.800000 , 0.800000 },{ -1.000000 , 0.000000 , 0.000000}}, 
 {{-1.000000 , -0.800000 , 0.600000 },{ -1.000000 , 0.000000 , 0.000000}}, 

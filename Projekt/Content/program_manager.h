@@ -4,14 +4,14 @@
 #include <unordered_map>
 
 #include "content_manager.h"
-#include "../../Game/Component/camera.h"
-#include "../../Event/listeners.h"
 #include "../../Helper/file_helper.h"
 #include "../../Model/vertex.h"
 #include "../../Render/program.h"
 #include "../../Render/shader.h"
 
-class ProgramManager : public ContentManager<Program>, CameraViewChangedListener, CameraProjectionChangedListener, CameraPositionChangedListener
+class Camera;
+
+class ProgramManager : public ContentManager<Program>
 {
 public:
 	static const std::string PROGRAM_SIMPLE_CONSTANT;
@@ -23,7 +23,7 @@ public:
 
 	void preloadPrograms();
 
-	void use(std::string identifier);
+	Program& use(std::string identifier);
 	Program& getCurrentProgram();
 	std::string getCurrentProgramName();
 
@@ -32,11 +32,7 @@ public:
 
 	void dispose();
 
-	void observeCamera(Camera& camera);
-
-	void onCameraViewChanged(Camera& camera) override;
-	void onCameraProjectionChanged(Camera& camera) override;
-	void onCameraPositionChanged(Camera& camera) override;
+	void observeCamera(Camera* camera);
 
 private:
 	static const std::string SHADER_VERTEX_PATH;
@@ -50,4 +46,6 @@ private:
 
 	std::string currentProgram;
 	std::stack<std::string> saveStack;
+
+	Camera* observedCamera;
 };

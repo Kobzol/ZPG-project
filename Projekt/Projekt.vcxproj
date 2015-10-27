@@ -139,7 +139,7 @@
     <ClInclude Include="Game\Physics\basic_physics_component.h" />
     <ClInclude Include="Game\Physics\force.h" />
     <ClInclude Include="Game\Physics\iphysics_component.h" />
-    <ClInclude Include="Game\Component\light.h" />
+    <ClInclude Include="Game\Component\light_component.h" />
     <ClInclude Include="Game\Object\game_object.h" />
     <ClInclude Include="Game\Input\input_controller.h" />
     <ClInclude Include="Game\Input\mouse_state.h" />

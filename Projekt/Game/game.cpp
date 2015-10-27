@@ -76,6 +76,8 @@ void Game::start()
 	this->camera->getTags().set(Tag::Camera);
 	this->objectManager.add(this->camera);
 
+	ProgramManager::getInstance().observeCamera(cameraScript);
+
 	IPhysicsComponent* physics = new BasicPhysicsComponent(true, false);
 	physics->getForce() = Force(glm::vec3(0.0f, 0.0f, 1.0f), 0.001f);
 	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)), physics);
@@ -88,13 +90,13 @@ void Game::start()
 	dirLight.phong.specular = glm::vec3(1.0f);
 
 	PointLight pointLight;
-	pointLight.position = glm::vec3(0.0f, 0.0f, 1.0f);
 	pointLight.phong = dirLight.phong;
 	pointLight.phong.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	pointLight.attenuation = Attenuation::ATT_DISTANCE_LONG;
 
-	GameObject* light = new GameObject(new Light<PointLight>(pointLight, "pointLight"), new SimpleConstantRenderer((const Vertex*) VERTICES, pocetPrvku, glm::vec3(1.0f)));
+	GameObject* light = new GameObject(new LightComponent<PointLight>(pointLight, "pointLight"), new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f)));
 	this->objectManager.add(light);
+	light->getTransform().setPosition(glm::vec3(5.0f, 0.0f, 0.0f));
 
 	Timer timer(0.01f);
 

@@ -89,7 +89,6 @@
     <ClInclude Include="Content\framebuffer_manager.h" />
     <ClInclude Include="Game\screen_quad.h" />
     <ClInclude Include="Game\Component\camera.h" />
-    <ClInclude Include="Game\Component\light.h" />
     <ClInclude Include="Audio\audio_manager.h" />
     <ClInclude Include="Render\Font\font_manager.h" />
     <ClInclude Include="Render\Font\character.h" />
@@ -101,6 +100,7 @@
     <ClInclude Include="Math\math_helper.h" />
     <ClInclude Include="Game\Render\simple_constant_renderer.h" />
     <ClInclude Include="Event\listeners.h" />
+    <ClInclude Include="Game\Component\light_component.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

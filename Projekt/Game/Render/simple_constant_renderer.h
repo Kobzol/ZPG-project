@@ -12,7 +12,7 @@
 class SimpleConstantRenderer : public IComponent
 {
 public:
-	SimpleConstantRenderer(const Vertex* data, size_t verticesCount, glm::vec3 color);
+	SimpleConstantRenderer(const VertexSimple* data, size_t verticesCount, glm::vec3 color);
 
 	void update() override;
 	void dispose() override;

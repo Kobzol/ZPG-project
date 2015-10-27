@@ -1,4 +1,5 @@
 #include "program_manager.h"
+#include "../../Game/Component/camera.h"
 
 const std::string ProgramManager::PROGRAM_SIMPLE_CONSTANT = "constant";
 const std::string ProgramManager::PROGRAM_MODEL = "model";
@@ -15,7 +16,7 @@ ProgramManager& ProgramManager::getInstance()
 	return ProgramManager::instance;
 }
 
-ProgramManager::ProgramManager()
+ProgramManager::ProgramManager() : observedCamera(nullptr)
 {
 	
 }
@@ -28,14 +29,23 @@ void ProgramManager::preloadPrograms()
 	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag", Flags<ProgramEvent>());
 }
 
-void ProgramManager::use(std::string identifier)
+Program& ProgramManager::use(std::string identifier)
 {
 	if (this->items.count(identifier))
 	{
 		this->currentProgram = identifier;
-		this->items[identifier].use();
+		Program& program = this->items[identifier];
+		program.use();
+
+		if (this->observedCamera != nullptr && program.getEvents().isSet(ProgramEvent::MVP))
+		{
+			program.setViewMatrix(this->observedCamera->calculateViewMatrix());
+			program.setProjectionMatrix(this->observedCamera->calculateProjectionMatrix());
+		}
+
+		return program;
 	}
-	else std::runtime_error("Program with identifier " + identifier + " doesn't exist");
+	else throw std::runtime_error("Program with identifier " + identifier + " doesn't exist");
 }
 Program& ProgramManager::getCurrentProgram()
 {
@@ -81,32 +91,7 @@ void ProgramManager::preloadProgram(std::string identifier, std::string vertexPa
 	this->load(identifier, program);
 }
 
-void ProgramManager::observeCamera(Camera& camera)
+void ProgramManager::observeCamera(Camera* camera)
 {
-	
-}
-
-void ProgramManager::onCameraViewChanged(Camera& camera)
-{
-	Program& program = this->getCurrentProgram();
-	if (program.getEvents().isSet(ProgramEvent::MVP))
-	{
-		program.setViewMatrix(camera.calculateViewMatrix());
-	}
-}
-void ProgramManager::onCameraProjectionChanged(Camera& camera)
-{
-	Program& program = this->getCurrentProgram();
-	if (program.getEvents().isSet(ProgramEvent::MVP))
-	{
-		program.setProjectionMatrix(camera.calculateProjectionMatrix());
-	}
-}
-void ProgramManager::onCameraPositionChanged(Camera& camera)
-{
-	Program& program = this->getCurrentProgram();
-	if (program.getEvents().isSet(ProgramEvent::ViewPosition))
-	{
-		program.setViewPosition(camera.getGameObject()->getTransform().getPosition());
-	}
+	this->observedCamera = camera;
 }

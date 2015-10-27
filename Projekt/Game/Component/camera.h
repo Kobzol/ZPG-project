@@ -69,6 +69,4 @@ private:
 	IComponent* controller;
 
 	Flags<CameraDirtyBit> dirty;
-
-	std::string lastUsedProgram;
 };

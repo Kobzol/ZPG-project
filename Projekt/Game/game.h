@@ -11,7 +11,7 @@
 #include "timer.h"
 #include "Input/input_controller.h"
 #include "Component/camera_controller.h"
-#include "Component/light.h"
+#include "Component/light_component.h"
 #include "Object/object_manager.h"
 #include "Physics/basic_physics_component.h"
 #include "Physics/physics_handler.h"
@@ -35,7 +35,6 @@
 #include "../Render/Light/directional_light.h"
 #include "../Render/Light/point_light.h"
 #include "../Render/Font/font_manager.h"
-#include "../Resources/Models/bedna.h"
 
 class Game
 {
