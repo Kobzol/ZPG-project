@@ -14,6 +14,12 @@ Program::Program()
 	GL_CHECK_ERRORS();
 }
 
+Program::Program(Flags<ProgramEvent> events) : events(events)
+{
+	this->program = glCreateProgram();
+	GL_CHECK_ERRORS();
+}
+
 void Program::attachShader(Shader& shader)
 {
 	glAttachShader(this->program, shader.getId());
@@ -124,4 +130,9 @@ void Program::setModelMatrix(const glm::mat4& matrix)
 void Program::setViewPosition(const glm::vec3& position)
 {
 	this->setUniform3f("viewPosition", position);
+}
+
+Flags<ProgramEvent> Program::getEvents()
+{
+	return this->events;
 }

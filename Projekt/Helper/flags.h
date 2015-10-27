@@ -16,6 +16,10 @@ public:
 	{
 		this->set(enumValue);
 	}
+	Flags(std::initializer_list<T> enumValues)
+	{
+		this->set(enumValues);
+	}
 
 	void set(T enumValue)
 	{

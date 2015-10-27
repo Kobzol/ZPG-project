@@ -13,9 +13,16 @@
 
 #include "shader.h"
 #include "../Buffer/vao.h"
+#include "../Helper/flags.h"
 #include "../Helper/opengl_helper.h"
 
 class ProgramManager;
+
+enum class ProgramEvent
+{
+	MVP,
+	ViewPosition
+};
 
 class Program
 {
@@ -27,10 +34,13 @@ private:
 	std::vector<Shader> shaders;
 	GLuint program;
 
+	Flags<ProgramEvent> events;
+
 public:
 	static void setAttribute(GLint position, GLint count, GLenum type, GLboolean normalize, GLsizei stride, const void* offset);
 
 	Program();
+	Program(Flags<ProgramEvent> events);
 
 	void attachShader(Shader& shader);
 	void link();
@@ -55,4 +65,6 @@ public:
 	void setViewPosition(const glm::vec3& position);
 
 	VAO* getVAO();
+
+	Flags<ProgramEvent> getEvents();
 };

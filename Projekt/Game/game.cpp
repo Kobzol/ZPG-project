@@ -93,14 +93,10 @@ void Game::start()
 	pointLight.phong.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	pointLight.attenuation = Attenuation::ATT_DISTANCE_LONG;
 
-	//GameObject* light = new GameObject(new Light<DirectionalLight>(dirLight, "directionalLight"));
-	//this->objectManager.add(light);
 	GameObject* light = new GameObject(new Light<PointLight>(pointLight, "pointLight"), new SimpleConstantRenderer((const Vertex*) VERTICES, pocetPrvku, glm::vec3(1.0f)));
 	this->objectManager.add(light);
 
 	Timer timer(0.01f);
-
-	GLfloat radius = 5.0f;
 
 	context->loop([&](Context& context)	// physics
 	{
@@ -111,17 +107,11 @@ void Game::start()
 		float delta = context.getDeltaTime();
 		timer.update(delta);
 
-		GLfloat camX = sin(glfwGetTime()) * radius;
-		GLfloat camZ = cos(glfwGetTime()) * radius;
-
 		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
 
 		RenderUtils::clearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		light->getTransform().setPosition(glm::vec3(camX, 0.0f, camZ));
-
-		ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
 		context.setDepthTest(true);
 
 		std::vector<GameObject*> objects = this->objectManager.getObjects();

@@ -22,10 +22,10 @@ ProgramManager::ProgramManager()
 
 void ProgramManager::preloadPrograms()
 {
-	this->preloadProgram(ProgramManager::PROGRAM_SIMPLE_CONSTANT, "constant.vert", "constant.frag");
-	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag");
-	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag");
-	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag");
+	this->preloadProgram(ProgramManager::PROGRAM_SIMPLE_CONSTANT, "constant.vert", "constant.frag", Flags<ProgramEvent>(ProgramEvent::MVP));
+	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag", Flags<ProgramEvent>({ ProgramEvent::MVP, ProgramEvent::ViewPosition }));
+	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag", Flags<ProgramEvent>());
+	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag", Flags<ProgramEvent>());
 }
 
 void ProgramManager::use(std::string identifier)
@@ -68,15 +68,45 @@ void ProgramManager::dispose()
 	this->items.clear();
 }
 
-void ProgramManager::preloadProgram(std::string identifier, std::string vertexPath, std::string fragmentPath)
+void ProgramManager::preloadProgram(std::string identifier, std::string vertexPath, std::string fragmentPath, Flags<ProgramEvent> events)
 {
 	Shader vertexShader(FileHelper::loadFile(ProgramManager::SHADER_VERTEX_PATH + vertexPath), GL_VERTEX_SHADER);
 	Shader fragmentShader(FileHelper::loadFile(ProgramManager::SHADER_FRAGMENT_PATH + fragmentPath), GL_FRAGMENT_SHADER);
 
-	Program program;
+	Program program(events);
 	program.attachShader(vertexShader);
 	program.attachShader(fragmentShader);
 	program.link();
 
 	this->load(identifier, program);
+}
+
+void ProgramManager::observeCamera(Camera& camera)
+{
+	
+}
+
+void ProgramManager::onCameraViewChanged(Camera& camera)
+{
+	Program& program = this->getCurrentProgram();
+	if (program.getEvents().isSet(ProgramEvent::MVP))
+	{
+		program.setViewMatrix(camera.calculateViewMatrix());
+	}
+}
+void ProgramManager::onCameraProjectionChanged(Camera& camera)
+{
+	Program& program = this->getCurrentProgram();
+	if (program.getEvents().isSet(ProgramEvent::MVP))
+	{
+		program.setProjectionMatrix(camera.calculateProjectionMatrix());
+	}
+}
+void ProgramManager::onCameraPositionChanged(Camera& camera)
+{
+	Program& program = this->getCurrentProgram();
+	if (program.getEvents().isSet(ProgramEvent::ViewPosition))
+	{
+		program.setViewPosition(camera.getGameObject()->getTransform().getPosition());
+	}
 }

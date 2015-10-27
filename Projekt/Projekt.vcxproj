@@ -163,7 +163,7 @@
     <ClInclude Include="Model\texture.h" />
     <ClInclude Include="Model\vertex.h" />
     <ClInclude Include="Game\Component\camera.h" />
-    <ClInclude Include="Event\camera_changed_listener.h" />
+    <ClInclude Include="Event\listeners.h" />
     <ClInclude Include="Event\event_broadcaster.h" />
     <ClInclude Include="Render\effect_manager.h" />
     <ClInclude Include="Render\Font\character.h" />

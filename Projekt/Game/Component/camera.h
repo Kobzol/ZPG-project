@@ -9,6 +9,7 @@
 #include "../Object/game_object.h"
 #include "../Physics/transform.h"
 #include "../../Content/program_manager.h"
+#include "../../Event/event_broadcaster.h"
 #include "../../Helper/flags.h"
 
 enum class CameraDirtyBit
