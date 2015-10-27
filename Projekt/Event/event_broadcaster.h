@@ -3,27 +3,32 @@
 #include <algorithm>
 #include <vector>
 
-template <typename T, typename... Args>
+template <typename Listener, typename... Args>
 class EventBroadcaster
 {
 private:
-	std::vector<T*> listeners;
-	void (T::*callback)(Args... args);
+	std::vector<Listener*> listeners;
+	void (Listener::*callback)(Args... args);
 
 public:
-	EventBroadcaster(void (T::*callback)(Args... args)) : callback(callback)
+	EventBroadcaster() : callback(nullptr)
 	{
-		
+
 	}
 
-	void attachListener(T* listener)
+	void setCallback(void (Listener::*callback)(Args... args))
+	{
+		this->callback = callback;
+	}
+
+	void attachListener(Listener* listener)
 	{
 		if (std::find(this->listeners.begin(), this->listeners.end(), listener) == this->listeners.end())
 		{
 			this->listeners.push_back(listener);
 		}
 	}
-	void detachListener(T* listener)
+	void detachListener(Listener* listener)
 	{
 		auto found = std::find(this->listeners.begin(), this->listeners.end(), listener);
 		if (found != this->listeners.end())
@@ -33,7 +38,7 @@ public:
 	}
 	void notify(Args... args)
 	{
-		for (T* t : this->listeners)
+		for (Listener* t : this->listeners)
 		{
 			(t->*callback)(args...);
 		}
