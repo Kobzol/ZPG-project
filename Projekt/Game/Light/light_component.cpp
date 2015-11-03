@@ -7,6 +7,8 @@ LightComponent::LightComponent(Light* light, std::string name) : light(light), n
 
 void LightComponent::update()
 {
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
+
 	glm::vec3 position = this->gameObject->getTransform().getPosition();
 
 	this->light->setUniforms(ProgramManager::getInstance().getCurrentProgram(), this->name, position);

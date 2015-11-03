@@ -20,9 +20,9 @@ ModelManager::ModelManager()
 
 void ModelManager::preloadModels()
 {
-	this->load(ModelManager::MODEL_CUBE, new Model(MODEL_PATH + "cube/cube.obj"));
+	this->load(ModelManager::MODEL_CUBE, new Model(MODEL_PATH + "cube/sphere.obj"));
 	//this->load(ModelManager::MODEL_M4, new Model(MODEL_PATH + "M4/m4a1_s.fbx"));
-	this->load(ModelManager::MODEL_NANOSUIT, new Model(MODEL_PATH + "nanosuit/nanosuit.obj"));
+	//this->load(ModelManager::MODEL_NANOSUIT, new Model(MODEL_PATH + "nanosuit/nanosuit.obj"));
 }
 
 void ModelManager::dispose()

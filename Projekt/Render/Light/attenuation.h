@@ -10,6 +10,7 @@
 
 struct Attenuation {
 public:
+	static const Attenuation ATT_DISTANCE_SHORT;
 	static const Attenuation ATT_DISTANCE_LONG;
 
 	GLfloat constant;

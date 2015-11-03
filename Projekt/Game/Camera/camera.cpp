@@ -11,10 +11,6 @@ Camera::Camera(
 
 void Camera::update()
 {
-	Program& program = ProgramManager::getInstance().getCurrentProgram();
-
-	program.setViewPosition(this->gameObject->getTransform().getPosition());
-
 	if (this->controller != nullptr)
 	{
 		this->controller->update();

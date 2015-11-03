@@ -68,29 +68,49 @@ void Game::start()
 
 	FramebufferManager::getInstance().preloadFramebuffers();
 
-	// initial object spawn
-	Camera* cameraScript = new Camera(new CameraController(), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
+	// initial object spawn 
+	Camera* cameraScript = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
 	this->camera = new GameObject(cameraScript);
-	this->camera->getTransform().setPosition(glm::vec3(0.0f, 8.0f, 10.5f));
+	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 8.0f));
 
 	this->camera->getTags().set(Tag::Camera);
 	this->objectManager.add(this->camera);
 
 	ProgramManager::getInstance().observeCamera(cameraScript);
 
-	IPhysicsComponent* physics = new BasicPhysicsComponent(true, false);
-	physics->getForce() = Force(glm::vec3(0.0f, 0.0f, 1.0f), 0.001f);
-	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_NANOSUIT)), physics);
-	this->objectManager.add(cube);
+	float distance = 3.0f;
 
-	DirectionalLight dirLight(glm::vec3(50.0f, 50.0f, -100.0f), Phong(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f)));
+	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	this->objectManager.add(cube);
+	cube->getTransform().setPosition(glm::vec3(distance, 0.0f, 0.0f));
+
+	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	this->objectManager.add(cube);
+	cube->getTransform().setPosition(glm::vec3(-distance, 0.0f, 0.0f));
+
+	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	this->objectManager.add(cube);
+	cube->getTransform().setPosition(glm::vec3(0.0f, distance, 0.0f));
+
+	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	this->objectManager.add(cube);
+	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 0.0f));
+
+	DirectionalLight *dirLight = new DirectionalLight (glm::vec3(10.0f, 10.0f, 10.0f), Phong(glm::vec3(0.001f), glm::vec3(1.0f), glm::vec3(0.1f)));
 
 	GameObject* light = new GameObject(
-		new LightComponent(new PointLight(Attenuation::ATT_DISTANCE_LONG, dirLight.phong), "pointLight"),
+		new LightComponent(new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f))), "pointLight"),
 		new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f))
 	);
-	light->getTransform().setPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	this->objectManager.add(light);
+
+	light = new GameObject(new LightComponent(dirLight, "directionalLight"));
+	this->objectManager.add(light);
+
+	SpotLight* spotLight = new SpotLight(glm::vec3(0.0f, 0.0f, -1.0f), 12.5f, 17.5f, Attenuation::ATT_DISTANCE_SHORT, dirLight->phong);
+	GameObject* spotLightObj = new GameObject(new LightComponent(spotLight, "spotLight"));
+	this->objectManager.add(spotLightObj);
 
 	Timer timer(0.01f);
 
@@ -110,6 +130,9 @@ void Game::start()
 
 		context.setDepthTest(true);
 
+		spotLight->direction = cameraScript->getFront();
+		spotLightObj->getTransform().setPosition(camera->getTransform().getPosition());
+
 		std::vector<GameObject*> objects = this->objectManager.getObjects();
 		size_t objectCount = this->objectManager.getObjectCount();
 
@@ -123,12 +146,12 @@ void Game::start()
 			objects[i]->draw();
 		}
 
+		this->screenQuad->drawScreen(context);
+
 		if (timer.resetIfReady())
 		{
 			FontManager::getInstance().renderText("FPS: " + std::to_string(round(1.0f / delta)), 10.0f, height - 20.0f, 0.5f, glm::vec3(1.0f, 1.0f, 0.0f));
 		}
-
-		this->screenQuad->drawScreen(context);
 
 		if (InputController::getInstance().isButtonPressed(GLFW_KEY_ESCAPE))
 		{

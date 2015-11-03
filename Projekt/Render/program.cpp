@@ -125,7 +125,7 @@ void Program::setProjectionMatrix(const glm::mat4& matrix)
 void Program::setModelMatrix(const glm::mat4& matrix)
 {
 	this->setUniformMatrix4fv("modelMatrix", matrix);
-	this->setUniformMatrix3fv("normalMatrix", glm::transpose(glm::inverse(glm::mat3(matrix))));
+	this->setUniformMatrix3fv("normalMatrix", glm::mat3(glm::transpose(glm::inverse(matrix))));
 }
 void Program::setViewPosition(const glm::vec3& position)
 {

@@ -1,5 +1,6 @@
 #include "attenuation.h"
 
+const Attenuation Attenuation::ATT_DISTANCE_SHORT = Attenuation(1.0f, 0.7f, 1.8f);
 const Attenuation Attenuation::ATT_DISTANCE_LONG = Attenuation(1.0f, 0.007f, 0.0002f);
 
 Attenuation::Attenuation()

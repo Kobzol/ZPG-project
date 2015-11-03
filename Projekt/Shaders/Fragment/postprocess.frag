@@ -9,11 +9,11 @@ vec4 apply_kernel(in float kernel[9], float strength);
 
 void main()
 { 
-    /*float kernel[9] = float[]( // blur
+    float kernel[9] = float[]( // blur
 		1.0f / 16.0f, 2.0f / 16.0f, 1.0f / 16.0f,
 		2.0f / 16.0f, 4.0f / 16.0f, 2.0f / 16.0f,
 		1.0f / 16.0f, 2.0f / 16.0f, 1.0f / 16.0f  
-	);*/
+	);
 
 	/*float kernel[9] = float[]( // edge detection
 		1.0f, 1.0f, 1.0f,
@@ -21,9 +21,10 @@ void main()
 		1.0f, 1.0f, 1.0f
 	);*/
 
-	//color = apply_kernel(kernel, 1.0f);
+	vec4 texColor = vec4(1.0f);
 
-    vec4 texColor = texture(screenTexture, TexCoords);
+	//texColor = apply_kernel(kernel, 1.0f);
+	texColor = texture(screenTexture, TexCoords);
 
 	color = vec4(texColor);
 }

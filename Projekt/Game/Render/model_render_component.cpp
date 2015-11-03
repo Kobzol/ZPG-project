@@ -7,15 +7,17 @@ ModelRenderComponent::ModelRenderComponent(Model* model) : model(model)
 
 void ModelRenderComponent::update()
 {
-	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
+	Program& program = ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
 
 	Transform& transform = this->gameObject->getTransform();
 
-	if (transform.isDirty())
+	program.setModelMatrix(this->gameObject->getTransform().getModel());
+
+	/*if (transform.isDirty())
 	{
-		ProgramManager::getInstance().getCurrentProgram().setModelMatrix(this->gameObject->getTransform().getModel());
+		
 		transform.clearDirty({ TransformDirtyBit::Position, TransformDirtyBit::Rotation, TransformDirtyBit::Scale });
-	}
+	}*/
 
 	this->model->draw();
 }

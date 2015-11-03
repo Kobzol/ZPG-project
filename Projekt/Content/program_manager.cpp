@@ -45,6 +45,7 @@ Program& ProgramManager::use(std::string identifier)
 		{
 			program.setViewMatrix(this->observedCamera->calculateViewMatrix());
 			program.setProjectionMatrix(this->observedCamera->calculateProjectionMatrix());
+			program.setViewPosition(this->observedCamera->getGameObject()->getTransform().getPosition());
 		}
 
 		return program;

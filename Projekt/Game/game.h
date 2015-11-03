@@ -14,6 +14,7 @@
 #include "Light/directional_light.h"
 #include "Light/light_component.h"
 #include "Light/point_light.h"
+#include "Light/spotlight.h"
 #include "Object/object_manager.h"
 #include "Physics/basic_physics_component.h"
 #include "Physics/physics_handler.h"
