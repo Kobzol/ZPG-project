@@ -103,6 +103,7 @@
     <ClInclude Include="Game\Light\point_light.h" />
     <ClInclude Include="Game\Light\spotlight.h" />
     <ClInclude Include="Game\Light\light.h" />
+    <ClInclude Include="Game\Component\function_component.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

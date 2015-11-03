@@ -134,6 +134,7 @@
     <ClInclude Include="Content\texture_manager.h" />
     <ClInclude Include="Context\context.h" />
     <ClInclude Include="Game\Camera\camera_controller.h" />
+    <ClInclude Include="Game\Component\function_component.h" />
     <ClInclude Include="Game\Component\icomponent.h" />
     <ClInclude Include="Content\content_manager.h" />
     <ClInclude Include="Content\model_manager.h" />
