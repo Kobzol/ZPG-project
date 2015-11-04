@@ -12,6 +12,9 @@ public:
 	glm::vec3 getDirection();
 	float getStrength();
 
+	void setDirection(const glm::vec3& direction);
+	void setStrength(float strength);
+
 	void applyTo(Transform& transform, float delta);
 
 private:

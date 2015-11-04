@@ -101,10 +101,9 @@ void Game::start()
 	this->scene.add(light);
 
 	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f)));
-	 light = new GameObject(
+	light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
-		new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f)),
-		new BasicPhysicsComponent(true, new SphereBoundingBox(1.0f))
+		new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f))
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	light->getTags().set(Tag::Light);
