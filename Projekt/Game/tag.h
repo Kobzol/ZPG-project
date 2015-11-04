@@ -2,5 +2,6 @@
 
 enum class Tag
 {
-	Camera
+	Camera,
+	Light
 };

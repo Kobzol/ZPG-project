@@ -15,6 +15,8 @@ public:
 
 	void add(GameObject* object);
 
+	ObjectManager& getObjectManager();
+
 private:
 	ObjectManager objectManager;
 };

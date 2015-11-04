@@ -72,7 +72,6 @@ void Game::start()
 	Camera* cameraScript = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
 	this->camera = new GameObject(cameraScript);
 	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 8.0f));
-
 	this->camera->getTags().set(Tag::Camera);
 	this->scene.add(this->camera);
 
@@ -97,22 +96,24 @@ void Game::start()
 	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 0.0f));
 
 	DirectionalLight *dirLight = new DirectionalLight (glm::vec3(10.0f, 10.0f, 10.0f), Phong(glm::vec3(0.001f), glm::vec3(1.0f), glm::vec3(0.1f)));
+	GameObject* light = new GameObject(new LightComponent(dirLight, "directionalLight"));
+	light->getTags().set(Tag::Light);
+	this->scene.add(light);
 
 	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f)));
-	GameObject* light = new GameObject(
+	 light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
 		new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f))
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	light->getTags().set(Tag::Light);
 	this->scene.add(light);
 
 	program.setUniform1i("pointLightCount", 1);
 
-	light = new GameObject(new LightComponent(dirLight, "directionalLight"));
-	this->scene.add(light);
-
 	SpotLight* spotLight = new SpotLight(glm::vec3(0.0f, 0.0f, -1.0f), 12.5f, 17.5f, Attenuation::ATT_DISTANCE_SHORT, dirLight->phong);
 	GameObject* spotLightObj = new GameObject(new LightComponent(spotLight, "spotLight"));
+	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
 	Timer timer(0.01f);

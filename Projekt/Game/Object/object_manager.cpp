@@ -60,6 +60,32 @@ std::vector<GameObject*>& ObjectManager::getObjects()
 	return this->objects;
 }
 
+GameObject* ObjectManager::findByName(const std::string& name)
+{
+	auto found = std::find_if(this->objects.begin(), this->objects.begin() + this->getObjectCount(), [name](GameObject* obj) -> bool { return obj->getName() == name; });
+
+	if (found != this->objects.end())
+	{
+		return *found;
+	}
+	else return nullptr;
+}
+std::vector<GameObject*> ObjectManager::findByTag(Tag tag)
+{
+	std::vector<GameObject*> found;
+	size_t count = this->getObjectCount();
+
+	for (size_t i = 0; i < count; i++)
+	{
+		if (this->objects[i]->getTags().isSet(tag))
+		{
+			found.push_back(this->objects[i]);
+		}
+	}
+
+	return found;
+}
+
 void ObjectManager::dispose()
 {
 	for (std::pair<int, size_t> objectRecord : this->indexMap)

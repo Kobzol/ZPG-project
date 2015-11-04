@@ -1,5 +1,23 @@
 #include "game_object.h"
 
+GameObject::GameObject(std::string name, IComponent* scriptComponent, IComponent* renderComponent, IPhysicsComponent* physicsComponent)
+	: name(name), scriptComponent(scriptComponent), renderComponent(renderComponent), physicsComponent(physicsComponent), id(-1)
+{
+	if (scriptComponent != nullptr)
+	{
+		scriptComponent->setGameObject(this);
+	}
+
+	if (renderComponent != nullptr)
+	{
+		renderComponent->setGameObject(this);
+	}
+
+	if (physicsComponent != nullptr)
+	{
+		physicsComponent->setGameObject(this);
+	}
+}
 GameObject::GameObject(IComponent* scriptComponent, IComponent* renderComponent, IPhysicsComponent* physicsComponent)
 	: scriptComponent(scriptComponent), renderComponent(renderComponent), physicsComponent(physicsComponent), id(-1)
 {
@@ -47,6 +65,15 @@ int GameObject::getId()
 void GameObject::setId(int id)
 {
 	this->id = id;
+}
+
+std::string GameObject::getName()
+{
+	return this->name;
+}
+void GameObject::setName(const std::string& name)
+{
+	this->name = name;
 }
 
 void GameObject::update()

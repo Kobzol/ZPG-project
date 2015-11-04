@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <set>
 #include <unordered_map>
 #include <vector>
@@ -18,6 +19,9 @@ public:
 
 	size_t getObjectCount();
 	std::vector<GameObject*>& getObjects();
+
+	GameObject* findByName(const std::string& name);
+	std::vector<GameObject*> findByTag(Tag tag);
 
 	void dispose();
 

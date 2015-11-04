@@ -35,3 +35,8 @@ void Scene::add(GameObject* object)
 {
 	this->objectManager.add(object);
 }
+
+ObjectManager& Scene::getObjectManager()
+{
+	return this->objectManager;
+}
