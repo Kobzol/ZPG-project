@@ -6,6 +6,7 @@
 
 #include <time.h>
 
+#include "scene.h"
 #include "screen_quad.h"
 #include "tag.h"
 #include "timer.h"
@@ -45,7 +46,7 @@ public:
 	void start();
 	float getDeltaTime();
 
-	ObjectManager& getObjectManager();
+	Scene& getActiveScene();
 	Context& getContext();
 
 private:
@@ -54,10 +55,10 @@ private:
 	void onWindowSizeCallback(GLFWwindow* window, int width, int height);
 
 	PhysicsHandler physicsHandler;
-	ObjectManager objectManager;
 	Context* context;
 	GameObject* camera;
 	ScreenQuad* screenQuad;
+	Scene scene;
 
 	Game();
 	~Game();

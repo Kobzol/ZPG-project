@@ -9,11 +9,11 @@ vec4 apply_kernel(in float kernel[9], float strength);
 
 void main()
 { 
-    float kernel[9] = float[]( // blur
+    /*float kernel[9] = float[]( // blur
 		1.0f / 16.0f, 2.0f / 16.0f, 1.0f / 16.0f,
 		2.0f / 16.0f, 4.0f / 16.0f, 2.0f / 16.0f,
 		1.0f / 16.0f, 2.0f / 16.0f, 1.0f / 16.0f  
-	);
+	);*/
 
 	/*float kernel[9] = float[]( // edge detection
 		1.0f, 1.0f, 1.0f,

@@ -101,6 +101,7 @@
     <ClCompile Include="Content\program_manager.cpp" />
     <ClCompile Include="Game\Render\model_render_component.cpp" />
     <ClCompile Include="Game\Render\simple_constant_renderer.cpp" />
+    <ClCompile Include="Game\scene.cpp" />
     <ClCompile Include="Game\timer.cpp" />
     <ClCompile Include="Helper\image.cpp" />
     <ClCompile Include="main.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Game\Object\object_manager.h" />
     <ClInclude Include="Game\Physics\physics_handler.h" />
     <ClInclude Include="Game\Render\model_render_component.h" />
+    <ClInclude Include="Game\scene.h" />
     <ClInclude Include="Game\Render\simple_constant_renderer.h" />
     <ClInclude Include="Game\tag.h" />
     <ClInclude Include="Game\timer.h" />

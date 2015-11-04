@@ -45,6 +45,7 @@
     <ClCompile Include="Game\Light\point_light.cpp" />
     <ClCompile Include="Game\Light\spotlight.cpp" />
     <ClCompile Include="Game\Light\light_component.cpp" />
+    <ClCompile Include="Game\scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="Game\Light\spotlight.h" />
     <ClInclude Include="Game\Light\light.h" />
     <ClInclude Include="Game\Component\function_component.h" />
+    <ClInclude Include="Game\scene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
