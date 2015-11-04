@@ -99,11 +99,13 @@ void Game::start()
 	DirectionalLight *dirLight = new DirectionalLight (glm::vec3(10.0f, 10.0f, 10.0f), Phong(glm::vec3(0.001f), glm::vec3(1.0f), glm::vec3(0.1f)));
 
 	GameObject* light = new GameObject(
-		new LightComponent(new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f))), "pointLight"),
+		new LightComponent(new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f))), "pointLights", 0),
 		new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f))
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	this->objectManager.add(light);
+
+	program.setUniform1i("pointLightCount", 1);
 
 	light = new GameObject(new LightComponent(dirLight, "directionalLight"));
 	this->objectManager.add(light);

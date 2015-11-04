@@ -10,7 +10,7 @@
 class LightComponent : public IComponent
 {
 public:
-	LightComponent(Light* light, std::string name);
+	LightComponent(Light* light, std::string name, int index = -1);
 
 	void update() override;
 	void dispose() override;

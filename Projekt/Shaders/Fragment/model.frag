@@ -43,7 +43,11 @@ uniform sampler2D textureDiffuse1;
 uniform sampler2D textureSpecular1;
 
 uniform DirLight directionalLight;
-uniform PointLight pointLight;
+
+#define MAX_POINT_LIGHTS 3
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
+uniform int pointLightCount;
+
 uniform SpotLight spotLight;
 
 uniform vec3 viewPosition;
@@ -58,7 +62,7 @@ void main()
 {
 	vec3 normal = normalize(vertexData.normal);
 	vec3 viewDir = normalize(viewPosition - vertexData.worldPosition);
-	vec3 diffuseMap = vec3(0.0f, 0.0f, 1.0f);//vec3(texture(textureDiffuse1, vertexData.texCoords));
+	vec3 diffuseMap = vec3(0.2f, 0.7f, 1.0f);//vec3(texture(textureDiffuse1, vertexData.texCoords));
 	vec3 specularMap = vec3(1.0f);//vec3(texture(textureSpecular1, vertexData.texCoords));
 
 	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
@@ -66,8 +70,11 @@ void main()
 	vec3 dirLightComponent = calcDirLight(directionalLight, normal, viewDir, diffuseMap, specularMap, 256.0f);
 	resultColor += dirLightComponent;
 
-	vec3 pointLightComponent = calcPointLight(pointLight, normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
-	resultColor += pointLightComponent;
+	for (int i = 0; i < pointLightCount; i++)
+	{
+		vec3 pointLightComponent = calcPointLight(pointLights[i], normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
+		resultColor += pointLightComponent;
+	}
 
 	vec3 spotLightComponent = calcSpotLight(spotLight, normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
 	resultColor += spotLightComponent;
