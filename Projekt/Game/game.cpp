@@ -70,7 +70,7 @@ void Game::start()
 
 	// initial object spawn 
 	Camera* cameraScript = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
-	this->camera = new GameObject(cameraScript);
+	this->camera = new GameObject(cameraScript, nullptr, new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 8.0f));
 	this->camera->getTags().set(Tag::Camera);
 	this->scene.add(this->camera);
@@ -103,7 +103,8 @@ void Game::start()
 	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f)));
 	 light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
-		new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f))
+		new SimpleConstantRenderer(VERTEX_CUBE, 36, glm::vec3(1.0f)),
+		new BasicPhysicsComponent(true, new SphereBoundingBox(1.0f))
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	light->getTags().set(Tag::Light);
@@ -121,7 +122,7 @@ void Game::start()
 
 	context->loop([&](Context& context)	// physics
 	{
-		//this->physicsHandler.simulate(this->objectManager.getObjects(), this->objectManager.getObjectCount(), Context::getFixedDeltaTime());
+		this->physicsHandler.simulate(this->scene.getObjectManager().getObjects(), this->scene.getObjectManager().getObjectCount(), Context::getFixedDeltaTime());
 	},	
 	[&](Context& context)	// render
 	{

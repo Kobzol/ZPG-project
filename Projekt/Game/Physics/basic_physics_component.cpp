@@ -1,15 +1,10 @@
 #include "basic_physics_component.h"
 
-BasicPhysicsComponent::BasicPhysicsComponent(bool movable, bool collidable) : movable(movable), collidable(collidable)
+BasicPhysicsComponent::BasicPhysicsComponent(bool movable, SphereBoundingBox* box) : movable(movable), IPhysicsComponent(box)
 {
 
 }
-
 bool BasicPhysicsComponent::isMovable() const 
 {
 	return this->movable;
-}
-bool BasicPhysicsComponent::isCollidable() const
-{
-	return this->collidable;
 }

@@ -9,5 +9,7 @@
 class PhysicsHandler
 {
 public:
-	void simulate(std::vector<GameObject*> objects, size_t objectCount, float delta);
+	void simulate(const std::vector<GameObject*>& objects, size_t objectCount, float delta);
+
+	void checkForCollisions(const std::vector<GameObject*>& objects, size_t objectCount, IPhysicsComponent* physics);
 };
