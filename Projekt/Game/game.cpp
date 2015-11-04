@@ -115,6 +115,7 @@ void Game::start()
 	this->objectManager.add(spotLightObj);
 
 	Timer timer(0.01f);
+	Timer switchTimer(0.5f);
 
 	context->loop([&](Context& context)	// physics
 	{
@@ -124,6 +125,7 @@ void Game::start()
 	{
 		float delta = context.getDeltaTime();
 		timer.update(delta);
+		switchTimer.update(delta);
 
 		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
 
@@ -158,6 +160,10 @@ void Game::start()
 		if (InputController::getInstance().isButtonPressed(GLFW_KEY_ESCAPE))
 		{
 			context.closeWindow();
+		}
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_SPACE) && switchTimer.resetIfReady())
+		{
+			// switch render strategy
 		}
 
 		InputController::getInstance().afterUpdate();

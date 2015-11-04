@@ -89,18 +89,12 @@ void calcAttenuation(float dist, Attenuation attenuationIn, out float attenuatio
 }
 void calcDiffSpec(vec3 lightDir, vec3 normal, vec3 viewDir, float shininess, out float diff, out float spec)
 {
+	// diffuse component
 	diff = max(dot(normal, lightDir), 0.0f);
 
-	// specular shading
-	vec3 reflectDir = reflect(-lightDir, normal);
-
-	float angle = dot(lightDir, normal);
-
-	if (angle < 0.0f)
-	{
-		spec = 0.0f;
-	}
-	else spec = pow(max(dot(viewDir, reflectDir), 0.0f), shininess);	// TODO set material shininess
+	// specular component
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+	spec = pow(max(dot(normal, halfwayDir), 0.0f), shininess);
 }
 vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec3 diffuseMap, vec3 specularMap, float shininess)
 {
