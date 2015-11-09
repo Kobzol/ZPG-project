@@ -47,6 +47,7 @@
     <ClCompile Include="Game\Light\light_component.cpp" />
     <ClCompile Include="Game\scene.cpp" />
     <ClCompile Include="Game\Physics\BoundingBox\sphere_bounding_box.cpp" />
+    <ClCompile Include="Render\color.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -108,6 +109,7 @@
     <ClInclude Include="Game\Component\function_component.h" />
     <ClInclude Include="Game\scene.h" />
     <ClInclude Include="Game\Physics\BoundingBox\sphere_bounding_box.h" />
+    <ClInclude Include="Render\color.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

@@ -31,6 +31,7 @@
 #include "../Context/context.h"
 #include "../Model/Model.h"
 #include "../Model/vertex.h"
+#include "../Render/color.h"
 #include "../Render/effect_manager.h"
 #include "../Render/framebuffer.h"
 #include "../Render/program.h"

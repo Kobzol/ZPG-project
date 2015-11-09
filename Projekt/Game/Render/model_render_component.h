@@ -8,10 +8,11 @@
 class ModelRenderComponent : public IComponent
 {
 public:
-	ModelRenderComponent(Model* model);
+	ModelRenderComponent(Model* model, glm::vec3 color = glm::vec3(1.0f));
 
 	void update() override;
 
 private:
 	Model* model;
+	glm::vec3 color;
 };

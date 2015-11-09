@@ -51,6 +51,7 @@ uniform int pointLightCount;
 uniform SpotLight spotLight;
 
 uniform vec3 viewPosition;
+uniform vec3 color;
 
 void calcAttenuation(float dist, Attenuation attenuationIn, out float attenuationOut);
 void calcDiffSpec(vec3 lightDir, vec3 normal, vec3 viewDir, float shininess, out float diff, out float spec);
@@ -62,7 +63,7 @@ void main()
 {
 	vec3 normal = normalize(vertexData.normal);
 	vec3 viewDir = normalize(viewPosition - vertexData.worldPosition);
-	vec3 diffuseMap = vec3(0.2f, 0.7f, 1.0f);//vec3(texture(textureDiffuse1, vertexData.texCoords));
+	vec3 diffuseMap = color;//vec3(texture(textureDiffuse1, vertexData.texCoords));
 	vec3 specularMap = vec3(1.0f);//vec3(texture(textureSpecular1, vertexData.texCoords));
 
 	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);

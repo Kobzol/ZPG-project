@@ -79,19 +79,19 @@ void Game::start()
 
 	float distance = 3.0f;
 
-	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Blue));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(distance, 0.0f, 0.0f));
 
-	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Red));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(-distance, 0.0f, 0.0f));
 
-	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Green));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, distance, 0.0f));
 
-	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Yellow));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 0.0f));
 

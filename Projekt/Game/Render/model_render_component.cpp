@@ -1,6 +1,6 @@
 #include "model_render_component.h"
 
-ModelRenderComponent::ModelRenderComponent(Model* model) : model(model)
+ModelRenderComponent::ModelRenderComponent(Model* model, glm::vec3 color) : model(model), color(color)
 {
 
 }
@@ -12,6 +12,7 @@ void ModelRenderComponent::update()
 	Transform& transform = this->gameObject->getTransform();
 
 	program.setModelMatrix(this->gameObject->getTransform().getModel());
+	program.setUniform3f("color", this->color);
 
 	/*if (transform.isDirty())
 	{

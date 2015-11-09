@@ -112,6 +112,7 @@
     <ClCompile Include="Model\texture.cpp" />
     <ClCompile Include="Model\vertex.cpp" />
     <ClCompile Include="Game\Camera\camera.cpp" />
+    <ClCompile Include="Render\color.cpp" />
     <ClCompile Include="Render\effect_manager.cpp" />
     <ClCompile Include="Render\Font\font_manager.cpp" />
     <ClCompile Include="Render\framebuffer.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Game\Camera\camera.h" />
     <ClInclude Include="Event\listeners.h" />
     <ClInclude Include="Event\event_broadcaster.h" />
+    <ClInclude Include="Render\color.h" />
     <ClInclude Include="Render\effect_manager.h" />
     <ClInclude Include="Render\Font\character.h" />
     <ClInclude Include="Render\Font\font_manager.h" />
