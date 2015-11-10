@@ -1,15 +1,9 @@
 #include "simple_constant_renderer.h"
 
-SimpleConstantRenderer::SimpleConstantRenderer(const VertexSimple* data, size_t verticesCount, glm::vec3 color) : verticesCount(verticesCount), color(color)
+SimpleConstantRenderer::SimpleConstantRenderer(const VertexSimple* data, size_t verticesCount, glm::vec3 color) : color(color)
 {
-	this->vao.bind();
-
-	this->vbo.bind();
-	this->vbo.setData(data, sizeof(VertexSimple) * verticesCount, GL_STATIC_DRAW);
-
-	Program::setAttribute(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexSimple), 0);
-
-	this->vao.unbind();
+	this->geometryObject.setGeometry(data, sizeof(VertexSimple), verticesCount);
+	this->geometryObject.setAttributePosition();
 }
 
 void SimpleConstantRenderer::update()
@@ -19,12 +13,11 @@ void SimpleConstantRenderer::update()
 	program.setModelMatrix(this->gameObject->getTransform().getModel());
 	program.setUniform3f("color", this->color);
 
-	this->vao.bind();
-	RenderUtils::drawTriangles(0, this->verticesCount);
-	this->vao.unbind();
+	this->geometryObject.getVAO().bind();
+	RenderUtils::drawTriangles(0, this->geometryObject.getVertexCount());
+	this->geometryObject.getVAO().unbind();
 }
 void SimpleConstantRenderer::dispose()
 {
-	this->vbo.dispose();
-	this->vao.dispose();
+	this->geometryObject.dispose();
 }

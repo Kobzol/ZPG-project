@@ -108,6 +108,7 @@
     <ClCompile Include="Helper\image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\cubemap.cpp" />
+    <ClCompile Include="Model\geometry_object.cpp" />
     <ClCompile Include="Model\mesh.cpp" />
     <ClCompile Include="Model\model.cpp" />
     <ClCompile Include="Model\texture.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Helper\opengl_helper.h" />
     <ClInclude Include="Helper\image.h" />
     <ClInclude Include="Model\cubemap.h" />
+    <ClInclude Include="Model\geometry_object.h" />
     <ClInclude Include="Model\mesh.h" />
     <ClInclude Include="Model\model.h" />
     <ClInclude Include="Model\texture.h" />

@@ -49,6 +49,7 @@
     <ClCompile Include="Game\Physics\BoundingBox\sphere_bounding_box.cpp" />
     <ClCompile Include="Render\color.cpp" />
     <ClCompile Include="Game\Render\skybox_renderer.cpp" />
+    <ClCompile Include="Model\geometry_object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -112,6 +113,7 @@
     <ClInclude Include="Game\Physics\BoundingBox\sphere_bounding_box.h" />
     <ClInclude Include="Render\color.h" />
     <ClInclude Include="Game\Render\skybox_renderer.h" />
+    <ClInclude Include="Model\geometry_object.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

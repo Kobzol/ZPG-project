@@ -6,6 +6,7 @@
 #include "../../Buffer/vao.h"
 #include "../../Buffer/vbo.h"
 #include "../../Model/cubemap.h"
+#include "../../Model/geometry_object.h"
 #include "../../Model/vertex.h"
 #include "../../Render/render_utils.h"
 #include "../game.h"
@@ -19,8 +20,6 @@ public:
 	void dispose() override;
 
 private:
-	VAO vao;
-	VBO vbo;
-
+	GeometryObject geometryObject;
 	Cubemap cubemap;
 };
