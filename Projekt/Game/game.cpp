@@ -99,12 +99,12 @@ void Game::start()
 	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 0.0f));
 
 	// lights
-	DirectionalLight *dirLight = new DirectionalLight (glm::vec3(10.0f, 10.0f, 10.0f), Phong(glm::vec3(0.001f), Color::White, glm::vec3(0.1f)));
+	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(10.0f, 10.0f, 10.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
 	GameObject* light = new GameObject(new LightComponent(dirLight, "directionalLight"));
 	light->getTags().set(Tag::Light);
 	this->scene.add(light);
 
-	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(glm::vec3(0.1f), Color::White, glm::vec3(1.0f)));
+	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(Color::White * 0.1f, Color::White, Color::White));
 	light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
 		new SimpleConstantRenderer(VERTICES_CUBE, 36, Color::White)
