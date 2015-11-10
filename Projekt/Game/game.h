@@ -22,6 +22,7 @@
 #include "Physics/transform.h"
 #include "Render/model_render_component.h"
 #include "Render/simple_constant_renderer.h"
+#include "Render/skybox_renderer.h"
 #include "../Audio/audio_manager.h"
 #include "../Buffer/vao.h"
 #include "../Buffer/vbo.h"

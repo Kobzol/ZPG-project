@@ -2,6 +2,8 @@
 
 Game Game::instance = Game();
 
+// model selection, cube map, uniform buffer objects
+
 Game& Game::getInstance()
 {
 	return Game::instance;
@@ -77,8 +79,30 @@ void Game::start()
 
 	ProgramManager::getInstance().observeCamera(cameraScript);
 
-	float distance = 3.0f;
+	// skybox
+	const std::string skyboxPath = "Resources/Textures/skybox/";
+	std::vector<Image> skyboxFaces;
+	skyboxFaces.push_back(Image(skyboxPath + "right.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "left.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "top.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "bottom.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "back.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "front.jpg"));
 
+	Cubemap skyboxCubemap;
+	skyboxCubemap.allocate();
+	skyboxCubemap.set2DImages(skyboxFaces);
+
+	for (size_t i = 0; i < skyboxFaces.size(); i++)
+	{
+		skyboxFaces[i].dispose();
+	}
+
+	GameObject* skybox = new GameObject(nullptr, new SkyboxRenderer(skyboxCubemap));
+	this->scene.add(skybox);
+
+	// objects
+	float distance = 3.0f;
 	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Blue));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(distance, 0.0f, 0.0f));
@@ -95,6 +119,7 @@ void Game::start()
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 0.0f));
 
+	// lights
 	DirectionalLight *dirLight = new DirectionalLight (glm::vec3(10.0f, 10.0f, 10.0f), Phong(glm::vec3(0.001f), Color::White, glm::vec3(0.1f)));
 	GameObject* light = new GameObject(new LightComponent(dirLight, "directionalLight"));
 	light->getTags().set(Tag::Light);
@@ -103,7 +128,7 @@ void Game::start()
 	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(glm::vec3(0.1f), Color::White, glm::vec3(1.0f)));
 	light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
-		new SimpleConstantRenderer(VERTEX_CUBE, 36, Color::White)
+		new SimpleConstantRenderer(VERTICES_CUBE, 36, Color::White)
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	light->getTags().set(Tag::Light);
@@ -111,7 +136,7 @@ void Game::start()
 
 	program.setUniform1i("pointLightCount", 1);
 
-	SpotLight* spotLight = new SpotLight(glm::vec3(0.0f, 0.0f, -1.0f), 12.5f, 17.5f, Attenuation::ATT_DISTANCE_SHORT, dirLight->phong);
+	SpotLight* spotLight = new SpotLight(glm::vec3(0.0f, 0.0f, -1.0f), 12.5f, 17.5f, Attenuation::ATT_DISTANCE_LONG, dirLight->phong);
 	GameObject* spotLightObj = new GameObject(new LightComponent(spotLight, "spotLight"));
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
@@ -121,7 +146,7 @@ void Game::start()
 
 	context->loop([&](Context& context)	// physics
 	{
-		this->physicsHandler.simulate(this->scene.getObjectManager().getObjects(), this->scene.getObjectManager().getObjectCount(), Context::getFixedDeltaTime());
+		//this->physicsHandler.simulate(this->scene.getObjectManager().getObjects(), this->scene.getObjectManager().getObjectCount(), Context::getFixedDeltaTime());
 	},	
 	[&](Context& context)	// render
 	{
