@@ -1,4 +1,5 @@
 #include "model_render_component.h"
+#include "../game.h"
 
 ModelRenderComponent::ModelRenderComponent(Model* model, glm::vec3 color) : model(model), color(color)
 {
@@ -8,6 +9,7 @@ ModelRenderComponent::ModelRenderComponent(Model* model, glm::vec3 color) : mode
 void ModelRenderComponent::update()
 {
 	Program& program = ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
+	Context& context = Game::getInstance().getContext();
 
 	Transform& transform = this->gameObject->getTransform();
 
@@ -20,5 +22,6 @@ void ModelRenderComponent::update()
 		transform.clearDirty({ TransformDirtyBit::Position, TransformDirtyBit::Rotation, TransformDirtyBit::Scale });
 	}*/
 
+	context.setStencilFunc(GL_ALWAYS, this->getGameObject()->getId(), 0xFF);
 	this->model->draw();
 }

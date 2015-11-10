@@ -16,6 +16,8 @@ void SkyboxRenderer::update()
 	this->geometryObject.getVAO().bind();
 
 	context.setDepthMask(false);
+	context.setStencilFunc(GL_ALWAYS, this->getGameObject()->getId(), 0xFF);
+
 	RenderUtils::drawTriangles(0, 36);
 	context.setDepthMask(true);
 

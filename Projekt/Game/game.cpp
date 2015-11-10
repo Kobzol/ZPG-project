@@ -54,6 +54,9 @@ void Game::start()
 	this->context->setDepthTest(true);
 	this->context->setDepthFunc(GL_LEQUAL);
 	this->context->setStencilTest(true);
+	this->context->setStencilMask(0xFF);
+	this->context->setStencilFunc(GL_ALWAYS, 1, 0xFF);
+	this->context->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	this->context->setCulling(true);
 	this->context->setBlending(true);
 	this->context->setBlendingFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -167,6 +170,9 @@ void Game::start()
 
 		this->scene.update();
 		this->scene.draw();
+
+		GLchar byte;
+		glReadPixels(context.getWindowWidth() / 2, context.getWindowHeight() / 2, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_BYTE, &byte);	// stencil value at the center
 
 		this->screenQuad->drawScreen(context);
 
