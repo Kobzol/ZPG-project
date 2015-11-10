@@ -52,6 +52,7 @@ void Game::start()
 	this->context->setWindowSizeCallback([](GLFWwindow* window, int width, int height) { Game::getInstance().onWindowSizeCallback(window, width, height); });
 	this->context->setShowMouseCursor(false);
 	this->context->setDepthTest(true);
+	this->context->setDepthFunc(GL_LEQUAL);
 	this->context->setStencilTest(true);
 	this->context->setCulling(true);
 	this->context->setBlending(true);
@@ -78,28 +79,6 @@ void Game::start()
 	this->scene.add(this->camera);
 
 	ProgramManager::getInstance().observeCamera(cameraScript);
-
-	// skybox
-	const std::string skyboxPath = "Resources/Textures/skybox/";
-	std::vector<Image> skyboxFaces;
-	skyboxFaces.push_back(Image(skyboxPath + "right.jpg"));
-	skyboxFaces.push_back(Image(skyboxPath + "left.jpg"));
-	skyboxFaces.push_back(Image(skyboxPath + "top.jpg"));
-	skyboxFaces.push_back(Image(skyboxPath + "bottom.jpg"));
-	skyboxFaces.push_back(Image(skyboxPath + "back.jpg"));
-	skyboxFaces.push_back(Image(skyboxPath + "front.jpg"));
-
-	Cubemap skyboxCubemap;
-	skyboxCubemap.allocate();
-	skyboxCubemap.set2DImages(skyboxFaces);
-
-	for (size_t i = 0; i < skyboxFaces.size(); i++)
-	{
-		skyboxFaces[i].dispose();
-	}
-
-	GameObject* skybox = new GameObject(nullptr, new SkyboxRenderer(skyboxCubemap));
-	this->scene.add(skybox);
 
 	// objects
 	float distance = 3.0f;
@@ -140,6 +119,28 @@ void Game::start()
 	GameObject* spotLightObj = new GameObject(new LightComponent(spotLight, "spotLight"));
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
+
+	// skybox
+	const std::string skyboxPath = "Resources/Textures/skybox/";
+	std::vector<Image> skyboxFaces;
+	skyboxFaces.push_back(Image(skyboxPath + "right.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "left.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "top.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "bottom.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "back.jpg"));
+	skyboxFaces.push_back(Image(skyboxPath + "front.jpg"));
+
+	Cubemap skyboxCubemap;
+	skyboxCubemap.allocate();
+	skyboxCubemap.set2DImages(skyboxFaces);
+
+	for (size_t i = 0; i < skyboxFaces.size(); i++)
+	{
+		skyboxFaces[i].dispose();
+	}
+
+	GameObject* skybox = new GameObject(nullptr, new SkyboxRenderer(skyboxCubemap));
+	this->scene.add(skybox);
 
 	Timer timer(0.01f);
 	Timer switchTimer(0.05f);
