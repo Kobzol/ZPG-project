@@ -42,6 +42,7 @@ void Cubemap::set2DImages(std::vector<Image>& images)
 			GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, type,
 			images[i].getWidth(), images[i].getHeight(), 0, type, GL_UNSIGNED_BYTE, images[i].getImageData()
 		);
+		images[i].dispose();
 		GL_CHECK_ERRORS();
 	}
 

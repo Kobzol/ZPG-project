@@ -6,6 +6,7 @@ const std::string ProgramManager::PROGRAM_MODEL = "model";
 const std::string ProgramManager::PROGRAM_POSTPROCESS = "postprocess";
 const std::string ProgramManager::PROGRAM_FONT = "font";
 const std::string ProgramManager::PROGRAM_SKYBOX = "skybox";
+const std::string ProgramManager::PROGRAM_SPRITE = "sprite";
 
 const std::string ProgramManager::SHADER_VERTEX_PATH = "Shaders/Vertex/";
 const std::string ProgramManager::SHADER_FRAGMENT_PATH = "Shaders/Fragment/";
@@ -29,6 +30,7 @@ void ProgramManager::preloadPrograms()
 	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag", Flags<ProgramEvent>());
 	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag", Flags<ProgramEvent>());
 	this->preloadProgram(ProgramManager::PROGRAM_SKYBOX, "skybox.vert", "skybox.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
+	this->preloadProgram(ProgramManager::PROGRAM_SPRITE, "sprite.vert", "sprite.frag", Flags<ProgramEvent>());
 }
 
 Program& ProgramManager::use(std::string identifier)

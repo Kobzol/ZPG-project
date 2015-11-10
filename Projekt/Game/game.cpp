@@ -2,7 +2,7 @@
 
 Game Game::instance = Game();
 
-// model selection, cube map, uniform buffer objects
+// model selection, shadows, uniform buffer objects
 
 Game& Game::getInstance()
 {
@@ -65,9 +65,9 @@ void Game::start()
 
 	// manager preload
 	AudioManager::getInstance().initialize();
+	TextureManager::getInstance().preloadTextures();
 	ModelManager::getInstance().preloadModels();
 	FontManager::getInstance().initialize(width, height);
-
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
@@ -137,13 +137,12 @@ void Game::start()
 	skyboxCubemap.allocate();
 	skyboxCubemap.set2DImages(skyboxFaces);
 
-	for (size_t i = 0; i < skyboxFaces.size(); i++)
-	{
-		skyboxFaces[i].dispose();
-	}
-
 	GameObject* skybox = new GameObject(nullptr, new SkyboxRenderer(skyboxCubemap));
 	this->scene.add(skybox);
+
+	GameObject* crossHair = new GameObject(nullptr, new SpriteRenderer(TextureManager::TEXTURE_CROSSHAIR));
+	crossHair->getTransform().setScale(glm::vec3(50.0f, 50.0f, 1.0f));
+	this->scene.add(crossHair);
 
 	Timer timer(0.01f);
 	Timer switchTimer(0.05f);
@@ -167,6 +166,8 @@ void Game::start()
 
 		spotLight->direction = cameraScript->getFront();
 		spotLightObj->getTransform().setPosition(camera->getTransform().getPosition());
+
+		crossHair->getTransform().setPosition(glm::vec3(context.getWindowWidth() / 2.0f, context.getWindowHeight() / 2.0f, 0.0f));
 
 		this->scene.update();
 		this->scene.draw();

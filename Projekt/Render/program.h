@@ -31,9 +31,8 @@ class Program
 private:
 	void use();
 
-	std::vector<Shader> shaders;
 	GLuint program;
-
+	std::vector<Shader> shaders;
 	Flags<ProgramEvent> events;
 
 public:
@@ -61,7 +60,7 @@ public:
 
 	void setViewMatrix(const glm::mat4& matrix);
 	void setProjectionMatrix(const glm::mat4& matrix);
-	void setModelMatrix(const glm::mat4& matrix);
+	void setModelMatrix(const glm::mat4& matrix, bool setNormalMatrix = true);
 	void setViewPosition(const glm::vec3& position);
 
 	VAO* getVAO();

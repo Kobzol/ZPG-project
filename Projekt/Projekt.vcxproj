@@ -103,6 +103,7 @@
     <ClCompile Include="Game\Render\model_render_component.cpp" />
     <ClCompile Include="Game\Render\simple_constant_renderer.cpp" />
     <ClCompile Include="Game\Render\skybox_renderer.cpp" />
+    <ClCompile Include="Game\Render\sprite_renderer.cpp" />
     <ClCompile Include="Game\scene.cpp" />
     <ClCompile Include="Game\timer.cpp" />
     <ClCompile Include="Helper\image.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Game\Physics\physics_handler.h" />
     <ClInclude Include="Game\Render\model_render_component.h" />
     <ClInclude Include="Game\Render\skybox_renderer.h" />
+    <ClInclude Include="Game\Render\sprite_renderer.h" />
     <ClInclude Include="Game\scene.h" />
     <ClInclude Include="Game\Render\simple_constant_renderer.h" />
     <ClInclude Include="Game\tag.h" />
@@ -205,15 +207,20 @@
     <None Include="Shaders\Fragment\postprocess.frag" />
     <None Include="Shaders\Fragment\constant.frag" />
     <None Include="Shaders\Fragment\skybox.frag" />
+    <None Include="Shaders\Fragment\sprite.frag" />
     <None Include="Shaders\Vertex\constant.vert" />
     <None Include="Shaders\Vertex\font.vert" />
     <None Include="Shaders\Vertex\postprocess.vert" />
     <None Include="Shaders\Vertex\model.vert" />
     <None Include="Shaders\Vertex\lambert.vert" />
     <None Include="Shaders\Vertex\skybox.vert" />
+    <None Include="Shaders\Vertex\sprite.vert" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Textures\crosshair.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

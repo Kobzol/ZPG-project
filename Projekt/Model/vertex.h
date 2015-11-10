@@ -1,5 +1,8 @@
 #pragma once
 
+#define GLEW_STATIC
+#include <GL/glew.h>
+
 #include <glm/glm.hpp>
 
 struct VertexSimple
@@ -69,7 +72,7 @@ const VertexSimple VERTICES_CUBE[] = {
 	{ { -0.5f, 0.5f, -0.5f } }
 };
 
-static float VERTICES_SKYBOX[] = {
+static GLfloat VERTICES_SKYBOX[] = {
 	// Positions          
 	-1.0f, 1.0f, -1.0f,
 	-1.0f, -1.0f, -1.0f,
@@ -112,4 +115,15 @@ static float VERTICES_SKYBOX[] = {
 	1.0f, -1.0f, -1.0f,
 	-1.0f, -1.0f, 1.0f,
 	1.0f, -1.0f, 1.0f
+};
+
+static GLfloat VERTICES_SPRITE[] = {
+	// Pos      // Tex
+	0.0f, 1.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 1.0f, 0.0f,
+	0.0f, 0.0f, 0.0f, 0.0f,
+
+	0.0f, 1.0f, 0.0f, 1.0f,
+	1.0f, 1.0f, 1.0f, 1.0f,
+	1.0f, 0.0f, 1.0f, 0.0f
 };

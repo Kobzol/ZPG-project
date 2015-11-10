@@ -50,6 +50,7 @@
     <ClCompile Include="Render\color.cpp" />
     <ClCompile Include="Game\Render\skybox_renderer.cpp" />
     <ClCompile Include="Model\geometry_object.cpp" />
+    <ClCompile Include="Game\Render\sprite_renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="Render\color.h" />
     <ClInclude Include="Game\Render\skybox_renderer.h" />
     <ClInclude Include="Model\geometry_object.h" />
+    <ClInclude Include="Game\Render\sprite_renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
@@ -133,8 +135,13 @@
     <None Include="Shaders\Vertex\constant.vert" />
     <None Include="Shaders\Vertex\skybox.vert" />
     <None Include="Shaders\Fragment\skybox.frag" />
+    <None Include="Shaders\Vertex\sprite.vert" />
+    <None Include="Shaders\Fragment\sprite.frag" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Textures\crosshair.png" />
   </ItemGroup>
 </Project>

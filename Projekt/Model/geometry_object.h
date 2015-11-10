@@ -13,6 +13,7 @@ public:
 	void setGeometry(const void* data, size_t vertexSize, size_t vertexCount);
 
 	void setAttributePosition();
+	void setAttributePositionTexture2D();
 
 	void dispose();
 
