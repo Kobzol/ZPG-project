@@ -129,12 +129,13 @@ static GLfloat VERTICES_SPRITE[] = {
 	1.0f, 0.0f, 1.0f, 0.0f
 };
 
-static VertexSimple VERTICES_PLANE[] = {
-	{ { -1.0f, 0.0f, 1.0f } },
-	{ { 1.0f, 0.0f, 1.0f } },
-	{ { 1.0f, 0.0f, -1.0f } },
-	{ { 1.0f, 0.0f, -1.0f } },
-	{ { -1.0f, 0.0f, -1.0f } },
-	{ { -1.0f, 0.0f, 1.0f } }
+static GLfloat VERTICES_PLANE[] = {
+	// positions		// normal
+	-1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+	1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+	1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+	1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+	-1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+	-1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f
 };
 #pragma endregion vertices

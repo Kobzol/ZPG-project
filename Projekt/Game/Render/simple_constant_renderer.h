@@ -13,12 +13,13 @@
 class SimpleConstantRenderer : public IComponent
 {
 public:
-	SimpleConstantRenderer(const VertexSimple* data, size_t verticesCount, glm::vec3 color);
+	SimpleConstantRenderer(GeometryObject geometryObject, std::string shader, glm::vec3 color = glm::vec3(1.0f));
 
 	void update() override;
 	void dispose() override;
 
 private:
 	GeometryObject geometryObject;
+	std::string shader;
 	glm::vec3 color;
 };

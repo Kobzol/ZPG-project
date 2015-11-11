@@ -14,6 +14,7 @@ public:
 
 	void setAttributePosition();
 	void setAttributePositionTexture2D();
+	void setAttributePositionNormal();
 
 	void dispose();
 

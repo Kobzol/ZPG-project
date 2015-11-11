@@ -1,7 +1,7 @@
 #include "program_manager.h"
 #include "../../Game/Camera/camera.h"
 
-const std::string ProgramManager::PROGRAM_SIMPLE_CONSTANT = "constant";
+const std::string ProgramManager::PROGRAM_GEOMETRY_CONSTANT = "geometry/constant";
 const std::string ProgramManager::PROGRAM_MODEL = "model";
 const std::string ProgramManager::PROGRAM_POSTPROCESS = "postprocess";
 const std::string ProgramManager::PROGRAM_FONT = "font";
@@ -25,7 +25,7 @@ ProgramManager::ProgramManager() : observedCamera(nullptr)
 
 void ProgramManager::preloadPrograms()
 {
-	this->preloadProgram(ProgramManager::PROGRAM_SIMPLE_CONSTANT, "model.vert", "constant.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
+	this->preloadProgram(ProgramManager::PROGRAM_GEOMETRY_CONSTANT, "model.vert", "constant.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
 	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag", Flags<ProgramEvent>({ ProgramEvent::ViewProjection, ProgramEvent::ViewPosition }));
 	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag", Flags<ProgramEvent>());
 	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag", Flags<ProgramEvent>());

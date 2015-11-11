@@ -1,14 +1,13 @@
 #include "simple_constant_renderer.h"
 
-SimpleConstantRenderer::SimpleConstantRenderer(const VertexSimple* data, size_t verticesCount, glm::vec3 color) : color(color)
+SimpleConstantRenderer::SimpleConstantRenderer(GeometryObject geometry, std::string shader, glm::vec3 color) : geometryObject(geometry), shader(shader), color(color)
 {
-	this->geometryObject.setGeometry(data, sizeof(VertexSimple), verticesCount);
-	this->geometryObject.setAttributePosition();
+	
 }
 
 void SimpleConstantRenderer::update()
 {
-	Program& program = ProgramManager::getInstance().use(ProgramManager::PROGRAM_SIMPLE_CONSTANT);
+	Program& program = ProgramManager::getInstance().use(this->shader);
 	Context& context = Game::getInstance().getContext();
 
 	program.setModelMatrix(this->gameObject->getTransform().getModel());

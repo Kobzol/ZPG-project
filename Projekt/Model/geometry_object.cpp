@@ -26,7 +26,7 @@ void GeometryObject::setGeometry(const void* data, size_t vertexSize, size_t ver
 void GeometryObject::setAttributePosition()
 {
 	this->vao.bind();
-	Program::setAttribute(0, 3, GL_FLOAT, GL_FALSE, this->vertexSize, 0);
+	Program::setAttribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
 	this->vao.unbind();
 }
 void GeometryObject::setAttributePositionTexture2D()
@@ -34,6 +34,13 @@ void GeometryObject::setAttributePositionTexture2D()
 	this->vao.bind();
 	Program::setAttribute(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
 	Program::setAttribute(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*) (2 * sizeof(GLfloat)));
+	this->vao.unbind();
+}
+void GeometryObject::setAttributePositionNormal()
+{
+	this->vao.bind();
+	Program::setAttribute(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
+	Program::setAttribute(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	this->vao.unbind();
 }
 
