@@ -3,7 +3,7 @@
 
 GeometryObject::GeometryObject() : vertexSize(0), vertexCount(0)
 {
-
+	
 }
 GeometryObject::GeometryObject(const void* data, size_t vertexSize, size_t vertexCount)
 {

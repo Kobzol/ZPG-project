@@ -120,7 +120,7 @@ void Game::start()
 	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(Color::White * 0.1f, Color::White, Color::White));
 	light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
-		new SimpleConstantRenderer(cubeGeometry, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, Color::White)
+		new RenderComponent(Color::White, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, std::vector<IRenderModule*> { new GeometryDrawModule(cubeGeometry) })
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	light->getTags().set(Tag::Light);
@@ -133,7 +133,7 @@ void Game::start()
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
-	GameObject* floor = new GameObject(nullptr, new SimpleConstantRenderer(planeGeometry, ProgramManager::PROGRAM_MODEL, Color::Purple));
+	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::Purple, ProgramManager::PROGRAM_MODEL, std::vector<IRenderModule*> { new GeometryDrawModule(planeGeometry) }));
 	floor->getTransform().setScale(glm::vec3(10.0f));
 	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
 	this->scene.add(floor);

@@ -101,6 +101,8 @@
     <ClCompile Include="Game\Physics\transform.cpp" />
     <ClCompile Include="Content\program_manager.cpp" />
     <ClCompile Include="Game\Render\model_render_component.cpp" />
+    <ClCompile Include="Game\Render\Module\geometry_draw_module.cpp" />
+    <ClCompile Include="Game\Render\render_component.cpp" />
     <ClCompile Include="Game\Render\simple_constant_renderer.cpp" />
     <ClCompile Include="Game\Render\skybox_renderer.cpp" />
     <ClCompile Include="Game\Render\sprite_renderer.cpp" />
@@ -156,6 +158,9 @@
     <ClInclude Include="Game\Input\mouse_state.h" />
     <ClInclude Include="Game\Object\object_manager.h" />
     <ClInclude Include="Game\Physics\physics_handler.h" />
+    <ClInclude Include="Game\Render\Module\geometry_draw_module.h" />
+    <ClInclude Include="Game\Render\render_component.h" />
+    <ClInclude Include="Game\Render\Module\irender_module.h" />
     <ClInclude Include="Game\Render\model_render_component.h" />
     <ClInclude Include="Game\Render\skybox_renderer.h" />
     <ClInclude Include="Game\Render\sprite_renderer.h" />
