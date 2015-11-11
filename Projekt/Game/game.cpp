@@ -68,6 +68,10 @@ void Game::start()
 	TextureManager::getInstance().preloadTextures();
 	ModelManager::getInstance().preloadModels();
 	FontManager::getInstance().initialize(width, height);
+
+	ShaderLoader::getInstance().addCodeMapping("#LIGHT_DEFINITIONS", FileHelper::loadFile("Shaders/Headers/light_definitions.frag"));
+	ShaderLoader::getInstance().addCodeMapping("#PHONG_CALCULATIONS", FileHelper::loadFile("Shaders/Headers/phong_calculations.frag"));
+
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);

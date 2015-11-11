@@ -51,7 +51,7 @@
     <ClCompile Include="Game\Render\skybox_renderer.cpp" />
     <ClCompile Include="Model\geometry_object.cpp" />
     <ClCompile Include="Game\Render\sprite_renderer.cpp" />
-    <ClCompile Include="Render\shader_loader.cpp" />
+    <ClCompile Include="Content\shader_loader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -117,7 +117,7 @@
     <ClInclude Include="Game\Render\skybox_renderer.h" />
     <ClInclude Include="Model\geometry_object.h" />
     <ClInclude Include="Game\Render\sprite_renderer.h" />
-    <ClInclude Include="Render\shader_loader.h" />
+    <ClInclude Include="Content\shader_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
@@ -139,7 +139,8 @@
     <None Include="Shaders\Fragment\skybox.frag" />
     <None Include="Shaders\Vertex\sprite.vert" />
     <None Include="Shaders\Fragment\sprite.frag" />
-    <None Include="Shaders\Headers\light_header.frag" />
+    <None Include="Shaders\Headers\light_definitions.frag" />
+    <None Include="Shaders\Headers\phong_calculations.frag" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />

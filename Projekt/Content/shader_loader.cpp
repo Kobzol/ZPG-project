@@ -12,16 +12,11 @@ ShaderLoader::ShaderLoader()
 
 }
 
-std::string ShaderLoader::preprocessCode(const std::string& code)
-{
-	return code;
-}
-
 Shader ShaderLoader::createShader(std::string code, GLenum type)
 {
 	GLenum shaderId = glCreateShader(type);
 
-	code = this->preprocessCode(code);
+	this->preprocessCode(code);
 
 	const GLchar* codePointer = code.c_str();
 
@@ -32,4 +27,22 @@ Shader ShaderLoader::createShader(std::string code, GLenum type)
 	GL_CHECK_ERRORS();
 
 	return Shader(shaderId);
+}
+
+void ShaderLoader::addCodeMapping(const std::string& directive, const std::string& replacement)
+{
+	this->codeMappings.emplace(directive, replacement);
+}
+
+void ShaderLoader::preprocessCode(std::string& code)
+{
+	for (auto mapping : this->codeMappings)
+	{
+		size_t position = code.find(mapping.first);
+
+		if (position != std::string::npos)
+		{
+			code.replace(position, mapping.first.size(), mapping.second);
+		}
+	}
 }
