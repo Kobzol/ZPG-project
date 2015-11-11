@@ -27,3 +27,11 @@ struct SpotLight {
 	Attenuation attenuation;
 	Phong phong;
 };
+
+uniform DirLight directionalLight;
+
+#define MAX_POINT_LIGHTS 3
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
+uniform int pointLightCount;
+
+uniform SpotLight spotLight;

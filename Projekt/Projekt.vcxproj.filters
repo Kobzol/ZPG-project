@@ -121,10 +121,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
-    <None Include="Shaders\Fragment\lambert.frag" />
     <None Include="Shaders\Fragment\model.frag" />
     <None Include="Shaders\Vertex\model.vert" />
-    <None Include="Shaders\Vertex\lambert.vert" />
     <None Include="Shaders\Vertex\postprocess.vert" />
     <None Include="Shaders\Fragment\postprocess.frag" />
     <None Include="Shaders\Vertex\font.vert" />
@@ -134,7 +132,6 @@
     <None Include="irrKlang.dll" />
     <None Include="ClassDiagram.cd" />
     <None Include="Shaders\Fragment\constant.frag" />
-    <None Include="Shaders\Vertex\constant.vert" />
     <None Include="Shaders\Vertex\skybox.vert" />
     <None Include="Shaders\Fragment\skybox.frag" />
     <None Include="Shaders\Vertex\sprite.vert" />

@@ -25,7 +25,7 @@ ProgramManager::ProgramManager() : observedCamera(nullptr)
 
 void ProgramManager::preloadPrograms()
 {
-	this->preloadProgram(ProgramManager::PROGRAM_SIMPLE_CONSTANT, "constant.vert", "constant.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
+	this->preloadProgram(ProgramManager::PROGRAM_SIMPLE_CONSTANT, "model.vert", "constant.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
 	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag", Flags<ProgramEvent>({ ProgramEvent::ViewProjection, ProgramEvent::ViewPosition }));
 	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag", Flags<ProgramEvent>());
 	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag", Flags<ProgramEvent>());

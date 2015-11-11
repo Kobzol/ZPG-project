@@ -204,7 +204,6 @@
     <None Include="ikpMP3.dll" />
     <None Include="irrKlang.dll" />
     <None Include="Shaders\Fragment\font.frag" />
-    <None Include="Shaders\Fragment\lambert.frag" />
     <None Include="Shaders\Fragment\model.frag" />
     <None Include="Shaders\Fragment\postprocess.frag" />
     <None Include="Shaders\Fragment\constant.frag" />
@@ -212,11 +211,9 @@
     <None Include="Shaders\Fragment\sprite.frag" />
     <None Include="Shaders\Headers\light_definitions.frag" />
     <None Include="Shaders\Headers\phong_calculations.frag" />
-    <None Include="Shaders\Vertex\constant.vert" />
     <None Include="Shaders\Vertex\font.vert" />
     <None Include="Shaders\Vertex\postprocess.vert" />
     <None Include="Shaders\Vertex\model.vert" />
-    <None Include="Shaders\Vertex\lambert.vert" />
     <None Include="Shaders\Vertex\skybox.vert" />
     <None Include="Shaders\Vertex\sprite.vert" />
   </ItemGroup>

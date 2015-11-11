@@ -15,14 +15,6 @@ out vec4 outColor;
 uniform sampler2D textureDiffuse1;
 uniform sampler2D textureSpecular1;
 
-uniform DirLight directionalLight;
-
-#define MAX_POINT_LIGHTS 3
-uniform PointLight pointLights[MAX_POINT_LIGHTS];
-uniform int pointLightCount;
-
-uniform SpotLight spotLight;
-
 uniform vec3 viewPosition;
 uniform vec3 color;
 
