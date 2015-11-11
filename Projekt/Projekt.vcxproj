@@ -103,6 +103,7 @@
     <ClCompile Include="Game\Render\Module\geometry_draw_module.cpp" />
     <ClCompile Include="Game\Render\Module\model_draw_module.cpp" />
     <ClCompile Include="Game\Render\Module\skybox_draw_module.cpp" />
+    <ClCompile Include="Game\Render\Module\sprite_draw_module.cpp" />
     <ClCompile Include="Game\Render\render_component.cpp" />
     <ClCompile Include="Game\Render\sprite_renderer.cpp" />
     <ClCompile Include="Game\scene.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Game\Render\Module\geometry_draw_module.h" />
     <ClInclude Include="Game\Render\Module\model_draw_module.h" />
     <ClInclude Include="Game\Render\Module\skybox_draw_module.h" />
+    <ClInclude Include="Game\Render\Module\sprite_draw_module.h" />
     <ClInclude Include="Game\Render\render_component.h" />
     <ClInclude Include="Game\Render\Module\irender_module.h" />
     <ClInclude Include="Game\Render\sprite_renderer.h" />

@@ -155,7 +155,7 @@ void Game::start()
 	GameObject* skybox = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_SKYBOX, new SkyboxDrawModule(skyboxCubemap)));
 	this->scene.add(skybox);
 
-	GameObject* crossHair = new GameObject(nullptr, new SpriteRenderer(TextureManager::TEXTURE_CROSSHAIR));
+	GameObject* crossHair = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_SPRITE, new SpriteDrawModule(TextureManager::TEXTURE_CROSSHAIR)));
 	crossHair->getTransform().setScale(glm::vec3(50.0f, 50.0f, 1.0f));
 	this->scene.add(crossHair);
 

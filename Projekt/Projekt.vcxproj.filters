@@ -53,6 +53,7 @@
     <ClCompile Include="Game\Render\Module\geometry_draw_module.cpp" />
     <ClCompile Include="Game\Render\Module\model_draw_module.cpp" />
     <ClCompile Include="Game\Render\Module\skybox_draw_module.cpp" />
+    <ClCompile Include="Game\Render\Module\sprite_draw_module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Game\Render\Module\geometry_draw_module.h" />
     <ClInclude Include="Game\Render\Module\model_draw_module.h" />
     <ClInclude Include="Game\Render\Module\skybox_draw_module.h" />
+    <ClInclude Include="Game\Render\Module\sprite_draw_module.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
