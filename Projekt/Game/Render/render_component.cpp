@@ -1,5 +1,9 @@
 #include "render_component.h"
 
+RenderComponent::RenderComponent(glm::vec3 color, std::string shader, IRenderModule* module) : color(color), shader(shader)
+{
+	this->modules.push_back(module);
+}
 RenderComponent::RenderComponent(glm::vec3 color, std::string shader, const std::vector<IRenderModule*>& modules) : color(color), shader(shader), modules(modules)
 {
 

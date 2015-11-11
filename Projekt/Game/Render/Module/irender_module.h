@@ -6,5 +6,5 @@ class IRenderModule
 {
 public:
 	virtual void update(RenderComponent* component) = 0;
-	virtual void dispose() = 0;
+	virtual void dispose() { };
 };

@@ -89,19 +89,19 @@ void Game::start()
 
 	// objects
 	float distance = 3.0f;
-	GameObject* cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Blue));
+	GameObject* cube = new GameObject(nullptr, new RenderComponent(Color::Blue, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(distance, 0.0f, 0.0f));
 
-	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Red));
+	cube = new GameObject(nullptr, new RenderComponent(Color::Red, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(-distance, 0.0f, 0.0f));
 
-	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Green));
+	cube = new GameObject(nullptr, new RenderComponent(Color::Green, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, distance, 0.0f));
 
-	cube = new GameObject(nullptr, new ModelRenderComponent(ModelManager::getInstance().get(ModelManager::MODEL_CUBE), Color::Yellow));
+	cube = new GameObject(nullptr, new RenderComponent(Color::Yellow, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 0.0f));
 
@@ -120,7 +120,7 @@ void Game::start()
 	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(Color::White * 0.1f, Color::White, Color::White));
 	light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
-		new RenderComponent(Color::White, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, std::vector<IRenderModule*> { new GeometryDrawModule(cubeGeometry) })
+		new RenderComponent(Color::White, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(cubeGeometry))
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	light->getTags().set(Tag::Light);
@@ -133,7 +133,7 @@ void Game::start()
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
-	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::Purple, ProgramManager::PROGRAM_MODEL, std::vector<IRenderModule*> { new GeometryDrawModule(planeGeometry) }));
+	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::Purple, ProgramManager::PROGRAM_MODEL, new GeometryDrawModule(planeGeometry)));
 	floor->getTransform().setScale(glm::vec3(10.0f));
 	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
 	this->scene.add(floor);
