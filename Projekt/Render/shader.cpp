@@ -1,16 +1,8 @@
 #include "shader.h"
 
-Shader::Shader(std::string code, GLenum type)
+Shader::Shader(GLuint shader) : shader(shader)
 {
-	this->shader = glCreateShader(type);
-
-	const GLchar* codePointer = code.c_str();
-
-	glShaderSource(this->shader, 1, &codePointer, nullptr);
-	glCompileShader(this->shader);
-
-	GL_CHECK_COMPILATION(this->shader);
-	GL_CHECK_ERRORS();
+	
 }
 
 void Shader::dispose()

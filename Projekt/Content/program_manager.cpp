@@ -89,8 +89,8 @@ void ProgramManager::dispose()
 
 void ProgramManager::preloadProgram(std::string identifier, std::string vertexPath, std::string fragmentPath, Flags<ProgramEvent> events)
 {
-	Shader vertexShader(FileHelper::loadFile(ProgramManager::SHADER_VERTEX_PATH + vertexPath), GL_VERTEX_SHADER);
-	Shader fragmentShader(FileHelper::loadFile(ProgramManager::SHADER_FRAGMENT_PATH + fragmentPath), GL_FRAGMENT_SHADER);
+	Shader vertexShader = ShaderLoader::getInstance().createShader(FileHelper::loadFile(ProgramManager::SHADER_VERTEX_PATH + vertexPath), GL_VERTEX_SHADER);
+	Shader fragmentShader = ShaderLoader::getInstance().createShader(FileHelper::loadFile(ProgramManager::SHADER_FRAGMENT_PATH + fragmentPath), GL_FRAGMENT_SHADER);
 
 	Program program(events);
 	program.attachShader(vertexShader);

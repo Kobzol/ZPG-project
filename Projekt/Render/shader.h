@@ -13,7 +13,7 @@ private:
 	GLuint shader;
 
 public:
-	Shader(std::string code, GLenum type);
+	Shader(GLuint shader);
 
 	GLuint getId();
 	void dispose();

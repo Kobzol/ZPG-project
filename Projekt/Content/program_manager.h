@@ -8,6 +8,7 @@
 #include "../../Model/vertex.h"
 #include "../../Render/program.h"
 #include "../../Render/shader.h"
+#include "../../Render/shader_loader.h"
 
 class Camera;
 

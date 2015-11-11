@@ -129,6 +129,7 @@
     <ClCompile Include="Render\render_utils.cpp" />
     <ClCompile Include="Game\screen_quad.cpp" />
     <ClCompile Include="Render\shader.cpp" />
+    <ClCompile Include="Render\shader_loader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\audio_manager.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Render\render_utils.h" />
     <ClInclude Include="Game\screen_quad.h" />
     <ClInclude Include="Render\shader.h" />
+    <ClInclude Include="Render\shader_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
@@ -208,6 +210,7 @@
     <None Include="Shaders\Fragment\constant.frag" />
     <None Include="Shaders\Fragment\skybox.frag" />
     <None Include="Shaders\Fragment\sprite.frag" />
+    <None Include="Shaders\Headers\light_header.frag" />
     <None Include="Shaders\Vertex\constant.vert" />
     <None Include="Shaders\Vertex\font.vert" />
     <None Include="Shaders\Vertex\postprocess.vert" />
