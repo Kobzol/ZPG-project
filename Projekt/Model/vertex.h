@@ -22,6 +22,7 @@ public:
 	Vertex(glm::vec3 position, glm::vec3 normal, glm::vec2 texCoords);
 };
 
+#pragma region vertices
 const VertexSimple VERTICES_CUBE[] = {
 	// back face
 	{ { -0.5f, -0.5f, -0.5f } },
@@ -127,3 +128,13 @@ static GLfloat VERTICES_SPRITE[] = {
 	1.0f, 1.0f, 1.0f, 1.0f,
 	1.0f, 0.0f, 1.0f, 0.0f
 };
+
+static VertexSimple VERTICES_PLANE[] = {
+	{ { -1.0f, 0.0f, 1.0f } },
+	{ { 1.0f, 0.0f, 1.0f } },
+	{ { 1.0f, 0.0f, -1.0f } },
+	{ { 1.0f, 0.0f, -1.0f } },
+	{ { -1.0f, 0.0f, -1.0f } },
+	{ { -1.0f, 0.0f, 1.0f } }
+};
+#pragma endregion vertices

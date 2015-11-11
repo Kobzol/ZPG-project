@@ -123,6 +123,11 @@ void Game::start()
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
+	GameObject* floor = new GameObject(nullptr, new SimpleConstantRenderer(VERTICES_PLANE, 6, Color::Purple));
+	floor->getTransform().setScale(glm::vec3(10.0f));
+	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
+	this->scene.add(floor);
+
 	// skybox
 	const std::string skyboxPath = "Resources/Textures/skybox/";
 	std::vector<Image> skyboxFaces;
