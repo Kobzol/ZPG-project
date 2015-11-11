@@ -152,7 +152,7 @@ void Game::start()
 	skyboxCubemap.allocate();
 	skyboxCubemap.set2DImages(skyboxFaces);
 
-	GameObject* skybox = new GameObject(nullptr, new SkyboxRenderer(skyboxCubemap));
+	GameObject* skybox = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_SKYBOX, new SkyboxDrawModule(skyboxCubemap)));
 	this->scene.add(skybox);
 
 	GameObject* crossHair = new GameObject(nullptr, new SpriteRenderer(TextureManager::TEXTURE_CROSSHAIR));

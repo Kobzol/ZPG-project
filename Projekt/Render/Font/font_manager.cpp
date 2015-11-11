@@ -95,7 +95,7 @@ void FontManager::renderText(std::string text, GLfloat x, GLfloat y, GLfloat sca
 	Program& program = ProgramManager::getInstance().getCurrentProgram();
 
 	program.setProjectionMatrix(this->projection);
-	program.setUniform3f("textColor", color);
+	program.setUniform3f("color", color);
 
 	this->vao->bind();
 

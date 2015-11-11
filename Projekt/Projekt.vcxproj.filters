@@ -27,7 +27,6 @@
     <ClCompile Include="Render\renderbuffer.cpp" />
     <ClCompile Include="Render\render_utils.cpp" />
     <ClCompile Include="Render\shader.cpp" />
-    <ClCompile Include="Game\Render\model_render_component.cpp" />
     <ClCompile Include="Content\model_manager.cpp" />
     <ClCompile Include="Content\program_manager.cpp" />
     <ClCompile Include="Content\texture_manager.cpp" />
@@ -47,13 +46,13 @@
     <ClCompile Include="Game\scene.cpp" />
     <ClCompile Include="Game\Physics\BoundingBox\sphere_bounding_box.cpp" />
     <ClCompile Include="Render\color.cpp" />
-    <ClCompile Include="Game\Render\skybox_renderer.cpp" />
     <ClCompile Include="Model\geometry_object.cpp" />
     <ClCompile Include="Game\Render\sprite_renderer.cpp" />
     <ClCompile Include="Content\shader_loader.cpp" />
     <ClCompile Include="Game\Render\render_component.cpp" />
     <ClCompile Include="Game\Render\Module\geometry_draw_module.cpp" />
     <ClCompile Include="Game\Render\Module\model_draw_module.cpp" />
+    <ClCompile Include="Game\Render\Module\skybox_draw_module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -87,7 +86,6 @@
     <ClInclude Include="Render\renderbuffer.h" />
     <ClInclude Include="Render\render_utils.h" />
     <ClInclude Include="Render\shader.h" />
-    <ClInclude Include="Game\Render\model_render_component.h" />
     <ClInclude Include="Content\content_manager.h" />
     <ClInclude Include="Content\model_manager.h" />
     <ClInclude Include="Content\program_manager.h" />
@@ -115,7 +113,6 @@
     <ClInclude Include="Game\scene.h" />
     <ClInclude Include="Game\Physics\BoundingBox\sphere_bounding_box.h" />
     <ClInclude Include="Render\color.h" />
-    <ClInclude Include="Game\Render\skybox_renderer.h" />
     <ClInclude Include="Model\geometry_object.h" />
     <ClInclude Include="Game\Render\sprite_renderer.h" />
     <ClInclude Include="Content\shader_loader.h" />
@@ -123,6 +120,7 @@
     <ClInclude Include="Game\Render\Module\irender_module.h" />
     <ClInclude Include="Game\Render\Module\geometry_draw_module.h" />
     <ClInclude Include="Game\Render\Module\model_draw_module.h" />
+    <ClInclude Include="Game\Render\Module\skybox_draw_module.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
