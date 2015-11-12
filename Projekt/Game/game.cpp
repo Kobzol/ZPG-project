@@ -106,7 +106,7 @@ void Game::start()
 	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 2.0f));
 
 	// lights
-	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(0.0f, 0.0f, 10.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
+	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(0.0f, 10.0f, 10.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
 	GameObject* light = new GameObject(new LightComponent(dirLight, "directionalLight"));
 	light->getTags().set(Tag::Light);
 	this->scene.add(light);
@@ -190,7 +190,7 @@ void Game::start()
 		RenderUtils::clear(GL_DEPTH_BUFFER_BIT);
 
 		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 100.0f);
-		glm::mat4 lightView = glm::lookAt(dirLight->direction, glm::vec3(0.0f), glm::vec3(1.0f));
+		glm::mat4 lightView = glm::lookAt(dirLight->direction, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
 		for (auto program : ProgramManager::getInstance().getPrograms())

@@ -22,14 +22,15 @@ uniform vec3 color;
 
 #PHONG_CALCULATIONS
 
-float calculateShadow(vec4 lightSpacePosition)
+float calculateShadow(vec4 lightSpacePosition, vec3 normal, vec3 lightDir)
 {
 	vec3 projCoords = lightSpacePosition.xyz / lightSpacePosition.w;
 	projCoords = projCoords * 0.5f + 0.5f;	// project to NDC [0,1]
 	float lightDepth = texture(depthMap, projCoords.xy).r;
 	float currentDepth = projCoords.z;
+	float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
 
-	return (currentDepth > lightDepth ? 1.0f : 0.0f);
+	return (currentDepth - bias > lightDepth ? 1.0f : 0.0f);
 }
 
 void main()
@@ -62,7 +63,7 @@ void main()
 	vec3 diffuse = directionalLight.phong.diffuse * diff;
 	vec3 specular = directionalLight.phong.specular * spec;
 
-	float shadow = calculateShadow(vertexData.worldPosLightSpace);
+	float shadow = calculateShadow(vertexData.worldPosLightSpace, normal, lightDir);
     vec3 lighting = (ambient + (1.0f - shadow) * (diffuse + specular)) * diffuseMap;
 
 	outColor = vec4(lighting, 1.0f);
