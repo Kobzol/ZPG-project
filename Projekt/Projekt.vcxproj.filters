@@ -47,7 +47,6 @@
     <ClCompile Include="Game\Physics\BoundingBox\sphere_bounding_box.cpp" />
     <ClCompile Include="Render\color.cpp" />
     <ClCompile Include="Model\geometry_object.cpp" />
-    <ClCompile Include="Game\Render\sprite_renderer.cpp" />
     <ClCompile Include="Content\shader_loader.cpp" />
     <ClCompile Include="Game\Render\render_component.cpp" />
     <ClCompile Include="Game\Render\Module\geometry_draw_module.cpp" />
@@ -115,7 +114,6 @@
     <ClInclude Include="Game\Physics\BoundingBox\sphere_bounding_box.h" />
     <ClInclude Include="Render\color.h" />
     <ClInclude Include="Model\geometry_object.h" />
-    <ClInclude Include="Game\Render\sprite_renderer.h" />
     <ClInclude Include="Content\shader_loader.h" />
     <ClInclude Include="Game\Render\render_component.h" />
     <ClInclude Include="Game\Render\Module\irender_module.h" />
@@ -143,6 +141,8 @@
     <None Include="Shaders\Fragment\sprite.frag" />
     <None Include="Shaders\Headers\light_definitions.frag" />
     <None Include="Shaders\Headers\phong_calculations.frag" />
+    <None Include="Shaders\Vertex\depth.vert" />
+    <None Include="Shaders\Fragment\depth.frag" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />

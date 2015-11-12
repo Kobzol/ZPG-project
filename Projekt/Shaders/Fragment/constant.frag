@@ -4,6 +4,7 @@ struct VertexData {
 	vec3 worldPosition;
 	vec3 normal;
 	vec2 texCoords;
+	vec4 worldPosLightSpace;
 };
 
 in VertexData vertexData;

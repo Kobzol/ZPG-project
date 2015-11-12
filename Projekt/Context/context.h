@@ -48,6 +48,8 @@ public:
 	void createWindow(int width, int height, int samples, std::string title, bool resizable, bool fullscreen, bool showDebugOutput = false);
 
 	void setViewport(GLint x, GLint y, GLsizei width, GLsizei height);
+	void setWindowSize(int width, int height);
+
 	void setKeyCallback(void (*callback)(GLFWwindow* window, int key, int scancode, int action, int mode));
 	void setMousePositionCallback(void (*callback)(GLFWwindow* window, double xpos, double ypos));
 	void setMouseScrollCallback(void (*callback)(GLFWwindow* window, double xoffset, double yoffset));

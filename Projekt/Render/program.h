@@ -21,7 +21,8 @@ class ProgramManager;
 enum class ProgramEvent
 {
 	ViewProjection,
-	ViewPosition
+	ViewPosition,
+	LightSpace
 };
 
 class Program
@@ -62,6 +63,7 @@ public:
 	void setProjectionMatrix(const glm::mat4& matrix);
 	void setModelMatrix(const glm::mat4& matrix, bool setNormalMatrix = true);
 	void setViewPosition(const glm::vec3& position);
+	void setLightSpaceMatrix(const glm::mat4& matrix);
 
 	VAO* getVAO();
 

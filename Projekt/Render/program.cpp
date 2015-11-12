@@ -76,12 +76,26 @@ GLint Program::getUniformLocation(std::string name)
 }
 void Program::setUniform4f(std::string name, const glm::vec4& value)
 {
-	glUniform4f(this->getUniformLocation(name), value.x, value.y, value.z, value.a);
+	GLint location = this->getUniformLocation(name);
+
+	if (location < 0)
+	{
+		return;
+	}
+
+	glUniform4f(location, value.x, value.y, value.z, value.a);
 	GL_CHECK_ERRORS();
 }
 void Program::setUniform3f(std::string name, GLfloat x, GLfloat y, GLfloat z)
 {
-	glUniform3f(this->getUniformLocation(name), x, y, z);
+	GLint location = this->getUniformLocation(name);
+
+	if (location < 0)
+	{
+		return;
+	}
+
+	glUniform3f(location, x, y, z);
 	GL_CHECK_ERRORS();
 }
 void Program::setUniform3f(std::string name, glm::vec3 value)
@@ -90,27 +104,62 @@ void Program::setUniform3f(std::string name, glm::vec3 value)
 }
 void Program::setUniform2f(std::string name, glm::vec2 value)
 {
-	glUniform2f(this->getUniformLocation(name), value.x, value.y);
+	GLint location = this->getUniformLocation(name);
+
+	if (location < 0)
+	{
+		return;
+	}
+
+	glUniform2f(location, value.x, value.y);
 	GL_CHECK_ERRORS();
 }
 void Program::setUniform1f(std::string name, GLfloat value)
 {
-	glUniform1f(this->getUniformLocation(name), value);
+	GLint location = this->getUniformLocation(name);
+
+	if (location < 0)
+	{
+		return;
+	}
+
+	glUniform1f(location, value);
 	GL_CHECK_ERRORS();
 }
 void Program::setUniform1i(std::string name, GLint value)
 {
-	glUniform1i(this->getUniformLocation(name), value);
+	GLint location = this->getUniformLocation(name);
+
+	if (location < 0)
+	{
+		return;
+	}
+
+	glUniform1i(location, value);
 	GL_CHECK_ERRORS();
 }
 void Program::setUniformMatrix3fv(std::string name, const glm::mat3& matrix)
 {
-	glUniformMatrix3fv(this->getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
+	GLint location = this->getUniformLocation(name);
+
+	if (location < 0)
+	{
+		return;
+	}
+
+	glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	GL_CHECK_ERRORS();
 }
 void Program::setUniformMatrix4fv(std::string name, const glm::mat4& matrix)
 {
-	glUniformMatrix4fv(this->getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
+	GLint location = this->getUniformLocation(name);
+
+	if (location < 0)
+	{
+		return;
+	}
+
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	GL_CHECK_ERRORS();
 }
 
@@ -134,6 +183,10 @@ void Program::setModelMatrix(const glm::mat4& matrix, bool setNormalMatrix)
 void Program::setViewPosition(const glm::vec3& position)
 {
 	this->setUniform3f("viewPosition", position);
+}
+void Program::setLightSpaceMatrix(const glm::mat4& matrix)
+{
+	this->setUniformMatrix4fv("lightSpaceMatrix", matrix);
 }
 
 Flags<ProgramEvent> Program::getEvents()

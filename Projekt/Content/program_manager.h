@@ -21,6 +21,7 @@ public:
 	static const std::string PROGRAM_FONT;
 	static const std::string PROGRAM_SKYBOX;
 	static const std::string PROGRAM_SPRITE;
+	static const std::string PROGRAM_DEPTH;
 
 	static ProgramManager& getInstance();
 
@@ -30,8 +31,13 @@ public:
 	Program& getCurrentProgram();
 	std::string getCurrentProgramName();
 
+	std::unordered_map<std::string, Program> getPrograms();
+
 	void save();
 	void restore();
+
+	void lockProgram();
+	void unlockProgram();
 
 	void dispose();
 
@@ -51,4 +57,6 @@ private:
 	std::stack<std::string> saveStack;
 
 	Camera* observedCamera;
+
+	bool locked;
 };

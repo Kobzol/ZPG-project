@@ -7,6 +7,7 @@ const std::string ProgramManager::PROGRAM_POSTPROCESS = "postprocess";
 const std::string ProgramManager::PROGRAM_FONT = "font";
 const std::string ProgramManager::PROGRAM_SKYBOX = "skybox";
 const std::string ProgramManager::PROGRAM_SPRITE = "sprite";
+const std::string ProgramManager::PROGRAM_DEPTH = "depth";
 
 const std::string ProgramManager::SHADER_VERTEX_PATH = "Shaders/Vertex/";
 const std::string ProgramManager::SHADER_FRAGMENT_PATH = "Shaders/Fragment/";
@@ -18,7 +19,7 @@ ProgramManager& ProgramManager::getInstance()
 	return ProgramManager::instance;
 }
 
-ProgramManager::ProgramManager() : observedCamera(nullptr)
+ProgramManager::ProgramManager() : observedCamera(nullptr), locked(false)
 {
 	
 }
@@ -26,17 +27,23 @@ ProgramManager::ProgramManager() : observedCamera(nullptr)
 void ProgramManager::preloadPrograms()
 {
 	this->preloadProgram(ProgramManager::PROGRAM_GEOMETRY_CONSTANT, "model.vert", "constant.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
-	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag", Flags<ProgramEvent>({ ProgramEvent::ViewProjection, ProgramEvent::ViewPosition }));
+	this->preloadProgram(ProgramManager::PROGRAM_MODEL, "model.vert", "model.frag", Flags<ProgramEvent>({ ProgramEvent::ViewProjection, ProgramEvent::ViewPosition, ProgramEvent::LightSpace }));
 	this->preloadProgram(ProgramManager::PROGRAM_POSTPROCESS, "postprocess.vert", "postprocess.frag", Flags<ProgramEvent>());
 	this->preloadProgram(ProgramManager::PROGRAM_FONT, "font.vert", "font.frag", Flags<ProgramEvent>());
 	this->preloadProgram(ProgramManager::PROGRAM_SKYBOX, "skybox.vert", "skybox.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
 	this->preloadProgram(ProgramManager::PROGRAM_SPRITE, "sprite.vert", "sprite.frag", Flags<ProgramEvent>());
+	this->preloadProgram(ProgramManager::PROGRAM_DEPTH, "depth.vert", "depth.frag", Flags<ProgramEvent>(ProgramEvent::LightSpace));
 }
 
 Program& ProgramManager::use(std::string identifier)
 {
 	if (this->items.count(identifier))
 	{
+		if (this->locked)
+		{
+			return this->getCurrentProgram();
+		}
+
 		Program& program = this->items[identifier];
 
 		if (this->currentProgram != identifier)
@@ -64,6 +71,10 @@ std::string ProgramManager::getCurrentProgramName()
 {
 	return this->currentProgram;
 }
+std::unordered_map<std::string, Program> ProgramManager::getPrograms()
+{
+	return this->items;
+}
 
 void ProgramManager::save()
 {
@@ -75,6 +86,15 @@ void ProgramManager::restore()
 	this->saveStack.pop();
 
 	this->use(lastSavedProgram);
+}
+
+void ProgramManager::lockProgram()
+{
+	this->locked = true;
+}
+void ProgramManager::unlockProgram()
+{
+	this->locked = false;
 }
 
 void ProgramManager::dispose()

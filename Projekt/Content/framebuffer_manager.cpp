@@ -1,6 +1,7 @@
 #include "framebuffer_manager.h"
 
 const std::string FramebufferManager::FRAMEBUFFER_POSTPROCESS = "postprocess";
+const std::string FramebufferManager::FRAMEBUFFER_DEPTH = "depth";
 
 FramebufferManager FramebufferManager::instance = FramebufferManager();
 
@@ -26,6 +27,17 @@ void FramebufferManager::preloadFramebuffers()
 	}
 
 	this->load(FramebufferManager::FRAMEBUFFER_POSTPROCESS, fb);
+
+	Framebuffer depthFb;
+	depthFb.bind();
+	depthFb.createShadowMap(1024, 1024);
+
+	if (!depthFb.isComplete())
+	{
+		throw std::runtime_error("Couldn't create depth framebuffer");
+	}
+
+	this->load(FramebufferManager::FRAMEBUFFER_DEPTH, depthFb);
 
 	this->bindDefault();
 }

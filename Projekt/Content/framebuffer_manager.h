@@ -7,6 +7,7 @@ class FramebufferManager : public ContentManager<Framebuffer>
 {
 public:
 	static const std::string FRAMEBUFFER_POSTPROCESS;
+	static const std::string FRAMEBUFFER_DEPTH;
 
 	static FramebufferManager& getInstance();
 

@@ -103,10 +103,10 @@ void Game::start()
 
 	cube = new GameObject(nullptr, new RenderComponent(Color::Yellow, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
-	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 0.0f));
+	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 2.0f));
 
 	// lights
-	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(10.0f, 10.0f, 10.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
+	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(0.0f, 0.0f, 10.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
 	GameObject* light = new GameObject(new LightComponent(dirLight, "directionalLight"));
 	light->getTags().set(Tag::Light);
 	this->scene.add(light);
@@ -172,19 +172,51 @@ void Game::start()
 		timer.update(delta);
 		switchTimer.update(delta);
 
-		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
-
-		RenderUtils::clearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-		context.setDepthTest(true);
-
 		spotLight->direction = cameraScript->getFront();
 		spotLightObj->getTransform().setPosition(camera->getTransform().getPosition());
 
 		crossHair->getTransform().setPosition(glm::vec3(context.getWindowWidth() / 2.0f, context.getWindowHeight() / 2.0f, 0.0f));
 
+		cube->getTransform().moveBy(glm::vec3(0.0f, 1.0f * 0.005f, 0.0f));
+
+		context.setDepthTest(true);
+
 		this->scene.update();
+		
+		// Shadows
+		context.setViewport(0, 0, 1024, 1024);
+		Framebuffer& depthBuffer = FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_DEPTH);
+		depthBuffer.bind();
+		RenderUtils::clear(GL_DEPTH_BUFFER_BIT);
+
+		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 100.0f);
+		glm::mat4 lightView = glm::lookAt(dirLight->direction, glm::vec3(0.0f), glm::vec3(1.0f));
+		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
+
+		for (auto program : ProgramManager::getInstance().getPrograms())
+		{
+			if (program.second.getEvents().isSet(ProgramEvent::LightSpace))
+			{
+				ProgramManager::getInstance().use(program.first);
+				program.second.setLightSpaceMatrix(lightSpaceMatrix);
+				program.second.setUniform1i("depthMap", 2);
+			}
+		}
+
+		Program& depthProgram = ProgramManager::getInstance().use(ProgramManager::PROGRAM_DEPTH);
+
+		ProgramManager::getInstance().lockProgram();
+		this->scene.draw();
+		ProgramManager::getInstance().unlockProgram();
+
+		// Scene
+		context.setViewport(0, 0, context.getWindowWidth(), context.getWindowHeight());
+		FramebufferManager::getInstance().get(FramebufferManager::FRAMEBUFFER_POSTPROCESS).bind();
+
+		RenderUtils::clearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		depthBuffer.primaryAttachment.bind(2);	// depth buffer is at unit 10
 		this->scene.draw();
 
 		GLchar byte;
@@ -229,6 +261,7 @@ void Game::start()
 void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
 	this->context->setViewport(0, 0, width, height);
+	this->context->setWindowSize(width, height);
 
 	Camera* camera = (Camera*) this->camera->getScriptComponent();
 	camera->setAspect(width / (float) height);

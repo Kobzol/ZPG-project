@@ -111,6 +111,11 @@ void Context::setViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 	glViewport(x, y, width, height);
 	GL_CHECK_ERRORS();
 }
+void Context::setWindowSize(int width, int height)
+{
+	this->width = width;
+	this->height = height;
+}
 void Context::setKeyCallback(void (*callback)(GLFWwindow* window, int key, int scancode, int action, int mode))
 {
 	glfwSetKeyCallback(this->window, callback);
