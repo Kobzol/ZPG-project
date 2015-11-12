@@ -206,7 +206,9 @@ void Game::start()
 		Program& depthProgram = ProgramManager::getInstance().use(ProgramManager::PROGRAM_DEPTH);
 
 		ProgramManager::getInstance().lockProgram();
+		context.setCullingMode(GL_FRONT);
 		this->scene.draw();
+		context.setCullingMode(GL_BACK);
 		ProgramManager::getInstance().unlockProgram();
 
 		// Scene
