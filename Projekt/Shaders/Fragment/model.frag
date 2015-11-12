@@ -26,6 +26,12 @@ float calculateShadow(vec4 lightSpacePosition, vec3 normal, vec3 lightDir)
 {
 	vec3 projCoords = lightSpacePosition.xyz / lightSpacePosition.w;
 	projCoords = projCoords * 0.5f + 0.5f;	// project to NDC [0,1]
+
+	if (projCoords.z > 1.0f)
+    {
+		return 0.0f;
+	}
+
 	float lightDepth = texture(depthMap, projCoords.xy).r;
 	float currentDepth = projCoords.z;
 	float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
