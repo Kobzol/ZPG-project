@@ -2,7 +2,8 @@
 
 Image::Image(std::string path, ImageType type) : type(type)
 {
-	this->data = SOIL_load_image(path.c_str(), &width, &height, 0, (type == ImageType::Alpha) ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
+	int channels;
+	this->data = SOIL_load_image(path.c_str(), &width, &height, &channels, (type == ImageType::Alpha) ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
 }
 Image::Image(int width, int height, ImageType type) : width(width), height(height), data(nullptr), type(type)
 {
