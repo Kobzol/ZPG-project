@@ -43,7 +43,7 @@ void main()
 {
 	vec3 normal = normalize(vertexData.normal);
 	vec3 viewDir = normalize(viewPosition - vertexData.worldPosition);
-	vec3 diffuseMap = color;//vec3(texture(textureDiffuse1, vertexData.texCoords));
+	vec3 diffuseMap = vec3(texture(textureDiffuse1, vertexData.texCoords));
 	vec3 specularMap = vec3(1.0f);//vec3(texture(textureSpecular1, vertexData.texCoords));
 
 	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
