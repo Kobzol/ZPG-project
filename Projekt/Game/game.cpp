@@ -133,7 +133,7 @@ void Game::start()
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
-	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::Purple, ProgramManager::PROGRAM_MODEL, new GeometryDrawModule(planeGeometry)));
+	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::Purple, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(planeGeometry)));
 	floor->getTransform().setScale(glm::vec3(10.0f));
 	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
 	this->scene.add(floor);
@@ -162,6 +162,17 @@ void Game::start()
 	Timer timer(0.01f);
 	Timer switchTimer(0.05f);
 	Timer clickTimer(1.0f);
+
+	const GLuint depthMapTU = 10;
+
+	Image normalMap("Resources/Models/cube_normal_map/normal_map.png");
+	Texture normalTexture;
+	normalTexture.allocate();
+	normalTexture.set2DImage(normalMap);
+	normalTexture.generateMipmap();
+	normalTexture.bind(8);
+
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMap", 8);
 
 	context->loop([&](Context& context)	// physics
 	{
@@ -201,7 +212,7 @@ void Game::start()
 			{
 				ProgramManager::getInstance().use(program.first);
 				program.second.setLightSpaceMatrix(lightSpaceMatrix);
-				program.second.setUniform1i("depthMap", 2);
+				program.second.setUniform1i("depthMap", depthMapTU);
 			}
 		}
 
@@ -220,7 +231,8 @@ void Game::start()
 		RenderUtils::clearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		RenderUtils::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		depthBuffer.primaryAttachment.bind(2);	// depth buffer is at unit 2
+		depthBuffer.primaryAttachment.bind(depthMapTU);
+
 		this->scene.draw();
 
 		if (InputController::getInstance().isLeftMouseDown() && clickTimer.resetIfReady())

@@ -24,7 +24,13 @@ void Model::loadModel(std::string path)
 {
 	Assimp::Importer importer;
 
-	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	const aiScene* scene = importer.ReadFile(path,
+		aiProcess_Triangulate |
+		aiProcess_FlipUVs |
+		aiProcess_CalcTangentSpace |
+		aiProcess_OptimizeMeshes |
+		aiProcess_OptimizeGraph
+		);
 
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -71,6 +77,12 @@ void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 			vertex.texCoords = glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y);
 		}
 		else vertex.texCoords = glm::vec2(0.0f);
+
+		if (mesh->HasTangentsAndBitangents())
+		{
+			vertex.tangent = glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z);
+		}
+		else vertex.tangent = glm::vec3(0.0f);
 
 		createdMesh.vertices.push_back(vertex);
 	}

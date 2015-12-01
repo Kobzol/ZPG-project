@@ -3,6 +3,7 @@ void calcDiffSpec(vec3 lightDir, vec3 normal, vec3 viewDir, float shininess, out
 vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec3 diffuseMap, vec3 specularMap, float shininess);
 vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec3 diffuseMap, vec3 specularMap, float shininess);
 vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec3 diffuseMap, vec3 specularMap, float shininess);
+float calculateShadow(vec4 lightSpacePosition, vec3 normal, vec3 lightDir);
 
 void calcAttenuation(float dist, Attenuation attenuationIn, out float attenuationOut)
 {
@@ -78,4 +79,20 @@ vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec
 	specular *= attenuation * intensity;
 
 	return (ambient + diffuse + specular);
+}
+float calculateShadow(vec4 lightSpacePosition, vec3 normal, vec3 lightDir)
+{
+	vec3 projCoords = lightSpacePosition.xyz / lightSpacePosition.w;
+	projCoords = projCoords * 0.5f + 0.5f;	// project to NDC [0,1]
+
+	if (projCoords.z > 1.0f)
+    {
+		return 0.0f;
+	}
+
+	float lightDepth = texture(depthMap, projCoords.xy).r;
+	float currentDepth = projCoords.z;
+	float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+
+	return (currentDepth - bias > lightDepth ? 1.0f : 0.0f);
 }

@@ -17,9 +17,10 @@ public:
 	glm::vec3 position;
 	glm::vec3 normal;
 	glm::vec2 texCoords;
+	glm::vec3 tangent;
 
 	Vertex();
-	Vertex(glm::vec3 position, glm::vec3 normal, glm::vec2 texCoords);
+	Vertex(glm::vec3 position, glm::vec3 normal, glm::vec2 texCoords, glm::vec3 tangent);
 };
 
 #pragma region vertices

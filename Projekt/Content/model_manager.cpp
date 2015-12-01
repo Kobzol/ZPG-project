@@ -21,7 +21,7 @@ ModelManager::ModelManager()
 
 void ModelManager::preloadModels()
 {
-	this->load(ModelManager::MODEL_CUBE, new Model(MODEL_PATH + "earth/sphere_earth.obj"));
+	this->load(ModelManager::MODEL_CUBE, new Model(MODEL_PATH + "cube_normal_map/texture_normal_cube.obj"));
 	this->load(ModelManager::MODEL_TREE, new Model(MODEL_PATH + "tree/Tree N161113.3ds"));
 	//this->load(ModelManager::MODEL_M4, new Model(MODEL_PATH + "M4/m4a1_s.fbx"));
 	//this->load(ModelManager::MODEL_NANOSUIT, new Model(MODEL_PATH + "nanosuit/nanosuit.obj"));

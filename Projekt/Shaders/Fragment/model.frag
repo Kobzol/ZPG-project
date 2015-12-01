@@ -5,6 +5,7 @@ struct VertexData {
 	vec3 normal;
 	vec2 texCoords;
 	vec4 worldPosLightSpace;
+	mat3 TBN;
 };
 
 #LIGHT_DEFINITIONS
@@ -16,40 +17,28 @@ out vec4 outColor;
 uniform sampler2D textureDiffuse1;
 uniform sampler2D textureSpecular1;
 uniform sampler2D depthMap;
+uniform sampler2D textureNormalMap;
 
 uniform vec3 viewPosition;
 uniform vec3 color;
 
 #PHONG_CALCULATIONS
 
-float calculateShadow(vec4 lightSpacePosition, vec3 normal, vec3 lightDir)
-{
-	vec3 projCoords = lightSpacePosition.xyz / lightSpacePosition.w;
-	projCoords = projCoords * 0.5f + 0.5f;	// project to NDC [0,1]
-
-	if (projCoords.z > 1.0f)
-    {
-		return 0.0f;
-	}
-
-	float lightDepth = texture(depthMap, projCoords.xy).r;
-	float currentDepth = projCoords.z;
-	float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
-
-	return (currentDepth - bias > lightDepth ? 1.0f : 0.0f);
-}
-
 void main()
 {
 	vec3 normal = normalize(vertexData.normal);
+	normal = texture(textureNormalMap, vertexData.texCoords).rgb;
+	normal = normalize(normal * 2.0 - 1.0);   
+	normal = normalize(vertexData.TBN * normal);
+
 	vec3 viewDir = normalize(viewPosition - vertexData.worldPosition);
 	vec3 diffuseMap = vec3(texture(textureDiffuse1, vertexData.texCoords));
 	vec3 specularMap = vec3(1.0f);//vec3(texture(textureSpecular1, vertexData.texCoords));
 
 	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
 
-	/*vec3 dirLightComponent = calcDirLight(directionalLight, normal, viewDir, diffuseMap, specularMap, 256.0f);
-	resultColor += dirLightComponent;
+	//vec3 dirLightComponent = calcDirLight(directionalLight, normal, viewDir, diffuseMap, specularMap, 256.0f);
+	//resultColor += dirLightComponent;
 
 	for (int i = 0; i < pointLightCount; i++)
 	{
@@ -58,7 +47,7 @@ void main()
 	}
 
 	vec3 spotLightComponent = calcSpotLight(spotLight, normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
-	resultColor += spotLightComponent;*/
+	resultColor += spotLightComponent;
 
 	vec3 lightDir = normalize(directionalLight.direction - vertexData.worldPosition);
 	
@@ -72,5 +61,5 @@ void main()
 	float shadow = calculateShadow(vertexData.worldPosLightSpace, normal, lightDir);
     vec3 lighting = (ambient + (1.0f - shadow) * (diffuse + specular)) * diffuseMap;
 
-	outColor = vec4(lighting, 1.0f);
+	outColor = vec4(resultColor + lighting, 1.0f);
 }
