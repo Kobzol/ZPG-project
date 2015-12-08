@@ -25,6 +25,12 @@ void Mesh::setup()
 	this->vao.unbind();
 }
 
+std::unordered_map<TextureType, std::pair<int, std::string>> textureProperties =
+{
+	{ TextureType::Diffuse, { 1, "textureDiffuse" } },
+	{ TextureType::Specular, { 2, "textureSpecular" } }
+};
+
 void Mesh::draw()
 {
 	GLuint diffuseNo = 1;
@@ -32,22 +38,10 @@ void Mesh::draw()
 
 	for (GLuint i = 0; i < this->textures.size(); i++)
 	{
-		bool diffuse = this->textures[i].type == TextureType::Diffuse;
-		std::string name = "texture";
-		name += (diffuse ? "Diffuse" : "Specular");
+		std::pair<int, std::string> textureProperty = textureProperties[this->textures[i].type];
 
-		GLuint index = specularNo;
-		if (diffuse)
-		{
-			index = diffuseNo;
-			diffuseNo++;
-		}
-		else specularNo++;
-
-		name += std::to_string(index);
-
-		ProgramManager::getInstance().getCurrentProgram().setUniform1i(name, i);
-		this->textures[i].bind(i);
+		ProgramManager::getInstance().getCurrentProgram().setUniform1i(textureProperty.second, textureProperty.first);
+		this->textures[i].bind(textureProperty.first);
 	}
 
 	this->vao.bind();

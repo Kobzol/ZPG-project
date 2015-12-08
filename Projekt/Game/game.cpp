@@ -133,8 +133,8 @@ void Game::start()
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
-	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::Purple, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(planeGeometry)));
-	floor->getTransform().setScale(glm::vec3(10.0f));
+	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::Purple, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	floor->getTransform().setScale(glm::vec3(10.0f, 0.2f, 10.0f));
 	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
 	this->scene.add(floor);
 

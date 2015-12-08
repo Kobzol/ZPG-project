@@ -217,6 +217,7 @@
     <None Include="Shaders\Headers\phong_calculations.frag" />
     <None Include="Shaders\Vertex\depth.vert" />
     <None Include="Shaders\Vertex\font.vert" />
+    <None Include="Shaders\Vertex\heightmap.vert" />
     <None Include="Shaders\Vertex\postprocess.vert" />
     <None Include="Shaders\Vertex\model.vert" />
     <None Include="Shaders\Vertex\skybox.vert" />

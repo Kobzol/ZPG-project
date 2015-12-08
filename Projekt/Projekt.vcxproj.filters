@@ -143,6 +143,7 @@
     <None Include="Shaders\Headers\phong_calculations.frag" />
     <None Include="Shaders\Vertex\depth.vert" />
     <None Include="Shaders\Fragment\depth.frag" />
+    <None Include="Shaders\Vertex\heightmap.vert" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />

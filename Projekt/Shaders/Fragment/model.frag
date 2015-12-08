@@ -14,8 +14,8 @@ in VertexData vertexData;
 
 out vec4 outColor;
 
-uniform sampler2D textureDiffuse1;
-uniform sampler2D textureSpecular1;
+uniform sampler2D textureDiffuse;
+uniform sampler2D textureSpecular;
 uniform sampler2D depthMap;
 uniform sampler2D textureNormalMap;
 
@@ -32,8 +32,8 @@ void main()
 	normal = normalize(vertexData.TBN * normal);
 
 	vec3 viewDir = normalize(viewPosition - vertexData.worldPosition);
-	vec3 diffuseMap = vec3(texture(textureDiffuse1, vertexData.texCoords));
-	vec3 specularMap = vec3(1.0f);//vec3(texture(textureSpecular1, vertexData.texCoords));
+	vec3 diffuseMap = vec3(texture(textureDiffuse, vertexData.texCoords));
+	vec3 specularMap = vec3(1.0f);//vec3(texture(textureSpecular, vertexData.texCoords));
 
 	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
 
