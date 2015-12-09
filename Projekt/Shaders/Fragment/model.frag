@@ -21,6 +21,8 @@ uniform sampler2D textureSpecular;
 uniform bool textureSpecularValid;
 
 uniform sampler2D depthMap;
+uniform bool depthMapValid;
+
 uniform sampler2D textureNormalMap;
 uniform bool textureNormalMapValid;
 
@@ -76,8 +78,11 @@ void main()
 	vec3 diffuse = directionalLight.phong.diffuse * diff;
 	vec3 specular = directionalLight.phong.specular * spec;
 
-	float shadow = calculateShadow(vertexData.worldPosLightSpace, normal, lightDir);
-    vec3 lighting = (ambient + (1.0f - shadow) * (diffuse + specular)) * diffuseMap;
+	if (depthMapValid)
+	{
+		float shadow = calculateShadow(vertexData.worldPosLightSpace, normal, lightDir);
+		resultColor += (ambient + (1.0f - shadow) * (diffuse + specular)) * diffuseMap;
+	}
 
-	outColor = vec4(resultColor + lighting, 1.0f);
+	outColor = vec4(resultColor, 1.0f);
 }

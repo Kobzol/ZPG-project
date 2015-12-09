@@ -177,8 +177,10 @@ void Game::start()
 	this->scene.add(weaponHUD);
 
 	Timer timer(0.01f);
-	Timer switchTimer(0.05f);
+	Timer switchTimer(0.5f);
 	Timer clickTimer(1.0f);
+
+	int enableShadows = 1;
 
 	const GLuint depthMapTU = 10;
 
@@ -270,7 +272,8 @@ void Game::start()
 		}
 		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_SPACE) && switchTimer.resetIfReady())
 		{
-			// switch render strategy
+			enableShadows = 1 - enableShadows;
+			ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("depthMapValid", enableShadows);
 		}
 
 		InputController::getInstance().afterUpdate();
