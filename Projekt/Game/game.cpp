@@ -99,19 +99,23 @@ void Game::start()
 
 	// objects
 	float distance = 3.0f;
-	GameObject* cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	GameObject* cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
+		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(distance, 0.0f, 0.0f));
 
-	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
+		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(-distance, 0.0f, 0.0f));
 
-	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
+		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, distance, 0.0f));
 
-	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
+		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 2.0f));
 
