@@ -17,6 +17,12 @@ void RenderComponent::update()
 
 	module->draw(this);
 }
+
+glm::vec3 RenderComponent::getColor() const
+{
+	return this->color;
+}
+
 void RenderComponent::dispose()
 {
 	this->module->dispose();

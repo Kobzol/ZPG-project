@@ -5,6 +5,7 @@ Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indic
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
+	this->color = glm::vec4(1.0f);
 }
 
 void Mesh::setup()
@@ -23,6 +24,15 @@ void Mesh::setup()
 	Program::setAttribute(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) offsetof(Vertex, tangent));	// tangent
 
 	this->vao.unbind();
+}
+
+glm::vec4 Mesh::getColor() const
+{
+	return this->color;
+}
+void Mesh::setColor(glm::vec4 color)
+{
+	this->color = color;
 }
 
 std::unordered_map<TextureType, std::pair<int, std::string>> textureProperties =

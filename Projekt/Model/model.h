@@ -18,7 +18,7 @@ class Model
 public:
 	Model(std::string path);
 
-	void draw();
+	std::vector<Mesh>& getMeshes();
 	void dispose();
 
 private:

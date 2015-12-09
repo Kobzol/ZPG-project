@@ -21,6 +21,8 @@ public:
 	void update() override;
 	void dispose() override;
 
+	glm::vec3 getColor() const;
+
 private:
 	glm::vec3 color;
 	std::string shader;

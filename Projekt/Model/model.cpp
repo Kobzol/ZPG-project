@@ -5,13 +5,11 @@ Model::Model(std::string path)
 	this->loadModel(path);
 }
 
-void Model::draw()
+std::vector<Mesh>& Model::getMeshes()
 {
-	for (GLuint i = 0; i < this->meshes.size(); i++)
-	{
-		this->meshes[i].draw();
-	}
+	return this->meshes;
 }
+
 void Model::dispose()
 {
 	for (GLuint i = 0; i < this->meshes.size(); i++)
@@ -103,6 +101,19 @@ void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 		
 		this->loadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::Diffuse, createdMesh.textures);
 		this->loadMaterialTextures(material, aiTextureType_SPECULAR, TextureType::Specular, createdMesh.textures);
+
+		glm::vec4 color;
+		aiColor4D aiColor;
+
+		if (aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &aiColor) == AI_SUCCESS)
+		{
+			color.r = aiColor.r;
+			color.g = aiColor.g;
+			color.b = aiColor.b;
+			color.a = aiColor.a;
+
+			createdMesh.setColor(color);
+		}
 	}
 
 	this->meshes[this->meshes.size() - 1].setup();

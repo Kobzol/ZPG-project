@@ -3,6 +3,8 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 
+#include <glm/glm.hpp>
+
 #include <string>
 #include <vector>
 
@@ -25,6 +27,9 @@ public:
 
 	void setup();
 
+	glm::vec4 getColor() const;
+	void setColor(glm::vec4 color);
+
 	void draw();
 	void dispose();
 
@@ -34,4 +39,6 @@ private:
 	VAO vao;
 	VBO vbo;
 	EBO ebo;
+
+	glm::vec4 color;
 };
