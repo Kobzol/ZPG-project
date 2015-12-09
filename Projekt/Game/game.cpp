@@ -35,6 +35,10 @@ Context& Game::getContext()
 {
 	return *this->context;
 }
+Camera* Game::getCamera()
+{
+	return this->camera;
+}
 
 void Game::start()
 {
@@ -79,13 +83,19 @@ void Game::start()
 	FramebufferManager::getInstance().preloadFramebuffers();
 
 	// initial object spawn 
-	Camera* cameraScript = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
-	this->camera = new GameObject(cameraScript, nullptr, new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
-	this->camera->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 8.0f));
-	this->camera->getTags().set(Tag::Camera);
-	this->scene.add(this->camera);
+	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
+	GameObject* cameraObj = new GameObject(this->camera,
+		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL,
+			new DecoratorModule(new HUDModule(), new ModelDrawModule(ModelManager::MODEL_M4))),
+		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f))
+	);
 
-	ProgramManager::getInstance().observeCamera(cameraScript);
+	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 8.0f));
+	cameraObj->getTags().set(Tag::Camera);
+	cameraObj->getTransform().setScale(glm::vec3(0.2f));
+	this->scene.add(cameraObj);
+
+	ProgramManager::getInstance().observeCamera(this->camera);
 
 	// objects
 	float distance = 3.0f;
@@ -173,6 +183,7 @@ void Game::start()
 	normalTexture.bind(8);
 
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMap", 8);
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMapValid", 0);
 
 	context->loop([&](Context& context)	// physics
 	{
@@ -185,8 +196,8 @@ void Game::start()
 		switchTimer.update(delta);
 		clickTimer.update(delta);
 
-		spotLight->direction = cameraScript->getFront();
-		spotLightObj->getTransform().setPosition(camera->getTransform().getPosition());
+		spotLight->direction = this->camera->getFront();
+		spotLightObj->getTransform().setPosition(this->camera->getGameObject()->getTransform().getPosition());
 
 		crossHair->getTransform().setPosition(glm::vec3(context.getWindowWidth() / 2.0f, context.getWindowHeight() / 2.0f, 0.0f));
 
@@ -235,25 +246,6 @@ void Game::start()
 
 		this->scene.draw();
 
-		if (InputController::getInstance().isLeftMouseDown() && clickTimer.resetIfReady())
-		{
-			glm::vec2 mousePos = glm::vec2(context.getWindowWidth() / 2, context.getWindowHeight() / 2);
-
-			GLfloat depth;
-			GLchar index;
-
-			glReadPixels(mousePos.x, mousePos.y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
-			glReadPixels(mousePos.x, mousePos.y, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_BYTE, &index);
-			printf("Clicked on pixel %f, %f, depth %f, stencil index %u\n", mousePos.x, mousePos.y, depth, index);
-
-			glm::vec3 position = glm::unProject(glm::vec3(mousePos, depth), cameraScript->calculateViewMatrix(), cameraScript->calculateProjectionMatrix(), glm::vec4(0, 0, context.getWindowWidth(), context.getWindowHeight()));
-			std::cout << position.x << ", " << position.y << ", " << position.z << std::endl;
-			GameObject* tree = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_TREE)));
-			this->scene.add(tree);
-			tree->getTransform().setPosition(position);
-			tree->getTransform().setRotation(-90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-		}
-
 		this->screenQuad->drawScreen(context);	
 
 		if (timer.resetIfReady())
@@ -295,8 +287,7 @@ void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
 	this->context->setViewport(0, 0, width, height);
 	this->context->setWindowSize(width, height);
 
-	Camera* camera = (Camera*) this->camera->getScriptComponent();
-	camera->setAspect(width / (float) height);
+	this->camera->setAspect(width / (float)height);
 
 	FontManager::getInstance().setPerspective(width, height);
 }

@@ -22,6 +22,7 @@ uniform bool textureSpecularValid;
 
 uniform sampler2D depthMap;
 uniform sampler2D textureNormalMap;
+uniform bool textureNormalMapValid;
 
 uniform vec3 viewPosition;
 uniform vec3 color;
@@ -31,9 +32,13 @@ uniform vec3 color;
 void main()
 {
 	vec3 normal = normalize(vertexData.normal);
-	normal = texture(textureNormalMap, vertexData.texCoords).rgb;
-	normal = normalize(normal * 2.0 - 1.0);   
-	normal = normalize(vertexData.TBN * normal);
+
+	if (textureNormalMapValid)
+	{
+		normal = texture(textureNormalMap, vertexData.texCoords).rgb;
+		normal = normalize(normal * 2.0 - 1.0);   
+		normal = normalize(vertexData.TBN * normal);
+	}
 
 	vec3 viewDir = normalize(viewPosition - vertexData.worldPosition);
 	vec3 diffuseMap = color;

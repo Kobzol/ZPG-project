@@ -20,7 +20,9 @@
 #include "Physics/basic_physics_component.h"
 #include "Physics/physics_handler.h"
 #include "Render/render_component.h"
+#include "Render/Module/decorator_module.h"
 #include "Render/Module/geometry_draw_module.h"
+#include "Render/Module/hud_module.h"
 #include "Render/Module/model_draw_module.h"
 #include "Render/Module/skybox_draw_module.h"
 #include "Render/Module/sprite_draw_module.h"
@@ -44,6 +46,7 @@ public:
 
 	void start();
 	float getDeltaTime();
+	Camera* getCamera();
 
 	Scene& getActiveScene();
 	Context& getContext();
@@ -55,7 +58,7 @@ private:
 
 	PhysicsHandler physicsHandler;
 	Context* context;
-	GameObject* camera;
+	Camera* camera;
 	ScreenQuad* screenQuad;
 	Scene scene;
 
