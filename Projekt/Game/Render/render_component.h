@@ -16,7 +16,6 @@ class RenderComponent : public IComponent
 {
 public:
 	RenderComponent(glm::vec3 color, std::string shader, IRenderModule* module);
-	RenderComponent(glm::vec3 color, std::string shader, const std::vector<IRenderModule*>& modules);
 
 	void update() override;
 	void dispose() override;
@@ -24,5 +23,5 @@ public:
 private:
 	glm::vec3 color;
 	std::string shader;
-	std::vector<IRenderModule*> modules;
+	IRenderModule* module;
 };

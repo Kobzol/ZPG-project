@@ -14,7 +14,7 @@ class SpriteDrawModule : public IRenderModule
 public:
 	SpriteDrawModule(std::string textureId);
 
-	void update(RenderComponent* component) override;
+	void startDraw(RenderComponent* component) override;
 	void dispose() override;
 
 private:

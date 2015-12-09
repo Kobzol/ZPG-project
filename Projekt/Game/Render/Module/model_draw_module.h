@@ -12,7 +12,7 @@ class ModelDrawModule : public IRenderModule
 public:
 	ModelDrawModule(std::string modelName);
 
-	void update(RenderComponent* component) override;
+	void startDraw(RenderComponent* component) override;
 
 private:
 	std::string modelName;

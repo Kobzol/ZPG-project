@@ -9,7 +9,7 @@ class GeometryDrawModule : public IRenderModule
 public:
 	GeometryDrawModule(GeometryObject geometry);
 
-	void update(RenderComponent* component) override;
+	void startDraw(RenderComponent* component) override;
 	void dispose() override;
 
 private:

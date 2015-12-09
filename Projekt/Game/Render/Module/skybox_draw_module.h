@@ -12,7 +12,7 @@ class SkyboxDrawModule : public IRenderModule
 public:
 	SkyboxDrawModule(Cubemap cubemap);
 
-	void update(RenderComponent* component) override;
+	void startDraw(RenderComponent* component) override;
 	void dispose() override;
 
 private:

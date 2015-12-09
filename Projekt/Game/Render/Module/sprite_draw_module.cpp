@@ -6,7 +6,7 @@ SpriteDrawModule::SpriteDrawModule(std::string textureId) : textureId(textureId)
 	this->spriteGeometry.setAttributePositionTexture2D();
 }
 
-void SpriteDrawModule::update(RenderComponent* component)
+void SpriteDrawModule::startDraw(RenderComponent* component)
 {
 	Texture& texture = TextureManager::getInstance().get(this->textureId);
 	texture.bind(0);

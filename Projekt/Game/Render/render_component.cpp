@@ -1,12 +1,8 @@
 #include "render_component.h"
 
-RenderComponent::RenderComponent(glm::vec3 color, std::string shader, IRenderModule* module) : color(color), shader(shader)
+RenderComponent::RenderComponent(glm::vec3 color, std::string shader, IRenderModule* module) : color(color), shader(shader), module(module)
 {
-	this->modules.push_back(module);
-}
-RenderComponent::RenderComponent(glm::vec3 color, std::string shader, const std::vector<IRenderModule*>& modules) : color(color), shader(shader), modules(modules)
-{
-
+	
 }
 
 void RenderComponent::update()
@@ -19,16 +15,10 @@ void RenderComponent::update()
 
 	context.setStencilFunc(GL_ALWAYS, this->getGameObject()->getId(), 0xFF);
 
-	for (IRenderModule* module : this->modules)
-	{
-		module->update(this);
-	}
+	module->draw(this);
 }
 void RenderComponent::dispose()
 {
-	for (IRenderModule* module : this->modules)
-	{
-		module->dispose();
-		delete module;
-	}
+	this->module->dispose();
+	delete this->module;
 }

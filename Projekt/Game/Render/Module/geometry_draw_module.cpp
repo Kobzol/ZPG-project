@@ -5,7 +5,7 @@ GeometryDrawModule::GeometryDrawModule(GeometryObject geometry) : geometry(geome
 
 }
 
-void GeometryDrawModule::update(RenderComponent* component)
+void GeometryDrawModule::startDraw(RenderComponent* component)
 {
 	this->geometry.getVAO().bind();
 	RenderUtils::drawTriangles(0, this->geometry.getVertexCount());

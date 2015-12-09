@@ -5,7 +5,7 @@ ModelDrawModule::ModelDrawModule(std::string modelName) : modelName(modelName)
 
 }
 
-void ModelDrawModule::update(RenderComponent* component)
+void ModelDrawModule::startDraw(RenderComponent* component)
 {
 	ModelManager::getInstance().get(this->modelName)->draw();
 }

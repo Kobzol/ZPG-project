@@ -6,7 +6,7 @@ SkyboxDrawModule::SkyboxDrawModule(Cubemap cubemap) : cubemap(cubemap)
 	this->geometry.setAttributePosition();
 }
 
-void SkyboxDrawModule::update(RenderComponent* component)
+void SkyboxDrawModule::startDraw(RenderComponent* component)
 {
 	Context& context = Game::getInstance().getContext();
 
