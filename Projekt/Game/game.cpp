@@ -143,8 +143,8 @@ void Game::start()
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
-	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(planeGeometry)));
-	floor->getTransform().setScale(glm::vec3(10.0f, 0.2f, 10.0f));
+	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	floor->getTransform().setScale(glm::vec3(100.0f, 0.2f, 100.0f));
 	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
 	this->scene.add(floor);
 
@@ -167,9 +167,9 @@ void Game::start()
 
 	GameObject* crossHair = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_SPRITE, new SpriteDrawModule(TextureManager::TEXTURE_CROSSHAIR)));
 	crossHair->getTransform().setScale(glm::vec3(50.0f, 50.0f, 1.0f));
-	//this->scene.add(crossHair);
+	this->scene.add(crossHair);
 
-	GameObject* weaponHUD = new GameObject(nullptr,
+	GameObject* weaponHUD = new GameObject(new WeaponController(),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL,
 		new DecoratorModule(new HUDModule(glm::vec3(0.0f, -2.0f, 5.0f)), new ModelDrawModule(ModelManager::MODEL_M4)))
 	);
@@ -178,7 +178,6 @@ void Game::start()
 
 	Timer timer(0.01f);
 	Timer switchTimer(0.5f);
-	Timer clickTimer(1.0f);
 
 	int enableShadows = 1;
 
@@ -194,16 +193,17 @@ void Game::start()
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMap", 8);
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMapValid", 0);
 
+	ObjectManager& objectManager = this->scene.getObjectManager();
+
 	context->loop([&](Context& context)	// physics
 	{
-		//this->physicsHandler.simulate(this->scene.getObjectManager().getObjects(), this->scene.getObjectManager().getObjectCount(), Context::getFixedDeltaTime());
+		this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
 	},	
 	[&](Context& context)	// render
 	{
 		float delta = context.getDeltaTime();
 		timer.update(delta);
 		switchTimer.update(delta);
-		clickTimer.update(delta);
 
 		spotLight->direction = this->camera->getFront();
 		spotLightObj->getTransform().setPosition(this->camera->getGameObject()->getTransform().getPosition());
@@ -259,7 +259,17 @@ void Game::start()
 		this->pass = RenderPass::Render;
 		this->scene.draw();
 
-		this->screenQuad->drawScreen(context);	
+		this->screenQuad->drawScreen(context);
+
+		size_t objectCount = objectManager.getObjectCount();
+		std::vector<GameObject*> &objects = objectManager.getObjects();
+		for (size_t i = 0; i < objectCount; i++)
+		{
+			if (glm::distance(objects[i]->getTransform().getPosition(), glm::vec3(0.0f)) > 100)
+			{
+				objectManager.markForRemoval(objects[i]);
+			}
+		}
 
 		if (timer.resetIfReady())
 		{

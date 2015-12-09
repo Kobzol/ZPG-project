@@ -106,6 +106,7 @@
     <ClCompile Include="Game\Render\Module\model_draw_module.cpp" />
     <ClCompile Include="Game\Render\Module\skybox_draw_module.cpp" />
     <ClCompile Include="Game\Render\Module\sprite_draw_module.cpp" />
+    <ClCompile Include="Game\weapon_controller.cpp" />
     <ClCompile Include="tmp.cpp" />
     <ClCompile Include="Game\Render\render_component.cpp" />
     <ClCompile Include="Game\scene.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Game\game.h" />
     <ClInclude Include="Game\Physics\transform.h" />
     <ClInclude Include="Content\program_manager.h" />
+    <ClInclude Include="Game\weapon_controller.h" />
     <ClInclude Include="Helper\file_helper.h" />
     <ClInclude Include="Helper\flags.h" />
     <ClInclude Include="Math\math_helper.h" />

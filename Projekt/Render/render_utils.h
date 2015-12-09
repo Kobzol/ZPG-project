@@ -3,7 +3,10 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 
+#include "color.h"
 #include "program.h"
+
+class IComponent;
 
 class RenderUtils
 {
@@ -18,6 +21,8 @@ public:
 	static void drawPoints(GLint skip, GLsizei pointsCount);
 
 	static void drawTriangleStrip(GLint skip, GLsizei verticesCount);
+
+	static IComponent* createCubeRenderer(glm::vec3 color = Color::White);
 
 private:
 	RenderUtils();

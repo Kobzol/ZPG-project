@@ -1,4 +1,5 @@
 #include "render_utils.h"
+#include "../Game/Render/render_component.h"
 
 RenderUtils::RenderUtils()
 {
@@ -38,4 +39,11 @@ void RenderUtils::drawTriangleStrip(GLint skip, GLsizei verticesCount)
 {
 	glDrawArrays(GL_TRIANGLE_STRIP, skip, verticesCount);
 	GL_CHECK_ERRORS();
+}
+
+IComponent* RenderUtils::createCubeRenderer(glm::vec3 color)
+{
+	GeometryObject cubeGeometry(VERTICES_CUBE, sizeof(glm::vec3), 36);
+	cubeGeometry.setAttributePosition();
+	return new RenderComponent(color, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(cubeGeometry));
 }

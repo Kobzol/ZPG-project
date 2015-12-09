@@ -10,6 +10,7 @@
 #include "screen_quad.h"
 #include "tag.h"
 #include "timer.h"
+#include "weapon_controller.h"
 #include "Input/input_controller.h"
 #include "Camera/camera_controller.h"
 #include "Light/directional_light.h"
