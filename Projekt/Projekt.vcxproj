@@ -168,6 +168,7 @@
     <ClInclude Include="Game\Render\Module\decorator_module.h" />
     <ClInclude Include="Game\Render\render_component.h" />
     <ClInclude Include="Game\Render\Module\irender_module.h" />
+    <ClInclude Include="Game\Render\render_pass.h" />
     <ClInclude Include="Game\scene.h" />
     <ClInclude Include="Game\tag.h" />
     <ClInclude Include="Game\timer.h" />

@@ -39,6 +39,10 @@ Camera* Game::getCamera()
 {
 	return this->camera;
 }
+RenderPass Game::getRenderPass()
+{
+	return this->pass;
+}
 
 void Game::start()
 {
@@ -93,7 +97,6 @@ void Game::start()
 	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 8.0f));
 	cameraObj->getTags().set(Tag::Camera);
 	cameraObj->getTransform().setScale(glm::vec3(0.2f));
-	this->scene.add(cameraObj);
 
 	ProgramManager::getInstance().observeCamera(this->camera);
 
@@ -169,6 +172,8 @@ void Game::start()
 	crossHair->getTransform().setScale(glm::vec3(50.0f, 50.0f, 1.0f));
 	//this->scene.add(crossHair);
 
+	this->scene.add(cameraObj);
+
 	Timer timer(0.01f);
 	Timer switchTimer(0.05f);
 	Timer clickTimer(1.0f);
@@ -231,7 +236,10 @@ void Game::start()
 
 		ProgramManager::getInstance().lockProgram();
 		context.setCullingMode(GL_FRONT);
+
+		this->pass = RenderPass::Depth;
 		this->scene.draw();
+
 		context.setCullingMode(GL_BACK);
 		ProgramManager::getInstance().unlockProgram();
 
@@ -244,6 +252,7 @@ void Game::start()
 
 		depthBuffer.primaryAttachment.bind(depthMapTU);
 
+		this->pass = RenderPass::Render;
 		this->scene.draw();
 
 		this->screenQuad->drawScreen(context);	

@@ -126,6 +126,7 @@
     <ClInclude Include="Game\Render\Module\sprite_draw_module.h" />
     <ClInclude Include="Game\Render\Module\decorator_module.h" />
     <ClInclude Include="Game\Render\Module\hud_module.h" />
+    <ClInclude Include="Game\Render\render_pass.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "render_pass.h"
 #include "Module/irender_module.h"
 #include "../game.h"
 #include "../Component/icomponent.h"

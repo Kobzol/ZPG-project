@@ -20,6 +20,7 @@
 #include "Physics/basic_physics_component.h"
 #include "Physics/physics_handler.h"
 #include "Render/render_component.h"
+#include "Render/render_pass.h"
 #include "Render/Module/decorator_module.h"
 #include "Render/Module/geometry_draw_module.h"
 #include "Render/Module/hud_module.h"
@@ -47,6 +48,7 @@ public:
 	void start();
 	float getDeltaTime();
 	Camera* getCamera();
+	RenderPass getRenderPass();
 
 	Scene& getActiveScene();
 	Context& getContext();
@@ -61,6 +63,7 @@ private:
 	Camera* camera;
 	ScreenQuad* screenQuad;
 	Scene scene;
+	RenderPass pass;
 
 	Game();
 	~Game();
