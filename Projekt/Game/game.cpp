@@ -88,15 +88,12 @@ void Game::start()
 
 	// initial object spawn 
 	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
-	GameObject* cameraObj = new GameObject(this->camera,
-		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL,
-			new DecoratorModule(new HUDModule(), new ModelDrawModule(ModelManager::MODEL_M4))),
-		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f))
-	);
+	GameObject* cameraObj = new GameObject(this->camera, new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 
 	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 8.0f));
 	cameraObj->getTags().set(Tag::Camera);
 	cameraObj->getTransform().setScale(glm::vec3(0.2f));
+	this->scene.add(cameraObj);
 
 	ProgramManager::getInstance().observeCamera(this->camera);
 
@@ -172,7 +169,12 @@ void Game::start()
 	crossHair->getTransform().setScale(glm::vec3(50.0f, 50.0f, 1.0f));
 	//this->scene.add(crossHair);
 
-	this->scene.add(cameraObj);
+	GameObject* weaponHUD = new GameObject(nullptr,
+		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL,
+		new DecoratorModule(new HUDModule(glm::vec3(0.0f, -2.0f, 5.0f)), new ModelDrawModule(ModelManager::MODEL_M4)))
+	);
+	weaponHUD->getTransform().setRotation(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	this->scene.add(weaponHUD);
 
 	Timer timer(0.01f);
 	Timer switchTimer(0.05f);
