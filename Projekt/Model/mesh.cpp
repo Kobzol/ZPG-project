@@ -33,14 +33,19 @@ std::unordered_map<TextureType, std::pair<int, std::string>> textureProperties =
 
 void Mesh::draw()
 {
-	GLuint diffuseNo = 1;
-	GLuint specularNo = 1;
+	Program& program = ProgramManager::getInstance().getCurrentProgram();
+
+	for (auto& texture : textureProperties)
+	{
+		program.setUniform1i(texture.second.second + "Valid", 0);
+	}
 
 	for (GLuint i = 0; i < this->textures.size(); i++)
 	{
 		std::pair<int, std::string> textureProperty = textureProperties[this->textures[i].type];
 
-		ProgramManager::getInstance().getCurrentProgram().setUniform1i(textureProperty.second, textureProperty.first);
+		program.setUniform1i(textureProperty.second, textureProperty.first);
+		program.setUniform1i(textureProperty.second + "Valid", 1);
 		this->textures[i].bind(textureProperty.first);
 	}
 

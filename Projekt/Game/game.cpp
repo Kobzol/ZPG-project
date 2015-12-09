@@ -89,19 +89,19 @@ void Game::start()
 
 	// objects
 	float distance = 3.0f;
-	GameObject* cube = new GameObject(nullptr, new RenderComponent(Color::Blue, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	GameObject* cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(distance, 0.0f, 0.0f));
 
-	cube = new GameObject(nullptr, new RenderComponent(Color::Red, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(-distance, 0.0f, 0.0f));
 
-	cube = new GameObject(nullptr, new RenderComponent(Color::Green, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, distance, 0.0f));
 
-	cube = new GameObject(nullptr, new RenderComponent(Color::Yellow, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	this->scene.add(cube);
 	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 2.0f));
 
@@ -133,7 +133,7 @@ void Game::start()
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
-	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::Purple, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(planeGeometry)));
 	floor->getTransform().setScale(glm::vec3(10.0f, 0.2f, 10.0f));
 	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
 	this->scene.add(floor);
@@ -248,7 +248,7 @@ void Game::start()
 
 			glm::vec3 position = glm::unProject(glm::vec3(mousePos, depth), cameraScript->calculateViewMatrix(), cameraScript->calculateProjectionMatrix(), glm::vec4(0, 0, context.getWindowWidth(), context.getWindowHeight()));
 			std::cout << position.x << ", " << position.y << ", " << position.z << std::endl;
-			GameObject* tree = new GameObject(nullptr, new RenderComponent(Color::Blue, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_TREE)));
+			GameObject* tree = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_TREE)));
 			this->scene.add(tree);
 			tree->getTransform().setPosition(position);
 			tree->getTransform().setRotation(-90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
