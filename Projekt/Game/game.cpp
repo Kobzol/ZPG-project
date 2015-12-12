@@ -65,7 +65,7 @@ void Game::start()
 	this->context->setStencilMask(0xFF);
 	this->context->setStencilFunc(GL_ALWAYS, 1, 0xFF);
 	this->context->setStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	this->context->setCulling(true);
+	this->context->setCulling(false);
 	this->context->setBlending(true);
 	this->context->setBlendingFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -150,7 +150,7 @@ void Game::start()
 	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	floor->getTransform().setScale(glm::vec3(100.0f, 0.2f, 100.0f));
 	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
-	this->scene.add(floor);
+	//this->scene.add(floor);
 
 	// skybox
 	const std::string skyboxPath = "Resources/Textures/skybox/";
@@ -187,21 +187,44 @@ void Game::start()
 
 	const GLuint depthMapTU = 10;
 
-	Image normalMap("Resources/Models/cube_normal_map/normal_map.png");
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMap", 8);
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMapValid", 0);
+
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_HEIGHTMAP).setUniform1i("heightMapTexture", 9);
+
+	/*Image normalMap("Resources/Textures/terrain.jpg");
 	Texture normalTexture;
 	normalTexture.allocate();
 	normalTexture.set2DImage(normalMap);
 	normalTexture.generateMipmap();
-	normalTexture.bind(8);
+	normalTexture.setTextureClamping(GL_REPEAT);
+	normalTexture.setTextureFiltering(false, GL_LINEAR_MIPMAP_LINEAR);
+	normalTexture.setTextureFiltering(true, GL_LINEAR_MIPMAP_LINEAR);
+	normalTexture.bind(9);*/
 
-	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMap", 8);
-	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMapValid", 0);
+	Image terrainTextureImg("Resources/Textures/terrain.jpg");
+	Texture terrainTexture;
+	terrainTexture.allocate();
+	terrainTexture.set2DImage(terrainTextureImg);
+	terrainTexture.generateMipmap();
+	terrainTexture.setTextureClamping(GL_REPEAT);
+	terrainTexture.setTextureFiltering(false, GL_LINEAR);
+	terrainTexture.setTextureFiltering(true, GL_LINEAR);
+	terrainTexture.bind(9);
+
+	HeightMap heightMap(256, 0.01f, 4.0f);
+
+	GameObject* terrain = heightMap.createObject();
+	terrain->getTransform().setScale(glm::vec3(60.0f, 20.0f, 60.0f));
+	terrain->getTransform().setPosition(glm::vec3(-30.0f, -20.0f, -30.0f));
+	this->scene.add(terrain);
 
 	ObjectManager& objectManager = this->scene.getObjectManager();
 
 	context->loop([&](Context& context)	// physics
 	{
-		this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
+		//this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
+		//objectManager.removeMarkedObjects();
 	},	
 	[&](Context& context)	// render
 	{

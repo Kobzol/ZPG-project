@@ -8,6 +8,7 @@ const std::string ProgramManager::PROGRAM_FONT = "font";
 const std::string ProgramManager::PROGRAM_SKYBOX = "skybox";
 const std::string ProgramManager::PROGRAM_SPRITE = "sprite";
 const std::string ProgramManager::PROGRAM_DEPTH = "depth";
+const std::string ProgramManager::PROGRAM_HEIGHTMAP = "heightmap";
 
 const std::string ProgramManager::SHADER_VERTEX_PATH = "Shaders/Vertex/";
 const std::string ProgramManager::SHADER_FRAGMENT_PATH = "Shaders/Fragment/";
@@ -33,6 +34,7 @@ void ProgramManager::preloadPrograms()
 	this->preloadProgram(ProgramManager::PROGRAM_SKYBOX, "skybox.vert", "skybox.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
 	this->preloadProgram(ProgramManager::PROGRAM_SPRITE, "sprite.vert", "sprite.frag", Flags<ProgramEvent>());
 	this->preloadProgram(ProgramManager::PROGRAM_DEPTH, "depth.vert", "depth.frag", Flags<ProgramEvent>(ProgramEvent::LightSpace));
+	this->preloadProgram(ProgramManager::PROGRAM_HEIGHTMAP, "heightmap.vert", "heightmap.frag", Flags<ProgramEvent>(ProgramEvent::ViewProjection));
 }
 
 Program& ProgramManager::use(std::string identifier)

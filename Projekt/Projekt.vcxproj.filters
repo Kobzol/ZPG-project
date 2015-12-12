@@ -57,6 +57,7 @@
     <ClCompile Include="Game\Render\Module\hud_module.cpp" />
     <ClCompile Include="tmp.cpp" />
     <ClCompile Include="Game\weapon_controller.cpp" />
+    <ClCompile Include="Game\heightmap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Game\Render\Module\hud_module.h" />
     <ClInclude Include="Game\Render\render_pass.h" />
     <ClInclude Include="Game\weapon_controller.h" />
+    <ClInclude Include="Game\heightmap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
@@ -152,6 +154,7 @@
     <None Include="Shaders\Vertex\depth.vert" />
     <None Include="Shaders\Fragment\depth.frag" />
     <None Include="Shaders\Vertex\heightmap.vert" />
+    <None Include="Shaders\Fragment\heightmap.frag" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />

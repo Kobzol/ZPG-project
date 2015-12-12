@@ -23,6 +23,15 @@ public:
 	Vertex(glm::vec3 position, glm::vec3 normal, glm::vec2 texCoords, glm::vec3 tangent);
 };
 
+struct VertexHeightMap
+{
+	glm::vec3 position;
+	glm::vec2 texCoords;
+
+	VertexHeightMap();
+	VertexHeightMap(glm::vec3 position, glm::vec2 texCoords);
+};
+
 #pragma region vertices
 const VertexSimple VERTICES_CUBE[] = {
 	// back face
@@ -132,11 +141,21 @@ static GLfloat VERTICES_SPRITE[] = {
 
 static GLfloat VERTICES_PLANE[] = {
 	// positions		// normal
-	-1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-	1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-	1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-	1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-	-1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-	-1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f
+	-0.5f, 0.0f, 0.5f, 0.0f, 0.5f, 0.0f,
+	0.5f, 0.0f, 0.5f, 0.0f, 0.5f, 0.0f,
+	0.5f, 0.0f, -0.5f, 0.0f, 0.5f, 0.0f,
+	0.5f, 0.0f, -0.5f, 0.0f, 0.5f, 0.0f,
+	-0.5f, 0.0f, -0.5f, 0.0f, 0.5f, 0.0f,
+	-0.5f, 0.0f, 0.5f, 0.0f, 0.5f, 0.0f
+};
+
+static GLfloat VERTICES_HEIGHTMAP[] = {
+	// positions		// tex
+	-0.5f, 0.0f, 0.5f, 0.0f, 0.0f,
+	0.5f, 0.0f, 0.5f, 0.0f, 1.0f,
+	0.5f, 0.0f, -0.5f, 1.0f, 1.0f,
+	0.5f, 0.0f, -0.5f, 1.0f, 1.0f,
+	-0.5f, 0.0f, -0.5f, 1.0f, 0.0f,
+	-0.5f, 0.0f, 0.5f, 0.0f, 0.0f
 };
 #pragma endregion vertices

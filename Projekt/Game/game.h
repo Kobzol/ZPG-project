@@ -4,8 +4,12 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <time.h>
+#include <glm/gtc/noise.hpp>
 
+#include <time.h>
+#include <random>
+
+#include "heightmap.h"
 #include "scene.h"
 #include "screen_quad.h"
 #include "tag.h"

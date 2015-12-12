@@ -36,6 +36,13 @@ void GeometryObject::setAttributePositionTexture2D()
 	Program::setAttribute(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*) (2 * sizeof(GLfloat)));
 	this->vao.unbind();
 }
+void GeometryObject::setAttributePositionTexture3D()
+{
+	this->vao.bind();
+	Program::setAttribute(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0);
+	Program::setAttribute(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	this->vao.unbind();
+}
 void GeometryObject::setAttributePositionNormal()
 {
 	this->vao.bind();

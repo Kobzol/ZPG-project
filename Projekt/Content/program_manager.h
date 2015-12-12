@@ -22,6 +22,7 @@ public:
 	static const std::string PROGRAM_SKYBOX;
 	static const std::string PROGRAM_SPRITE;
 	static const std::string PROGRAM_DEPTH;
+	static const std::string PROGRAM_HEIGHTMAP;
 
 	static ProgramManager& getInstance();
 
