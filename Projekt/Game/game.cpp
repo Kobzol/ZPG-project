@@ -90,7 +90,7 @@ void Game::start()
 	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
 	GameObject* cameraObj = new GameObject(this->camera, new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 
-	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 8.0f));
+	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 30.0f));
 	cameraObj->getTags().set(Tag::Camera);
 	cameraObj->getTransform().setScale(glm::vec3(0.2f));
 	this->scene.add(cameraObj);
@@ -153,7 +153,7 @@ void Game::start()
 
 	Timer fpsTimer(0.01f);
 	Timer switchTimer(0.5f);
-	Timer spawnTimer(3.0f);
+	Timer spawnTimer(10.0f);
 
 	int enableShadows = 1;
 	int enableBumpMap = 1;
@@ -197,6 +197,9 @@ void Game::start()
 
 	ObjectManager& objectManager = this->scene.getObjectManager();
 
+	std::default_random_engine engine;
+	std::uniform_real_distribution<float> randomGenerator(-10.0f, 10.0f);
+
 	context->loop([&](Context& context)	// physics
 	{
 		this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
@@ -216,7 +219,13 @@ void Game::start()
 
 		if (spawnTimer.resetIfReady())
 		{
+			GameObject* target = new GameObject(nullptr,
+				new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
+				new BasicPhysicsComponent(false, new SphereBoundingBox(2.0f)));
 
+			target->getTransform().setPosition(glm::vec3(randomGenerator(engine), randomGenerator(engine), 20.0f + randomGenerator(engine)));
+			target->getTags().set(Tag::Target);
+			scene.add(target);
 		}
 
 		context.setDepthTest(true);
