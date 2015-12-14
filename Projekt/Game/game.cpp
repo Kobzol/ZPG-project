@@ -151,28 +151,19 @@ void Game::start()
 	GameObject* skybox = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_SKYBOX, new SkyboxDrawModule(skyboxCubemap)));
 	this->scene.add(skybox);
 
-	GameObject* crossHair = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_SPRITE, new SpriteDrawModule(TextureManager::TEXTURE_CROSSHAIR)));
-	crossHair->getTransform().setScale(glm::vec3(50.0f, 50.0f, 1.0f));
-	this->scene.add(crossHair);
-
-	GameObject* weaponHUD = new GameObject(new WeaponController(),
-		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL,
-		new DecoratorModule(new HUDModule(glm::vec3(0.0f, -2.0f, 5.0f)), new ModelDrawModule(ModelManager::MODEL_M4)))
-	);
-	weaponHUD->getTransform().setRotation(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	this->scene.add(weaponHUD);
-
-	Timer timer(0.01f);
+	Timer fpsTimer(0.01f);
 	Timer switchTimer(0.5f);
+	Timer spawnTimer(3.0f);
 
 	int enableShadows = 1;
 	int enableBumpMap = 1;
 	int enablePostProcess = 0;
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("useShadows", enableShadows);
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("useBumpMap", enableBumpMap);
-	ProgramManager::getInstance().use(ProgramManager::PROGRAM_POSTPROCESS).setUniform1i("usePostProcess", enablePostProcess);
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_POSTPROCESS).setUniform1i("postProcess", enablePostProcess);
 
 	const GLuint depthMapTU = 10;
+	const size_t maxBulletDistance = 100;
 
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_HEIGHTMAP).setUniform1i("heightMapTexture", 9);
 
@@ -193,23 +184,40 @@ void Game::start()
 	terrain->getTransform().setPosition(glm::vec3(-30.0f, -20.0f, -30.0f));
 	this->scene.add(terrain);
 
+	GameObject* crossHair = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_SPRITE, new SpriteDrawModule(TextureManager::TEXTURE_CROSSHAIR)));
+	crossHair->getTransform().setScale(glm::vec3(50.0f, 50.0f, 1.0f));
+	this->scene.add(crossHair);
+
+	GameObject* weaponHUD = new GameObject(new WeaponController(),
+		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL,
+		new DecoratorModule(new HUDModule(glm::vec3(0.0f, -2.0f, 5.0f)), new ModelDrawModule(ModelManager::MODEL_M4)))
+		);
+	weaponHUD->getTransform().setRotation(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	this->scene.add(weaponHUD);
+
 	ObjectManager& objectManager = this->scene.getObjectManager();
 
 	context->loop([&](Context& context)	// physics
 	{
-		//this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
-		//objectManager.removeMarkedObjects();
+		this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
+		objectManager.removeMarkedObjects();
 	},	
 	[&](Context& context)	// render
 	{
 		float delta = context.getDeltaTime();
-		timer.update(delta);
+		fpsTimer.update(delta);
 		switchTimer.update(delta);
+		spawnTimer.update(delta);
 
 		spotLight->direction = this->camera->getFront();
 		spotLightObj->getTransform().setPosition(this->camera->getGameObject()->getTransform().getPosition());
 
 		crossHair->getTransform().setPosition(glm::vec3(context.getWindowWidth() / 2.0f, context.getWindowHeight() / 2.0f, 0.0f));
+
+		if (spawnTimer.resetIfReady())
+		{
+
+		}
 
 		context.setDepthTest(true);
 
@@ -264,13 +272,13 @@ void Game::start()
 		std::vector<GameObject*> &objects = objectManager.getObjects();
 		for (size_t i = 0; i < objectCount; i++)
 		{
-			if (glm::distance(objects[i]->getTransform().getPosition(), glm::vec3(0.0f)) > 100)
+			if (objects[i]->getTags().isSet(Tag::Bullet) && glm::distance(objects[i]->getTransform().getPosition(), glm::vec3(0.0f)) > maxBulletDistance)
 			{
 				objectManager.markForRemoval(objects[i]);
 			}
 		}
 
-		if (timer.resetIfReady())
+		if (fpsTimer.resetIfReady())
 		{
 			FontManager::getInstance().renderText("FPS: " + std::to_string(round(1.0f / delta)), 10.0f, height - 20.0f, 0.5f, glm::vec3(1.0f, 1.0f, 0.0f));
 		}
@@ -291,8 +299,8 @@ void Game::start()
 		}
 		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_M) && switchTimer.resetIfReady())
 		{
-			enablePostProcess = 1 - enablePostProcess;
-			ProgramManager::getInstance().use(ProgramManager::PROGRAM_POSTPROCESS).setUniform1i("usePostProcess", enablePostProcess);
+			enablePostProcess = (enablePostProcess + 1) % 3;
+			ProgramManager::getInstance().use(ProgramManager::PROGRAM_POSTPROCESS).setUniform1i("postProcess", enablePostProcess);
 		}
 
 		InputController::getInstance().afterUpdate();

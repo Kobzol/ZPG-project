@@ -55,7 +55,7 @@ public:
 				break;
 			}
 
-			OpenGLHelper::glPrintError(message, filename, line);
+			throw new std::exception();
 
 			return false;
 		}

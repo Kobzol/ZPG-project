@@ -3,5 +3,7 @@
 enum class Tag
 {
 	Camera,
-	Light
+	Light,
+	Target,
+	Bullet
 };

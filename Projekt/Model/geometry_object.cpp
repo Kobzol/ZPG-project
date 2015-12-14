@@ -53,8 +53,8 @@ void GeometryObject::setAttributePositionNormal()
 
 void GeometryObject::dispose()
 {
-	this->vao.dispose();
 	this->vbo.dispose();
+	this->vao.dispose();
 }
 
 VAO GeometryObject::getVAO()

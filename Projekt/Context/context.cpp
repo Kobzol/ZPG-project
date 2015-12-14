@@ -145,7 +145,7 @@ void Context::loop(std::function<void(Context&)> fixedCallback, std::function<vo
 {
 	GLfloat lastFrame = (GLfloat) glfwGetTime();
 	double accumulator = 0.0;
-	double fixedDelta = 1 / 60.0f;
+	double fixedDelta = 1 / 30.0f;
 	Context::fixedDeltaTime = (GLfloat) fixedDelta;
 
 	while (!glfwWindowShouldClose(this->window))

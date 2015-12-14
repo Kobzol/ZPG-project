@@ -18,7 +18,7 @@ void VBO::unbind()
 }
 void VBO::dispose()
 {
-	//glDeleteBuffers(GL_ARRAY_BUFFER, &this->vbo); // crashes on manual vertex data
+	glDeleteBuffers(1, &this->vbo);
 	GL_CHECK_ERRORS();
 	this->vbo = 0;
 }

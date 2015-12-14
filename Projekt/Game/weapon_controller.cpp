@@ -22,15 +22,19 @@ void WeaponController::shoot()
 	GameObject* bullet = new GameObject(nullptr, RenderUtils::createCubeRenderer(Color::Yellow), new BasicPhysicsComponent(true, new SphereBoundingBox(1.0f),
 	[](IPhysicsComponent* component, GameObject* object)
 	{
-		Game::getInstance().getActiveScene().getObjectManager().markForRemoval(object);
-		Game::getInstance().getActiveScene().getObjectManager().markForRemoval(component->getGameObject());
+		if (object->getTags().isSet(Tag::Target))
+		{
+			Game::getInstance().getActiveScene().getObjectManager().markForRemoval(object);
+			Game::getInstance().getActiveScene().getObjectManager().markForRemoval(component->getGameObject());
 
-		std::cout << "Hit box!" << std::endl;
+			std::cout << "Hit box!" << std::endl;
+		}
 	}));
 	bullet->getTransform().setPosition(playerPosition->getTransform().getPosition());
 	bullet->getTransform().setScale(glm::vec3(0.5f));
 	bullet->getPhysicsComponent()->getForce().setDirection(camera->getFront());
-	bullet->getPhysicsComponent()->getForce().setStrength(1.0f);
+	bullet->getPhysicsComponent()->getForce().setStrength(0.1f);
+	bullet->getTags().set(Tag::Bullet);
 
 	Game::getInstance().getActiveScene().add(bullet);
 }
