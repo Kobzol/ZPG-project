@@ -5,6 +5,8 @@ out vec4 color;
 
 uniform sampler2D screenTexture;
 
+uniform bool usePostProcess;
+
 vec4 apply_kernel(in float kernel[9], float strength);
 
 void main()
@@ -15,16 +17,19 @@ void main()
 		1.0f / 16.0f, 2.0f / 16.0f, 1.0f / 16.0f  
 	);*/
 
-	/*float kernel[9] = float[]( // edge detection
+	float kernel[9] = float[]( // edge detection
 		1.0f, 1.0f, 1.0f,
 		1.0f, -8.0f, 1.0f,
 		1.0f, 1.0f, 1.0f
-	);*/
+	);
 
 	vec4 texColor = vec4(1.0f);
 
-	//texColor = apply_kernel(kernel, 1.0f);
-	texColor = texture(screenTexture, TexCoords);
+	if (usePostProcess)
+	{
+		texColor = apply_kernel(kernel, 1.0f);
+	}
+	else texColor = texture(screenTexture, TexCoords);
 
 	color = vec4(texColor);
 }

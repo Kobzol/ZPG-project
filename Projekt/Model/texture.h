@@ -13,7 +13,8 @@
 enum TextureType
 {
 	Diffuse,
-	Specular
+	Specular,
+	Bump
 };
 
 class Texture

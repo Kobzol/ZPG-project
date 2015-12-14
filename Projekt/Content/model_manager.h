@@ -10,6 +10,7 @@ public:
 	static const std::string MODEL_NANOSUIT;
 	static const std::string MODEL_M4;
 	static const std::string MODEL_TREE;
+	static const std::string MODEL_HOUSE;
 
 	static ModelManager& getInstance();
 

@@ -21,13 +21,15 @@ uniform sampler2D textureSpecular;
 uniform bool textureSpecularValid;
 
 uniform sampler2D depthMap;
-uniform bool depthMapValid;
 
-uniform sampler2D textureNormalMap;
-uniform bool textureNormalMapValid;
+uniform sampler2D textureBump;
+uniform bool textureBumpValid;
 
 uniform vec3 viewPosition;
 uniform vec3 color;
+
+uniform bool useShadows;
+uniform bool useBumpMap;
 
 #PHONG_CALCULATIONS
 
@@ -35,9 +37,9 @@ void main()
 {
 	vec3 normal = normalize(vertexData.normal);
 
-	if (textureNormalMapValid)
+	if (textureBumpValid && useBumpMap)
 	{
-		normal = texture(textureNormalMap, vertexData.texCoords).rgb;
+		normal = texture(textureBump, vertexData.texCoords).rgb;
 		normal = normalize(normal * 2.0 - 1.0);   
 		normal = normalize(vertexData.TBN * normal);
 	}
@@ -78,7 +80,7 @@ void main()
 	vec3 diffuse = directionalLight.phong.diffuse * diff;
 	vec3 specular = directionalLight.phong.specular * spec;
 
-	if (depthMapValid)
+	if (useShadows)
 	{
 		float shadow = calculateShadow(vertexData.worldPosLightSpace, normal, lightDir);
 		resultColor += (ambient + (1.0f - shadow) * (diffuse + specular)) * diffuseMap;

@@ -101,6 +101,7 @@ void Model::addMesh(aiMesh* mesh, const aiScene* scene)
 		
 		this->loadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::Diffuse, createdMesh.textures);
 		this->loadMaterialTextures(material, aiTextureType_SPECULAR, TextureType::Specular, createdMesh.textures);
+		this->loadMaterialTextures(material, aiTextureType_HEIGHT, TextureType::Bump, createdMesh.textures);
 
 		glm::vec4 color;
 		aiColor4D aiColor;

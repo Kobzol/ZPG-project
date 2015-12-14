@@ -38,7 +38,8 @@ void Mesh::setColor(glm::vec4 color)
 std::unordered_map<TextureType, std::pair<int, std::string>> textureProperties =
 {
 	{ TextureType::Diffuse, { 1, "textureDiffuse" } },
-	{ TextureType::Specular, { 2, "textureSpecular" } }
+	{ TextureType::Specular, { 2, "textureSpecular" } },
+	{ TextureType::Bump, { 3, "textureBump" } }
 };
 
 void Mesh::draw()

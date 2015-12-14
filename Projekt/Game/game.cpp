@@ -98,26 +98,8 @@ void Game::start()
 	ProgramManager::getInstance().observeCamera(this->camera);
 
 	// objects
-	float distance = 3.0f;
-	GameObject* cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
-		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
-	this->scene.add(cube);
-	cube->getTransform().setPosition(glm::vec3(distance, 0.0f, 0.0f));
-
-	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
-		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
-	this->scene.add(cube);
-	cube->getTransform().setPosition(glm::vec3(-distance, 0.0f, 0.0f));
-
-	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
-		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
-	this->scene.add(cube);
-	cube->getTransform().setPosition(glm::vec3(0.0f, distance, 0.0f));
-
-	cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
-		new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
-	this->scene.add(cube);
-	cube->getTransform().setPosition(glm::vec3(0.0f, -distance, 2.0f));
+	GameObject* house = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_HOUSE)));
+	this->scene.add(house);
 
 	// lights
 	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(0.0f, 10.0f, 10.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
@@ -136,7 +118,7 @@ void Game::start()
 		new LightComponent(pointLight, "pointLights", 0),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(cubeGeometry))
 	);
-	light->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	light->getTransform().setPosition(glm::vec3(0.0f, 10.0f, 0.0f));
 	light->getTags().set(Tag::Light);
 	this->scene.add(light);
 
@@ -184,23 +166,15 @@ void Game::start()
 	Timer switchTimer(0.5f);
 
 	int enableShadows = 1;
+	int enableBumpMap = 1;
+	int enablePostProcess = 0;
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("useShadows", enableShadows);
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("useBumpMap", enableBumpMap);
+	ProgramManager::getInstance().use(ProgramManager::PROGRAM_POSTPROCESS).setUniform1i("usePostProcess", enablePostProcess);
 
 	const GLuint depthMapTU = 10;
 
-	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMap", 8);
-	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("textureNormalMapValid", 0);
-
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_HEIGHTMAP).setUniform1i("heightMapTexture", 9);
-
-	/*Image normalMap("Resources/Textures/terrain.jpg");
-	Texture normalTexture;
-	normalTexture.allocate();
-	normalTexture.set2DImage(normalMap);
-	normalTexture.generateMipmap();
-	normalTexture.setTextureClamping(GL_REPEAT);
-	normalTexture.setTextureFiltering(false, GL_LINEAR_MIPMAP_LINEAR);
-	normalTexture.setTextureFiltering(true, GL_LINEAR_MIPMAP_LINEAR);
-	normalTexture.bind(9);*/
 
 	Image terrainTextureImg("Resources/Textures/terrain.jpg");
 	Texture terrainTexture;
@@ -238,8 +212,6 @@ void Game::start()
 		crossHair->getTransform().setPosition(glm::vec3(context.getWindowWidth() / 2.0f, context.getWindowHeight() / 2.0f, 0.0f));
 
 		context.setDepthTest(true);
-
-		cube->getTransform().rotateBy(20.0f * delta, glm::vec3(1.0f, 0.0f, 0.0f));
 
 		this->scene.update();
 		
@@ -307,10 +279,20 @@ void Game::start()
 		{
 			context.closeWindow();
 		}
-		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_SPACE) && switchTimer.resetIfReady())
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_B) && switchTimer.resetIfReady())
 		{
 			enableShadows = 1 - enableShadows;
-			ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("depthMapValid", enableShadows);
+			ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("useShadows", enableShadows);
+		}
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_N) && switchTimer.resetIfReady())
+		{
+			enableBumpMap = 1 - enableBumpMap;
+			ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL).setUniform1i("useBumpMap", enableBumpMap);
+		}
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_M) && switchTimer.resetIfReady())
+		{
+			enablePostProcess = 1 - enablePostProcess;
+			ProgramManager::getInstance().use(ProgramManager::PROGRAM_POSTPROCESS).setUniform1i("usePostProcess", enablePostProcess);
 		}
 
 		InputController::getInstance().afterUpdate();
