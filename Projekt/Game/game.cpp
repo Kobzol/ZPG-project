@@ -84,7 +84,7 @@ void Game::start()
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
 	ProgramManager::getInstance().use(ProgramManager::PROGRAM_MODEL);
 
-	FramebufferManager::getInstance().preloadFramebuffers();
+	FramebufferManager::getInstance().preloadFramebuffers(width, height);
 
 	// initial object spawn 
 	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
@@ -200,6 +200,14 @@ void Game::start()
 	std::default_random_engine engine;
 	std::uniform_real_distribution<float> randomGenerator(-10.0f, 10.0f);
 
+	GameObject* target = new GameObject(nullptr,
+		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new OutlineModule(new ModelDrawModule(ModelManager::MODEL_CUBE))),
+		new BasicPhysicsComponent(false, new SphereBoundingBox(2.0f)));
+
+	target->getTransform().setPosition(glm::vec3(randomGenerator(engine), randomGenerator(engine), 20.0f + randomGenerator(engine)));
+	target->getTags().set(Tag::Target);
+	scene.add(target);
+
 	context->loop([&](Context& context)	// physics
 	{
 		this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
@@ -219,8 +227,8 @@ void Game::start()
 
 		if (spawnTimer.resetIfReady())
 		{
-			GameObject* target = new GameObject(nullptr,
-				new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)),
+			target = new GameObject(nullptr,
+				new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new OutlineModule(new ModelDrawModule(ModelManager::MODEL_CUBE))),
 				new BasicPhysicsComponent(false, new SphereBoundingBox(2.0f)));
 
 			target->getTransform().setPosition(glm::vec3(randomGenerator(engine), randomGenerator(engine), 20.0f + randomGenerator(engine)));

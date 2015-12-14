@@ -11,7 +11,7 @@ public:
 
 	static FramebufferManager& getInstance();
 
-	void preloadFramebuffers();
+	void preloadFramebuffers(int width, int height);
 
 	void bindDefault();
 

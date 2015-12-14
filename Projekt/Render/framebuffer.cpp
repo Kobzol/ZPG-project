@@ -27,6 +27,7 @@ void Framebuffer::createAttachments(int width, int height)
 	this->primaryAttachment.set2DImage(Image(width, height, ImageType::Alpha));
 	this->primaryAttachment.setTextureFiltering(true, GL_LINEAR);
 	this->primaryAttachment.setTextureFiltering(false, GL_LINEAR);
+	this->primaryAttachment.setTextureClamping(GL_CLAMP_TO_EDGE);
 
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->primaryAttachment.getId(), 0);
 	GL_CHECK_ERRORS();

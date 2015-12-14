@@ -15,11 +15,11 @@ FramebufferManager::FramebufferManager()
 
 }
 
-void FramebufferManager::preloadFramebuffers()
+void FramebufferManager::preloadFramebuffers(int width, int height)
 {
 	Framebuffer fb;
 	fb.bind();
-	fb.createAttachments(800, 600);	// TODO pass size
+	fb.createAttachments(width, height);
 	
 	if (!fb.isComplete())
 	{

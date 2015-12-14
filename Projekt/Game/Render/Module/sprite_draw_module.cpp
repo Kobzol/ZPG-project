@@ -14,7 +14,7 @@ void SpriteDrawModule::startDraw(RenderComponent* component)
 	Context& context = Game::getInstance().getContext();
 
 	Program& program = ProgramManager::getInstance().getCurrentProgram();
-	program.setProjectionMatrix(glm::ortho(0.0f, (float)context.getWindowWidth(), (float)context.getWindowHeight(), 0.0f, -1.0f, 1.0f));
+	program.setProjectionMatrix(glm::ortho(0.0f, (float)context.getWindowWidth(), (float)context.getWindowHeight(), 0.0f, -0.1f, 1.0f));
 
 	Transform& transform = component->getGameObject()->getTransform();
 	glm::vec3 position = transform.getPosition();

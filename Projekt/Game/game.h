@@ -30,6 +30,7 @@
 #include "Render/Module/geometry_draw_module.h"
 #include "Render/Module/hud_module.h"
 #include "Render/Module/model_draw_module.h"
+#include "Render/Module/outline_module.h"
 #include "Render/Module/skybox_draw_module.h"
 #include "Render/Module/sprite_draw_module.h"
 #include "../Audio/audio_manager.h"

@@ -58,6 +58,7 @@
     <ClCompile Include="tmp.cpp" />
     <ClCompile Include="Game\weapon_controller.cpp" />
     <ClCompile Include="Game\heightmap.cpp" />
+    <ClCompile Include="Game\Render\Module\outline_module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Game\Render\render_pass.h" />
     <ClInclude Include="Game\weapon_controller.h" />
     <ClInclude Include="Game\heightmap.h" />
+    <ClInclude Include="Game\Render\Module\outline_module.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
