@@ -157,6 +157,7 @@
     <None Include="Shaders\Fragment\depth.frag" />
     <None Include="Shaders\Vertex\heightmap.vert" />
     <None Include="Shaders\Fragment\heightmap.frag" />
+    <None Include="Shaders\Headers\vertex_data.param" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />

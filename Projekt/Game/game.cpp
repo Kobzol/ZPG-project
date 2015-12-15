@@ -77,8 +77,9 @@ void Game::start()
 	ModelManager::getInstance().preloadModels();
 	FontManager::getInstance().initialize(width, height);
 
-	ShaderLoader::getInstance().addCodeMapping("#LIGHT_DEFINITIONS", FileHelper::loadFile("Shaders/Headers/light_definitions.frag"));
-	ShaderLoader::getInstance().addCodeMapping("#PHONG_CALCULATIONS", FileHelper::loadFile("Shaders/Headers/phong_calculations.frag"));
+	ShaderLoader::getInstance().addCodeMapping("//LIGHT_DEFINITIONS", FileHelper::loadFile("Shaders/Headers/light_definitions.frag"));
+	ShaderLoader::getInstance().addCodeMapping("//PHONG_CALCULATIONS", FileHelper::loadFile("Shaders/Headers/phong_calculations.frag"));
+	ShaderLoader::getInstance().addCodeMapping("//VERTEX_DATA", FileHelper::loadFile("Shaders/Headers/vertex_data.param"));
 
 	ProgramManager::getInstance().preloadPrograms();
 	Program program = ProgramManager::getInstance().get(ProgramManager::PROGRAM_MODEL);
@@ -100,6 +101,10 @@ void Game::start()
 	// objects
 	GameObject* house = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_HOUSE)));
 	this->scene.add(house);
+
+	GameObject* cube = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+	cube->getTransform().setPosition(glm::vec3(0.0f, 10.0f, 2.0f));
+	this->scene.add(cube);
 
 	// lights
 	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(0.0f, 10.0f, 10.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));

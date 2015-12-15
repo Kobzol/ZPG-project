@@ -6,11 +6,12 @@ out vec3 TexCoords;
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
+uniform mat4 modelMatrix;
 
 void main()
 {
 	mat4 viewNoTranslation = mat4(mat3(viewMatrix));
-	vec4 pos = projectionMatrix * viewNoTranslation * vec4(position, 1.0);
+	vec4 pos = projectionMatrix * viewNoTranslation * modelMatrix * vec4(position, 1.0);
 
     gl_Position = pos.xyww;	// z will always be 1.0f so that we can use depth test
 	TexCoords = position;

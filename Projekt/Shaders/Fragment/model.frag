@@ -1,14 +1,8 @@
 #version 330 core
 
-struct VertexData {
-	vec3 worldPosition;
-	vec3 normal;
-	vec2 texCoords;
-	vec4 worldPosLightSpace;
-	mat3 TBN;
-};
+//VERTEX_DATA
 
-#LIGHT_DEFINITIONS
+//LIGHT_DEFINITIONS
 
 in VertexData vertexData;
 
@@ -31,7 +25,7 @@ uniform vec3 color;
 uniform bool useShadows;
 uniform bool useBumpMap;
 
-#PHONG_CALCULATIONS
+//PHONG_CALCULATIONS
 
 void main()
 {
@@ -39,9 +33,13 @@ void main()
 
 	if (textureBumpValid && useBumpMap)
 	{
+		vec3 bitangent = cross(normalize(vertexData.tangent), normal);
+
+		mat3 TBN = mat3(vertexData.tangent, bitangent, normal);
+
 		normal = texture(textureBump, vertexData.texCoords).rgb;
-		normal = normalize(normal * 2.0 - 1.0);   
-		normal = normalize(vertexData.TBN * normal);
+		normal = normalize(normal * 2.0 - 1.0);
+		normal = normalize(TBN * normal);
 	}
 
 	vec3 viewDir = normalize(viewPosition - vertexData.worldPosition);
