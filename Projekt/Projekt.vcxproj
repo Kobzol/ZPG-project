@@ -95,6 +95,8 @@
     <ClCompile Include="Game\Input\input_controller.cpp" />
     <ClCompile Include="Game\Input\mouse_state.cpp" />
     <ClCompile Include="Game\Object\object_manager.cpp" />
+    <ClCompile Include="Game\Path\linear_path_handler.cpp" />
+    <ClCompile Include="Game\Path\path_follower.cpp" />
     <ClCompile Include="Game\Physics\basic_physics_component.cpp" />
     <ClCompile Include="Game\Physics\BoundingBox\sphere_bounding_box.cpp" />
     <ClCompile Include="Game\Physics\force.cpp" />
@@ -153,6 +155,9 @@
     <ClInclude Include="Content\content_manager.h" />
     <ClInclude Include="Content\model_manager.h" />
     <ClInclude Include="Game\Light\light.h" />
+    <ClInclude Include="Game\Path\ipath_handler.h" />
+    <ClInclude Include="Game\Path\linear_path_handler.h" />
+    <ClInclude Include="Game\Path\path_follower.h" />
     <ClInclude Include="Game\Physics\basic_physics_component.h" />
     <ClInclude Include="Game\Physics\BoundingBox\sphere_bounding_box.h" />
     <ClInclude Include="Game\Physics\force.h" />

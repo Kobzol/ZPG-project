@@ -59,6 +59,8 @@
     <ClCompile Include="Game\weapon_controller.cpp" />
     <ClCompile Include="Game\heightmap.cpp" />
     <ClCompile Include="Game\Render\Module\outline_module.cpp" />
+    <ClCompile Include="Game\Path\linear_path_handler.cpp" />
+    <ClCompile Include="Game\Path\path_follower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -133,6 +135,9 @@
     <ClInclude Include="Game\weapon_controller.h" />
     <ClInclude Include="Game\heightmap.h" />
     <ClInclude Include="Game\Render\Module\outline_module.h" />
+    <ClInclude Include="Game\Path\ipath_handler.h" />
+    <ClInclude Include="Game\Path\linear_path_handler.h" />
+    <ClInclude Include="Game\Path\path_follower.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
