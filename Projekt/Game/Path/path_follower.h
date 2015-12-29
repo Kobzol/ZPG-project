@@ -1,15 +1,18 @@
 #pragma once
 
+#include <vector>
+
 #include "ipath_handler.h"
 #include "../Component/icomponent.h"
 
 class PathFollower : public IComponent
 {
 public:
-	PathFollower(IPathHandler* pathHandler);
+	PathFollower(std::initializer_list<IPathHandler*> pathHandlers);
 
 	virtual void update() override;
 
 private:
-	IPathHandler* pathHandler;
+	std::vector<IPathHandler*> pathHandlers;
+	size_t currentHandler;
 };

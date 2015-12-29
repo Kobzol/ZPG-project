@@ -61,6 +61,7 @@
     <ClCompile Include="Game\Render\Module\outline_module.cpp" />
     <ClCompile Include="Game\Path\linear_path_handler.cpp" />
     <ClCompile Include="Game\Path\path_follower.cpp" />
+    <ClCompile Include="Game\Path\bezier_path_handler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer\ebo.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Game\Path\ipath_handler.h" />
     <ClInclude Include="Game\Path\linear_path_handler.h" />
     <ClInclude Include="Game\Path\path_follower.h" />
+    <ClInclude Include="Game\Path\bezier_path_handler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />

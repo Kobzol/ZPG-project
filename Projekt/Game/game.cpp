@@ -103,10 +103,18 @@ void Game::start()
 	this->scene.add(house);
 
 	GameObject* cube = new GameObject(
-		new PathFollower(new LinearPathHandler({
-		glm::vec3(0.0f, 10.0f, 2.0f), glm::vec3(0.0f, 20.0f, 2.0f),
-		glm::vec3(10.0f, 15.0f, 4.0f)
-	}, 0.1f)),
+		new PathFollower({
+			new BezierPathHandler({
+				glm::vec3(0.0f, 10.0f, 2.0f),
+				glm::vec3(10.0f, 14.0f, 2.0f),
+				glm::vec3(10.0f, 18.0f, 2.0f),
+				glm::vec3(0.0f, 20.0f, 2.0f)
+			}, 0.1f),
+			new LinearPathHandler({
+				glm::vec3(0.0f, 20.0f, 2.0f),
+				glm::vec3(0.0f, 10.0f, 2.0f)
+			})
+		}),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	cube->getTransform().setPosition(glm::vec3(0.0f, 10.0f, 2.0f));
 	this->scene.add(cube);

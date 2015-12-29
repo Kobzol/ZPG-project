@@ -22,6 +22,7 @@
 #include "Light/point_light.h"
 #include "Light/spotlight.h"
 #include "Object/object_manager.h"
+#include "Path/bezier_path_handler.h"
 #include "Path/ipath_handler.h"
 #include "Path/linear_path_handler.h"
 #include "Path/path_follower.h"

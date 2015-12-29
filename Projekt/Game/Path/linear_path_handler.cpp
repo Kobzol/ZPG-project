@@ -26,7 +26,16 @@ void LinearPathHandler::move(Transform& transform)
 
 	if (this->currentDelta >= 1.0f)
 	{
-		this->currentPoint = (this->currentPoint + 1) % this->points.size();
+		this->currentPoint++;
 		this->currentDelta = 0.0f;
 	}
+}
+bool LinearPathHandler::isFinished()
+{
+	return this->currentPoint == this->points.size() - 1;
+}
+void LinearPathHandler::reset()
+{
+	this->currentPoint = 0;
+	this->currentDelta = 0.0f;
 }
