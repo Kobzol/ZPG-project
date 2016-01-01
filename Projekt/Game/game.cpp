@@ -105,14 +105,14 @@ void Game::start()
 	GameObject* cube = new GameObject(
 		new PathFollower({
 			new BezierPathHandler({
-				glm::vec3(0.0f, 10.0f, 2.0f),
-				glm::vec3(10.0f, 14.0f, 2.0f),
-				glm::vec3(10.0f, 18.0f, 2.0f),
-				glm::vec3(0.0f, 20.0f, 2.0f)
-			}, 0.1f),
+				glm::vec3(5.0f, 10.0f, 2.0f),
+				glm::vec3(15.0f, 14.0f, 2.0f),
+				glm::vec3(15.0f, 18.0f, 2.0f),
+				glm::vec3(5.0f, 20.0f, 2.0f)
+			}, 0.5f),
 			new LinearPathHandler({
-				glm::vec3(0.0f, 20.0f, 2.0f),
-				glm::vec3(0.0f, 10.0f, 2.0f)
+				glm::vec3(5.0f, 20.0f, 2.0f),
+				glm::vec3(5.0f, 10.0f, 2.0f)
 			})
 		}),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
@@ -147,10 +147,16 @@ void Game::start()
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
-	GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
-	floor->getTransform().setScale(glm::vec3(100.0f, 0.2f, 100.0f));
-	floor->getTransform().setPosition(glm::vec3(0.0f, -5.0f, 0.0f));
-	//this->scene.add(floor);
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+			floor->getTransform().setScale(glm::vec3(5.0f, 0.2f, 5.0f));
+			floor->getTransform().setPosition(glm::vec3(i * 10.0f, 0.0f, j * 10.0f));
+			this->scene.add(floor);
+		}
+	}
 
 	// skybox
 	const std::string skyboxPath = "Resources/Textures/skybox/";
@@ -231,6 +237,10 @@ void Game::start()
 		spotLightObj->getTransform().setPosition(this->camera->getGameObject()->getTransform().getPosition());
 
 		crossHair->getTransform().setPosition(glm::vec3(context.getWindowWidth() / 2.0f, context.getWindowHeight() / 2.0f, 0.0f));
+		
+		glm::vec3 normalizedPosition = cameraObj->getTransform().getPosition();
+		normalizedPosition.y = 2.0f;
+		cameraObj->getTransform().setPosition(normalizedPosition);
 
 		context.setDepthTest(true);
 

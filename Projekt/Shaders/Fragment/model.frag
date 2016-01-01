@@ -69,10 +69,10 @@ void main()
 	vec3 spotLightComponent = calcSpotLight(spotLight, normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
 	resultColor += spotLightComponent;
 
-	vec3 lightDir = normalize(directionalLight.direction - vertexData.worldPosition);
+	vec3 lightDir = normalize(directionalLight.direction);
 	
 	float diff, spec;
-	calcDiffSpec(lightDir, normal, viewDir, 32.0f, diff, spec);
+	calcDiffSpec(lightDir, normal, viewDir, 256.0f, diff, spec);
 
 	vec3 ambient = directionalLight.phong.ambient * diffuseMap;
 	vec3 diffuse = directionalLight.phong.diffuse * diff;
