@@ -33,12 +33,12 @@ void main()
 
 	if (textureBumpValid && useBumpMap)
 	{
-		vec3 bitangent = cross(normalize(vertexData.tangent), normal);
-
-		mat3 TBN = mat3(vertexData.tangent, bitangent, normal);
+		vec3 tangent = normalize(vertexData.tangent - dot(vertexData.tangent, normal) * normal);
+		vec3 bitangent = cross(tangent, normal);
+		mat3 TBN = mat3(tangent, bitangent, normal);
 
 		normal = texture(textureBump, vertexData.texCoords).rgb;
-		normal = normalize(normal * 2.0 - 1.0);
+		normal = normalize(normal * 2.0f - 1.0f);
 		normal = normalize(TBN * normal);
 	}
 
