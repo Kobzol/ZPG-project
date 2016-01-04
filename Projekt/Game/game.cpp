@@ -46,13 +46,13 @@ RenderPass Game::getRenderPass()
 
 void Game::start()
 {
-	int width = 1920;
-	int height = 1080;
+	int width = 1024;
+	int height = 768;
 
 	// context creation
 	this->context = new Context();
 	this->context->initialize(4, 3);
-	this->context->createWindow(width, height, 4, "ZPG", false, true, true);
+	this->context->createWindow(width, height, 4, "ZPG", false, false, true);
 	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { InputController::getInstance().onKeyCallback(window, key, scan, action, modifier); });
 	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { InputController::getInstance().onMouseMoveCallback(window, x, y); });
 	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { InputController::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
@@ -91,8 +91,7 @@ void Game::start()
 	// initial object spawn 
 	this->camera = new Camera(new CameraController(100.0f), glm::vec3(0.0f, 0.0f, -1.0f), 75.0f, width / height, 0.1f, 1000.0f);
 	GameObject* cameraObj = new GameObject(this->camera, new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
-
-	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 30.0f));
+	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 2.0f, 30.0f));
 	cameraObj->getTags().set(Tag::Camera);
 	cameraObj->getTransform().setScale(glm::vec3(0.2f));
 	this->scene.add(cameraObj);
@@ -101,24 +100,26 @@ void Game::start()
 
 	// objects
 	GameObject* house = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_HOUSE)));
-	//this->scene.add(house);
+	this->scene.add(house);
 
 	GameObject* cube = new GameObject(
 		new PathFollower({
 			new BezierPathHandler({
-				glm::vec3(5.0f, 10.0f, 2.0f),
-				glm::vec3(15.0f, 14.0f, 2.0f),
-				glm::vec3(15.0f, 18.0f, 2.0f),
-				glm::vec3(5.0f, 20.0f, 2.0f)
-			}, 0.5f),
-			new LinearPathHandler({
-				glm::vec3(5.0f, 20.0f, 2.0f),
-				glm::vec3(5.0f, 10.0f, 2.0f)
+				glm::vec3(8.0f, 20.0f, 0.0f),
+				glm::vec3(0.0f, 35.0f, 0.0f),
+				glm::vec3(16.0f, 35.0f, 0.0f),
+				glm::vec3(8.0f, 20.0f, 0.0f)
+			}),
+			new BezierPathHandler({
+				glm::vec3(8.0f, 20.0f, 0.0f),
+				glm::vec3(0.0f, 5.0f, 0.0f),
+				glm::vec3(16.0f, 5.0f, 0.0f),
+				glm::vec3(8.0f, 20.0f, 0.0f)
 			})
 		}),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	cube->getTransform().setPosition(glm::vec3(0.0f, 10.0f, 2.0f));
-	//this->scene.add(cube);
+	this->scene.add(cube);
 
 	// lights
 	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(-20.0f, 25.0f, 0.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
@@ -129,23 +130,23 @@ void Game::start()
 	GeometryObject cubeGeometry(VERTICES_CUBE, sizeof(glm::vec3), 36);
 	cubeGeometry.setAttributePosition();
 
-	/*PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(Color::White * 0.1f, Color::White, Color::White));
+	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(Color::White * 0.1f, Color::Red, Color::Blue * 0.1f));
 	light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(cubeGeometry))
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 10.0f, 0.0f));
 	light->getTags().set(Tag::Light);
-	this->scene.add(light);*/
+	this->scene.add(light);
 
-	program.setUniform1i("pointLightCount", 0);
+	program.setUniform1i("pointLightCount", 1);
 
 	SpotLight* spotLight = new SpotLight(glm::vec3(0.0f, 0.0f, -1.0f), 12.5f, 17.5f, Attenuation::ATT_DISTANCE_LONG, dirLight->phong);
 	GameObject* spotLightObj = new GameObject(new LightComponent(spotLight, "spotLights", 0));
 	spotLightObj->getTags().set(Tag::Light);
-	//this->scene.add(spotLightObj);
+	this->scene.add(spotLightObj);
 
-	program.setUniform1i("spotLightCount", 0);
+	program.setUniform1i("spotLightCount", 1);
 
 	GameObject* atat = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_AT_AT)));
 	atat->getTransform().setPosition(glm::vec3(15.0f, 0.0f, 2.0f));
@@ -153,9 +154,9 @@ void Game::start()
 	this->scene.add(atat);
 
 	GameObject* deathstar = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_DEATHSTAR)));
-	deathstar->getTransform().setPosition(glm::vec3(40.0f, 80.0f, -80.0f));
+	deathstar->getTransform().setPosition(glm::vec3(300.0f, 150.0f, -30.0f));
 	deathstar->getTransform().setScale(glm::vec3(10.0f));
-	deathstar->getTransform().rotateBy(-90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	deathstar->getTransform().rotateBy(-150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	this->scene.add(deathstar);
 
 	GameObject* xwing = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_XWING)));
@@ -238,8 +239,8 @@ void Game::start()
 	HeightMap heightMap(256, 0.01f, 4.0f);
 
 	GameObject* terrain = heightMap.createObject();
-	terrain->getTransform().setScale(glm::vec3(60.0f, 20.0f, 60.0f));
-	terrain->getTransform().setPosition(glm::vec3(-30.0f, -20.0f, -30.0f));
+	terrain->getTransform().setScale(glm::vec3(60.0f, 50.0f, 120.0f));
+	terrain->getTransform().setPosition(glm::vec3(-40.0f, 0.0f, 50.0f));
 	this->scene.add(terrain);
 
 	GameObject* crossHair = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_SPRITE, new SpriteDrawModule(TextureManager::TEXTURE_CROSSHAIR)));
@@ -249,12 +250,13 @@ void Game::start()
 	GameObject* weaponHUD = new GameObject(new WeaponController(),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL,
 		new DecoratorModule(new HUDModule(glm::vec3(2.0f, -3.0f, -3.0f)), new ModelDrawModule(ModelManager::MODEL_BLASTER)))
-		);
+	);
 	weaponHUD->getTransform().setRotation(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	weaponHUD->getTransform().setScale(glm::vec3(0.2f));
 	this->scene.add(weaponHUD);
 
 	ObjectManager& objectManager = this->scene.getObjectManager();
+	GameObject* movedObject = terrain;
 
 	context->loop([&](Context& context)	// physics
 	{
@@ -359,6 +361,26 @@ void Game::start()
 		{
 			enablePostProcess = (enablePostProcess + 1) % 3;
 			ProgramManager::getInstance().use(ProgramManager::PROGRAM_POSTPROCESS).setUniform1i("postProcess", enablePostProcess);
+		}
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_R) && switchTimer.resetIfReady())
+		{
+			movedObject->getTransform().moveBy(glm::vec3(1.0f, 0.0f, 0.0f));
+		}
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_T) && switchTimer.resetIfReady())
+		{
+			movedObject->getTransform().moveBy(glm::vec3(-1.0f, 0.0f, 0.0f));
+		}
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_Z) && switchTimer.resetIfReady())
+		{
+			movedObject->getTransform().moveBy(glm::vec3(0.0f, 0.0f, 1.0f));
+		}
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_U) && switchTimer.resetIfReady())
+		{
+			movedObject->getTransform().moveBy(glm::vec3(0.0f, 0.0f, -1.0f));
+		}
+		else if (InputController::getInstance().isButtonPressed(GLFW_KEY_K) && switchTimer.resetIfReady())
+		{
+			SOIL_save_screenshot("screen.bmp", SOIL_SAVE_TYPE_BMP, 0, 0, width, height);
 		}
 
 		InputController::getInstance().afterUpdate();

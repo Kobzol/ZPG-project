@@ -19,5 +19,5 @@ void main()
 	vertexData.worldPosition = vec3(modelMatrix * vec4(position, 1.0f));
 	vertexData.texCoords = texCoords;
 
-	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position.x, position.y, position.z, 1.0f);
+	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0f);
 }

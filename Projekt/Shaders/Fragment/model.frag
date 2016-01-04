@@ -86,6 +86,7 @@ void main()
 		float shadow = calculateShadow(vertexData.worldPosLightSpace, normal, lightDir);
 		resultColor += (ambient + (1.0f - shadow) * (diffuse + specular)) * diffuseMap;
 	}
+	else resultColor += calcDirLight(directionalLight, normal, viewDir, diffuseMap, specularMap, 256.0f);
 
 	outColor = vec4(resultColor, 1.0f);
 }

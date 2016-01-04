@@ -21,7 +21,7 @@ void calcDiffSpec(vec3 lightDir, vec3 normal, vec3 viewDir, float shininess, out
 }
 vec3 calcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec3 diffuseMap, vec3 specularMap, float shininess)
 {
-	vec3 lightDir = normalize(-light.direction);
+	vec3 lightDir = normalize(light.direction);
 	
 	float diff, spec;
 	calcDiffSpec(lightDir, normal, viewDir, shininess, diff, spec);

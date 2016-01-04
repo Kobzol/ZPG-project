@@ -13,6 +13,6 @@ void main()
 	mat4 viewNoTranslation = mat4(mat3(viewMatrix));
 	vec4 pos = projectionMatrix * viewNoTranslation * modelMatrix * vec4(position, 1.0);
 
-    gl_Position = pos.xyww;	// z will always be 1.0f so that we can use depth test
+    gl_Position = pos.xyww;	// z will always be 1.0f so that the skybox can be drawn last and will pass depth test using GL_LEQUAL
 	TexCoords = position;
 }  
