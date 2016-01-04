@@ -42,7 +42,7 @@ glm::mat4 Camera::calculateViewMatrix()
 glm::mat4 Camera::calculateProjectionMatrix()
 {
 	return glm::perspective(
-		this->fov,
+		glm::radians(this->fov),
 		this->aspect,
 		this->nearPlane,
 		this->farPlane
