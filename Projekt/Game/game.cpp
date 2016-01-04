@@ -46,13 +46,13 @@ RenderPass Game::getRenderPass()
 
 void Game::start()
 {
-	int width = 800;
-	int height = 600;
+	int width = 1920;
+	int height = 1080;
 
 	// context creation
 	this->context = new Context();
 	this->context->initialize(4, 3);
-	this->context->createWindow(width, height, 1, "ZPG", false, false, true);
+	this->context->createWindow(width, height, 4, "ZPG", false, true, true);
 	this->context->setKeyCallback([](GLFWwindow* window, int key, int scan, int action, int modifier) { InputController::getInstance().onKeyCallback(window, key, scan, action, modifier); });
 	this->context->setMousePositionCallback([](GLFWwindow* window, double x, double y) { InputController::getInstance().onMouseMoveCallback(window, x, y); });
 	this->context->setMouseScrollCallback([](GLFWwindow* window, double xOffset, double yOffset) { InputController::getInstance().onMouseScrollCallback(window, xOffset, yOffset); });
@@ -68,6 +68,7 @@ void Game::start()
 	this->context->setCulling(false);
 	this->context->setBlending(true);
 	this->context->setBlendingFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	this->context->setMultisampling(true);
 
 	this->screenQuad = new ScreenQuad();
 
@@ -88,7 +89,7 @@ void Game::start()
 	FramebufferManager::getInstance().preloadFramebuffers(width, height);
 
 	// initial object spawn 
-	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 60.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
+	this->camera = new Camera(new CameraController(100.0f), glm::vec3(0.0f, 0.0f, -1.0f), 75.0f, width / height, 0.1f, 1000.0f);
 	GameObject* cameraObj = new GameObject(this->camera, new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 
 	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 30.0f));
@@ -147,9 +148,37 @@ void Game::start()
 	program.setUniform1i("spotLightCount", 0);
 
 	GameObject* atat = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_AT_AT)));
-	atat->getTransform().setPosition(glm::vec3(20.0f, 0.0f, 5.0f));
-	atat->getTransform().setScale(glm::vec3(3.0f));
+	atat->getTransform().setPosition(glm::vec3(15.0f, 0.0f, 2.0f));
+	atat->getTransform().setScale(glm::vec3(5.0f, 8.0, 5.0f));
 	this->scene.add(atat);
+
+	GameObject* deathstar = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_DEATHSTAR)));
+	deathstar->getTransform().setPosition(glm::vec3(40.0f, 80.0f, -80.0f));
+	deathstar->getTransform().setScale(glm::vec3(10.0f));
+	deathstar->getTransform().rotateBy(-90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	this->scene.add(deathstar);
+
+	GameObject* xwing = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_XWING)));
+	xwing->getTransform().setPosition(glm::vec3(40.0f, 40.0f, 20.0f));
+	xwing->getTransform().setScale(glm::vec3(1.0f));
+	xwing->getTransform().rotateBy(-45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	xwing->getTransform().rotateBy(45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	xwing->getTransform().rotateBy(120.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	this->scene.add(xwing);
+
+	GameObject* laser = new GameObject(nullptr, new RenderComponent(Color::Red, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(cubeGeometry)));
+	laser->getTransform().setPosition(glm::vec3(50.0f, 55.0f, 40.0f));
+	laser->getTransform().setScale(glm::vec3(0.1f, 0.1f, 6.0f));
+	//laser->getTransform().rotateBy(30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	laser->getTransform().rotateBy(-30.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	this->scene.add(laser);
+
+	GameObject* tie = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_TIE)));
+	tie->getTransform().setPosition(glm::vec3(60.0f, 70.0f, 55.0f));
+	tie->getTransform().setScale(glm::vec3(5.0f));
+	tie->getTransform().rotateBy(-150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	tie->getTransform().rotateBy(35.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	this->scene.add(tie);
 
 	//floor
 	for (int i = 0; i < 5; i++)
@@ -157,8 +186,8 @@ void Game::start()
 		for (int j = 0; j < 5; j++)
 		{
 			GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_GROUND)));
-			floor->getTransform().setScale(glm::vec3(5.0f, 0.2f, 5.0f));
-			floor->getTransform().setPosition(glm::vec3(i * 10.0f, 0.0f, j * 10.0f));
+			floor->getTransform().setScale(glm::vec3(10.0f, 0.2f, 10.0f));
+			floor->getTransform().setPosition(glm::vec3(-20 + i * 20.0f, 0.0f, -20 + j * 20.0f));
 			this->scene.add(floor);
 		}
 	}
@@ -245,7 +274,7 @@ void Game::start()
 		crossHair->getTransform().setPosition(glm::vec3(context.getWindowWidth() / 2.0f, context.getWindowHeight() / 2.0f, 0.0f));
 		
 		glm::vec3 normalizedPosition = cameraObj->getTransform().getPosition();
-		normalizedPosition.y = 3.0f;
+		//normalizedPosition.y = 3.0f;
 		cameraObj->getTransform().setPosition(normalizedPosition);
 
 		context.setDepthTest(true);
@@ -354,6 +383,11 @@ void Game::start()
 
 void Game::onWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
+	if (width == 0 || height == 0)
+	{
+		return;
+	}
+
 	this->context->setViewport(0, 0, width, height);
 	this->context->setWindowSize(width, height);
 

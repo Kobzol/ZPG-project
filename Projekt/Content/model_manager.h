@@ -16,6 +16,7 @@ public:
 	static const std::string MODEL_BLASTER;
 	static const std::string MODEL_GROUND;
 	static const std::string MODEL_AT_AT;
+	static const std::string MODEL_DEATHSTAR;
 
 	static ModelManager& getInstance();
 
