@@ -11,6 +11,11 @@ public:
 	static const std::string MODEL_M4;
 	static const std::string MODEL_TREE;
 	static const std::string MODEL_HOUSE;
+	static const std::string MODEL_TIE;
+	static const std::string MODEL_XWING;
+	static const std::string MODEL_BLASTER;
+	static const std::string MODEL_GROUND;
+	static const std::string MODEL_AT_AT;
 
 	static ModelManager& getInstance();
 

@@ -88,7 +88,7 @@ void Game::start()
 	FramebufferManager::getInstance().preloadFramebuffers(width, height);
 
 	// initial object spawn 
-	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
+	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 60.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
 	GameObject* cameraObj = new GameObject(this->camera, new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 
 	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 30.0f));
@@ -100,7 +100,7 @@ void Game::start()
 
 	// objects
 	GameObject* house = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_HOUSE)));
-	this->scene.add(house);
+	//this->scene.add(house);
 
 	GameObject* cube = new GameObject(
 		new PathFollower({
@@ -117,41 +117,44 @@ void Game::start()
 		}),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
 	cube->getTransform().setPosition(glm::vec3(0.0f, 10.0f, 2.0f));
-	this->scene.add(cube);
+	//this->scene.add(cube);
 
 	// lights
-	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(0.0f, 10.0f, 10.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
+	DirectionalLight *dirLight = new DirectionalLight(glm::vec3(-20.0f, 25.0f, 0.0f), Phong(Color::White * 0.001f, Color::White, Color::White * 0.1f));
 	GameObject* light = new GameObject(new LightComponent(dirLight, "directionalLight"));
 	light->getTags().set(Tag::Light);
 	this->scene.add(light);
 
-	GeometryObject planeGeometry(VERTICES_PLANE, 2 * sizeof(glm::vec3), 6);
-	planeGeometry.setAttributePositionNormal();
-
 	GeometryObject cubeGeometry(VERTICES_CUBE, sizeof(glm::vec3), 36);
 	cubeGeometry.setAttributePosition();
 
-	PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(Color::White * 0.1f, Color::White, Color::White));
+	/*PointLight* pointLight = new PointLight(Attenuation::ATT_DISTANCE_LONG, Phong(Color::White * 0.1f, Color::White, Color::White));
 	light = new GameObject(
 		new LightComponent(pointLight, "pointLights", 0),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_GEOMETRY_CONSTANT, new GeometryDrawModule(cubeGeometry))
 	);
 	light->getTransform().setPosition(glm::vec3(0.0f, 10.0f, 0.0f));
 	light->getTags().set(Tag::Light);
-	this->scene.add(light);
+	this->scene.add(light);*/
 
-	program.setUniform1i("pointLightCount", 1);
+	program.setUniform1i("pointLightCount", 0);
 
 	SpotLight* spotLight = new SpotLight(glm::vec3(0.0f, 0.0f, -1.0f), 12.5f, 17.5f, Attenuation::ATT_DISTANCE_LONG, dirLight->phong);
 	GameObject* spotLightObj = new GameObject(new LightComponent(spotLight, "spotLight"));
 	spotLightObj->getTags().set(Tag::Light);
 	this->scene.add(spotLightObj);
 
+	GameObject* atat = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_AT_AT)));
+	atat->getTransform().setPosition(glm::vec3(20.0f, 0.0f, 5.0f));
+	atat->getTransform().setScale(glm::vec3(3.0f));
+	this->scene.add(atat);
+
+	//floor
 	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
-			GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_CUBE)));
+			GameObject* floor = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_GROUND)));
 			floor->getTransform().setScale(glm::vec3(5.0f, 0.2f, 5.0f));
 			floor->getTransform().setPosition(glm::vec3(i * 10.0f, 0.0f, j * 10.0f));
 			this->scene.add(floor);
@@ -214,17 +217,18 @@ void Game::start()
 
 	GameObject* weaponHUD = new GameObject(new WeaponController(),
 		new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL,
-		new DecoratorModule(new HUDModule(glm::vec3(0.0f, -2.0f, 5.0f)), new ModelDrawModule(ModelManager::MODEL_M4)))
+		new DecoratorModule(new HUDModule(glm::vec3(2.0f, -3.0f, -3.0f)), new ModelDrawModule(ModelManager::MODEL_BLASTER)))
 		);
 	weaponHUD->getTransform().setRotation(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	weaponHUD->getTransform().setScale(glm::vec3(0.2f));
 	this->scene.add(weaponHUD);
 
 	ObjectManager& objectManager = this->scene.getObjectManager();
 
 	context->loop([&](Context& context)	// physics
 	{
-		this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
-		objectManager.removeMarkedObjects();
+		//this->physicsHandler.simulate(objectManager.getObjects(), objectManager.getObjectCount(), Context::getFixedDeltaTime());
+		//objectManager.removeMarkedObjects();
 	},	
 	[&](Context& context)	// render
 	{
@@ -239,7 +243,7 @@ void Game::start()
 		crossHair->getTransform().setPosition(glm::vec3(context.getWindowWidth() / 2.0f, context.getWindowHeight() / 2.0f, 0.0f));
 		
 		glm::vec3 normalizedPosition = cameraObj->getTransform().getPosition();
-		normalizedPosition.y = 2.0f;
+		normalizedPosition.y = 3.0f;
 		cameraObj->getTransform().setPosition(normalizedPosition);
 
 		context.setDepthTest(true);
@@ -252,8 +256,8 @@ void Game::start()
 		depthBuffer.bind();
 		RenderUtils::clear(GL_DEPTH_BUFFER_BIT);
 
-		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 100.0f);
-		glm::mat4 lightView = glm::lookAt(dirLight->direction, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 lightProjection = glm::ortho(-100.0f, 100.0f, -100.0f, 100.0f, 1.0f, 200.0f);
+		glm::mat4 lightView = glm::lookAt(dirLight->direction, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
 		for (auto program : ProgramManager::getInstance().getPrograms())

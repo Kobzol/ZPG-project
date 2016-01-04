@@ -19,7 +19,7 @@ void WeaponController::shoot()
 	Camera* camera = game.getCamera();
 	GameObject* playerPosition = camera->getGameObject();
 
-	GameObject* bullet = new GameObject(nullptr, RenderUtils::createCubeRenderer(Color::Yellow), new BasicPhysicsComponent(true, new SphereBoundingBox(1.0f),
+	GameObject* bullet = new GameObject(nullptr, RenderUtils::createCubeRenderer(Color::Red), new BasicPhysicsComponent(true, new SphereBoundingBox(1.0f),
 	[](IPhysicsComponent* component, GameObject* object)
 	{
 		if (object->getTags().isSet(Tag::Target))
@@ -31,7 +31,7 @@ void WeaponController::shoot()
 		}
 	}));
 	bullet->getTransform().setPosition(playerPosition->getTransform().getPosition());
-	bullet->getTransform().setScale(glm::vec3(0.5f));
+	bullet->getTransform().setScale(glm::vec3(0.2f));
 	bullet->getPhysicsComponent()->getForce().setDirection(camera->getFront());
 	bullet->getPhysicsComponent()->getForce().setStrength(0.1f);
 	bullet->getTags().set(Tag::Bullet);
