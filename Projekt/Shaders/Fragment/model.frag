@@ -66,8 +66,11 @@ void main()
 		resultColor += pointLightComponent;
 	}
 
-	vec3 spotLightComponent = calcSpotLight(spotLight, normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
-	resultColor += spotLightComponent;
+	for (int i = 0; i < spotLightCount; i++)
+	{
+		vec3 spotLightComponent = calcSpotLight(spotLights[0], normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
+		resultColor += spotLightComponent;
+	}
 
 	vec3 lightDir = normalize(directionalLight.direction);
 	

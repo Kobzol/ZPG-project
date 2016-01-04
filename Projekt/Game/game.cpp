@@ -140,9 +140,11 @@ void Game::start()
 	program.setUniform1i("pointLightCount", 0);
 
 	SpotLight* spotLight = new SpotLight(glm::vec3(0.0f, 0.0f, -1.0f), 12.5f, 17.5f, Attenuation::ATT_DISTANCE_LONG, dirLight->phong);
-	GameObject* spotLightObj = new GameObject(new LightComponent(spotLight, "spotLight"));
+	GameObject* spotLightObj = new GameObject(new LightComponent(spotLight, "spotLights", 0));
 	spotLightObj->getTags().set(Tag::Light);
-	this->scene.add(spotLightObj);
+	//this->scene.add(spotLightObj);
+
+	program.setUniform1i("spotLightCount", 0);
 
 	GameObject* atat = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule(ModelManager::MODEL_AT_AT)));
 	atat->getTransform().setPosition(glm::vec3(20.0f, 0.0f, 5.0f));

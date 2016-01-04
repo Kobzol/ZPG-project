@@ -34,4 +34,7 @@ uniform DirLight directionalLight;
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform int pointLightCount;
 
-uniform SpotLight spotLight;
+
+#define MAX_SPOT_LIGHTS 1
+uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
+uniform int spotLightCount;
