@@ -53,7 +53,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\soil\lib;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\lib\Win32-visualStudio;$(ProjectDir)\GL_LIB\freetype\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\soil\lib;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\lib\Win32-visualStudio;$(ProjectDir)\GL_LIB\freetype\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;SOIL.lib;assimp.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
@@ -73,7 +73,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\assimp-3.1.1\build\code\Release;$(ProjectDir)\GL_LIB\soil\lib;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\lib\Win32-visualStudio;$(ProjectDir)\GL_LIB\freetype\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\GL_LIB\glfw-3.1.1.bin.WIN32\lib-vc2013;$(ProjectDir)\GL_LIB\glew-1.13.0\lib\Release\Win32;$(ProjectDir)\GL_LIB\soil\lib;$(ProjectDir)\GL_LIB\irrKlang-1.5.0\lib\Win32-visualStudio;$(ProjectDir)\GL_LIB\freetype\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glu32.lib;glew32s.lib;glfw3.lib;SOIL.lib;assimp.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
