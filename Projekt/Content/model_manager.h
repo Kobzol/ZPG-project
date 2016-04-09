@@ -17,6 +17,9 @@ public:
 	static const std::string MODEL_GROUND;
 	static const std::string MODEL_AT_AT;
 	static const std::string MODEL_DEATHSTAR;
+	static const std::string MODEL_MGA_PODLAHA;
+	static const std::string MODEL_MGA_MEC;
+	static const std::string MODEL_MGA_KYTARA;
 
 	static ModelManager& getInstance();
 

@@ -30,7 +30,7 @@ void FramebufferManager::preloadFramebuffers(int width, int height)
 
 	Framebuffer depthFb;
 	depthFb.bind();
-	depthFb.createShadowMap(1024, 1024);
+	depthFb.createShadowMap(4096, 4096);
 
 	if (!depthFb.isComplete())
 	{

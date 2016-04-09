@@ -44,7 +44,7 @@ void main()
 
 	vec3 viewDir = normalize(viewPosition - vertexData.worldPosition);
 	vec3 diffuseMap = color;
-	vec3 specularMap = vec3(1.0f);
+	vec3 specularMap = vec3(1.0f, 1.0f, 1.0f);
 
 	if (textureDiffuseValid)
 	{
@@ -57,9 +57,6 @@ void main()
 
 	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
 
-	//vec3 dirLightComponent = calcDirLight(directionalLight, normal, viewDir, diffuseMap, specularMap, 256.0f);
-	//resultColor += dirLightComponent;
-
 	for (int i = 0; i < pointLightCount; i++)
 	{
 		vec3 pointLightComponent = calcPointLight(pointLights[i], normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
@@ -68,21 +65,20 @@ void main()
 
 	for (int i = 0; i < spotLightCount; i++)
 	{
-		vec3 spotLightComponent = calcSpotLight(spotLights[0], normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
+		vec3 spotLightComponent = calcSpotLight(spotLights[i], normal, vertexData.worldPosition, viewDir, diffuseMap, specularMap, 32.0f);
 		resultColor += spotLightComponent;
 	}
 
-	vec3 lightDir = normalize(directionalLight.direction);
-	
-	float diff, spec;
-	calcDiffSpec(lightDir, normal, viewDir, 256.0f, diff, spec);
-
-	vec3 ambient = directionalLight.phong.ambient * diffuseMap;
-	vec3 diffuse = directionalLight.phong.diffuse * diff;
-	vec3 specular = directionalLight.phong.specular * spec;
-
 	if (useShadows)
 	{
+		vec3 lightDir = normalize(directionalLight.direction);
+		float diff, spec;
+		calcDiffSpec(lightDir, normal, viewDir, 256.0f, diff, spec);
+
+		vec3 ambient = directionalLight.phong.ambient * diffuseMap;
+		vec3 diffuse = directionalLight.phong.diffuse * diff;
+		vec3 specular = directionalLight.phong.specular * spec;
+
 		float shadow = calculateShadow(vertexData.worldPosLightSpace, normal, lightDir);
 		resultColor += (ambient + (1.0f - shadow) * (diffuse + specular)) * diffuseMap;
 	}

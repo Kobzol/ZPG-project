@@ -13,10 +13,9 @@
 struct DirectionalLight : Light
 {
 public:
-	glm::vec3 direction;
 	Phong phong;
 
-	DirectionalLight(const glm::vec3& direction, const Phong& phong);
+	DirectionalLight(const Phong& phong);
 
 	void setUniforms(Program& program, std::string name, glm::vec3 position) override;
 };

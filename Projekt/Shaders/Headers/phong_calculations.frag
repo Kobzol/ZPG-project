@@ -90,20 +90,20 @@ float calculateShadow(vec4 lightSpacePosition, vec3 normal, vec3 lightDir)
 		return 0.0f;
 	}
 
-	float shadow = 0.0;
-	vec2 texelSize = 1.0 / textureSize(depthMap, 0);
+	float shadow = 0.0f;
+	vec2 texelSize = 1.0f / textureSize(depthMap, 0);
 	float currentDepth = projCoords.z;
-	float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+	float bias = max(0.05f * (1.0f - dot(normal, lightDir)), 0.005f);
 
-	for(int x = -1; x <= 1; ++x)
+	for (int x = -1; x <= 1; x++)
 	{
-		for(int y = -1; y <= 1; ++y)
+		for (int y = -1; y <= 1; y++)
 		{
 			float pcfDepth = texture(depthMap, projCoords.xy + vec2(x, y) * texelSize).r; 
-			shadow += currentDepth - bias > pcfDepth ? 1.0f : 0.0f;    
+			shadow += currentDepth - bias > pcfDepth ? 1.0f : 0.0f;
 		}    
 	}
-	shadow /= 9.0;
+	shadow /= 9.0f;
 
 	return shadow;
 }

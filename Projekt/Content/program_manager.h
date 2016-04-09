@@ -17,6 +17,7 @@ class ProgramManager : public ContentManager<Program>
 public:
 	static const std::string PROGRAM_GEOMETRY_CONSTANT;
 	static const std::string PROGRAM_MODEL;
+	static const std::string PROGRAM_MODEL_NOLIGHT;
 	static const std::string PROGRAM_POSTPROCESS;
 	static const std::string PROGRAM_FONT;
 	static const std::string PROGRAM_SKYBOX;
