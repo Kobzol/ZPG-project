@@ -1,0 +1,13 @@
+# Blender MTL File: 'projekt.blend'
+# Material Count: 1
+
+newmtl Leather__br
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.683922 0.624314 0.520784
+Ks 0.043137 0.043137 0.043137
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd lavicka_bake.png

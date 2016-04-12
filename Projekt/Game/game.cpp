@@ -89,7 +89,7 @@ void Game::start()
 	FramebufferManager::getInstance().preloadFramebuffers(width, height);
 
 	// initial object spawn 
-	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 75.0f, width / height, 0.1f, 1000.0f);
+	this->camera = new Camera(new CameraController(10.0f), glm::vec3(0.0f, 0.0f, -1.0f), 75.0f, (float) width / height, 0.1f, 1000.0f);
 	GameObject* cameraObj = new GameObject(this->camera, new BasicPhysicsComponent(false, new SphereBoundingBox(1.0f)));
 	cameraObj->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	cameraObj->getTags().set(Tag::Camera);
@@ -106,8 +106,13 @@ void Game::start()
 	GameObject* gate = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule("mga/projekt/gate")));
 	this->scene.add(gate);
 
+	// tower
+	GameObject* tower = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule("mga/projekt/tower")));
+	this->scene.add(tower);
+
 	// ground
 	GameObject* grass = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule("mga/projekt/grass")));
+	grass->getTransform().moveBy(glm::vec3(0.0f, 0.05f, 0.0f));
 	this->scene.add(grass);
 
 	// gallows
@@ -126,7 +131,21 @@ void Game::start()
 
 	// catapult
 	GameObject* catapult = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule("mga/projekt/catapult")));
+	catapult->getTransform().moveBy(glm::vec3(0.0f, 0.08f, 0.0f));
 	this->scene.add(catapult);
+
+	// bench
+	GameObject* bench = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule("mga/projekt/bench")));
+	bench->getTransform().moveBy(glm::vec3(0.0f, -0.1f, 0.0f));
+	this->scene.add(bench);
+
+	// coins
+	GameObject* coins = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule("mga/projekt/coins")));
+	this->scene.add(coins);
+
+	// crate
+	GameObject* crate = new GameObject(nullptr, new RenderComponent(Color::White, ProgramManager::PROGRAM_MODEL, new ModelDrawModule("mga/projekt/crate")));
+	this->scene.add(crate);
 
 	// lights
 	GeometryObject cubeGeometry(VERTICES_CUBE, sizeof(glm::vec3), 36);

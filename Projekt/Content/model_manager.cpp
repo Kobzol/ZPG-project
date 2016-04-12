@@ -43,6 +43,10 @@ void ModelManager::preloadModels()
 	this->load("mga/projekt/sword", new Model(MODEL_PATH + "mga/projekt/sword/sword.obj"));
 	this->load("mga/projekt/catapult", new Model(MODEL_PATH + "mga/projekt/catapult/catapult.obj"));
 	this->load("mga/projekt/weapons", new Model(MODEL_PATH + "mga/projekt/weapons/weapons.obj"));
+	this->load("mga/projekt/tower", new Model(MODEL_PATH + "mga/projekt/tower/tower.obj"));
+	this->load("mga/projekt/bench", new Model(MODEL_PATH + "mga/projekt/bench/bench.obj"));
+	this->load("mga/projekt/coins", new Model(MODEL_PATH + "mga/projekt/coins/coins.obj"));
+	this->load("mga/projekt/crate", new Model(MODEL_PATH + "mga/projekt/crate/crate.obj"));
 
 	//this->load(ModelManager::MODEL_HOUSE, new Model(MODEL_PATH + "house/test.obj"));
 	//this->load(ModelManager::MODEL_TREE, new Model(MODEL_PATH + "ber0134/80_final.obj"));
